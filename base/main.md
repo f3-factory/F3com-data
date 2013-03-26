@@ -1,8 +1,11 @@
 # Base
 
 The Base class represents the framework core. It contains everything you need to run a simple application.
-The file `base.php` also packages the [Cache](cache), [Prefab](prefab), [View](view), [ISO](iso) and [Registry](registry) class.
+This file also packages the [Cache](cache), [Prefab](prefab), [View](view), [ISO](iso) and [Registry](registry) class.
 Feel free to remove all other files in the `lib/`-directory, if you're fine with the features provided by this Package.
+
+Namespace: `\` <br/>
+File location: `lib/base.php`
 
 ---
 
@@ -106,9 +109,49 @@ $f3->get('myarray["baz"]'); // 4.56
 
 ### sync
 
-### cut
+Sync PHP global with corresponding hive key
+
+``` php
+$f3->sync( string $key); array
+```
 
 ### ref
+
+Get hive key reference/contents
+
+``` php
+&$f3->ref( string $key, [ bool = TRUE $add ]); mixed
+```
+
+Usage:
+
+``` php
+$f3->set('name','John');
+$b = &$f3->ref('name');
+$b = 'Chuck';
+$f3->get('name'); // Chuck
+```
+
+You can also add non-existent hive keys, array elements, and object properties by default.
+
+``` php
+
+$new = &$f3->ref('newVar');
+$new = 'hello world';
+$f3->get('newVar'); // hello world
+
+$new = &$f3->ref('newObj->name');
+$new = 'Sheldon';
+$f3->get('newObj')->name; // Sheldon
+$f3->get('newObj->name'); // Sheldon
+
+$a = &$f3->ref('hero.name');
+$a = 'Chuck';
+// or
+$b = &$f3->ref('hero');
+$b['name'] = 'Chuck';
+$f3->get('hero'); // array ('name' => 'Chuck')
+```
 
 ### exists
 
