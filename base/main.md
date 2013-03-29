@@ -153,7 +153,33 @@ $b['name'] = 'Chuck';
 $f3->get('hero'); // array ('name' => 'Chuck')
 ```
 
+If the `$add` argument is `false`, it just returns the read-only hive key contents. This behaviour is used by get().
+
 ### exists
+
+Return TRUE if hive key is not empty
+
+``` php
+$f3->exists(string $key); bool
+```
+
+Usage:
+
+``` php
+$f3->set('foo','value');
+
+$f3->exists('foo'); // true
+$f3->exists('bar'); // false
+
+$f3->exists('COOKIE.userid');
+$f3->exists('SESSION.login');
+$f3->exists('POST.submit');
+```
+
+The exists function also checks the Cache backend, if the key was not found in the hive.
+
+<div class="alert alert-info"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
+
 
 ### clear
 
