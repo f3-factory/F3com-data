@@ -70,7 +70,7 @@ It is also possible to set php globals using GET, POST, COOKIE or SESSION.
 <div class="alert alert-info"><strong>Notice:</strong> If you set or access a key of SESSION, the session gets started automatically. There's no need for you to do it by yourself.</div>
 
 The framework has some own [system variables] (system-variables). You can change them to get a framework behaviour, that fits best for your app.
-
+Hive keys are case-sensitive.
 
 ### get
 **Retrieve contents of hive key**
@@ -182,6 +182,31 @@ The exists function also checks the Cache backend, if the key was not found in t
 
 
 ### clear
+Unset hive key
+
+``` php
+$f3->clear( string $key ); void
+```
+
+If you want to remove a hive key, you can clear it like this:
+
+``` php
+$f3->clear('foobar');
+$f3->clear('myArray.param1'); // removes key `param1` from array `myArray`
+```
+
+If the given hive key was cached before, it will be cleared from cache too.
+
+Some more special usages:
+
+``` php
+$f3->clear('SESSION'); // destroys the user SESSION
+$f3->clear('COOKIE.foobar'); // removes a cookie
+$f3->clear('CACHE'); // clears all cache contents
+```
+
+<div class="alert alert-info"><strong>Notice:</strong> Clearing all cache contents at once is not supported for the XCache cache backend</div>
+
 
 ### mset
 
@@ -221,7 +246,7 @@ The exists function also checks the Cache backend, if the key was not found in t
 ### serialize
 ### unserialize
 
-### Localisation
+## Localisation
 
 ### format
 ### language
