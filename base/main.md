@@ -17,7 +17,7 @@ The hive is all about working with framwork variables.
 **Bind value to hive key**
 
 ``` php
-$f3->set ( string $key, mixed $val, [ int = 0 $ttl ]); mixed
+$f3->set ( string $key, mixed $val, [ int $ttl = 0 ]); mixed
 ```
 
 
@@ -70,13 +70,15 @@ It is also possible to set php globals using GET, POST, COOKIE or SESSION.
 <div class="alert alert-info"><strong>Notice:</strong> If you set or access a key of SESSION, the session gets started automatically. There's no need for you to do it by yourself.</div>
 
 The framework has some own [system variables] (system-variables). You can change them to get a framework behaviour, that fits best for your app.
-Hive keys are case-sensitive.
+Hive keys are case-sensitive. Root hive keys are checked for validity against these valid chars: [ a-z A-Z 0-9 _ ]
+
+
 
 ### get
 **Retrieve contents of hive key**
 
 ``` php
-$f3->get( string $key, [ string|array = NULL $args ]);mixed
+$f3->get( string $key, [ string|array $args = NULL ]);mixed
 ```
 
 to get a previously saved framework var, use:
@@ -107,20 +109,22 @@ $f3->get('myarray["baz"]'); // 4.56
 ```
 
 
-### sync
 
-Sync PHP global with corresponding hive key
+### sync
+**Sync PHP global with corresponding hive key**
 
 ``` php
-$f3->sync( string $key); array
+$f3->sync( string $key ); array
 ```
+
+
 
 ### ref
 
-Get hive key reference/contents
+**Get hive key reference/contents**
 
 ``` php
-&$f3->ref( string $key, [ bool = TRUE $add ]); mixed
+&$f3->ref( string $key, [ bool $add = true ]); mixed
 ```
 
 Usage:
@@ -155,12 +159,13 @@ $f3->get('hero'); // array ('name' => 'Chuck')
 
 If the `$add` argument is `false`, it just returns the read-only hive key contents. This behaviour is used by get().
 
-### exists
 
-Return TRUE if hive key is not empty
+
+### exists
+**Return TRUE if hive key is not empty**
 
 ``` php
-$f3->exists(string $key); bool
+$f3->exists( string $key ); bool
 ```
 
 Usage:
@@ -181,8 +186,9 @@ The exists function also checks the Cache backend, if the key was not found in t
 <div class="alert alert-info"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
 
 
+
 ### clear
-Unset hive key
+**Unset hive key**
 
 ``` php
 $f3->clear( string $key ); void
@@ -208,34 +214,334 @@ $f3->clear('CACHE'); // clears all cache contents
 <div class="alert alert-info"><strong>Notice:</strong> Clearing all cache contents at once is not supported for the XCache cache backend</div>
 
 
+
 ### mset
+**Multi-variable assignment using associative array**
+
+``` php
+$f3->mset(array $vars, [ string $prefix = ''], [ integer $ttl = 0 ]); void
+```
+
+Usage:
+
+``` php
+$f3->mset(array(
+    'var1'=>'value1',
+    'var2'=>'value2',
+    'var3'=>'value3',
+));
+
+$f3->get('var1'); // value1
+$f3->get('var2'); // value2
+$f3->get('var3'); // value3
+```
+
+You can append all key names using the `$prefix` argument.
+
+``` php
+$f3->mset(array(
+    'var1'=>'value1',
+    'var2'=>'value2',
+    'var3'=>'value3',
+),
+'pre_');
+
+$f3->get('pre_var1'); // value1
+$f3->get('pre_var2'); // value2
+$f3->get('pre_var3'); // value3
+```
+
+To cache all vars, set a positive numeric integer value to `$ttl` in seconds.
+
+
 
 ### hive
+**Publish hive contents.**
+
+``` php
+$f3->hive(); array
+```
+
+
 
 ### copy
+**Copy contents of hive variable to another**
+
+``` php
+$f3->copy( string $src, string $dst); mixed
+```
+
+Usage:
+
+``` php
+$f3->set('var_1','value123');
+echo $f3->copy('var_1','foo'); // "value123"
+echo $f3->get('foo'); // "value123"
+```
+
+Returns writable `$dst` reference.
+
+
 
 ### concat
+**Concatenate string to hive string variable**
+
+``` php
+$f3->concat( string $key, string $val ); void
+```
+
+Usage:
+
+``` php
+$f3->set('var','hello');
+echo $f3->concat('var',' world'); // hello world
+echo $f3->get('var'); // hello world
+```
+
+Returns writable `$key` reference.
+
+
 
 ### flip
+**Swap keys and values of hive array variable**
+
+``` php
+$f3->flip( string $key ); array
+```
+
+Usage:
+
+``` php
+$f3->set('data', array(
+    'foo1' => 'bar1',
+    'foo2 '=> 'bar2',
+    'foo3' => 'bar3',
+));
+$f3->flip('data');
+
+print_r($f3->get('data'));
+/* output:
+Array
+(
+    [bar1] => foo1
+    [bar2] => foo2
+    [bar3] => foo3
+)
+*/
+```
+
+
 
 ### push
+**Add element to the end of hive array variable**
+
+``` php
+$f3->push( string $key, mixed $val ); mixed
+```
+
+Usage:
+
+``` php
+$f3->set('fruits',array(
+    'apple',
+    'banana',
+    'peach',
+));
+$f3->push('fruits','cherry');
+
+print_r($f3->get('fruits'));
+/* output:
+Array
+(
+    [0] => apple
+    [1] => banana
+    [2] => peach
+    [3] => cherry
+)
+*/
+```
+
+
 
 ### pop
+**Remove last element of hive array variable**
+
+``` php
+$f3->pop( string $key ); mixed
+```
+
+Usage:
+
+``` php
+$f3->set('fruits',array(
+	'apple',
+	'banana',
+	'peach'
+));
+$f3->pop('fruits'); // returns "peach"
+
+print_r($f3->get('fruits'));
+/* output:
+Array
+(
+    [1] => apple
+    [2] => banana
+)
+*/
+```
+
+
 
 ### unshift
+**Add element to the beginning of hive array variable**
+
+``` php
+$f3->unshift( string $key, string $val ); mixed
+```
+
+Usage:
+
+``` php
+$f3->set('fruits',array(
+	'apple',
+	'banana',
+	'peach'
+));
+$f3->unshift('fruits','cherry');
+
+print_r($f3->get('fruits'));
+/* output:
+Array
+(
+    [0] => cherry
+    [1] => apple
+    [2] => banana
+    [3] => peach
+)
+*/
+```
+
+
 
 ### shift
+**Remove first element of hive array variable**
 
-### split
+``` php
+$f3->shift( string $key ); mixed
+```
+
+Usage:
+
+``` php
+$f3->set('fruits',array(
+	'apple',
+	'banana',
+	'peach'
+));
+$f3->shift('fruits'); // returns "apple"
+
+print_r($f3->get('fruits'));
+/* output:
+Array
+(
+    [0] => banana
+    [1] => peach
+)
+*/
+```
+
+
 
 ## Encoding & Conversion
 
+
+
 ### fixslashes
+**Convert backslashes to slashes**
+
+``` php
+$f3->fixslashes( string $str ); string
+```
+
+
+
+### split
+**Split comma-, semi-colon, or pipe-separated string**
+
+``` php
+$f3->split( string $str ); array
+```
+
+Usage:
+
+``` php
+$data = 'value1,value2;value3|value4';
+print_r($f3->split($data));
+/* output:
+Array
+(
+    [0] => value1
+    [1] => value2
+    [2] => value3
+    [3] => value4
+)
+*/
+```
+
+
+
 ### stringify
+**Convert PHP expression/value to compressed exportable string**
+
+``` php
+$f3->stringify( mixed $arg ); string
+```
+
+
+
 ### csv
+**Flatten array values and return as CSV string**
+
+``` php
+$f3->csv( array $args ); string
+```
+
+Usage:
+
+``` php
+$data = array('value1','value2','value3');
+$f3->csv($data); // returns: "'value1','value2','value3'"
+```
+
+
+
 ### camelcase
+**Convert snake_case string to camelCase**
+
+``` php
+$f3->camelcase( string $str ); string
+```
+
+
+
 ### snakecase
+**Convert camelCase string to snake_case**
+
+``` php
+$f3->snakecase( string $str ); string
+```
+
+
+
 ### sign
+**Return -1 if specified number is negative, 0 if zero,	or 1 if the number is positive**
+
+``` php
+$f3->sign( mixed $num ); integer
+```
+
+
+
 ### hash
 ### base64
 ### encode
