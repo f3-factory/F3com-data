@@ -1,14 +1,14 @@
 # Base
 
 The Base class represents the framework core. It contains everything you need to run a simple application.
-The file `base.php` also packages the [Cache](cache), [Prefab](prefab), [View](view), [ISO](iso) and [Registry](registry) class.
-Feel free to remove all other files in the `lib/`-directory, if you're fine with the features provided by this Package.
+The file `base.php` also packages the [Cache](cache), [Prefab](prefab), [View](view), [ISO](iso) and [Registry](registry) classes.
+Feel free to remove all other files in the `lib/`-directory, if all you need are the basic features provided by this package.
 
 ---
 
 ## The Hive
 
-The hive is all about working with framwork variables.
+The hive is all about working with framework variables.
 
 ### set
 **Bind value to framework variable**
@@ -16,7 +16,6 @@ The hive is all about working with framwork variables.
 ``` php
 $f3->set ( string $key, mixed $value, [ int = 0 $ttl ]); mixed
 ```
-
 
 setting framework variables
 
@@ -37,8 +36,7 @@ $f3->set('hash.y',2);
 $f3->set('hash.z',3);
 ```
 
-If the `$tll` parameter is > 0, and the F3 CACHE is enabled, the var is going to be cached.
-You can cache strings, arrays and all other types - even complete objects, get() will load them automatically from Cache.
+If the `$ttl` parameter is > 0, and the CACHE variable is enabled, the specified variable will be cached. You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from Cache.
 
 ``` php
 // cache string                         
@@ -52,7 +50,6 @@ $f3->set('fruits',array(
 // cache objects
 $f3->set('myClass1', new myClass('arg1'), 3600);
 ```
-
 
 ### sync
 
