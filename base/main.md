@@ -1,8 +1,8 @@
 # Base
 
 The Base class represents the framework core. It contains everything you need to run a simple application.
-This file also packages the [Cache](cache), [Prefab](prefab), [View](view), [ISO](iso) and [Registry](registry) class.
-Feel free to remove all other files in the `lib/`-directory, if you're fine with the features provided by this Package.
+The file `base.php` also packages the [Cache](cache), [Prefab](prefab), [View](view), [ISO](iso) and [Registry](registry) classes.
+Feel free to remove all other files in the `lib/`-directory, if all you need are the basic features provided by this package.
 
 Namespace: `\` <br/>
 File location: `lib/base.php`
@@ -11,7 +11,7 @@ File location: `lib/base.php`
 
 ## The Hive
 
-The hive is all about working with framwork variables.
+The hive is all about working with framework variables.
 
 ### set
 **Bind value to hive key**
@@ -19,7 +19,6 @@ The hive is all about working with framwork variables.
 ``` php
 $f3->set ( string $key, mixed $val, [ int $ttl = 0 ]); mixed
 ```
-
 
 setting framework variables
 
@@ -40,17 +39,7 @@ $f3->set('hash.y',2);
 $f3->set('hash.z',3);
 ```
 
-objects properties
-
-``` php
-$f3->set('a',new \stdClass);
-$f3->set('a->hello','world');
-```
-
-
-If the `$ttl` parameter is set and the F3 CACHE is enabled, the var is going to be cached.
-You can cache strings, arrays and all other types - even complete objects.
-When you access them with get(), they will be loaded automatically from Cache, if present and not expired.
+If the `$ttl` parameter is > 0, and the CACHE variable is enabled, the specified variable will be cached. You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from Cache.
 
 ``` php
 // cache string                         
@@ -64,51 +53,6 @@ $f3->set('fruits',array(
 // cache objects
 $f3->set('myClass1', new myClass('arg1'), 3600);
 ```
-
-It is also possible to set php globals using GET, POST, COOKIE or SESSION.
-
-<div class="alert alert-info"><strong>Notice:</strong> If you set or access a key of SESSION, the session gets started automatically. There's no need for you to do it by yourself.</div>
-
-The framework has some own [system variables] (system-variables). You can change them to get a framework behaviour, that fits best for your app.
-Hive keys are case-sensitive. Root hive keys are checked for validity against these valid chars: [ a-z A-Z 0-9 _ ]
-
-
-
-### get
-**Retrieve contents of hive key**
-
-``` php
-$f3->get( string $key, [ string|array $args = NULL ]);mixed
-```
-
-to get a previously saved framework var, use:
-
-``` php
-$f3->set('myVar','hello world');
-$f3->get('myVar'); // returns the string 'hello world'
-```
-
-<div class="alert alert-info"><strong>Notice:</strong> F3 tries to load the var from Cache when using get(), if the var was not defined at runtime before and caching is enabled.</div>
-
-Accessing arrays is easy. You can also use the JS dot notation, which makes it much easier to read and write.
-
-``` php
-$f3->set('myarray', array(
-        0 => 'value_0',  
-        1 => 'value_1',
-        'bar' => 123,
-        'foo' => 'we like candy',
-        'baz' => 4.56,
-    ));
-
-$f3->get('myarray[0]'); // value_0
-$f3->get('myarray.1'); // value_1
-$f3->get('myarray[bar]'); // 123
-$f3->get('myarray.foo'); // we like candy
-$f3->get('myarray["baz"]'); // 4.56
-```
-
-
 
 ### sync
 **Sync PHP global with corresponding hive key**
