@@ -540,8 +540,57 @@ $f3->sign( mixed $num ); integer
 
 
 ### hash
+**Generate 64bit/base36 hash**
+
+``` php
+$f3->hash( string $str ); string
+```
+
+Example:
+
+``` php
+echo $f3->hash('foobar'); // 0i43fmgps1r
+```
+
+
+
 ### base64
+**Return Base64-encoded equivalent**
+
+``` php
+$f3->base64( string $data, string $mime ); string
+```
+
+Example:
+
+``` php
+echo $f3->base64('<h1>foobar</h1>','text/html');
+// data:text/html;base64,PGgxPmZvb2JhcjwvaDE+
+```
+
+
+
 ### encode
+**Convert special characters to HTML entities**
+
+``` php
+$f3->encode( string $str ); string
+```
+
+Encodes symbols like `& " ' < >` and other chars, based on your applications ENCODING setting. (default: UTF-8)
+
+Example:
+
+``` php
+echo $f3->encode("we <b>want</b> 'sugar & candy'");
+// we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'
+
+echo $f3->encode("§9: convert symbols & umlauts like ä ü ö");
+// &sect;9: convert symbols &amp; umlauts like &auml; &uuml; &ouml;
+```
+
+
+
 ### decode
 ### scrub
 ### esc
