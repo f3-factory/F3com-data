@@ -583,20 +583,140 @@ Example:
 
 ``` php
 echo $f3->encode("we <b>want</b> 'sugar & candy'");
-// we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'
+// we &amp;lt;b&amp;gt;want&amp;lt;/b&amp;gt; 'sugar &amp;amp; candy'
 
-echo $f3->encode("§9: convert symbols & umlauts like ä ü ö");
-// &sect;9: convert symbols &amp; umlauts like &auml; &uuml; &ouml;
+echo $f3->encode("§9: convert symbols &amp; umlauts like ä ü ö");
+// &amp;sect;9: convert symbols &amp;amp; umlauts like &amp;auml; &amp;uuml; &amp;ouml;
 ```
 
 
 
 ### decode
+**Convert HTML entities back to characters**
+
+``` php
+$f3->decode( string $str ); string
+```
+
+Example:
+
+``` php
+echo $f3->decode("we &amp;lt;b&amp;gt;want&amp;lt;/b&amp;gt; 'sugar &amp;amp; candy'");
+// we <b>want</b> 'sugar &amp; candy'
+
+echo $f3->decode("&amp;sect;9: convert symbols &amp;amp; umlauts like &amp;auml; &amp;uuml; &amp;ouml;");
+// §9: convert symbols &amp; umlauts like ä ü ö welcome!
+```
+
+
+
 ### scrub
+**Remove HTML tags (except those enumerated) and non-printable characters to mitigate XSS/code injection attacks**
+
+``` php
+$f3->scrub( mixed &$var, [ string $tags=NULL ]); string
+```
+
+Example:
+
+``` php
+$foo = "99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>";
+echo $f3->scrub($foo); // 99 bottles of beer on the wall. alert(1);
+echo $foo // 99 bottles of beer on the wall. alert(1);
+```
+
+You can also define a list of allowed html tags, that will not be removed:
+
+``` php
+$foo = "<h1><b>nice</b> <span>news</span> article <em>headline</em></h1>";
+$f3->scrub($foo,'h1,span');
+// <h1>nice <span>news</span> article headline</h1>
+```
+
+<div class="alert alert-info">It is recommended to use this function to sanitize submitted form input.</div>
+
+
+
 ### esc
+**Encode characters to equivalent HTML entities**
+
+``` php
+$f3->esc( mixed $arg ); string
+```
+
+Usage:
+
+``` php
+echo $f3->esc("99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>");
+// 99 bottles of &amp;lt;b&amp;gt;beer&amp;lt;/b&amp;gt; on the wall. &amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;
+```
+
+This also works with arrays and object properties:
+
+``` php
+$myArray = array('<b>foo</b>',array('<script>alert(1)</script>'),'key'=>'<i>foo</i>');
+print_r($f3->esc($myArray));
+/*
+    [0] => &amp;lt;b&amp;gt;foo&amp;lt;/b&amp;gt;
+    [1] => Array
+        (
+            [0] => &amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;
+        )
+    [key] => &amp;lt;i&amp;gt;foo&amp;lt;/i&amp;gt;
+*/
+
+$myObj = new stdClass();
+$myObj->title = '<h1>Hello World</h1>';
+var_dump($f3->esc($myObj));
+/*
+    object(stdClass)#23 (1) {
+      ["title"] => string(32) "&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;"
+    }
+*/
+```
+
+<div class="alert alert-info">If the system var <b>ESCAPE</b> is turned on (it is by default), then every hive key access using a template token like <b>{{@myContent}}</b> automatically get escaped by this function. If this is not desired, look into the <a href="template">template</a> section for further post processors.</div>
+
+
+
 ### raw
+**Decode HTML entities to equivalent characters**
+
+``` php
+$f3->raw( mixed $arg ); string
+```
+
+Example:
+
+``` php
+$f3->raw("99 bottles of &amp;lt;b&amp;gt;beer&amp;lt;/b&amp;gt; on the wall. &amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;");
+// 99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>
+```
+
+This method also handles nested array elements and objects properties, like `$f3->esc()` does too.
+
+
+
 ### serialize
+**Return string representation of PHP value**
+
+``` php
+$f3->serialize( mixed $arg ); string
+```
+
+Depending on the `SERIALIZER` system variable, this method converts anything into a portable string expression. Possible values are **igbinary**, **json** and **php**.
+F3 checks on startup, if igbinary is available and prioritize it, as the igbinary extension works much faster and uses less disc space for serializing. Check [igbinary on github](https://github.com/igbinary/igbinary).
+
+
+
 ### unserialize
+**Return PHP value derived from string**
+
+``` php
+$f3->unserialize( mixed $arg ); string
+```
+
+See [serialize](base#serialize) for further description.
 
 ## Localisation
 
