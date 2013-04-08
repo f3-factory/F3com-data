@@ -1,5 +1,6 @@
-F3 supports both SQL and NoSQL databases off-the-shelf: MySQL, SQLite, MSSQL/Sybase, PostgreSQL, MongoDB and its own lightning fast Flat-File DB (we call it [Jig](jig)). It also comes with powerful object-relational mappers for data abstraction and modeling that are just as lightweight as the framework. No configuration needed.
 ![supported DBS](gui/img/supported_dbs.jpg)
+
+F3 supports both SQL and NoSQL databases off-the-shelf: MySQL, SQLite, MSSQL/Sybase, PostgreSQL, MongoDB and its own lightning fast Flat-File DB (we call it [Jig](jig)). It also comes with powerful object-relational mappers for data abstraction and modeling that are just as lightweight as the framework. No configuration needed.
 
 F3 can also shield you from spam and DoS attacks, by performing DNSBL checks. It can increase your server health and uptime, by controlling web server traffic with profile analysis and bandwidth throttle.
 
