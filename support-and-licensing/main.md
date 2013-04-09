@@ -4,7 +4,7 @@ Technical support is available at the official discussion forum: [`https://group
 
 ## Nightly Builds
 
-F3 uses Git for version control. To clone the code repository on GitHub:-
+F3 uses Git for version control. To clone the code repository on GitHub:
 
 ``` bash
 git clone git://git@github.com:bcosca/Fat-Free-Framework.git

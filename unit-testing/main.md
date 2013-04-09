@@ -8,7 +8,7 @@ If you know little or nothing about unit testing methodologies, you're probably 
 
 F3 makes it easy for you to debug programs - without getting in the way of your regular thought processes. The framework does not require you to build complex OOP classes, heavy test structures, and obtrusive procedures.
 
-A unit (or test fixture) can be a function/method or a class. Let's have a simple example:-
+A unit (or test fixture) can be a function/method or a class. Let's have a simple example:
 
 ``` php
 function hello() {
@@ -16,7 +16,7 @@ function hello() {
 }
 ```
 
-Save it in a file called `hello.php`. Now how do we know it really runs as expected? Let's create our test procedure:-
+Save it in a file called `hello.php`. Now how do we know it really runs as expected? Let's create our test procedure:
 
 ``` php
 $f3=require('lib/base.php');
@@ -71,13 +71,13 @@ Fat-Free gives you the freedom to display test results in any way you want. You 
 
 ## Mocking HTTP Requests
 
-F3 gives you the ability to simulate HTTP requests from within your PHP program so you can test the behavior of a particular route. Here's a simple mock request:-
+F3 gives you the ability to simulate HTTP requests from within your PHP program so you can test the behavior of a particular route. Here's a simple mock request:
 
 ``` php
 $f3->mock('GET /test?foo=bar');
 ```
 
-To mock a POST request and submit a simulated HTML form:-
+To mock a POST request and submit a simulated HTML form:
 
 ``` php
 $f3->mock('POST /test',array('foo'=>'bar'));
@@ -85,4 +85,4 @@ $f3->mock('POST /test',array('foo'=>'bar'));
 
 ## Expecting the Worst that can Happen
 
-Once you get the hang of testing the smallest units of your application, you can then move on to the bigger components, modules, and subsystems - checking along the way if the parts are correctly communicating with each other. Testing manageable chunks of code leads to more reliable programs that work as you expect, and weaves the testing process into the fabric of your development cycle. The question to ask yourself is:- Have I tested all possible scenarios? More often than not, those situations that have not been taken into consideration are the likely causes of bugs. Unit testing helps a lot in minimizing these occurrences. Even a few tests on each fixture can greatly reduce headaches. On the other hand, writing applications without unit testing at all invites trouble.
+Once you get the hang of testing the smallest units of your application, you can then move on to the bigger components, modules, and subsystems - checking along the way if the parts are correctly communicating with each other. Testing manageable chunks of code leads to more reliable programs that work as you expect, and weaves the testing process into the fabric of your development cycle. The question to ask yourself is: Have I tested all possible scenarios? More often than not, those situations that have not been taken into consideration are the likely causes of bugs. Unit testing helps a lot in minimizing these occurrences. Even a few tests on each fixture can greatly reduce headaches. On the other hand, writing applications without unit testing at all invites trouble.

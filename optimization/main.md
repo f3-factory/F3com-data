@@ -2,7 +2,7 @@
 
 ## Cache Engine
 
-Caching static Web pages - so the code in some route handlers can be skipped and templates don't have to be reprocessed - is one way of reducing your Web server's work load so it can focus on other tasks. You can activate the framework's cache engine by providing a third argument to the `$f3->route()` method. Just specify the number of seconds before a cached Web page expires:-
+Caching static Web pages - so the code in some route handlers can be skipped and templates don't have to be reprocessed - is one way of reducing your Web server's work load so it can focus on other tasks. You can activate the framework's cache engine by providing a third argument to the `$f3->route()` method. Just specify the number of seconds before a cached Web page expires:
 
 ``` php
 $f3->route('GET /my_page','App->method',60);
@@ -16,7 +16,7 @@ Here's an important point to consider when designing your application. Don't cac
 
 For example, you designed your site in such a way that all your Web pages have the menu options: `"Home"`, `"About Us"`, and `"Login"`, displayed when a user is not logged into your application. You also want the menu options to change to: `"Home"`, `"About Us"`, and `"Logout"`, once the user has logged in. If you instructed Fat-Free to cache the contents of `"About Us"` page (which includes the menu options), it does so and also sends the same instruction to the HTTP client. Regardless of the user's session state, i.e. logged in or logged out, the user's browser will take a snapshot of the page at the session state it was in. Future requests by the user for the `"About Us"` page before the cache timeout expires will display the same menu options available at that time the page was initially saved. Now, a user may have already logged in, but the menu options are still the same as if no such event occurred. That's not the kind of behavior we want from our application.
 
-Some pointers:-
+Some pointers:
 
 * Don't cache dynamic pages. It's quite obvious you don't want to cache data that changes frequently. You can, however, activate caching on pages that contain data updated on an hourly, daily or even yearly basis.For security reasons, the framework restricts cache engine usage to HTTP `GET` routes only. It will not cache submitted forms!Don't activate the cache on Web pages that at first glance look static. In our example, the "About Us" content may be static, but the menu isn't.
 * Activate caching on pages that are available only in ONE session state. If you want to cache the `"About Us"` page, make sure it's available only when a user is not logged in.
@@ -26,7 +26,7 @@ Some pointers:-
 
 PHP needs to be set up correctly for the F3 cache engine to work properly. Your operating system timezone should be synchronized with the date.timezone setting in the `php.ini` file.
 
-Similar to routes, Fat-Free also allows you to cache database queries. Speed gains can be quite significant, specially when used on complex SQL statements that involve look-up of static data or database content that rarely changes. Activating the database query cache so the framework doesn't have to re-execute the SQL statements every time is as simple as adding a 3rd argument to the F3::sql command - the cache timeout. For example:-
+Similar to routes, Fat-Free also allows you to cache database queries. Speed gains can be quite significant, specially when used on complex SQL statements that involve look-up of static data or database content that rarely changes. Activating the database query cache so the framework doesn't have to re-execute the SQL statements every time is as simple as adding a 3rd argument to the F3::sql command - the cache timeout. For example:
 
 ``` php
 $db->exec('SELECT * from sizes;',NULL,86400);
@@ -40,25 +40,25 @@ The SQL data mapper also uses the cache engine to optimize synchronization of ta
 $user=new DB\SQL\Mapper($db,'users',86400);
 ```
 
-By default, Fat-Free's cache engine is disabled. You can enable it and allow it to auto-detect APC, WinCache or XCache. If it cannot find an appropriate backend, F3 will use the filesystem, i.e. the `tmp/cache/` folder:-
+By default, Fat-Free's cache engine is disabled. You can enable it and allow it to auto-detect APC, WinCache or XCache. If it cannot find an appropriate backend, F3 will use the filesystem, i.e. the `tmp/cache/` folder:
 
 ``` php
 $f3->set('CACHE',TRUE);
 ```
 
-Disabling the cache is as simple as:-
+Disabling the cache is as simple as:
 
 ``` php
 $f3->set('CACHE',FALSE);
 ```
 
-If you wish to override the auto-detection feature, you can do so - as in the case of a Memcached back-end which F3 also supports:-
+If you wish to override the auto-detection feature, you can do so - as in the case of a Memcached back-end which F3 also supports:
 
 ``` php
 $f3->set('CACHE','memcache=localhost:11211');
 ```
 
-You can also use the cache engine to store your own variables. These variables will persist between HTTP requests and remain in cache until the engine receives instructions to delete them. To save a value in the cache:-
+You can also use the cache engine to store your own variables. These variables will persist between HTTP requests and remain in cache until the engine receives instructions to delete them. To save a value in the cache:
 
 ``` php
 $f3->set('var','I want this value saved',90);
@@ -68,21 +68,21 @@ $f3->set('var','I want this value saved',90);
 
 ## Keeping Javascript and CSS on a Healthy Diet
 
-Fat-Free also has a Javascript and CSS compressor available in the Web plug-in. It can combine all your CSS files into one stylesheet (or Javascript files into a single script) so the number of components on a Web page are decreased. Reducing the number of HTTP requests to your Web server results in faster page loading. First you need to prepare your HTML template so it can take advantage of this feature. Something like:-
+Fat-Free also has a Javascript and CSS compressor available in the Web plug-in. It can combine all your CSS files into one stylesheet (or Javascript files into a single script) so the number of components on a Web page are decreased. Reducing the number of HTTP requests to your Web server results in faster page loading. First you need to prepare your HTML template so it can take advantage of this feature. Something like:
 
 ``` html
 <link rel="stylesheet" type="text/css"
 	href="/minify/css?files=typo.css,grid.css" />
 ```
 
-Do the same with your Javascript files:-
+Do the same with your Javascript files:
 
 ``` html
 <script type="text/javascript" src="/minify/js?&files=underscore.js">
 </script>
 ```
 
-Of course we need to set up a route so your application can handle the necessary call to the Fat-Free CSS/Javascript compressor:-
+Of course we need to set up a route so your application can handle the necessary call to the Fat-Free CSS/Javascript compressor:
 
 ``` php
 $f3->route('GET /minify/@type',
@@ -108,7 +108,7 @@ Want to make your site run even faster? Fat-Free works best with either Alternat
 
 ## Bandwidth Throttling
 
-A fast application that processes all HTTP requests and responds to them at the shortest time possible is not always a good idea - specially if your bandwidth is limited or traffic on your Web site is particularly heavy. Serving pages ASAP also makes your application vulnerable to Denial-of-Service (DOS) attacks. F3 has a bandwidth throttling feature that allows you to control how fast your Web pages are served. Your can specifies how much time it should take to process a request:-
+A fast application that processes all HTTP requests and responds to them at the shortest time possible is not always a good idea - specially if your bandwidth is limited or traffic on your Web site is particularly heavy. Serving pages ASAP also makes your application vulnerable to Denial-of-Service (DOS) attacks. F3 has a bandwidth throttling feature that allows you to control how fast your Web pages are served. Your can specifies how much time it should take to process a request:
 
 ``` php
 $f3->set('/throttledpage','MyApp->handler',0,128);

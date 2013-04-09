@@ -8,19 +8,19 @@ Mixing programming constructs and user interface components in a single file, li
 
 ## PHP as a Template Engine
 
-F3 supports PHP as a template engine. Take a look at this HTML fragment saved as `template.htm`:-.
+F3 supports PHP as a template engine. Take a look at this HTML fragment saved as `template.htm`:.
 
 ``` html
 <p>Hello, <?php echo $name; ?>!</p>
 ```
 
-If short tags are enabled on your server, this should work too:-
+If short tags are enabled on your server, this should work too:
 
 ``` html
 <p>Hello, <?= $name ?></p>
 ```
 
-To display this template, you can have PHP code that looks like this (stored in a file separate from the template):-
+To display this template, you can have PHP code that looks like this (stored in a file separate from the template):
 
 ``` php
 $f3=require('lib/base.php');
@@ -29,7 +29,7 @@ $f3->route('GET /',
         $f3->set('name','world');
         $view=new View;
         echo $view->render('template.htm');
-        // Previous two lines can be shortened to:-
+        // Previous two lines can be shortened to:
         // echo View::instance()->render('template.htm');
     }
 );
@@ -40,13 +40,13 @@ The only issue with using PHP as a template engine, due to the embedded PHP code
 
 ## A Quick Look at the F3 Template Language
 
-As an alternative to PHP, you can use F3's own template engine. The above HTML fragment can be rewritten as:-
+As an alternative to PHP, you can use F3's own template engine. The above HTML fragment can be rewritten as:
 
 ``` html
 <p>Hello, {{ @name }}!</p>
 ```
 
-and the code needed to view this template:-
+and the code needed to view this template:
 
 ``` php
 $f3=require('lib/base.php');
@@ -55,7 +55,7 @@ $f3->route('GET /',
         $f3->set('name','world');
         $template=new Template;
         echo $template->render('template.htm');
-        // Above lines can be written as:-
+        // Above lines can be written as:
         // echo Template::instance()->render('template.htm');
     }
 );
@@ -64,7 +64,7 @@ $f3->run();
 
 Like routing tokens used for catching variables in URLs (still remember the `GET /brew/@count` example in the previous section?), F3 template tokens begin with the `@` symbol followed by a series of letters and digits enclosed in curly braces. The first character must be alpha. Template tokens have a one-to-one correspondence with framework variables. The framework automatically replaces a token with the value stored in a variable of the same name.
 
-In our example, F3 replaces the `@name` token in our template with the value we assigned to the name variable. At runtime, the output of the above code will be:-
+In our example, F3 replaces the `@name` token in our template with the value we assigned to the name variable. At runtime, the output of the above code will be:
 
 ``` html
 <p>Hello, world</p>
@@ -74,15 +74,15 @@ Worried about performance of F3 templates? At runtime, the framework parses and 
 
 Whether you use PHP's template engine or F3's own, template rendering can be significantly faster if you have APC, WinCache or XCache available on your server.
 
-As mentioned earlier, framework variables can hold any PHP data type. However, usage of non-scalar data types in F3 templates may produce strange results if you're not careful. Expressions in curly braces will always be evaluated and converted to string. You should limit your user interface variables to simple scalars:- `string`, `integer`, `boolean` or `float` data types.
+As mentioned earlier, framework variables can hold any PHP data type. However, usage of non-scalar data types in F3 templates may produce strange results if you're not careful. Expressions in curly braces will always be evaluated and converted to string. You should limit your user interface variables to simple scalars: `string`, `integer`, `boolean` or `float` data types.
 
-But what about arrays? Fat-Free recognizes arrays and you can employ them in your templates. You can have something like:-
+But what about arrays? Fat-Free recognizes arrays and you can employ them in your templates. You can have something like:
 
 ``` html
 <p>{{ @buddy[0] }}, {{ @buddy[1] }}, and {{ @buddy[2] }}</p>
 ```
 
-And populate the `@buddy` array in your PHP code before serving the template:-
+And populate the `@buddy` array in your PHP code before serving the template:
 
 ``` php
 $f3->set('buddy',array('Tom','Dick','Harry'));
@@ -90,7 +90,7 @@ $f3->set('buddy',array('Tom','Dick','Harry'));
 
 However, if you simply insert `{{ @buddy }}` in your template, PHP 5.3 will replace it with `'Array'` because it converts the token to a string. PHP 5.4, on the other hand, will generate an `Array to string conversion` notice at runtime.
 
-F3 allows you to embed expressions in templates. These expressions may take on various forms, like arithmetic calculations, boolean expressions, PHP constants, etc. Here are a few examples:-
+F3 allows you to embed expressions in templates. These expressions may take on various forms, like arithmetic calculations, boolean expressions, PHP constants, etc. Here are a few examples:
 
 ``` html
 {{ 2*(@page-1) }}
@@ -119,19 +119,19 @@ The F3 template engine will interpret the token as expected, if you specify the 
 
 ## Templates Within Templates
 
-Simple variable substitution is one thing all template engines have. Fat-Free has more up its sleeves:-
+Simple variable substitution is one thing all template engines have. Fat-Free has more up its sleeves:
 
 ``` html
 <include href="header.htm" />
 ```
 
-The <include> directive will embed the contents of the header.htm template at the exact position where the directive is stated. You can also have dynamic content in the form of:-
+The <include> directive will embed the contents of the header.htm template at the exact position where the directive is stated. You can also have dynamic content in the form of:
 
 ``` html
 <include href="{{ @content }}" />
 ```
 
-A practical use for such template directive is when you have several pages with a common HTML layout but with different content. Instructing the framework to insert a sub-template into your main template is as simple as writing the following PHP code:-
+A practical use for such template directive is when you have several pages with a common HTML layout but with different content. Instructing the framework to insert a sub-template into your main template is as simple as writing the following PHP code:
 
 ``` php
 // switch content to your blog sub-template
@@ -144,7 +144,7 @@ A sub-template may in turn contain any number of <include> directives. F3 allows
 
 You can specify filenames with something other than .htm or .html file extensions, but it's easier to preview them in your Web browser during the development and debugging phase. The template engine is not limited to rendering HTML files. In fact you can use the template engine to render other kinds of files.
 
-The `<include>` directive also has an optional `if` attribute so you can specify a condition that needs to be satisfied before the sub-template is inserted:-
+The `<include>` directive also has an optional `if` attribute so you can specify a condition that needs to be satisfied before the sub-template is inserted:
 
 ``` html
 <include if="{{ count(@items) }}" href="items.htm" />
@@ -152,7 +152,7 @@ The `<include>` directive also has an optional `if` attribute so you can specify
 
 ## Exclusion of Segments
 
-During the course of writing/debugging F3-powered programs and designing templates, there may be instances when disabling the display of a block of HTML may be handy. You can use the `<exclude>` directive for this purpose:-
+During the course of writing/debugging F3-powered programs and designing templates, there may be instances when disabling the display of a block of HTML may be handy. You can use the `<exclude>` directive for this purpose:
 
 ``` html
 <exclude>
@@ -162,7 +162,7 @@ During the course of writing/debugging F3-powered programs and designing templat
 
 That's like the `<!-- comment -->` HTML comment tag, but the `<exclude>` directive makes the HTML block totally invisible once the template is rendered.
 
-Here's another way of excluding template content or adding comments:-
+Here's another way of excluding template content or adding comments:
 
 ``` html
 {{* <p>A chunk of HTML we don't want displayed at the moment</p> *}}
@@ -170,7 +170,7 @@ Here's another way of excluding template content or adding comments:-
 
 ## Conditional Segments
 
-Another useful template feature is the `<check>` directive. It allows you to embed an HTML fragment depending on the evaluation of a certain condition. Here are a few examples:-
+Another useful template feature is the `<check>` directive. It allows you to embed an HTML fragment depending on the evaluation of a certain condition. Here are a few examples:
 
 ``` html
 <check if="{{ @page=='Home' }}">
@@ -188,7 +188,7 @@ Another useful template feature is the `<check>` directive. It allows you to emb
 
 You can have as many nested `<check>` directives as you need.
 
-An F3 expression inside an if attribute that equates to `NULL`, an empty string, a boolean `FALSE`, an empty array or zero, automatically invokes `<false>`. If your template has no `<false>` block, then the `<true>` opening and closing tags are optional:-
+An F3 expression inside an if attribute that equates to `NULL`, an empty string, a boolean `FALSE`, an empty array or zero, automatically invokes `<false>`. If your template has no `<false>` block, then the `<true>` opening and closing tags are optional:
 
 ``` html
 <check if="{{ @loggedin }}">
@@ -198,7 +198,7 @@ An F3 expression inside an if attribute that equates to `NULL`, an empty string,
 
 ## Repeating Segments
 
-Fat-Free can also handle repetitive HTML blocks:-
+Fat-Free can also handle repetitive HTML blocks:
 
 ``` html
 <repeat group="{{ @fruits }}" value="{{ @fruit }}">
@@ -206,13 +206,13 @@ Fat-Free can also handle repetitive HTML blocks:-
 </repeat>
 ```
 
-The `group` attribute `@fruits` inside the `<repeat>` directive must be an array and should be set in your PHP code accordingly:-
+The `group` attribute `@fruits` inside the `<repeat>` directive must be an array and should be set in your PHP code accordingly:
 
 ``` php
 $f3->set('fruits',array('apple','orange ',' banana'));
 ```
 
-Nothing is gained by assigning a value to `@fruit` in your application code. Fat-Free ignores any preset value it may have because it uses the variable to represent the current item during iteration over the group. The output of the above HTML template fragment and the corresponding PHP code becomes:-
+Nothing is gained by assigning a value to `@fruit` in your application code. Fat-Free ignores any preset value it may have because it uses the variable to represent the current item during iteration over the group. The output of the above HTML template fragment and the corresponding PHP code becomes:
 
 ``` html
 <p>apple</p>
@@ -220,7 +220,7 @@ Nothing is gained by assigning a value to `@fruit` in your application code. Fat
 <p>banana</p>
 ```
 
-The framework allows unlimited nesting of `<repeat>` blocks:-
+The framework allows unlimited nesting of `<repeat>` blocks:
 
 ``` html
 <repeat group="{{ @div }}" key="{{ @ikey }}" value="{{ @idiv }}">
@@ -235,7 +235,7 @@ The framework allows unlimited nesting of `<repeat>` blocks:-
 </repeat>
 ```
 
-Apply the following F3 command:-
+Apply the following F3 command:
 
 ``` php
 $f3->set('div',
@@ -246,7 +246,7 @@ $f3->set('div',
 );
 ```
 
-As a result, you get the following HTML fragment:-
+As a result, you get the following HTML fragment:
 
 ``` html
 <div>
@@ -272,7 +272,7 @@ Amazing, isn't it? And the only thing you had to do in PHP was to define the con
 
 The `<repeat>` template directive's `value` attribute returns the value of the current element in the iteration. If you need to get the array key of the current element, use the `key` attribute instead. The `key` attribute is optional.
 
-`<repeat>` also has an optional counter attribute that can be used as follows:-
+`<repeat>` also has an optional counter attribute that can be used as follows:
 
 ``` html
 <repeat group="{{ @fruits }}" value="{{ @fruit }}" counter="{{ @ctr }}">
@@ -284,7 +284,7 @@ Internally, F3's template engine records the number of loop iterations and saves
 
 ## Embedding Javascript and CSS
 
-If you have to insert F3 tokens inside a `<script>` or `<style>` section of your template, the framework will still replace them the usual way:-
+If you have to insert F3 tokens inside a `<script>` or `<style>` section of your template, the framework will still replace them the usual way:
 
 ``` html
 <script type="text/javascript">
@@ -294,7 +294,7 @@ If you have to insert F3 tokens inside a `<script>` or `<style>` section of your
 </script>
 ```
 
-Embedding template directives inside your `<script>` or `<style>` tags requires no special handling:-
+Embedding template directives inside your `<script>` or `<style>` tags requires no special handling:
 
 ``` html
 <script type="text/javascript">
@@ -308,7 +308,7 @@ Embedding template directives inside your `<script>` or `<style>` tags requires 
 
 ## Document Encoding
 
-By default, Fat-Free uses the UTF-8 character set unless changed. You can override this behavior by issuing something like:-
+By default, Fat-Free uses the UTF-8 character set unless changed. You can override this behavior by issuing something like:
 
 ``` php
 $f3->set('ENCODING','ISO-8859-1');
@@ -318,7 +318,7 @@ Once you inform the framework of the desired character set, F3 will use it in al
 
 ## All Kinds of Templates
 
-As mentioned earlier in this section, the framework isn't limited to HTML templates. You can process XML templates just as well. The mechanics are pretty much similar. You still have the same `{{ @variable }}` and `{{ expression }}` tokens, `<repeat>`, `<check>`, `<include>`, and `<exclude>` directives at your disposal. Just tell F3 that you're passing an XML file instead of HTML:-
+As mentioned earlier in this section, the framework isn't limited to HTML templates. You can process XML templates just as well. The mechanics are pretty much similar. You still have the same `{{ @variable }}` and `{{ expression }}` tokens, `<repeat>`, `<check>`, `<include>`, and `<exclude>` directives at your disposal. Just tell F3 that you're passing an XML file instead of HTML:
 
 ``` php
 echo Template::instance()->render('template.xml','application/xml');
@@ -326,7 +326,7 @@ echo Template::instance()->render('template.xml','application/xml');
 
 The second argument represents the MIME type of the document being rendered.
 
-The View component of MVC covers everything that doesn't fall under the Model and Controller, which means your presentation can and should include all kinds of user interfaces, like RSS, e-mail, RDF, FOAF, text files, etc. The example below shows you how to separate your e-mail presentation from your application's business logic:-
+The View component of MVC covers everything that doesn't fall under the Model and Controller, which means your presentation can and should include all kinds of user interfaces, like RSS, e-mail, RDF, FOAF, text files, etc. The example below shows you how to separate your e-mail presentation from your application's business logic:
 
 ``` html
 MIME-Version: 1.0
@@ -338,7 +338,7 @@ Subject: {{ @subject }}
 <p>Welcome, and thanks for joining {{ @site }}!</p>
 ```
 
-Save the above e-mail template as welcome.txt. The associated F3 code would be:-
+Save the above e-mail template as welcome.txt. The associated F3 code would be:
 
 ``` php
 $f3->set('from','<no-reply@mysite.com>');
@@ -356,7 +356,7 @@ Tip: Replace the SMTP mail() function with imap_mail() if your script communicat
 
 Now isn't that something? Of course, if you have a bundle of e-mail recipients, you'd be using a database to populate the firstName, lastName, and email tokens.
 
-Here's an alternative solution using the F3's SMTP plug-in:-
+Here's an alternative solution using the F3's SMTP plug-in:
 
 ``` php
 $mail=new SMTP('smtp.gmail.com',465,'SSL','account@gmail.com','secret');
@@ -370,7 +370,7 @@ $mail->send(Template::instance()->render('email.txt'));
 
 F3 supports multiple languages right out of the box.
 
-First, create a dictionary file with the following structure (one file per language):-
+First, create a dictionary file with the following structure (one file per language):
 
 ``` php
 <?php
@@ -382,7 +382,7 @@ return array(
 );
 ```
 
-Save it as `dict/en.php`. Let's create another dictionary, this time for German. Save the file as `dict/de.php`:-
+Save it as `dict/en.php`. Let's create another dictionary, this time for German. Save the file as `dict/de.php`:
 
 ``` php
 <?php
@@ -393,7 +393,7 @@ return array(
 );
 ```
 
-Dictionaries are nothing more than key-value pairs. F3 automatically instantiates framework variables based on the keys in the language files. As such, it's easy to embed these variables as tokens in your templates. Using the F3 template engine:-
+Dictionaries are nothing more than key-value pairs. F3 automatically instantiates framework variables based on the keys in the language files. As such, it's easy to embed these variables as tokens in your templates. Using the F3 template engine:
 
 ``` html
 <h1>{{ @love }}</h1>
@@ -404,7 +404,7 @@ Dictionaries are nothing more than key-value pairs. F3 automatically instantiate
 </p>
 ```
 
-And the longer version that utilizes PHP as a template engine:-
+And the longer version that utilizes PHP as a template engine:
 
 ``` php
 <?php $f3=Base::instance(); ?>
@@ -416,7 +416,7 @@ And the longer version that utilizes PHP as a template engine:-
 </p>
 ```
 
-Next, we instruct F3 to look for dictionaries in the `dict/` folder:-
+Next, we instruct F3 to look for dictionaries in the `dict/` folder:
 
 ``` php
 $f3->set('LOCALES','dict/');
@@ -424,7 +424,7 @@ $f3->set('LOCALES','dict/');
 
 But how does the framework determine which language to use? F3 will detect it automatically by looking at the HTTP request headers first, specifically the `Accept-Language` header sent by the browser.
 
-To override this behavior, you can trigger F3 to use a language specified by the user or application:-
+To override this behavior, you can trigger F3 to use a language specified by the user or application:
 
 ``` php
 $f3->set('LANGUAGE','de');
@@ -437,7 +437,7 @@ Dictionary key-value pairs become F3 variables once referenced. Make sure the ke
 
 Did you notice the peculiar `'Today is {0,date}'` pattern in our previous example? F3's multilingual capability hinges on string/message formatting rules of the ICU project. The framework uses its own subset of the ICU string formatting implementation. There is no need for PHP's `intl` extension to be activated on the server.
 
-One more thing: F3 can also load .ini-style formatted files as dictionaries:-
+One more thing: F3 can also load .ini-style formatted files as dictionaries:
 
 ``` ini
 love="I love F3"
@@ -450,25 +450,25 @@ Save it as `dict/en.ini` so the framework can load it automatically.
 
 ## Data Sanitation
 
-By default, both view handler and template engine escapes all rendered variables, i.e. converted to HTML entities to protect you from possible XSS and code injection attacks. On the other hand, if you wish to pass valid HTML fragments from your application code to your template:-
+By default, both view handler and template engine escapes all rendered variables, i.e. converted to HTML entities to protect you from possible XSS and code injection attacks. On the other hand, if you wish to pass valid HTML fragments from your application code to your template:
 
 ``` php
 $f3->set('ESCAPE',FALSE);
 ```
 
-This may have undesirable effects. You might not want all variables to pass through unescaped. Fat-Free allows you to unescape variables individually. For F3 templates:-
+This may have undesirable effects. You might not want all variables to pass through unescaped. Fat-Free allows you to unescape variables individually. For F3 templates:
 
 ``` html
 {{ @html_content | raw }}
 ```
 
-In the case of PHP templates:-
+In the case of PHP templates:
 
 ``` php
 <?php echo Base::instance()->raw($html_content); ?>
 ```
 
-As an addition to auto-escaping of F3 variables, the framework also gives you a free hand at sanitizing user input from HTML forms:-
+As an addition to auto-escaping of F3 variables, the framework also gives you a free hand at sanitizing user input from HTML forms:
 
 ``` php
 $f3->scrub($_GET,'p; br; span; div; a');

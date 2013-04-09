@@ -16,16 +16,16 @@ $img->render();
 
 This example generates an random image based on your desired TrueType font. The `fonts/` folder is a subfolder within application's `UI` path. The second parameter indicates the font size, and the third argument defines the number of hexadecimal characters to generate.
 
-The last argument represents an F3 variable name. This is where F3 will store the string equivalent of the CAPTCHA image. To make the string reload-safe, we specified a session variable:- `SESSION.captcha_code` which maps to `$_SESSION['captcha_code']`, which you can use later to verify whether the input element in the form submitted matches this string.
+The last argument represents an F3 variable name. This is where F3 will store the string equivalent of the CAPTCHA image. To make the string reload-safe, we specified a session variable: `SESSION.captcha_code` which maps to `$_SESSION['captcha_code']`, which you can use later to verify whether the input element in the form submitted matches this string.
 
 ## Grabbing Data from Another Site
 
-We've covered almost every feature available in the framework to run a stand-alone Web server. For most applications, these features will serve you quite well. But what do you do if your application needs data from another Web server on the network? F3 has the Web plugin to help you in this situation:-
+We've covered almost every feature available in the framework to run a stand-alone Web server. For most applications, these features will serve you quite well. But what do you do if your application needs data from another Web server on the network? F3 has the Web plugin to help you in this situation:
 
 ``` php
 $web=new Web;
 $request=$web->request('http://www.google.com/');
-// another way to do it:-
+// another way to do it:
 $request=Web::instance()->request('http://www.google.com/');
 ```
 
@@ -37,7 +37,7 @@ $web->request($host.'/_all_dbs'),
 $web->request($host.'/testdb/',array('method'=>'PUT'));
 ```
 
-You may have noticed that you can pass an array of additional options to the `request()` method:-
+You may have noticed that you can pass an array of additional options to the `request()` method:
 
 ``` php
 $web->request(
@@ -66,7 +66,7 @@ Fat-Free will use whatever means are available on your Web server for the `reque
 
 ## Handling File Downloads
 
-F3 has a utility for sending files to an HTTP client, i.e. fulfilling download requests. You can use it to hide the real path to your download files. This adds some layer of security because users won't be able to download files if they don't know the file names and their locations. Here's how it's done:-
+F3 has a utility for sending files to an HTTP client, i.e. fulfilling download requests. You can use it to hide the real path to your download files. This adds some layer of security because users won't be able to download files if they don't know the file names and their locations. Here's how it's done:
 
 ``` php
 $f3->route('GET /downloads/@filename',
