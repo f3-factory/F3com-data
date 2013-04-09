@@ -23,19 +23,19 @@ $f3->mset(
 );
 ```
 
-To retrieve the value of a framework variable named `var`:-
+To retrieve the value of a framework variable named `var`:
 
 ``` php
 $f3->get('var')
 ```
 
-To remove a Fat-Free variable from memory if you no longer need it (discard it so it doesn't interfere with your other functions/methods), use the method:-
+To remove a Fat-Free variable from memory if you no longer need it (discard it so it doesn't interfere with your other functions/methods), use the method:
 
 ``` php
 $f3->clear('var')
 ```
 
-To find out if a variable has been previously defined:-
+To find out if a variable has been previously defined:
 
 ``` php
 $f3->exists('var')
@@ -43,7 +43,7 @@ $f3->exists('var')
 
 ## Globals
 
-F3 maintains its own symbol table for framework and application variables, which are independent of PHP's. Some variables are mapped to PHP globals. Fat-Free's `SESSION` is equivalent to `$_SESSION`, and `REQUEST` maps to `$_REQUEST`. Use of framework variables is recommended, instead of PHP's, to help you with data transfer across different functions, classes and methods. They also have other advantages:-
+F3 maintains its own symbol table for framework and application variables, which are independent of PHP's. Some variables are mapped to PHP globals. Fat-Free's `SESSION` is equivalent to `$_SESSION`, and `REQUEST` maps to `$_REQUEST`. Use of framework variables is recommended, instead of PHP's, to help you with data transfer across different functions, classes and methods. They also have other advantages:
 
 * You can use framework variables directly in your templates.
 * You don't have to instruct PHP to reference a variable outside the current scope using a global keyword inside each function or method. All F3 variables are global to your application.
@@ -80,7 +80,7 @@ $f3->copy('a','b');
 echo $f3->get('b'); // returns the same string: 'firecracker'
 ```
 
-F3 also provides some primitive methods for working with array variables:-
+F3 also provides some primitive methods for working with array variables:
 
 ``` php
 $f3->set('colors',array('red','blue','yellow'));
@@ -96,28 +96,38 @@ $result=$f3->merge('colors','grays'); // merges the two arrays
 
 ## Do-It-Yourself Directory Structures
 
-Unlike other frameworks that have rigid folder structures, F3 gives you a lot of flexibility. You can have a folder structure that looks like this (parenthesized words in all-caps represent the F3 framework variables that need tweaking):-
+Unlike other frameworks that have rigid folder structures, F3 gives you a lot of flexibility. You can have a folder structure that looks like this (parenthesized words in all-caps represent the F3 framework variables that need tweaking):
 
-```
-/ (your Web root, where index.php is located)
-app/ (application files)
-    dict/ (LOCALES, optional)
-    controllers/
-    logs/ (LOGS, optional)
-    models/
-    views/ (UI)
-css/
-js/
-lib/ (you can store base.php here)
-tmp/ (TEMP, used by the framework)
-   cache/ (CACHE)
-```
+<ul class="tree">
+    <li>/ <span class="label-inverse label">your Web root, where index.php is located</span>
+        <ul>
+            <li>app/ <span class="label label-info">application files</span>
+                <ul>
+                    <li>dict/ <span class="label">LOCALES, optional</span></li>
+                    <li>controllers/</li>
+                    <li>logs/ <span class="label">LOGS, optional</span></li>
+                    <li>models/</li>
+                    <li>views/ <span class="label label-info">UI</span></li>
+                </ul>
+            </li>
+            <li>css/</li>
+            <li>js/</li>
+            <li>lib/ <span class="label label-info">you can store base.php here</span></li>
+            <li>tmp/ <span class="label label-info">TEMP</span>
+                <ul>
+                    <li>cache/ <span class="label label-info">CACHE</span></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+
 
 Feel free to organize your files and directories any way you want. Just set the appropriate F3 global variables. If you want a really secure site, Fat-Free even allows you to store all your files in a non-Web-accessible directory. The only requirement is that you leave `index.php`, `.htaccess` and your public files, like CSS, JavaScript, images, etc. in a path visible to your browser.
 
 ## About the F3 Error Handler
 
-Fat-Free generates its own HTML error pages, with stack traces to help you with debugging. Here's an example:-
+Fat-Free generates its own HTML error pages, with stack traces to help you with debugging. Here's an example:
 
 > ---
 > <h3>Internal Server Error</h3>
@@ -127,7 +137,7 @@ Fat-Free generates its own HTML error pages, with stack traces to help you with 
 >     • var/html/dev/index.php:16 Base->run()
 > ---
 
-If you feel it's a bit too plain or wish to do other things when the error occurs, you may create your own custom error handler:-
+If you feel it's a bit too plain or wish to do other things when the error occurs, you may create your own custom error handler:
 
 ``` php
 $f3->set('ONERROR',
@@ -140,7 +150,7 @@ $f3->set('ONERROR',
 );
 ```
 
-F3 maintains a global variable containing the details of the latest error that occurred in your application. The `ERROR` variable is an array structured as follows:-
+F3 maintains a global variable containing the details of the latest error that occurred in your application. The `ERROR` variable is an array structured as follows:
 
 ```
 ERROR.code - displays the error code (404, 500, etc.)
@@ -149,7 +159,7 @@ ERROR.text - error context
 ERROR.trace - stack trace
 ```
 
-While developing your application, it's best to set the debug level to maximum so you can trace all errors to their root cause:-
+While developing your application, it's best to set the debug level to maximum so you can trace all errors to their root cause:
 
 ``` php
 $f3->set('DEBUG',3);
@@ -157,7 +167,7 @@ $f3->set('DEBUG',3);
 
 Just insert the command in your application's bootstrap sequence.
 
-Once your application is ready for release, simply remove the statement from your application, or replace it with:-
+Once your application is ready for release, simply remove the statement from your application, or replace it with:
 
 ``` php
 $f3->set('DEBUG',0);
@@ -173,7 +183,7 @@ This will suppress the stack trace output in any system-generated HTML error pag
 
 If your application needs to be user-configurable, F3 provides a handy method for reading configuration files to set up your application. This way, you and your users can tweak the application without altering any PHP code.
 
-Instead of creating a PHP script that contains the following sample code:-
+Instead of creating a PHP script that contains the following sample code:
 
 ``` php
 $f3->set('num',123);
@@ -183,7 +193,7 @@ $f3->set('items',array(7,8,9));
 $f3->set('mix',array('this',123.45,FALSE));
 ```
 
-You can construct a configuration file that does the same thing:-
+You can construct a configuration file that does the same thing:
 
 ``` ini
 [globals]
@@ -206,13 +216,13 @@ items=7,8,9
 mix="this",123.45,FALSE
 ```
 
-Instead of lengthy `$f3->set()` statements in your code, you can instruct the framework to load a configuration file as code substitute. Let's save the above text as setup.cfg. We can then call it with a simple:-
+Instead of lengthy `$f3->set()` statements in your code, you can instruct the framework to load a configuration file as code substitute. Let's save the above text as setup.cfg. We can then call it with a simple:
 
 ``` php
 $f3->config('setup.cfg');
 ```
 
-String values need not be quoted, unless you want leading or trailing spaces included. If a comma should be treated as part of a string, enclose the string using double-quotes - otherwise, the value will be treated as an array (the comma is used as an array element separator). Strings can span multiple lines:-
+String values need not be quoted, unless you want leading or trailing spaces included. If a comma should be treated as part of a string, enclose the string using double-quotes - otherwise, the value will be treated as an array (the comma is used as an array element separator). Strings can span multiple lines:
 
 ``` ini
 [globals]
@@ -221,7 +231,7 @@ very long \
 string"
 ```
 
-F3 also gives you the ability to define HTTP routes in configuration files:-
+F3 also gives you the ability to define HTTP routes in configuration files:
 
 ``` ini
 [routes]
@@ -230,7 +240,7 @@ GET /404=App->page404
 GET /page/@num=Page->@controller
 ```
 
-Route maps can be defined in configuration files too:-
+Route maps can be defined in configuration files too:
 
 ``` ini
 [maps]
