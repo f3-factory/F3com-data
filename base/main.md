@@ -11,7 +11,7 @@ File location: `lib/base.php`
 
 ## The Hive
 
-The hive is all about working with framework variables.
+The hive is a memory array to hold your framework variables in a key / value pair. Storing a value in the hive ensures it is globaly available to all classes and methods in your application.
 
 ### set
 **Bind value to hive key**
@@ -46,7 +46,7 @@ $f3->set('a',new \stdClass);
 $f3->set('a->hello','world');
 ```
 
-If the `$ttl` parameter is > 0, and the CACHE variable is enabled, the specified variable will be cached. You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from Cache.
+If the `$ttl` parameter is > 0, and the CACHE framework variable is enabled, the specified variable will be cached for X seconds. You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from Cache.
 
 ``` php
 // cache string                         
@@ -65,7 +65,11 @@ It is also possible to set php globals using GET, POST, COOKIE or SESSION.
 
 <div class="alert alert-info"><strong>Notice:</strong> If you set or access a key of SESSION, the session gets started automatically. There's no need for you to do it by yourself.</div>
 
-The framework has some own [system variables] (system-variables). You can change them to get a framework behaviour, that fits best for your app.
+The framework has it's own [system variables] (system-variables). You can change them using set() to modify a framework behaviour, for example 
+``` php
+$f3->set('CACHE', TRUE);
+```
+
 Hive keys are case-sensitive. Root hive keys are checked for validity against these valid chars: [ a-z A-Z 0-9 _ ]
 
 
@@ -81,44 +85,53 @@ to get a previously saved framework var, use:
 
 ``` php
 $f3->set('myVar','hello world');
-$f3->get('myVar'); // returns the string 'hello world'
+echo $f3->get('myVar'); // outputs the string 'hello world'
+$local_var = $f3->get('myVar'); // $local_var holds the string 'hello world'
 ```
 
 <div class="alert alert-info"><strong>Notice:</strong> F3 tries to load the var from Cache when using get(), if the var was not defined at runtime before and caching is enabled.</div>
 
 Accessing arrays is easy. You can also use the JS dot notation, which makes it much easier to read and write.
-
+<!-- special alignment ez 2 read 4 beginners -->
 ``` php
-$f3->set('myarray', array(
-        0 => 'value_0',  
-        1 => 'value_1',
-        'bar' => 123,
-        'foo' => 'we like candy',
-        'baz' => 4.56,
-    ));
+$f3->set('myarray', 
+           array(
+                    0 => 'value_0',  
+                    1 => 'value_1',
+                'bar' => 123,
+                'foo' => 'we like candy',
+                'baz' => 4.56,
+                )
+         );
 
-$f3->get('myarray[0]'); // value_0
-$f3->get('myarray.1'); // value_1
-$f3->get('myarray[bar]'); // 123
-$f3->get('myarray.foo'); // we like candy
-$f3->get('myarray["baz"]'); // 4.56
+echo $f3->get('myarray[0]'); // value_0
+echo $f3->get('myarray.1'); // value_1
+echo $f3->get('myarray["bar"]'); // 123, notice alternate use of single & dbl quotes 
+echo $f3->get('myarray.foo'); // we like candy
+echo $f3->get('myarray["baz"]'); // 4.56
 ``` 
 
 
 
 
 ### sync
-**Sync PHP global with corresponding hive key**
+**Sync PHP global variable with corresponding hive key**
 
 ``` php
 $f3->sync( string $key ); array
 ```
 
+Usage:
+
+``` php
+$f3->sync('SESSION');
+// ensures php global var SESSION is the same as F3 framework variable SESSION
+```
 
 
 ### ref
 
-**Get hive key reference/contents**
+**Get reference to hive key and it's contents**
 
 ``` php
 &$f3->ref( string $key, [ bool $add = true ]); mixed
@@ -128,33 +141,35 @@ Usage:
 
 ``` php
 $f3->set('name','John');
-$b = &$f3->ref('name');
-$b = 'Chuck';
-$f3->get('name'); // Chuck
+$b = &$f3->ref('name'); // $b is a reference to framework variable 'name' , not a copy
+$b = 'Chuck'; // modifiying the reference updates the framework variable 'name'
+echo $f3->get('name'); // Chuck
 ```
 
-You can also add non-existent hive keys, array elements, and object properties by default.
+You can also add non-existent hive keys, array elements, and object properties, when 2nd argument is TRUE by default.
 
 ``` php
 
-$new = &$f3->ref('newVar');
-$new = 'hello world';
-$f3->get('newVar'); // hello world
+$new = &$f3->ref('newVar'); // creates new framework hive var 'newVar' and returns reference to it
+$new = 'hello world'; // set value of php variable, also updates reference
+echo $f3->get('newVar'); // hello world
 
-$new = &$f3->ref('newObj->name');
+$new = &$f3->ref('newObj->name'); 
 $new = 'Sheldon';
-$f3->get('newObj')->name; // Sheldon
-$f3->get('newObj->name'); // Sheldon
+echo $f3->get('newObj')->name; // Sheldon
+echo $f3->get('newObj->name'); // Sheldon
+echo $f3->get('newObj.name'); // Sheldon
 
 $a = &$f3->ref('hero.name');
-$a = 'Chuck';
+$a = 'SpongeBob';
 // or
-$b = &$f3->ref('hero');
-$b['name'] = 'Chuck';
-$f3->get('hero'); // array ('name' => 'Chuck')
+$b = &$f3->ref('hero'); // variable
+$b['name'] = 'SpongeBob';  // becomes array with key 'name'
+$my_array = $f3->get('hero'); 
+echo $my_array['name']; // 'SpongeBob'
 ```
 
-If the `$add` argument is `false`, it just returns the read-only hive key contents. This behaviour is used by get().
+If the 2nd argument `$add` is `false`, it just returns the read-only hive key contents. This behaviour is used by get(). If the hive key does not exist, it returns NULL. 
 
 
 
@@ -165,33 +180,35 @@ If the `$add` argument is `false`, it just returns the read-only hive key conten
 $f3->exists( string $key ); bool
 ```
 
+<div class="alert alert-info"><strong>Notice:</strong> exists uses PHP's `isset()` function to determine if a variable is set and is not NULL.</div>
+
 Usage:
 
 ``` php
 $f3->set('foo','value');
 
 $f3->exists('foo'); // true
-$f3->exists('bar'); // false
+$f3->exists('bar'); // false, was not set above
 
 $f3->exists('COOKIE.userid');
 $f3->exists('SESSION.login');
 $f3->exists('POST.submit');
 ```
 
-The exists function also checks the Cache backend, if the key was not found in the hive.
+The exists function also checks the Cache backend storage, if the key was not found in the hive.
 
 <div class="alert alert-info"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
 
 
 
 ### clear
-**Unset hive key**
+**Unset hive key, key no longer exists**
 
 ``` php
 $f3->clear( string $key ); void
 ```
 
-If you want to remove a hive key, you can clear it like this:
+To remove a hive key and it's value completely from memory:
 
 ``` php
 $f3->clear('foobar');
@@ -222,30 +239,32 @@ $f3->mset(array $vars, [ string $prefix = ''], [ integer $ttl = 0 ]); void
 Usage:
 
 ``` php
-$f3->mset(array(
-    'var1'=>'value1',
-    'var2'=>'value2',
-    'var3'=>'value3',
-));
+$f3->mset( array(
+                 'var1'=>'value1',
+                 'var2'=>'value2',
+                 'var3'=>'value3',
+                 )
+         );
 
-$f3->get('var1'); // value1
-$f3->get('var2'); // value2
-$f3->get('var3'); // value3
+echo $f3->get('var1'); // value1
+echo $f3->get('var2'); // value2
+echo $f3->get('var3'); // value3
 ```
 
-You can append all key names using the `$prefix` argument.
+You can append all key names using the 2nd argument `$prefix`.
 
 ``` php
-$f3->mset(array(
-    'var1'=>'value1',
-    'var2'=>'value2',
-    'var3'=>'value3',
-),
-'pre_');
+$f3->mset( array(
+                 'var1'=>'value1',
+                 'var2'=>'value2',
+                 'var3'=>'value3',
+                 ),
+            'pre_'
+          );
 
-$f3->get('pre_var1'); // value1
-$f3->get('pre_var2'); // value2
-$f3->get('pre_var3'); // value3
+echo $f3->get('pre_var1'); // value1
+echo $f3->get('pre_var2'); // value2
+echo $f3->get('pre_var3'); // value3
 ```
 
 To cache all vars, set a positive numeric integer value to `$ttl` in seconds.
@@ -253,10 +272,10 @@ To cache all vars, set a positive numeric integer value to `$ttl` in seconds.
 
 
 ### hive
-**Publish hive contents.**
+**return all hive contents as array.**
 
 ``` php
-$f3->hive(); array
+echo "HIVE CONTENTS <pre>" . var_export( $f3->hive(), true ) . "</pre>";
 ```
 
 
@@ -272,11 +291,11 @@ Usage:
 
 ``` php
 $f3->set('var_1','value123');
-echo $f3->copy('var_1','foo'); // "value123"
+$f3->copy('var_1','foo'); // foo = "value123"
 echo $f3->get('foo'); // "value123"
 ```
 
-Returns writable `$dst` reference.
+Returns writable reference to `$dst` hive variable.
 
 
 
@@ -290,12 +309,12 @@ $f3->concat( string $key, string $val ); void
 Usage:
 
 ``` php
-$f3->set('var','hello');
-echo $f3->concat('var',' world'); // hello world
-echo $f3->get('var'); // hello world
+$f3->set('cart_count', 4);
+$f3->concat('cart_count,' items in your shopping cart'); 
+echo $f3->get('cart_count'); // "4 items in your shopping cart"
 ```
 
-Returns writable `$key` reference.
+Returns writable reference to `$key` hive variable.
 
 
 
@@ -460,7 +479,12 @@ Array
 $f3->fixslashes( string $str ); string
 ```
 
+Usage:
 
+```php
+$filepath = __FILE__; // \www\mysite\myfile.txt
+$filepath = $f3->fixslashes($filepath); // /www/mysite/myfile.txt
+```
 
 ### split
 **Split comma-, semi-colon, or pipe-separated string**
@@ -495,8 +519,8 @@ $f3->stringify( mixed $arg ); string
 ```
 
 
-
-### csv
+<!-- testing tocify vs reserved words -->
+### csv&nbsp;
 **Flatten array values and return as CSV string**
 
 ``` php
@@ -519,6 +543,12 @@ $f3->csv($data); // returns: "'value1','value2','value3'"
 $f3->camelcase( string $str ); string
 ```
 
+Usage:
+
+``` php
+$str_s_c = 'user_name';
+$f3->camelcase($str_s_c); // returns: "userName"
+```
 
 
 ### snakecase
@@ -528,6 +558,12 @@ $f3->camelcase( string $str ); string
 $f3->snakecase( string $str ); string
 ```
 
+Usage:
+
+``` php
+$str_CC = 'userName';
+$f3->snakecase($str_CC); // returns: "user_name"
+```
 
 
 ### sign
@@ -637,7 +673,7 @@ $f3->scrub($foo,'h1,span');
 
 
 
-### esc
+### esc&nbsp;
 **Encode characters to equivalent HTML entities**
 
 ``` php
@@ -704,6 +740,14 @@ This method also handles nested array elements and objects properties, like `$f3
 $f3->serialize( mixed $arg ); string
 ```
 
+Usage:
+
+``` php
+// example using json_encode
+$myArray = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
+echo $f3->serialize($myArray);  // outputs {"a":1,"b":2,"c":3,"d":4,"e":5}
+```
+
 Depending on the `SERIALIZER` system variable, this method converts anything into a portable string expression. Possible values are **igbinary**, **json** and **php**.
 F3 checks on startup, if igbinary is available and prioritize it, as the igbinary extension works much faster and uses less disc space for serializing. Check [igbinary on github](https://github.com/igbinary/igbinary).
 
@@ -718,9 +762,16 @@ $f3->unserialize( mixed $arg ); string
 
 See [serialize](base#serialize) for further description.
 
+# To Be Continued... #
+
 ## Localisation
 
 ### format
+**Return locale-aware formatted string**
+
+
+
+
 ### language
 ### lexicon
 
