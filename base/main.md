@@ -66,6 +66,7 @@ It is also possible to set php globals using GET, POST, COOKIE or SESSION.
 <div class="alert alert-info"><strong>Notice:</strong> If you set or access a key of SESSION, the session gets started automatically. There's no need for you to do it by yourself.</div>
 
 The framework has it's own [system variables] (system-variables). You can change them using set() to modify a framework behaviour, for example 
+
 ``` php
 $f3->set('CACHE', TRUE);
 ```
@@ -93,6 +94,7 @@ $local_var = $f3->get('myVar'); // $local_var holds the string 'hello world'
 
 Accessing arrays is easy. You can also use the JS dot notation, which makes it much easier to read and write.
 <!-- special alignment ez 2 read 4 beginners -->
+
 ``` php
 $f3->set('myarray', 
            array(
@@ -106,9 +108,9 @@ $f3->set('myarray',
 
 echo $f3->get('myarray[0]'); // value_0
 echo $f3->get('myarray.1'); // value_1
-echo $f3->get('myarray["bar"]'); // 123, notice alternate use of single & dbl quotes 
-echo $f3->get('myarray.foo'); // we like candy
-echo $f3->get('myarray["baz"]'); // 4.56
+echo $f3->get('myarray.bar'); // 123
+echo $f3->get('myarray["foo"]'); // we like candy
+echo $f3->get('myarray[baz]'); // 4.56, notice alternate use of single, double and no quotes 
 ``` 
 
 
