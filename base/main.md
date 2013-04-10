@@ -309,9 +309,9 @@ $f3->concat( string $key, string $val ); void
 Usage:
 
 ``` php
-$f3->set('var','hello');
-$f3->concat('var',' world'); // "hello world"
-echo $f3->get('var'); // "hello world"
+$f3->set('cart_count', 4);
+$f3->concat('cart_count,' items in your shopping cart'); 
+echo $f3->get('cart_count'); // "4 items in your shopping cart"
 ```
 
 Returns writable reference to `$key` hive variable.
@@ -479,7 +479,12 @@ Array
 $f3->fixslashes( string $str ); string
 ```
 
+Usage:
 
+```php
+$filepath = __FILE__; // \www\mysite\myfile.txt
+$filepath = $f3->fixslashes($filepath); // /www/mysite/myfile.txt
+```
 
 ### split
 **Split comma-, semi-colon, or pipe-separated string**
@@ -514,8 +519,8 @@ $f3->stringify( mixed $arg ); string
 ```
 
 
-
-### csv
+<!-- testing tocify vs reserved words -->
+### csv&nbsp;
 **Flatten array values and return as CSV string**
 
 ``` php
@@ -538,6 +543,12 @@ $f3->csv($data); // returns: "'value1','value2','value3'"
 $f3->camelcase( string $str ); string
 ```
 
+Usage:
+
+``` php
+$str_s_c = 'user_name';
+$f3->camelcase($str_s_c); // returns: "userName"
+```
 
 
 ### snakecase
@@ -547,6 +558,12 @@ $f3->camelcase( string $str ); string
 $f3->snakecase( string $str ); string
 ```
 
+Usage:
+
+``` php
+$str_CC = 'userName';
+$f3->snakecase($str_CC); // returns: "user_name"
+```
 
 
 ### sign
@@ -656,7 +673,7 @@ $f3->scrub($foo,'h1,span');
 
 
 
-### esc
+### esc&nbsp;
 **Encode characters to equivalent HTML entities**
 
 ``` php
@@ -723,6 +740,14 @@ This method also handles nested array elements and objects properties, like `$f3
 $f3->serialize( mixed $arg ); string
 ```
 
+Usage:
+
+``` php
+// example using json_encode
+$myArray = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
+echo $f3->serialize($myArray);  // outputs {"a":1,"b":2,"c":3,"d":4,"e":5}
+```
+
 Depending on the `SERIALIZER` system variable, this method converts anything into a portable string expression. Possible values are **igbinary**, **json** and **php**.
 F3 checks on startup, if igbinary is available and prioritize it, as the igbinary extension works much faster and uses less disc space for serializing. Check [igbinary on github](https://github.com/igbinary/igbinary).
 
@@ -737,9 +762,16 @@ $f3->unserialize( mixed $arg ); string
 
 See [serialize](base#serialize) for further description.
 
+# To Be Continued... #
+
 ## Localisation
 
 ### format
+**Return locale-aware formatted string**
+
+
+
+
 ### language
 ### lexicon
 
