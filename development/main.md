@@ -13,12 +13,6 @@ It is highly recommended that experienced users develop new applications with th
 
 
 
-## Support
-
-Technical support is available at the official discussion forum: [`https://groups.google.com/forum/#!forum/f3-framework`](https://groups.google.com/forum/#!forum/f3-framework).
-
-If you need live support, you can talk to the development team and other members of the F3 community via IRC. We're on the FreeNode `#fatfree` channel (`chat.freenode.net`). Visit [`http://webchat.freenode.net/`](http://webchat.freenode.net/?channels=fatfree) to join the conversation. You can also download the [Firefox Chatzilla](https://addons.mozilla.org/en-US/firefox/addon/chatzilla/) add-on or [Pidgin](http://www.pidgin.im/) if you don't have an IRC client so you can participate in the live chat.
-
 ## Fair Licensing
 
 **Fat-Free Framework is free and released as open source software covered by the terms of the [GNU Public License](http://www.gnu.org/licenses/gpl-3.0.html) (GPL v3).** You may not use the software, documentation, and samples except in compliance with the license. If the terms and conditions of this license are too restrictive for your use, alternative licensing is available for a very reasonable fee.
@@ -26,6 +20,15 @@ If you need live support, you can talk to the development team and other members
 If you feel that this software is one great weapon to have in your programming arsenal, it saves you a lot of time and money, use it for commercial gain or in your business organization, please consider making a donation to the project. A significant amount of time, effort, and money has been spent on this project. Your donations help keep this project alive and the development team motivated. Donors and sponsors get priority support (24-hour response time on business days).
 
 <a class="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MJSQL8N5LPDAY" title="donate with PayPal"></a>
+
+
+
+## Support
+
+Technical support is available at the official discussion forum: [`https://groups.google.com/forum/#!forum/f3-framework`](https://groups.google.com/forum/#!forum/f3-framework).
+
+If you need live support, you can talk to the development team and other members of the F3 community via IRC. We're on the FreeNode `#fatfree` channel (`chat.freenode.net`). Visit [`http://webchat.freenode.net/`](http://webchat.freenode.net/?channels=fatfree) to join the conversation. You can also download the [Firefox Chatzilla](https://addons.mozilla.org/en-US/firefox/addon/chatzilla/) add-on or [Pidgin](http://www.pidgin.im/) if you don't have an IRC client so you can participate in the live chat.
+
 
 
 ## Contribute
@@ -135,7 +138,7 @@ See what other users have made with F3.
     </tbody>
 </table>
 
-<button type="button" class="btn btn-small" data-toggle="collapse" data-target="#plugin-archive">view Plugin archive of older F3 versions</button>
+<button type="button" class="btn btn-small" data-toggle="collapse" data-target="#plugin-archive">view Plugin archive for older F3 versions</button>
 <div id="plugin-archive" class="collapse">
     <table class="table table-bordered">
         <thead>
@@ -174,6 +177,8 @@ See what other users have made with F3.
         </tbody>
     </table>
 </div>
+
+
 
 ### Some more Goodies
 
@@ -277,5 +282,7 @@ The Fat-Free Framework is community-driven software. It can't be what it is toda
 * Christian Treptow
 * Кубарев Дмитрий
 * Alexandru Catalin Trandafir
+* Leigh Harrison
+* Дмитриев Иван
 
 Special thanks to the selfless others who expressed their desire to remain anonymous, yet share their time, contribute code, send donations, promote the framework to a wider audience, as well as provide encouragement and regular financial assistance. Their generosity is F3's prime motivation.
