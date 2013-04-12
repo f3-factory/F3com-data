@@ -771,7 +771,47 @@ See [serialize](base#serialize) for further description.
 ### format
 **Return locale-aware formatted string**
 
+``` php
+$f3->format( string $format [, mixed $arg0 [, mixed $arg1...] ] ); string
+```
 
+The `$format` string contains one or more placeholders identified by a position index enclosed in curly braces, the starting index being 0.
+The placeholders are replaced by the values of the provided arguments.
+
+``` php
+echo $f3->format('Name: {0} - Age: {1}','John',23); //outputs the string 'Name: John - Age: 23'
+```
+
+The formatting can get preciser if the expected type is provided within placeholders.
+Current supported types are:
+
+* date
+* time
+* number,integer
+* number,currency
+* number,percent
+* plural
+
+``` php
+echo $f3->format('Current date: {0,date} - Current time: {0,time}',time());
+//outputs the string 'Current date: 04/12/2013 - Current time: 11:49:57'
+echo $f3->format('{0} is displayed as a decimal number while {0,number,integer} is rounded',12.54);
+//outputs the string '12.54 is displayed as a decimal number while 13 is rounded'
+echo $f3->format('Price: {0,number,currency}',29.90);
+//outputs the string 'Price: $29.90'
+echo $f3->format('Percentage: {0,number,percent}',0.175);
+//outputs the string 'Percentage: 18%' //Note that the percentage is rendered as an integer
+```
+
+The **plural** type syntax is a bit more complex since it allows you to relate the output to the input quantity. The accepted keywords are *zero*, *one*, *two* and *other*.
+
+``` php
+$string='{0,plural,zero {Your cart is empty.},one {One item in your cart.},two {A pair of items in your cart.},other {There are # items in your cart.}}';
+echo $f3->format($string,0);//outputs the string 'Your cart is empty.'
+echo $f3->format($string,1);//outputs the string 'One item in your cart.'
+echo $f3->format($string,2);//outputs the string 'A pair of items in your cart.'
+echo $f3->format($string,3);//outputs the string 'There are 3 items in your cart.'
+```
 
 
 ### language
