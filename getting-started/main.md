@@ -36,15 +36,17 @@ total Web development framework - with a lot of muscle!
 
 ## Enough Said - See For Yourself
 
-Unzip the contents of the distribution package anywhere in your hard drive.
+Unzip the contents of the [distribution package](https://github.com/bcosca/fatfree/archive/master.zip) anywhere in your hard drive.
 By default, the framework file and optional plug-ins are located in the
 `lib/` path. Organize your directory structures any way you want.
 You may move the default folders to a path that's not Web-accessible for
 better security. Delete the plug-ins that you don't need. You can always
 restore them later and F3 will detect their presence automatically.
 
-**Important:** If your application uses APC, Memcached, WinCache, XCache, or a filesystem cache,
- clear all cache entries first before overwriting an older version of the framework with a new one.
+<div class="alert">
+<strong>Important:</strong> If your application uses APC, Memcached, WinCache, XCache, or a filesystem cache,
+ clear all cache entries first before overwriting an older version of the framework with a new one. This can also be done (except XCache) by calling <b>$f3->clear('CACHE')</b>.
+</div>
 
 Make sure you're running the right version of PHP. F3 does not support versions earlier than PHP
 5.3. You'll be getting syntax errors (false positives) all over the place because new language
@@ -64,7 +66,7 @@ Copyright (c) 1997-2012 The PHP Group
 Zend Engine v2.3.0, Copyright (c) 1998-2012 Zend Technologies
 ```
 
-Upgrade if necessary and come back here if you've made the jump to PHP 5.3 or a later release.
+Upgrade if necessary, [check additional system requirements](system-requirements) and come back here if you've made the jump to PHP 5.3 or a later release.
 If you need a PHP 5.3+ hosting service provider, try one of these services:
 
 * [A2 Hosting](http://www.a2hosting.com/2461-15-1-72.html)
@@ -113,5 +115,5 @@ For now, let's keep it simple. To instruct the framework to start waiting for re
 we issue the `$f3->run()` command.
 
 **Can't Get the Example Running?** If you're having trouble getting this simple program to run
-on your server, you may have to tweak your Web server settings a bit. Take a look at the sample
-Apache configuration in the following section (along with the Nginx and Lighttpd equivalents).
+on your server, you may have to tweak your Web server settings a bit. Take a look at the
+[sample Apache configuration](routing-engine#sample-apache-configuration) in the following section (along with the Nginx and Lighttpd equivalents).
