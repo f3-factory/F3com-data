@@ -9,7 +9,7 @@ Check the system requirements and get a first impression by running the demo app
 
 ### 2. [Routing Engine](routing-engine)
 
-Setup your hosting environment, and define your application routes with no hassle.
+Setup your hosting environment and define your application routes with no hassle.
 
 ### 3. [Framework Variables](framework-variables)
 
@@ -45,7 +45,7 @@ If you now already fell in love with F3, check the [Support and Licensing](devel
 
 ### 11. Demo Applications
 
-You can download these working examples, to get an idea of how easy all components can work together.
+You can download these working examples to get an idea of how easy all components can work together.
 
 * [**CMS Demo**, (F3 version 3.x)](https://github.com/bcosca/fatfree/blob/archive/f3-3.0.6.cms.demo.zip)
 * [**Blog Example**, (F3 version 2.1)](https://github.com/bcosca/fatfree/blob/archive/f3-2.1.0-blog.example.zip)
