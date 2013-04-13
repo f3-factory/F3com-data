@@ -22,7 +22,7 @@ That's not all. F3 is packaged with other optional plug-ins that extend its capa
 * SMTP over SSL/TLS
 * Tools for communicating with other servers
 * Data Validation
-* and [more Plugins from the F3-Community](plugins)
+* and [more Plugins from the F3-Community](development#user-plugins)
 
 ---
 
