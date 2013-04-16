@@ -853,8 +853,7 @@ $f3->route('POST /@category/@thread','ForumThread->saveAnswer'); // /games/battl
 $f3->route('GET /image/@width-@height/@file','ImageCompressor->render'); // /image/300-200/mario.jpg
 ```
 
-After processing the routes (initiated by [run](base#run)), you'll find the value of each of those tokens in the `PARAMS` system variable as named key, like `$f3->get('PARAMS.page')`.
-The routing pattern that matches the current request URI is saved in the `PATTERN` var, the current HTTP request URI in the `URI` var and the request method in the `VERB` var.
+After processing the incoming request URI (initiated by [run](base#run)), you'll find the value of each of those tokens in the `PARAMS` system variable as named key, like `$f3->get('PARAMS.page')`.
 
 You can also define wildcards (`/*`) in your routing URI. You can also use them in combination with `@`-tokens.
 
@@ -904,15 +903,44 @@ class Bar {
 
 #### Caching
 
-The 3rd argument `$ttl` defines the caching time in seconds.
+The 3rd argument `$ttl` defines the caching time in seconds. Setting this argument to a positive value will call the [expire](base#expire) function to set cache metadata in the HTTP response header.
+
 
 #### Bandwidth Throttling
 
-Set the 4th argument `$kbps` to your desired speed limit, to enable throttling.
+Set the 4th argument `$kbps` to your desired speed limit, to enable throttling. [Read more](optimization#bandwidth-throttling) about it in the user guide.
 
 ### reroute
 ### map
 ### run
+**Match routes against incoming URI and call their route handler**
+
+``` php
+$f3->run(); null
+```
+
+Example:
+
+``` php
+$f3 = require __DIR__.'/lib/base.php';
+$f3->route('GET /',function(){
+    echo "Hello World";
+});
+$f3->run();
+```
+
+After processing the incoming request URI, the routing pattern that matches the that URI is saved in the `PATTERN` var, the current HTTP request URI in the `URI` var and the request method in the `VERB` var.
+The `PARAMS` var will contains all tokens as named keys, and additionally all tokens and wildcards as numeric keys, depending on their order of appearance.
+
+<div class="alert alert-info">
+    <p><b>Notice:</b> If there is a static and a dynamic route pattern defined, than can match to same incoming URI, then the static route pattern has priority.</p>
+</div>
+
+If `CACHE` is turned off, `$ttl` will only control the browser cache using [expire](base#expire) header metadata.
+If `CACHE` is turned on, and there is a positive `$ttl` value set for the current request URI handler, F3 additionally will cache the output for this page, and refresh it when `$ttl` expires.
+Read more about it [here](https://groups.google.com/d/msg/f3-framework/lwaqZjtwCvU/PC-gK8Ki9PMJ) and [here](https://groups.google.com/d/msg/f3-framework/lwaqZjtwCvU/LDUlPhQfc84J).
+
+
 ### call
 ### chain
 ### relay
