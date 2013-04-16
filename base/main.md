@@ -49,7 +49,7 @@ $f3->set('a->hello','world');
 If the `$ttl` parameter is > 0, and the CACHE framework variable is enabled, the specified variable will be cached for X seconds. You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from Cache.
 
 ``` php
-// cache string                         
+// cache string
 $f3->set('simplevar','foo bar 1337', 3600); // cache for 1 hour
 //cache big computed arrays
 $f3->set('fruits',array(
@@ -129,6 +129,12 @@ Usage:
 $f3->sync('SESSION');
 // ensures php global var SESSION is the same as F3 framework variable SESSION
 ```
+
+<div class="alert alert-info">
+    F3 will automatically sync the following PHP globals:
+    <b>GET</b>, <b>POST</b>, <b>COOKIE</b>, <b>REQUEST</b>, <b>SESSION</b>, <b>FILES</b>, <b>SERVER</b>, <b>ENV</b>
+</div>
+
 
 
 ### ref
@@ -820,7 +826,95 @@ echo $f3->format($string,3);//outputs the string 'There are 3 items in your cart
 ## Routing
 
 ### mock
+
+
+
 ### route
+**Bind handler to route pattern**
+
+``` php
+$f3->route( string|array $pattern, callback $handler, [ int $ttl = 0 ],[ int $kbps = 0 ]); null
+```
+
+Basic usage example:
+
+``` php
+$f3->route('POST /login','AuthController->login');
+```
+
+#### Route Pattern
+
+The `$pattern` var describes a route pattern, that consists of the request type and a request URI, both separated by a space char.
+
+Possible request type (Verb) definitions, that F3 will process, are: **GET**, **POST**, **PUT**, **DELETE**, **HEAD**, **PATCH**, **CONNECT**.
+
+You can combine multiple verbs, to use the same route handler for all of them. They are separated by a pipe char like `GET|POST`.
+
+The request URI may contain one or more **token**, that a meant for defining dynamic routes. Tokens are indicated by a `@`-char. See this example:
+
+``` php
+$f3->route('GET|HEAD /@page','PageController->display'); // /about
+$f3->route('POST /@category/@thread','ForumThread->saveAnswer'); // /games/battlefield3
+$f3->route('GET /image/@width-@height/@file','ImageCompressor->render'); // /image/300-200/mario.jpg
+```
+
+After processing the routes (initiated by [run](base#run)), you'll find the value of each of those tokens in the `PARAMS` system variable as named key, like `$f3->get('PARAMS.page')`.
+The routing pattern that matches the current request URI is saved in the `PATTERN` var, the current HTTP request URI in the `URI` var and the request method in the `VERB` var.
+
+You can also define wildcards (`/*`) in your routing URI. You can also use them in combination with `@`-tokens.
+
+``` php
+$f3->route('GET /path/*/@page',function($f3,$params){
+    // called URI: "/path/cat/page1"
+    // $params is the same as $f3->get('PARAMS');
+    $params[0]; // contains the full route path. "/path/cat/page"
+    $params[1]; // and further numeric keys in PARAMS holds the catched wildcard paths and tokens. in this case "cat"
+    $params['page']; // is your last segment, in this case "page1"
+});
+```
+
+<div class="alert alert-info">
+    <b>Notice:</b> The `PARAMS` var contains all tokens as named key, and additionally all tokens and wildcards as numeric key, depending on their order of appearance.
+</div>
+
+The route above also works with sub categories. Just call `/path/cat/subcat/page1`
+
+``` php
+$params[1]; // now contains "/cat/subcat"
+```
+
+It even works with some more sub-levels. You just need to explode this value with a `/`-delimiter to handle your sub-categories.
+Something like `/path/*/@pagetitle/@pagenum` is also quite easy.
+
+It becomes complicated when you try to use more than one wildcard, because only the first `/*`-wildcard can hold unlimited path-segments.
+Any further wildcards can only contain exactly one part between the slashes (`/`). So try to keep it simple.
+
+#### Route Handler
+
+Can be a callable class method like 'Foo->bar' or 'Foo::bar', a function name, or an anonymous function.
+
+F3 automatically passes the framework object to methods of route handler controller classes, i.e.
+
+``` php
+$f3->set('hello','world');
+$f3->route('GET /foo/@file','Bar->baz');
+
+class Bar {
+    function baz($f3,$args) {
+        echo $f3->get('hello');
+        echo $args['file'];
+    }
+}
+```
+
+#### Caching
+
+The 3rd argument `$ttl` defines the caching time in seconds.
+
+#### Bandwidth Throttling
+
+Set the 4th argument `$kbps` to your desired speed limit, to enable throttling.
+
 ### reroute
 ### map
 ### run
