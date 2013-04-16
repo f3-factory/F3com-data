@@ -247,12 +247,13 @@ $f3->mset(array $vars, [ string $prefix = ''], [ integer $ttl = 0 ]); void
 Usage:
 
 ``` php
-$f3->mset( array(
-                 'var1'=>'value1',
-                 'var2'=>'value2',
-                 'var3'=>'value3',
-                 )
-         );
+$f3->mset(
+    array(
+        'var1'=>'value1',
+        'var2'=>'value2',
+        'var3'=>'value3',
+    )
+);
 
 echo $f3->get('var1'); // value1
 echo $f3->get('var2'); // value2
@@ -262,13 +263,14 @@ echo $f3->get('var3'); // value3
 You can append all key names using the 2nd argument `$prefix`.
 
 ``` php
-$f3->mset( array(
-                 'var1'=>'value1',
-                 'var2'=>'value2',
-                 'var3'=>'value3',
-                 ),
-            'pre_'
-          );
+$f3->mset(
+    array(
+        'var1'=>'value1',
+        'var2'=>'value2',
+        'var3'=>'value3',
+    ),
+    'pre_'
+);
 
 echo $f3->get('pre_var1'); // value1
 echo $f3->get('pre_var2'); // value2
@@ -278,15 +280,12 @@ echo $f3->get('pre_var3'); // value3
 To cache all vars, set a positive numeric integer value to `$ttl` in seconds.
 
 
-
 ### hive
 **return all hive contents as array.**
 
 ``` php
 echo "HIVE CONTENTS <pre>" . var_export( $f3->hive(), true ) . "</pre>";
 ```
-
-
 
 ### copy
 **Copy contents of hive variable to another**
@@ -305,8 +304,6 @@ echo $f3->get('foo'); // "value123"
 
 Returns writable reference to `$dst` hive variable.
 
-
-
 ### concat
 **Concatenate string to hive string variable**
 
@@ -323,8 +320,6 @@ echo $f3->get('cart_count'); // "4 items in your shopping cart"
 ```
 
 Returns writable reference to `$key` hive variable.
-
-
 
 ### flip
 **Swap keys and values of hive array variable**
@@ -528,7 +523,7 @@ $f3->stringify( mixed $arg ); string
 
 
 <!-- testing tocify vs reserved words -->
-### csv&nbsp;
+### csv 
 **Flatten array values and return as CSV string**
 
 ``` php
@@ -627,10 +622,10 @@ Example:
 
 ``` php
 echo $f3->encode("we <b>want</b> 'sugar & candy'");
-// we &amp;lt;b&amp;gt;want&amp;lt;/b&amp;gt; 'sugar &amp;amp; candy'
+// we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'
 
-echo $f3->encode("§9: convert symbols &amp; umlauts like ä ü ö");
-// &amp;sect;9: convert symbols &amp;amp; umlauts like &amp;auml; &amp;uuml; &amp;ouml;
+echo $f3->encode("§9: convert symbols & umlauts like ä ü ö");
+// &sect;9: convert symbols &amp; umlauts like &auml; &uuml; &ouml;
 ```
 
 
@@ -645,11 +640,11 @@ $f3->decode( string $str ); string
 Example:
 
 ``` php
-echo $f3->decode("we &amp;lt;b&amp;gt;want&amp;lt;/b&amp;gt; 'sugar &amp;amp; candy'");
-// we <b>want</b> 'sugar &amp; candy'
+echo $f3->decode("we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'");
+// we <b>want</b> 'sugar & candy'
 
-echo $f3->decode("&amp;sect;9: convert symbols &amp;amp; umlauts like &amp;auml; &amp;uuml; &amp;ouml;");
-// §9: convert symbols &amp; umlauts like ä ü ö welcome!
+echo $f3->decode("&sect;9: convert symbols &amp; umlauts like &auml; &uuml; &ouml;");
+// §9: convert symbols & umlauts like ä ü ö welcome!
 ```
 
 
@@ -681,7 +676,7 @@ $f3->scrub($foo,'h1,span');
 
 
 
-### esc&nbsp;
+### esc 
 **Encode characters to equivalent HTML entities**
 
 ``` php
@@ -692,7 +687,7 @@ Usage:
 
 ``` php
 echo $f3->esc("99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>");
-// 99 bottles of &amp;lt;b&amp;gt;beer&amp;lt;/b&amp;gt; on the wall. &amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;
+// 99 bottles of &lt;b&gt;beer&lt;/b&gt; on the wall. &lt;script&gt;alert(1);&lt;/script&gt;
 ```
 
 This also works with arrays and object properties:
@@ -701,12 +696,12 @@ This also works with arrays and object properties:
 $myArray = array('<b>foo</b>',array('<script>alert(1)</script>'),'key'=>'<i>foo</i>');
 print_r($f3->esc($myArray));
 /*
-    [0] => &amp;lt;b&amp;gt;foo&amp;lt;/b&amp;gt;
+    [0] => &lt;b&gt;foo&lt;/b&gt;
     [1] => Array
         (
-            [0] => &amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;
+            [0] => &lt;script&gt;alert(1)&lt;/script&gt;
         )
-    [key] => &amp;lt;i&amp;gt;foo&amp;lt;/i&amp;gt;
+    [key] => &lt;i&gt;foo&lt;/i&gt;
 */
 
 $myObj = new stdClass();
@@ -714,7 +709,7 @@ $myObj->title = '<h1>Hello World</h1>';
 var_dump($f3->esc($myObj));
 /*
     object(stdClass)#23 (1) {
-      ["title"] => string(32) "&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;"
+      ["title"] => string(32) "&lt;h1&gt;Hello World&lt;/h1&gt;"
     }
 */
 ```
@@ -733,7 +728,7 @@ $f3->raw( mixed $arg ); string
 Example:
 
 ``` php
-$f3->raw("99 bottles of &amp;lt;b&amp;gt;beer&amp;lt;/b&amp;gt; on the wall. &amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;");
+$f3->raw("99 bottles of &lt;b&gt;beer&lt;/b&gt; on the wall. &lt;script&gt;alert(1);&lt;/script&gt;");
 // 99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>
 ```
 
