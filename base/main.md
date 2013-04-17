@@ -815,12 +815,59 @@ echo $f3->format($string,3);//outputs the string 'There are 3 items in your cart
 ```
 
 
+
 ### language
+**Assign/auto-detect language**
+
+``` php
+$f3->language([ string $code = NULL ]); string
+```
+
+This function is used while booting the framework to auto-detect the possible user language, by looking at the HTTP request headers, specifically the Accept-Language header sent by the browser.
+Use the `LANGUAGE` system variable to get and set languages, since it also handles some dependencies like changing dictionary files.
+The `FALLBACK` system variable defines a default language, that will be used, if none of the detected languages are available as a dictionary file.
+
+Example:
+
+``` php
+$f3->get('LANGUAGE'); // de_DE,de,en_US,en
+$f3->set('LANGUAGE','en_UK,en_US,en');
+```
+
+
+
 ### lexicon
+**Transfer lexicon entries to hive**
+
+``` php
+$f3->lexicon(string $path ); array
+```
+
+This function is used while booting the framework to auto-load the dictionary files, located within the defined path in `LOCALES` var.
+
+``` php
+$f3->set('LOCALES','dict/');
+```
+
+A dictionary file can be a php file returning a key-value paired associative array, or an .ini-style formatted config file.
+[Read the guide about language files here](views-and-templates#multilingual-support).
+
+
 
 ## Routing
 
 ### mock
+**Mock HTTP request**
+
+``` php
+$f3->mock( string $pattern , [ array $args = NULL ], [ array $headers = NULL ], [ string $body = NULL]); null
+```
+
+Fires a HTTP request.
+
+``` php
+$f3->mock('GET /page/view');
+```
 
 
 
@@ -828,7 +875,7 @@ echo $f3->format($string,3);//outputs the string 'There are 3 items in your cart
 **Bind handler to route pattern**
 
 ``` php
-$f3->route( string|array $pattern, callback $handler, [ int $ttl = 0 ],[ int $kbps = 0 ]); null
+$f3->route( string|array $pattern, callback $handler, [ int $ttl = 0 ], [ int $kbps = 0 ]); null
 ```
 
 Basic usage example:
@@ -910,8 +957,65 @@ The 3rd argument `$ttl` defines the caching time in seconds. Setting this argume
 
 Set the 4th argument `$kbps` to your desired speed limit, to enable throttling. [Read more](optimization#bandwidth-throttling) about it in the user guide.
 
+
+
 ### reroute
+**Reroute to specified URI**
+
+``` php
+$f3->reroute( string $uri, [ bool $permanent = FALSE]); null
+```
+
+Examples:
+
+``` php
+// an old page is moved permanently
+$f3->route('GET|HEAD /obsoletepage', function($f3) {
+        $f3->reroute('/newpage', true);
+});
+
+// whereas a Post/Redirect/Get pattern would just redirect temporarily
+$f3->route('GET|HEAD /login', 'AuthController->viewLoginForm');
+$f3->route('POST /login', function($f3) {
+    if( AuthController->checkLogin == true )
+        $f3->reroute('/members', false);
+    else
+        $f3->reroute('/login', false);
+});
+
+// we can also reroute to external URLs
+$f3->route('GET /partners', function($f3) {
+        $f3->reroute('http://externaldomain.com');
+});
+
+```
+
+
 ### map
+**Provide ReST interface by mapping HTTP verb to class method**
+
+``` php
+$f3->map( string $url, string $class, [ int $ttl = 0], [ int $kbps = 0 ]); null
+```
+
+Its syntax works slightly similar to the **route** function, but you need not to define a HTTP request method in the 1st argument,
+because they are mapped as functions in the Class you prodive in the `$class` argument.
+[Read more about the REST support in the User Guide](routing-engine#representational-state-transfer-%28rest%29).
+
+Example:
+
+``` php
+$f3->map('/news/@item','News');
+
+class News {
+    function get() {}
+    function post() {}
+    function put() {}
+    function delete() {}
+}
+```
+
+
 ### run
 **Match routes against incoming URI and call their route handler**
 
