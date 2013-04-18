@@ -1,7 +1,7 @@
 # Base
 
-The Base class represents the framework core. It contains everything you need to run a simple application.
-The file `base.php` also packages the [Cache](cache), [Prefab](prefab), [View](view), [ISO](iso) and [Registry](registry) classes.
+The Base class represents the framework core. It contains everything you need to run a simple application. The file `base.php` also includes the essential [Cache](cache), [Prefab](prefab), [View](view), [ISO](iso) and [Registry](registry) classes to reduce unnecessary disk I/O for optimal performance.
+
 Feel free to remove all other files in the `lib/`-directory, if all you need are the basic features provided by this package.
 
 Namespace: `\` <br/>
@@ -622,10 +622,10 @@ Example:
 
 ``` php
 echo $f3->encode("we <b>want</b> 'sugar & candy'");
-// we &amp;lt;b&amp;gt;want&amp;lt;/b&amp;gt; 'sugar &amp;amp; candy'
+// we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'
 
 echo $f3->encode("§9: convert symbols & umlauts like ä ü ö");
-// &sect;9: convert symbols &amp; umlauts like &auml; &uuml; &ouml;
+// §9: convert symbols & umlauts like ä ü ö
 ```
 
 
@@ -640,11 +640,11 @@ $f3->decode( string $str ); string
 Example:
 
 ``` php
-echo $f3->decode("we &amp;lt;b&amp;gt;want&amp;lt;/b&amp;gt; 'sugar &amp;amp; candy'");
-// we <b>want</b> 'sugar &amp; candy'
+echo $f3->decode("we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'");
+// we <b>want</b> 'sugar & candy'
 
-echo $f3->decode("&amp;sect;9: convert symbols &amp;amp; umlauts like &amp;auml; &amp;uuml; &amp;ouml;");
-// §9: convert symbols &amp; umlauts like ä ü ö welcome!
+echo $f3->decode("&sect;9: convert symbols &amp; umlauts like &auml; &uuml; &ouml;");
+// §9: convert symbols & umlauts like ä ü ö welcome!
 ```
 
 
@@ -687,7 +687,7 @@ Usage:
 
 ``` php
 echo $f3->esc("99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>");
-// 99 bottles of &amp;lt;b&amp;gt;beer&amp;lt;/b&amp;gt; on the wall. &amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;
+// 99 bottles of &lt;b&gt;beer&lt;/b&gt; on the wall. &lt;script&gt;alert(1);&lt;/script&gt;
 ```
 
 This also works with arrays and object properties:
@@ -696,12 +696,12 @@ This also works with arrays and object properties:
 $myArray = array('<b>foo</b>',array('<script>alert(1)</script>'),'key'=>'<i>foo</i>');
 print_r($f3->esc($myArray));
 /*
-    [0] => &amp;lt;b&amp;gt;foo&amp;lt;/b&amp;gt;
+    [0] => &lt;b&gt;foo&lt;/b&gt;
     [1] => Array
         (
-            [0] => &amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;
+            [0] => &lt;script&gt;alert(1)&lt;/script&gt;
         )
-    [key] => &amp;lt;i&amp;gt;foo&amp;lt;/i&amp;gt;
+    [key] => &lt;i&gt;foo&lt;/i&gt;
 */
 
 $myObj = new stdClass();
@@ -709,7 +709,7 @@ $myObj->title = '<h1>Hello World</h1>';
 var_dump($f3->esc($myObj));
 /*
     object(stdClass)#23 (1) {
-      ["title"] => string(32) "&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;"
+      ["title"] => string(32) "&lt;h1&gt;Hello World&lt;/h1&gt;"
     }
 */
 ```
@@ -728,7 +728,7 @@ $f3->raw( mixed $arg ); string
 Example:
 
 ``` php
-$f3->raw("99 bottles of &amp;lt;b&amp;gt;beer&amp;lt;/b&amp;gt; on the wall. &amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;");
+$f3->raw("99 bottles of &lt;b&gt;beer&lt;/b&gt; on the wall. &lt;script&gt;alert(1);&lt;/script&gt;");
 // 99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>
 ```
 
