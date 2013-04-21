@@ -14,6 +14,7 @@ File location: `lib/base.php`
 The hive is a memory array to hold your framework variables in a key / value pair. Storing a value in the hive ensures it is globaly available to all classes and methods in your application.
 
 ### set
+
 **Bind value to hive key**
 
 ``` php
@@ -76,6 +77,7 @@ Hive keys are case-sensitive. Root hive keys are checked for validity against th
 
 
 ### get
+
 **Retrieve contents of hive key**
 
 ``` php
@@ -113,10 +115,8 @@ echo $f3->get('myarray["foo"]'); // we like candy
 echo $f3->get('myarray[baz]'); // 4.56, notice alternate use of single, double and no quotes
 ```
 
-
-
-
 ### sync
+
 **Sync PHP global variable with corresponding hive key**
 
 ``` php
@@ -179,9 +179,8 @@ echo $my_array['name']; // 'SpongeBob'
 
 If the 2nd argument `$add` is `false`, it just returns the read-only hive key contents. This behaviour is used by get(). If the hive key does not exist, it returns NULL.
 
-
-
 ### exists
+
 **Return TRUE if hive key is not empty**
 
 ``` php
@@ -207,9 +206,8 @@ The exists function also checks the Cache backend storage, if the key was not fo
 
 <div class="alert alert-info"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
 
-
-
 ### clear
+
 **Unset hive key, key no longer exists**
 
 ``` php
@@ -235,9 +233,8 @@ $f3->clear('CACHE'); // clears all cache contents
 
 <div class="alert alert-info"><strong>Notice:</strong> Clearing all cache contents at once is not supported for the XCache cache backend</div>
 
-
-
 ### mset
+
 **Multi-variable assignment using associative array**
 
 ``` php
@@ -279,8 +276,8 @@ echo $f3->get('pre_var3'); // value3
 
 To cache all vars, set a positive numeric integer value to `$ttl` in seconds.
 
-
 ### hive
+
 **return all hive contents as array.**
 
 ``` php
@@ -288,6 +285,7 @@ echo "HIVE CONTENTS <pre>" . var_export( $f3->hive(), true ) . "</pre>";
 ```
 
 ### copy
+
 **Copy contents of hive variable to another**
 
 ``` php
@@ -305,6 +303,7 @@ echo $f3->get('foo'); // "value123"
 Returns writable reference to `$dst` hive variable.
 
 ### concat
+
 **Concatenate string to hive string variable**
 
 ``` php
@@ -322,6 +321,7 @@ echo $f3->get('cart_count'); // "4 items in your shopping cart"
 Returns writable reference to `$key` hive variable.
 
 ### flip
+
 **Swap keys and values of hive array variable**
 
 ``` php
@@ -349,9 +349,8 @@ Array
 */
 ```
 
-
-
 ### push
+
 **Add element to the end of hive array variable**
 
 ``` php
@@ -380,9 +379,8 @@ Array
 */
 ```
 
-
-
 ### pop
+
 **Remove last element of hive array variable**
 
 ``` php
@@ -409,9 +407,8 @@ Array
 */
 ```
 
-
-
 ### unshift
+
 **Add element to the beginning of hive array variable**
 
 ``` php
@@ -440,9 +437,8 @@ Array
 */
 ```
 
-
-
 ### shift
+
 **Remove first element of hive array variable**
 
 ``` php
@@ -469,13 +465,10 @@ Array
 */
 ```
 
-
-
 ## Encoding & Conversion
 
-
-
 ### fixslashes
+
 **Convert backslashes to slashes**
 
 ``` php
@@ -490,6 +483,7 @@ $filepath = $f3->fixslashes($filepath); // /www/mysite/myfile.txt
 ```
 
 ### split
+
 **Split comma-, semi-colon, or pipe-separated string**
 
 ``` php
@@ -513,15 +507,16 @@ Array
 ```
 
 ### stringify
+
 **Convert PHP expression/value to compressed exportable string**
 
 ``` php
 $f3->stringify( mixed $arg ); string
 ```
 
-
 <!-- testing tocify vs reserved words -->
 ### csv
+
 **Flatten array values and return as CSV string**
 
 ``` php
@@ -535,9 +530,8 @@ $data = array('value1','value2','value3');
 $f3->csv($data); // returns: "'value1','value2','value3'"
 ```
 
-
-
 ### camelcase
+
 **Convert snake_case string to camelCase**
 
 ``` php
@@ -550,9 +544,8 @@ Usage:
 $str_s_c = 'user_name';
 $f3->camelcase($str_s_c); // returns: "userName"
 ```
-
-
 ### snakecase
+
 **Convert camelCase string to snake_case**
 
 ``` php
@@ -566,17 +559,16 @@ $str_CC = 'userName';
 $f3->snakecase($str_CC); // returns: "user_name"
 ```
 
-
 ### sign
+
 **Return -1 if specified number is negative, 0 if zero,	or 1 if the number is positive**
 
 ``` php
 $f3->sign( mixed $num ); integer
 ```
 
-
-
 ### hash
+
 **Generate 64bit/base36 hash**
 
 ``` php
@@ -589,9 +581,8 @@ Example:
 echo $f3->hash('foobar'); // 0i43fmgps1r
 ```
 
-
-
 ### base64
+
 **Return Base64-encoded equivalent**
 
 ``` php
@@ -605,9 +596,8 @@ echo $f3->base64('<h1>foobar</h1>','text/html');
 // data:text/html;base64,PGgxPmZvb2JhcjwvaDE+
 ```
 
-
-
 ### encode
+
 **Convert special characters to HTML entities**
 
 ``` php
@@ -626,9 +616,8 @@ echo $f3->encode("§9: convert symbols & umlauts like ä ü ö");
 // §9: convert symbols & umlauts like ä ü ö
 ```
 
-
-
 ### decode
+
 **Convert HTML entities back to characters**
 
 ``` php
@@ -645,9 +634,8 @@ echo $f3->decode("&sect;9: convert symbols &amp; umlauts like &auml; &uuml; &oum
 // §9: convert symbols & umlauts like ä ü ö welcome!
 ```
 
-
-
 ### scrub
+
 **Remove HTML tags (except those enumerated) and non-printable characters to mitigate XSS/code injection attacks**
 
 ``` php
@@ -672,9 +660,8 @@ $f3->scrub($foo,'h1,span');
 
 <div class="alert alert-info">It is recommended to use this function to sanitize submitted form input.</div>
 
-
-
 ### esc
+
 **Encode characters to equivalent HTML entities**
 
 ``` php
@@ -714,9 +701,8 @@ var_dump($f3->esc($myObj));
 
 <div class="alert alert-info">If the system var <b>ESCAPE</b> is turned on (it is by default), then every hive key access using a template token like <b>{{@myContent}}</b> automatically get escaped by this function. If this is not desired, look into the <a href="template">template</a> section for further post processors.</div>
 
-
-
 ### raw
+
 **Decode HTML entities to equivalent characters**
 
 ``` php
@@ -732,9 +718,8 @@ $f3->raw("99 bottles of &lt;b&gt;beer&lt;/b&gt; on the wall. &lt;script&gt;alert
 
 This method also handles nested array elements and objects properties, like `$f3->esc()` does too.
 
-
-
 ### serialize
+
 **Return string representation of PHP value**
 
 ``` php
@@ -752,9 +737,8 @@ echo $f3->serialize($myArray);  // outputs {"a":1,"b":2,"c":3,"d":4,"e":5}
 Depending on the `SERIALIZER` system variable, this method converts anything into a portable string expression. Possible values are **igbinary**, **json** and **php**.
 F3 checks on startup, if igbinary is available and prioritize it, as the igbinary extension works much faster and uses less disc space for serializing. Check [igbinary on github](https://github.com/igbinary/igbinary).
 
-
-
 ### unserialize
+
 **Return PHP value derived from string**
 
 ``` php
@@ -763,11 +747,10 @@ $f3->unserialize( mixed $arg ); string
 
 See [serialize](base#serialize) for further description.
 
-
-
 ## Localisation
 
 ### format
+
 **Return locale-aware formatted string**
 
 ``` php
@@ -812,9 +795,8 @@ echo $f3->format($string,2);//outputs the string 'A pair of items in your cart.'
 echo $f3->format($string,3);//outputs the string 'There are 3 items in your cart.'
 ```
 
-
-
 ### language
+
 **Assign/auto-detect language**
 
 ``` php
@@ -832,9 +814,8 @@ $f3->get('LANGUAGE'); // de_DE,de,en_US,en
 $f3->set('LANGUAGE','en_UK,en_US,en');
 ```
 
-
-
 ### lexicon
+
 **Transfer lexicon entries to hive**
 
 ``` php
@@ -850,11 +831,10 @@ $f3->set('LOCALES','dict/');
 A dictionary file can be a php file returning a key-value paired associative array, or an .ini-style formatted config file.
 [Read the guide about language files here](views-and-templates#multilingual-support).
 
-
-
 ## Routing
 
 ### mock
+
 **Mock HTTP request**
 
 ``` php
@@ -867,9 +847,8 @@ Fires a HTTP request.
 $f3->mock('GET /page/view');
 ```
 
-
-
 ### route
+
 **Bind handler to route pattern**
 
 ``` php
@@ -955,9 +934,8 @@ The 3rd argument `$ttl` defines the caching time in seconds. Setting this argume
 
 Set the 4th argument `$kbps` to your desired speed limit, to enable throttling. [Read more](optimization#bandwidth-throttling) about it in the user guide.
 
-
-
 ### reroute
+
 **Reroute to specified URI**
 
 ``` php
@@ -985,11 +963,10 @@ $f3->route('POST /login', function($f3) {
 $f3->route('GET /partners', function($f3) {
         $f3->reroute('http://externaldomain.com');
 });
-
 ```
 
-
 ### map
+
 **Provide ReST interface by mapping HTTP verb to class method**
 
 ``` php
@@ -1013,8 +990,8 @@ class News {
 }
 ```
 
-
 ### run
+
 **Match routes against incoming URI and call their route handler**
 
 ``` php
@@ -1044,13 +1021,18 @@ Read more about it [here](https://groups.google.com/d/msg/f3-framework/lwaqZjtwC
 
 
 ### call
+
 ### chain
+
 ### relay
 
 ---
 ## File System
+
 ### mutex
+
 ### read
+
 ### write
 
 ## Debug
@@ -1058,12 +1040,21 @@ Read more about it [here](https://groups.google.com/d/msg/f3-framework/lwaqZjtwC
 ## Misc
 
 ### status
+
 ### expire
+
 ### error
+
 ### blacklisted
+
 ### config
+
 ### highlight
+
 ### dump
+
 ### autoload
+
 ### unload
+
 ### instance
