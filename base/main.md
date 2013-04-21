@@ -22,20 +22,20 @@ $f3->set ( string $key, mixed $val, [ int $ttl = 0 ]); mixed
 
 setting framework variables
 
-``` php 
-$f3->set('a',123); // a=123, integer 
-$f3->set('b','c'); // b='c', string 
-$f3->set('c','whatever'); // c='whatever', string 
+``` php
+$f3->set('a',123); // a=123, integer
+$f3->set('b','c'); // b='c', string
+$f3->set('c','whatever'); // c='whatever', string
 $f3->set('d',TRUE); // d=TRUE, boolean
 ```
 
 setting arrays
 
 ``` php
-$f3->set('hash',array( 'x'=>1,'y'=>2,'z'=>3 ) ); 
-// dot notation is also possible 
-$f3->set('hash.x',1); 
-$f3->set('hash.y',2); 
+$f3->set('hash',array( 'x'=>1,'y'=>2,'z'=>3 ) );
+// dot notation is also possible
+$f3->set('hash.x',1);
+$f3->set('hash.y',2);
 $f3->set('hash.z',3);
 ```
 
@@ -65,7 +65,7 @@ It is also possible to set php globals using GET, POST, COOKIE or SESSION.
 
 <div class="alert alert-info"><strong>Notice:</strong> If you set or access a key of SESSION, the session gets started automatically. There's no need for you to do it by yourself.</div>
 
-The framework has it's own [system variables] (system-variables). You can change them using set() to modify a framework behaviour, for example 
+The framework has its own [system variables] (system-variables). You can change them using set() to modify a framework behaviour, for example
 
 ``` php
 $f3->set('CACHE', TRUE);
@@ -96,9 +96,9 @@ Accessing arrays is easy. You can also use the JS dot notation, which makes it m
 <!-- special alignment ez 2 read 4 beginners -->
 
 ``` php
-$f3->set('myarray', 
+$f3->set('myarray',
            array(
-                    0 => 'value_0',  
+                    0 => 'value_0',
                     1 => 'value_1',
                 'bar' => 123,
                 'foo' => 'we like candy',
@@ -110,8 +110,8 @@ echo $f3->get('myarray[0]'); // value_0
 echo $f3->get('myarray.1'); // value_1
 echo $f3->get('myarray.bar'); // 123
 echo $f3->get('myarray["foo"]'); // we like candy
-echo $f3->get('myarray[baz]'); // 4.56, notice alternate use of single, double and no quotes 
-``` 
+echo $f3->get('myarray[baz]'); // 4.56, notice alternate use of single, double and no quotes
+```
 
 
 
@@ -139,7 +139,7 @@ $f3->sync('SESSION');
 
 ### ref
 
-**Get reference to hive key and it's contents**
+**Get reference to hive key and its contents**
 
 ``` php
 &$f3->ref( string $key, [ bool $add = true ]); mixed
@@ -162,7 +162,7 @@ $new = &$f3->ref('newVar'); // creates new framework hive var 'newVar' and retur
 $new = 'hello world'; // set value of php variable, also updates reference
 echo $f3->get('newVar'); // hello world
 
-$new = &$f3->ref('newObj->name'); 
+$new = &$f3->ref('newObj->name');
 $new = 'Sheldon';
 echo $f3->get('newObj')->name; // Sheldon
 echo $f3->get('newObj->name'); // Sheldon
@@ -173,11 +173,11 @@ $a = 'SpongeBob';
 // or
 $b = &$f3->ref('hero'); // variable
 $b['name'] = 'SpongeBob';  // becomes array with key 'name'
-$my_array = $f3->get('hero'); 
+$my_array = $f3->get('hero');
 echo $my_array['name']; // 'SpongeBob'
 ```
 
-If the 2nd argument `$add` is `false`, it just returns the read-only hive key contents. This behaviour is used by get(). If the hive key does not exist, it returns NULL. 
+If the 2nd argument `$add` is `false`, it just returns the read-only hive key contents. This behaviour is used by get(). If the hive key does not exist, it returns NULL.
 
 
 
@@ -216,7 +216,7 @@ The exists function also checks the Cache backend storage, if the key was not fo
 $f3->clear( string $key ); void
 ```
 
-To remove a hive key and it's value completely from memory:
+To remove a hive key and its value completely from memory:
 
 ``` php
 $f3->clear('foobar');
@@ -315,7 +315,7 @@ Usage:
 
 ``` php
 $f3->set('cart_count', 4);
-$f3->concat('cart_count,' items in your shopping cart'); 
+$f3->concat('cart_count,' items in your shopping cart');
 echo $f3->get('cart_count'); // "4 items in your shopping cart"
 ```
 
