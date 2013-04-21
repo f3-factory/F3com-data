@@ -512,8 +512,6 @@ Array
 */
 ```
 
-
-
 ### stringify
 **Convert PHP expression/value to compressed exportable string**
 
@@ -523,7 +521,7 @@ $f3->stringify( mixed $arg ); string
 
 
 <!-- testing tocify vs reserved words -->
-### csv 
+### csv
 **Flatten array values and return as CSV string**
 
 ``` php
@@ -676,7 +674,7 @@ $f3->scrub($foo,'h1,span');
 
 
 
-### esc 
+### esc
 **Encode characters to equivalent HTML entities**
 
 ``` php
