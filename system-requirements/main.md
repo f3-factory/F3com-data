@@ -1,11 +1,11 @@
 # System Requirements
 
-F3 needs at least one of the following server configurations:
+F3 needs at least the following server configuration:
 
 **APACHE Webserver**
 
 * PHP 5.3.3 or higher
-* PCRE 8.02 or higher (usually shipped with PHP package, but need's to be additionally updated on CentOS systems)
+* PCRE 8.02 or higher (usually shipped with PHP package, but need's to be additionally updated on CentOS or Red Hat systems)
 * mod_rewrite and mod_headers enabled
 * GD libary (for Image plugin)
 * cURL, sockets or stream extension (for Web plugin)
