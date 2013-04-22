@@ -125,8 +125,13 @@ Remote IP address. The framework derives the address from headers if HTTP client
 ### JAR
 **Type:** `array`
 
-Default cookie parameters.
+Default cookie parameters. Consists of the following options:
 
+* `expire` Unix timestamp, when the cookie should expire
+* `path` The path on the server in which the cookie will be available on
+* `domain` The domain that the cookie is available to
+* `secure` only set the cookie, when a secure HTTPS connection exists
+* `httponly` Make the cookie accessible only through the HTTP protocol.
 
 ### LANGUAGE
 **Type:** `string`
@@ -233,7 +238,7 @@ Temporary folder for cache, filesystem locks, compiled F3 templates, etc. Defaul
 ### TZ
 **Type:** `string`
 
-Default timezone. Changing this value automatically calls the underlying `date_default_timezone_set()` function.
+Default timezone. Changing this value automatically calls the underlying `date_default_timezone_set()` function. See the [list of supported timezones](http://de2.php.net/manual/en/timezones.php) to get a possible value to use here.
 
 
 ### UI
