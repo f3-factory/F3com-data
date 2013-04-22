@@ -2,185 +2,276 @@
 
 ## System Variables
 
-`string AGENT`
 
-* Auto-detected HTTP user agent, e.g. `Mozilla/5.0 (Linux; Android 4.2.2; Nexus 7) AppleWebKit/537.31`.
+### AGENT
+**Type:** `string`
 
-`bool AJAX`
+Auto-detected HTTP user agent, e.g. `Mozilla/5.0 (Linux; Android 4.2.2; Nexus 7) AppleWebKit/537.31`.
 
-* `TRUE` if an XML HTTP request is detected, `FALSE` otherwise.
 
-`string AUTOLOAD`
+### AJAX
+**Type:** `bool`
 
-* Search path for user-defined PHP classes that the framework will attempt to autoload at runtime. Accepts a pipe (`|`), comma (`,`), or semi-colon (`;`) as path separator.
+`TRUE` if an XML HTTP request is detected, `FALSE` otherwise.
 
-`string BASE`
 
-* Path to the `index.php` main/front controller.
+### AUTOLOAD
+**Type:** `string`
 
-`string BODY`
+Search path for user-defined PHP classes that the framework will attempt to autoload at runtime. Accepts a pipe (`|`), comma (`,`), or semi-colon (`;`) as path separator.
 
-* HTTP request body for ReSTful post-processing.
 
-`bool/string CACHE`
+### BASE
+**Type:** `string`
 
-* Cache backend. Unless assigned a value like `'memcache=localhost'` (and the PHP memcache module is present), F3 auto-detects the presence of APC, WinCache and XCache and uses the first available PHP module if set to TRUE. If none of these PHP modules are available, a filesystem-based backend is used (default directory: `tmp/cache`). The framework disables the cache engine if assigned a `FALSE` value.
+Path to the `index.php` main/front controller.
 
-`bool CASELESS`
 
-* Pattern matching of routes against incoming URIs is case-insensitive by default. Set to `FALSE` to make it case-sensitive.
+### BODY
+**Type:** `string`
 
-`array COOKIE, GET, POST, REQUEST, SESSION, FILES, SERVER, ENV`
+HTTP request body for ReSTful post-processing.
 
-* Framework equivalents of PHP globals. Variables may be used throughout an application. However, direct use in templates is not advised due to security risks.
 
-`integer DEBUG`
+### CACHE
+**Type:** `bool|string`
 
-* Stack trace verbosity. Assign values 1 to 3 for increasing verbosity levels. Zero (0) suppresses the stack trace. This is the default value and it should be the assigned setting on a production server.
+Cache backend. Unless assigned a value like `'memcache=localhost'` (and the PHP memcache module is present), F3 auto-detects the presence of APC, WinCache and XCache and uses the first available PHP module if set to TRUE. If none of these PHP modules are available, a filesystem-based backend is used (default directory: `tmp/cache`). The framework disables the cache engine if assigned a `FALSE` value.
 
-`string DNSBL`
 
-* Comma-separated list of [DNS blacklist servers](http://whatismyipaddress.com/blacklist-check). Framework generates a `403 Forbidden` error if the user's IPv4 address is listed on the specified server(s).
+### CASELESS
+**Type:** `bool`
 
-`array DIACRITICS`
+Pattern matching of routes against incoming URIs is case-insensitive by default. Set to `FALSE` to make it case-sensitive.
 
-* Key-value pairs for foreign-to-ASCII character translations.
 
-`string ENCODING`
+### COOKIE, GET, POST, REQUEST, SESSION, FILES, SERVER, ENV
+**Type:** `array`
 
-* Character set used for document encoding. Default value is `UTF-8`.
+Framework equivalents of PHP globals. Variables may be used throughout an application. However, direct use in templates is not advised due to security risks.
 
-`array ERROR`
 
-* Information about the last HTTP error that occurred. `ERROR.code` is the HTTP status code. `ERROR.title` contains a brief description of the error. `ERROR.text` provides greater detail. For HTTP 500 errors, use `ERROR.trace` to retrieve the stack trace.
+### DEBUG
+**Type:** `integer`
 
-`bool ESCAPE`
+Stack trace verbosity. Assign values 1 to 3 for increasing verbosity levels. Zero (0) suppresses the stack trace. This is the default value and it should be the assigned setting on a production server.
 
-* Used to enable/disable auto-escaping.
 
-`string EXEMPT`
+### DNSBL
+**Type:** `string`
 
-* Comma-separated list of IPv4 addresses exempt from DNSBL lookups.
+Comma-separated list of [DNS blacklist servers](http://whatismyipaddress.com/blacklist-check). Framework generates a `403 Forbidden` error if the user's IPv4 address is listed on the specified server(s).
 
-`string FALLBACK`
 
-* Language (and dictionary) to use if no translation is available.
+### DIACRITICS
+**Type:** `string`
 
-`array HEADERS`
+Key-value pairs for foreign-to-ASCII character translations.
 
-* HTTP request headers received by the server.
 
-`bool HIGHLIGHT`
+### ENCODING
+**Type:** `string`
 
-* Enable/disable syntax highlighting of stack traces. Default value: `TRUE` (requires `code.css` stylesheet).
+ Character set used for document encoding. Default value is `UTF-8`.
 
-`string HOST`
 
-* Server host name. If `$_SERVER['SERVER_NAME']` is not available, return value of `gethostname()` is used.
+### ERROR
+**Type:** `array`
 
-`string IP`
+Information about the last HTTP error that occurred. `ERROR.code` is the HTTP status code. `ERROR.title` contains a brief description of the error. `ERROR.text` provides greater detail. For HTTP 500 errors, use `ERROR.trace` to retrieve the stack trace.
 
-* Remote IP address. The framework derives the address from headers if HTTP client is behind a proxy server.
 
-`array JAR`
+### ESCAPE
+**Type:** `bool`
 
-* Default cookie parameters.
+Used to enable/disable auto-escaping.
 
-`string LANGUAGE`
 
-* Current active language. Value is used to load the appropriate language translation file in the folder pointed to by `LOCALES`. If set to `NULL`, language is auto-detected from the HTTP `Accept-Language` request header.
+### EXEMPT
+**Type:** `string`
 
-`string LOCALES`
+Comma-separated list of IPv4 addresses exempt from DNSBL lookups.
 
-* Location of the language dictionaries.
 
-`string LOGS`
+### FALLBACK
+**Type:** `string`
 
-* Location of custom logs.
+Language (and dictionary) to use if no translation is available.
 
-`mixed ONERROR`
 
-* Callback function to use as custom error handler.
+### HEADERS
+**Type:** `rray`
 
-`string PACKAGE`
+HTTP request headers received by the server.
 
-* Framework name.
 
-`array PARAMS`
+### HIGHLIGHT
+**Type:** `bool`
 
-* Captured values of tokens defined in a `route()` pattern. `PARAMS.0` contains the captured URL relative to the Web root.
+Enable/disable syntax highlighting of stack traces. Default value: `TRUE` (requires `code.css` stylesheet).
 
-`string PATTERN`
 
-* Contains the routing pattern that matches the current request URI.
+### HOST
+**Type:** `string`
 
-`string PLUGINS`
+Server host name. If `$_SERVER['SERVER_NAME']` is not available, return value of `gethostname()` is used.
 
-* Location of F3 plugins. Default value is the folder where the framework code resides, i.e. the path to `base.php`.
 
-`int PORT`
+### IP
+**Type:** `string`
 
-* TCP/IP listening port used by the Web server.
+Remote IP address. The framework derives the address from headers if HTTP client is behind a proxy server.
 
-`bool QUIET`
+### JAR
+**Type:** `array`
 
-* Toggle switch for suppressing or enabling standard output and error messages. Particularly useful in unit testing.
+Default cookie parameters.
 
-`string REALM`
 
-* Full canonical URL.
+### LANGUAGE
+**Type:** `string`
 
-`string RESPONSE`
+Current active language. Value is used to load the appropriate language translation file in the folder pointed to by `LOCALES`. If set to `NULL`, language is auto-detected from the HTTP `Accept-Language` request header.
 
-* The body of the last HTTP response. F3 populates this variable regardless of the `QUIET` setting.
 
-`string ROOT`
+### LOCALES
+**Type:** `string`
 
-* Absolute path to document root folder.
+Location of the language dictionaries.
 
-`array ROUTES`
 
-* Contains the defined application routes.
+### LOGS
+**Type:** `string`
 
-`string SCHEME`
+Location of custom logs.
 
-* Server protocol, i.e. `http` or `https`.
 
-`string SERIALIZER`
+### ONERROR
+**Type:** `mixed`
 
-* Default serializer. Normally set to `php`, unless PHP `igbinary` extension is auto-detected. Assign `json` if desired.
+Callback function to use as custom error handler.
 
-`string TEMP`
 
-* Temporary folder for cache, filesystem locks, compiled F3 templates, etc. Default is the `tmp/` folder inside the Web root. Adjust accordingly to conform to your site's security policies.
+### PACKAGE
+**Type:** `string`
 
-`string TZ`
+Framework name.
 
-* Default timezone. Changing this value automatically calls the underlying `date_default_timezone_set()` function.
 
-`string UI`
+### PARAMS
+**Type:** `array`
 
-* Search path for user interface files used by the `View` and `Template` classes' `render()` method. Default value is the Web root. Accepts a pipe (`|`), comma (`,`), or semi-colon (`;`) as separator for multiple paths.
+Captured values of tokens defined in a `route()` pattern. `PARAMS.0` contains the captured URL relative to the Web root.
 
-`callback UNLOAD`
 
-* Executed by framework on script shutdown.
+### PATTERN
+**Type:** `string`
 
-`string UPLOADS`
+Contains the routing pattern that matches the current request URI.
 
-* Directory where file uploads are saved.
 
-`string URI`
+### PLUGINS
+**Type:** `string`
 
-* Current HTTP request URI.
+Location of F3 plugins. Default value is the folder where the framework code resides, i.e. the path to `base.php`.
 
-`string VERB`
 
-* Current HTTP request method.
+### PORT
+**Type:** `integer`
 
-`string VERSION`
+TCP/IP listening port used by the Web server.
 
-* Framework version.
+
+### QUIET
+**Type:** `bool`
+
+Toggle switch for suppressing or enabling standard output and error messages. Particularly useful in unit testing.
+
+
+### REALM
+**Type:** `string`
+
+Full canonical URL.
+
+
+### RESPONSE
+**Type:** `string`
+
+The body of the last HTTP response. F3 populates this variable regardless of the `QUIET` setting.
+
+
+### ROOT
+**Type:** `string`
+
+Absolute path to document root folder.
+
+
+### ROUTES
+**Type:** `array`
+
+Contains the defined application routes.
+
+
+### SCHEME
+**Type:** `string`
+
+Server protocol, i.e. `http` or `https`.
+
+
+### SERIALIZER
+**Type:** `string`
+
+Default serializer. Normally set to `php`, unless PHP `igbinary` extension is auto-detected. Assign `json` if desired.
+
+
+### TEMP
+**Type:** `string`
+
+Temporary folder for cache, filesystem locks, compiled F3 templates, etc. Default is the `tmp/` folder inside the Web root. Adjust accordingly to conform to your site's security policies.
+
+
+### TZ
+**Type:** `string`
+
+Default timezone. Changing this value automatically calls the underlying `date_default_timezone_set()` function.
+
+
+### UI
+**Type:** `string`
+
+Search path for user interface files used by the `View` and `Template` classes' `render()` method. Default value is the Web root. Accepts a pipe (`|`), comma (`,`), or semi-colon (`;`) as separator for multiple paths.
+
+
+### UNLOAD
+**Type:** `callback`
+
+Executed by framework on script shutdown.
+
+
+### UPLOADS
+**Type:** `string`
+
+Directory where file uploads are saved.
+
+
+### URI
+**Type:** `string`
+
+Current HTTP request URI.
+
+
+### VERB
+**Type:** `string`
+
+Current HTTP request method.
+
+
+### VERSION
+**Type:** `string`
+
+Framework version.
+
+
 
 ## Template Directives
 
