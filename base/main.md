@@ -610,7 +610,7 @@ Example:
 
 ``` php
 echo $f3->encode("we <b>want</b> 'sugar & candy'");
-// we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'
+// we <b>want</b> 'sugar & candy'
 
 echo $f3->encode("§9: convert symbols & umlauts like ä ü ö");
 // §9: convert symbols & umlauts like ä ü ö
@@ -627,10 +627,10 @@ $f3->decode( string $str ); string
 Example:
 
 ``` php
-echo $f3->decode("we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'");
+echo $f3->decode("we <b>want</b> 'sugar & candy'");
 // we <b>want</b> 'sugar & candy'
 
-echo $f3->decode("&sect;9: convert symbols &amp; umlauts like &auml; &uuml; &ouml;");
+echo $f3->decode("§9: convert symbols & umlauts like ä ü ö");
 // §9: convert symbols & umlauts like ä ü ö welcome!
 ```
 
@@ -672,7 +672,7 @@ Usage:
 
 ``` php
 echo $f3->esc("99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>");
-// 99 bottles of &lt;b&gt;beer&lt;/b&gt; on the wall. &lt;script&gt;alert(1);&lt;/script&gt;
+// 99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>
 ```
 
 This also works with arrays and object properties:
@@ -681,12 +681,12 @@ This also works with arrays and object properties:
 $myArray = array('<b>foo</b>',array('<script>alert(1)</script>'),'key'=>'<i>foo</i>');
 print_r($f3->esc($myArray));
 /*
-    [0] => &lt;b&gt;foo&lt;/b&gt;
+    [0] => <b>foo</b>
     [1] => Array
         (
-            [0] => &lt;script&gt;alert(1)&lt;/script&gt;
+            [0] => <script>alert(1)</script>
         )
-    [key] => &lt;i&gt;foo&lt;/i&gt;
+    [key] => <i>foo</i>
 */
 
 $myObj = new stdClass();
@@ -694,7 +694,7 @@ $myObj->title = '<h1>Hello World</h1>';
 var_dump($f3->esc($myObj));
 /*
     object(stdClass)#23 (1) {
-      ["title"] => string(32) "&lt;h1&gt;Hello World&lt;/h1&gt;"
+      ["title"] => string(32) "<h1>Hello World</h1>"
     }
 */
 ```
@@ -712,7 +712,7 @@ $f3->raw( mixed $arg ); string
 Example:
 
 ``` php
-$f3->raw("99 bottles of &lt;b&gt;beer&lt;/b&gt; on the wall. &lt;script&gt;alert(1);&lt;/script&gt;");
+$f3->raw("99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>");
 // 99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>
 ```
 
@@ -748,6 +748,8 @@ $f3->unserialize( mixed $arg ); string
 See [serialize](base#serialize) for further description.
 
 ## Localisation
+
+<div class="alert alert-info"><strong>Note:</strong> F3 follows ICU formatting rules but does not require PHP's <tt>intl</tt> module.</div>
 
 ### format
 
