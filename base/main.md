@@ -1024,26 +1024,85 @@ Read more about it [here](https://groups.google.com/d/msg/f3-framework/lwaqZjtwC
 
 ### call
 
+**Execute callback/hooks (supports 'class->method' format)**
+
+``` php
+$f3->call( callback $func, [ mixed $args = NULL ], [ string $hooks = '' ]); mixed|false
+```
+
+
+
 ### chain
 
+**Execute specified callbacks in succession; Apply same arguments to all callbacks**
+
+``` php
+$f3->chain( array|string $funcs, [ mixed $args = NULL ]); array
+```
+
+
+
 ### relay
+
+**Execute specified callbacks in succession; Relay result of previous callback as argument to the next callback**
+
+``` php
+$f3->relay( array|string $funcs, [ mixed $args = NULL ]); array
+```
+
+
 
 ---
 ## File System
 
 ### mutex
 
+**Create mutex, invoke callback then drop ownership when done**
+
+``` php
+$f3->mutex( string $id, callback $func, [ mixed $args = NULL ]); mixed
+```
+
+A [Mutual Exclusion](http://en.wikipedia.org/wiki/Mutual_exclusion)(mutex) is a way of running your code in a newly created thread.
+
 ### read
+
+**Read file (with option to apply Unix LF as standard line ending)**
+
+``` php
+$f3->read( string $file, [ bool $lf = FALSE ]); string
+```
+
 
 ### write
 
-## Debug
+**Exclusive file write**
+
+``` php
+$f3->write( string $file, mixed $data, [ bool $append = FALSE ]); int|FALSE
+```
 
 ## Misc
 
 ### status
 
+**Send HTTP/1.1 status header; Return text equivalent of status code**
+
+``` php
+$f3->status( int $code ); string
+```
+
+
+
 ### expire
+
+**Send cache metadata to HTTP client**
+
+``` php
+$f3->expire([ int $secs = 0 ]); void
+```
+
+
 
 ### error
 
