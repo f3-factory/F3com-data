@@ -47,7 +47,10 @@ $f3->set('a',new \stdClass);
 $f3->set('a->hello','world');
 ```
 
-If the `$ttl` parameter is > 0, and the CACHE framework variable is enabled, the specified variable will be cached for X seconds. You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from Cache.
+If the `$ttl` parameter is > 0, and the CACHE framework variable is enabled, the specified variable will be cached for X seconds. Already cached vars will be updated and get the new expiration `$ttl`.
+If the key was already cached before and `$ttl` is 0, then the key value will also be updated in cache, by reusing the old expiration time.
+
+You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from Cache.
 
 ``` php
 // cache string
@@ -181,7 +184,7 @@ If the 2nd argument `$add` is `false`, it just returns the read-only hive key co
 
 ### exists
 
-**Return TRUE if hive key is not empty**
+**Return TRUE if hive key is not empty, or timestamp and TTL if cached**
 
 ``` php
 $f3->exists( string $key ); bool
@@ -202,7 +205,7 @@ $f3->exists('SESSION.login');
 $f3->exists('POST.submit');
 ```
 
-The exists function also checks the Cache backend storage, if the key was not found in the hive.
+The exists function also checks the Cache backend storage, if the key was not found in the hive. If the key was found in cache, it returns `array($timestamp,$ttl)`.
 
 <div class="alert alert-info"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
 
