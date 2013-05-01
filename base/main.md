@@ -867,9 +867,13 @@ $f3->route('POST /login','AuthController->login');
 
 The `$pattern` var describes a route pattern, that consists of the request type and a request URI, both separated by a space char.
 
+##### Verbs
+
 Possible request type (Verb) definitions, that F3 will process, are: **GET**, **POST**, **PUT**, **DELETE**, **HEAD**, **PATCH**, **CONNECT**.
 
 You can combine multiple verbs, to use the same route handler for all of them. They are separated by a pipe char like `GET|POST`.
+
+##### Tokens
 
 The request URI may contain one or more **token**, that a meant for defining dynamic routes. Tokens are indicated by a `@`-char. See this example:
 
@@ -880,6 +884,8 @@ $f3->route('GET /image/@width-@height/@file','ImageCompressor->render'); // /ima
 ```
 
 After processing the incoming request URI (initiated by [run](base#run)), you'll find the value of each of those tokens in the `PARAMS` system variable as named key, like `$f3->get('PARAMS.page')`.
+
+##### Wildcards
 
 You can also define wildcards (`/*`) in your routing URI. You can also use them in combination with `@`-tokens.
 
@@ -908,6 +914,25 @@ Something like `/path/*/@pagetitle/@pagenum` is also quite easy.
 
 It becomes complicated when you try to use more than one wildcard, because only the first `/*`-wildcard can hold unlimited path-segments.
 Any further wildcards can only contain exactly one part between the slashes (`/`). So try to keep it simple.
+
+##### Groups
+
+Since `F3 v3.0.7` it is possible to assign multiple routes to the same route handler, using an array of routes in `$pattern`. It would look like this:
+
+``` php
+$f3->route(
+  array(
+    'GET /archive',
+    'GET /archive/@year',
+    'GET /archive/@year/@month',
+    'GET /archive/@year/@month/@day'
+  ),
+  function($f3,$params){
+    $params+=array('year'=>2013,'month'=>1,'day'=>1); //default values
+    //etc..
+  }
+);
+```
 
 #### Route Handler
 
