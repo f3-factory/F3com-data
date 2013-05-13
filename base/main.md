@@ -1112,13 +1112,53 @@ $f3->write( string $file, mixed $data, [ bool $append = FALSE ]); int|FALSE
 
 ## Misc
 
-### status
+### blacklisted
 
-**Send HTTP/1.1 status header; Return text equivalent of status code**
+**Return TRUE if IPv4 address exists in DNSBL**
 
 ``` php
-$f3->status( int $code ); string
+$f3->blacklisted( string $ip ); bool
 ```
+
+This function get called while bootstrapping the application and will lookup the visitors IP against common DNS blacklist services
+you can define in [DNSBL](quick-reference#dnsbl). This is very useful to protect your application against Spam bots or DOS attacks.
+
+
+
+### config
+
+**Configure framework according to .ini-style file settings**
+
+``` php
+$f3->config( string $file ); null
+```
+
+This will parse a configuration file, provided by `$file` and setup the framework with variables and routes.
+
+See the user guide section about [configuration files](framework-variables#configuration-files) to get a full description about how to setup your ini file.
+
+
+
+### dump
+
+**Dump expression with syntax highlighting**
+
+``` php
+$f3->dump( mixed $expr ); null
+```
+
+
+
+### error
+
+**Execute error handler**
+
+``` php
+$f3->error( int $code,[ string $text = '' ], [ array $trace = NULL ]); null
+```
+
+Calling this function logs an error and executes the [ONERROR](quick-reference#onerror) handler if defined.
+Otherwise it will display a default error page in HTML for synchronous requests, or gives a JSON string for AJAX requests.
 
 
 
@@ -1132,18 +1172,44 @@ $f3->expire([ int $secs = 0 ]); void
 
 
 
-### error
-
-### blacklisted
-
-### config
-
 ### highlight
 
-### dump
+**Apply syntax highlighting**
 
-### autoload
+``` php
+$f3->highlight( string $text ); string
+```
+
+
+
+### instance
+
+**Return class instance**
+
+``` php
+$f3 = \Base::instance();
+```
+
+This is used to grab the framework instance at any point of your code.
+
+
+
+### status
+
+**Send HTTP/1.1 status header; Return text equivalent of status code**
+
+``` php
+$f3->status( int $code ); string
+```
+
+
 
 ### unload
 
-### instance
+**Execute framework/application shutdown sequence**
+
+``` php
+$f3->unload(); null
+```
+
+This will shutdown the application and calls the shutdown handler defined in [UNLOAD](quick-reference#unload).
