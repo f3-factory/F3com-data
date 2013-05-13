@@ -1038,11 +1038,11 @@ $f3->route('GET /',function(){
 $f3->run();
 ```
 
-After processing the incoming request URI, the routing pattern that matches the that URI is saved in the `PATTERN` var, the current HTTP request URI in the `URI` var and the request method in the `VERB` var.
+After processing the incoming request URI, the routing pattern that matches that URI is saved in the `PATTERN` var, the current HTTP request URI in the `URI` var and the request method in the `VERB` var.
 The `PARAMS` var will contains all tokens as named keys, and additionally all tokens and wildcards as numeric keys, depending on their order of appearance.
 
 <div class="alert alert-info">
-    <p><b>Notice:</b> If there is a static and a dynamic route pattern defined, than can match to same incoming URI, then the static route pattern has priority.</p>
+    <p><b>Notice:</b> If a static and dynamic route pattern both match the current URI, then the static route pattern has priority.</p>
 </div>
 
 If `CACHE` is turned off, `$ttl` will only control the browser cache using [expire](base#expire) header metadata.
@@ -1058,7 +1058,16 @@ Read more about it [here](https://groups.google.com/d/msg/f3-framework/lwaqZjtwC
 $f3->call( callback $func, [ mixed $args = NULL ], [ string $hooks = '' ]); mixed|false
 ```
 
+This method provides that facility to invoke callbacks and their arguments. F3 recognizes these as valid callbacks:
 
+* Anonymous/lambda functions (aka closures)
+* `array('class','method')`
+* `class::method` static method
+* `class->method` equivalent to `array(new class,method)`
+
+`$args` if specified provides a means of executing the callback with parameters.
+
+`$hooks` is used by the `route()` method to specify pre- and post-execution functions, i.e. `beforeroute()` and `afterroute()`.
 
 ### chain
 
