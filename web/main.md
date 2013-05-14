@@ -1,5 +1,7 @@
 # Web
 
+## 
+
 ### mime
 The mime method detects MIME type by a files extension. It's recommended to pass the type of a file to a download initiated by PHP.
 
