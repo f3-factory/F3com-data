@@ -1,8 +1,6 @@
 # Web
 The Web class contains several helpers to interact with clients and servers based on HTTP like down- and uploads
 
-## Web
-
 ### mime
 The mime method detects MIME type by a files extension. It's recommended to pass the type of a file to a download initiated by PHP.
 
