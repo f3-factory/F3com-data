@@ -121,8 +121,5 @@ echo Web::instance()->slug('ĤÈĹĹŌ');
 // returns: HELLO
 ```
 
-```php
-Web::instance()->slug('');
-
 ### gzdecode
 Decodes a gzip-compressed string if `gzdecode()` is available
