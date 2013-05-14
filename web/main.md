@@ -50,7 +50,7 @@ function callback() {
 }
 
 $overwrite = false; // set to true, to overwrite an existing file; Default: false 
-$slut = true; // rename file to filesystem-friendly version
+$slug = true; // rename file to filesystem-friendly version
 
 Web::instance()->receive('callback', $overwrite, $slug);
 ```
