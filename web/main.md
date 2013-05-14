@@ -23,7 +23,6 @@ Array
     [text/html] => 1
     [application/xhtml+xml] => 1
     [application/xml] => 0.9
-    [*/*] => 0.8
 )
 */
 ```
