@@ -1,6 +1,23 @@
 # Web
 The Web class contains several helpers to interact with clients and servers based on HTTP like down- and uploads
 
+Namespace: `\` <br/>
+File location: `lib/web.php`
+
+---
+
+### instance
+
+**Return class instance**
+
+``` php
+$web = \Web::instance();
+```
+
+The Web class uses the [Prefab](prefab) factory wrapper, so you are able to grab the same instance of that class at any point of your code.
+
+
+
 ### mime
 
 **Detect MIME type using file extension**
@@ -170,30 +187,80 @@ Perform a HTTP request on low-level via TCP/IP sockets. It's a protected method 
 
 Returns an array containing the content and the header.
 
+
+
 ### engine
-Sets the engine to be used by `Web->request()`. Possible values are
+
+**Specify the HTTP request engine to use**
+
+``` php
+$web->engine([ string $arg = 'socket' ]); string
+```
+
+Sets the engine to be used by `Web->request()`. If the selected engine is not available, it falls back to an applicable substitute.
+Possible values are:
 
 * curl
 * stream
 * socket (default)
 
+<div class="alert alert-info">
+    <b>Notice:</b> All these engines need their appropriate php extension to be installed and activated to work properly.
+</div>
+
+
+
 ### subst
-Replace old headers with new elements
+
+**Replace old headers with new elements**
+
+``` php
+$web->subst( array &$old , string|array $new ); NULL
+```
+
+
 
 ### request
-Perform a HTTP request
+
+**Perform a HTTP request**
+
+``` php
+$web->request( string $url, [ array $options = NULL ]); array | false
+```
+
+
 
 ### minify
-Minify CSS and Javascript files by strippping whitespaces and comments. Returns a combined output as a string.
+
+**Minify CSS and Javascript files by stripping whitespaces and comments. Returns a combined output as a string.**
+
+``` php
+$web->minify( string|array $files,[ string $mime = NULL ], [ bool $header = TRUE ]); string
+```
+
+Example:
 
 ```php
 $minified = Web::instance()->minify('style.css,framework.css,null.css'); 
 ```
 
+Notice, that any files processed by this function had to be located in one of the directories specified in [UI](quick-reference#ui) system var.
+
+To get maximum performance, enable the system caching. Have a look a the [CACHE](quick-reference#cache) var.
+
 To learn more about `minify` you may check the [User Guide](http://fatfreeframework.com/optimization#keeping-javascript-and-css-on-a-healthy-diet)
 
+
+
 ### rss
-Parse a RSS feed and returns an array of all tags if not specified.
+
+**Parse a RSS feed and returns an array of all tags if not specified.**
+
+``` php
+$web->rss( string $url, [ int $max = 10], [ string $tags = NULL ]); array | false
+```
+
+Example:
 
 ```php
 $count = 20; // Default: 10
@@ -202,14 +269,31 @@ $tags = array('title', 'link', 'pubDate'); // Default: NULL (all tags)
 Web::instance()->rss('http://example.org/feed.rss', $count, $tags);
 ```
 
+
+
 ### slug
-Method to return a URL- and filesystem-friendly string. 
 
-```php
-echo Web::instance()->slug('ĤÈĹĹŌ');
+**Method to return a URL- and filesystem-friendly string.**
 
-// returns: HELLO
+``` php
+$web->slug( string $text); string
 ```
 
+The purpose of this function is to convert foreign characters to their approximate English keyboard character equivalents.
+Therefor it uses ISO-9 transliteration with a lookup table array that can be extended with the [DIACRITICS](quick-reference#diacritics) var.
+Furthermore it is designed to remove all non-alphanumeric characters and convert them to dashes.
+
+```php
+echo Web::instance()->slug('ĤÈĹĹŌ'); // returns: HELLO
+echo Web::instance()->slug('Ein schöner Artikel über Max & John'); // returns: ein-schoner-artikel-uber-max-john
+```
+
+
+
 ### gzdecode
-Decodes a gzip-compressed string if `gzdecode()` is available
+
+**Decodes a gzip-compressed string if `gzdecode()` is available**
+
+``` php
+$web->gzdecode( string $str ); string
+```
