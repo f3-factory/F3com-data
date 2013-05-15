@@ -23,7 +23,7 @@ echo $f3->read($file);
 
 If no known extension has been found, it will return 'application/octet-stream'.
 
-### accceptable
+### acceptable
 
 **Returns the list of acceptable MIME types of the browser.**
 
@@ -65,8 +65,10 @@ $web->send( string $file, [ string $mime = NULL ], [ int $kbps = 0 ], [ bool $fo
 ```
 
 The 2nd argument `$kbps` defines the throttle speed, measured in Kilobits per second, if you like to slow down the file download for the user.
+
 In `$mime` argument you can explicitly set a mime type. Leave it to `NULL` to let the framework detect the type.
-Use `$force` to force the "save file..." download dialog, otherwise it would display the file, i.e. images or a .pdf or .mp3 files can be displayed by the browser directly
+
+Use `$force` to force the "save file..." download dialog, otherwise it would just display the file in some cases, because an image or a .pdf or .mp3 file can be displayed by the browser directly and will not prompt you to download it.
 
 Example:
 
