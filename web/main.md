@@ -2,16 +2,36 @@
 The Web class contains several helpers to interact with clients and servers based on HTTP like down- and uploads
 
 ### mime
-The mime method detects MIME type by a files extension. It's recommended to pass the type of a file to a download initiated by PHP.
+
+**Detect MIME type using file extension**
+
+``` php
+$web->mime( string $file ); string
+```
+
+Detects MIME type by comparing the file extension against a predefined array. This is more save than using Fileinfo, which is not available on some server setups and would be more costly in terms of performance. 
+In the following example, we see how to set the right response header content type to display an image by PHP.
 
 ```php
-echo Web::instance()->mime('cat.jpg'); // returns 'image/jpeg'
+$web = \Web::instance();
+
+$file = 'ui/images/south-park.jpg';
+$mime = $web->mime($file); // returns 'image/jpeg'
+header('Content-Type: '.$mime);
+echo $f3->read($file);
 ```
 
 If no known extension has been found, it will return 'application/octet-stream'.
 
 ### accceptable
-Returns the list of acceptable MIME types of the browser.
+
+**Returns the list of acceptable MIME types of the browser.**
+
+``` php
+$web->acceptable([ string|array $list = NULL ]); array | string | false
+```
+
+It returns the MIME types stated in the HTTP Accept header as an array.
 
 ```php
 print_r(Web::instance()->acceptable();
@@ -28,43 +48,110 @@ Array
 */
 ```
 
-### send
-Transmits a file to the client and returns the file size on success
+If a list of MIME types is specified, it returns the best match, or FALSE if none found.
 
-```php
-$throttle = '8192' // measured in Kilobit per second; Default: 0
-$mime = NULL; // let the framework detect the type; Default: NULL
-$force_download = true // force the "save file..." dialog; Default: true
-
-Web::instance()->send('data/documents.zip', $mime, $throttle, $force_download);
+``` php
+$web->acceptable(array('application/xml','application/xhtml+xml')); // returns application/xhtml+xml
 ```
 
+
+
+### send
+
+**Transmits a file to the client and returns the file size on success**
+
+``` php
+$web->send( string $file, [ string $mime = NULL ], [ int $kbps = 0 ], [ bool $force = TRUE ]); int | false
+```
+
+The 2nd argument `$kbps` defines the throttle speed, measured in Kilobits per second, if you like to slow down the file download for the user.
+In `$mime` argument you can explicitly set a mime type. Leave it to `NULL` to let the framework detect the type.
+Use `$force` to force the "save file..." download dialog, otherwise it would display the file, i.e. images or a .pdf or .mp3 files can be displayed by the browser directly
+
+Example:
+
+```php
+$throttle = '8192' // throttle the download to 1024 Kilobytes per second
+$mime = NULL; // let the framework detect the type
+
+$web->send('data/documents.zip', $mime, $throttle);
+```
+
+
+
 ### receive
-Receives and processes files from a client sent via PUT or POST.
+
+**Receives and processes files from a client sent via PUT or POST.**
+
+``` php
+$web->receive([ callback $func = NULL ], [ bool $overwrite = FALSE], [ bool $slug = TRUE ]); int | false
+```
+
+This function fetches the user uploaded file(s) and move it into a directory, specified in [UPLOADS](quick-reference#uploads) system var. It returns `true` on success.
+
+You can set an optional upload handler function to validate uploaded files, before moving them to their desired location. Lets have a look at this:
+
+``` php
+$f3->set('UPLOADS','uploads/'); // don't forget to set an Upload directory, and make it writable!
+
+$overwrite = false; // set to true, to overwrite an existing file; Default: false
+$slug = true; // rename file to filesystem-friendly version
+
+$web->receive( function($file){
+        var_dump($file);
+        /* looks like:
+          array(5) {
+              ["name"]=>
+              string(19) "csshat_quittung.png"
+              ["type"]=>
+              string(9) "image/png"
+              ["tmp_name"]=>
+              string(14) "/tmp/php2YS85Q"
+              ["error"]=>
+              int(0)
+              ["size"]=>
+              int(172245)
+            }
+        */
+
+        // maybe you want to check the file size
+        if($file['size'] > (2 * 1024 * 1024)) // if bigger than 2 MB
+            return false; // this file is not valid, return false will not move it
+
+        // everything went fine, hurray!
+    },
+    $overwrite,
+    $slug
+);
+```
+
+A callback can also be another function or class method. Have a look at the [call()](base#call) function description to see all possibilities.
 
 ```php
 function callback() {
     echo 'file uploaded!';
 }
 
-$overwrite = false; // set to true, to overwrite an existing file; Default: false 
-$slug = true; // rename file to filesystem-friendly version
-
-Web::instance()->receive('callback', $overwrite, $slug);
+Web::instance()->receive('callback', false, true);
 ```
 
-Returns `true` on success.
+<div class="alert alert-info">
+    <b>Notice:</b> The callback function will be called for every successful upload if specified.
+</div>
 
-The callback function will be called for every successfull download if specified.
+
 
 ### progress
-Returns the progress of a file upload if `session.upload_progress.enabled` is set to `1` in the php.ini
+
+**Returns the progress of a file upload if `session.upload_progress.enabled` is set to `1` in the php.ini**
 
 ```php
-Web::instance()->progress($session_id);
+Web::instance()->progress( string $session_id ); int | false
 ```
 
 The `$session_id` ist the "key" of the `$_SESSION` array and is necessary to retrieve the status of a specific user. Please read the [PHP Docs](http://php.net/manual/session.upload-progress.php) for more information.
+
+
 
 ### _curl
 Perform HTTP requests via cURL. It's a protected method and is used by `Web->request()`.
