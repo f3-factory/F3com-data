@@ -116,26 +116,20 @@ $f3->set('UPLOADS','uploads/'); // don't forget to set an Upload directory, and 
 $overwrite = false; // set to true, to overwrite an existing file; Default: false
 $slug = true; // rename file to filesystem-friendly version
 
-$web->receive( function($file){
+$web->receive(function($file){
         var_dump($file);
         /* looks like:
           array(5) {
-              ["name"]=>
-              string(19) "csshat_quittung.png"
-              ["type"]=>
-              string(9) "image/png"
-              ["tmp_name"]=>
-              string(14) "/tmp/php2YS85Q"
-              ["error"]=>
-              int(0)
-              ["size"]=>
-              int(172245)
+              ["name"] =>     string(19) "csshat_quittung.png"
+              ["type"] =>     string(9) "image/png"
+              ["tmp_name"] => string(14) "/tmp/php2YS85Q"
+              ["error"] =>    int(0)
+              ["size"] =>     int(172245)
             }
         */
-
         // maybe you want to check the file size
         if($file['size'] > (2 * 1024 * 1024)) // if bigger than 2 MB
-            return false; // this file is not valid, return false will not move it
+            return false; // this file is not valid, return false will skip moving it
 
         // everything went fine, hurray!
     },
@@ -143,6 +137,9 @@ $web->receive( function($file){
     $slug
 );
 ```
+<div class="alert alert-info">
+    <b>Notice:</b> Having trouble to get this working? Have you set the <b>enctype="multipart/form-data"</b> attribute to your <b>&lt;form&gt;</b> TAG?
+</div>
 
 A callback can also be another function or class method. Have a look at the [call()](base#call) function description to see all possibilities.
 
