@@ -25,7 +25,7 @@ The Web class uses the [Prefab](prefab) factory wrapper, so you are able to grab
 $web->mime( string $file ); string
 ```
 
-Detects MIME type by comparing the file extension against a predefined array. This is more save than using Fileinfo, which is not available on some server setups and would be more costly in terms of performance. 
+Detects MIME type by comparing the file extension against a predefined array. Use this in place of Fileinfo, which is not available on some server setups and would be more costly in terms of performance.
 In the following example, we see how to set the right response header content type to display an image by PHP.
 
 ```php
@@ -52,7 +52,7 @@ It returns the MIME types stated in the HTTP Accept header as an array.
 ```php
 print_r(Web::instance()->acceptable());
 
-/* 
+/*
 Returns for example
 
 Array
@@ -137,7 +137,7 @@ $web->receive(function($file){
 );
 ```
 <div class="alert alert-info">
-    <b>Notice:</b> Having trouble to get this working? Have you set the <b>enctype="multipart/form-data"</b> attribute to your <b>&lt;form&gt;</b> TAG?
+    <b>Notice:</b> Having trouble to get this working? Don't forget to set the <b>enctype="multipart/form-data"</b> attribute in your <b>&lt;form&gt;</b> tag.
 </div>
 
 A callback can also be another function or class method. Have a look at the [call()](base#call) function description to see all possibilities.
@@ -201,10 +201,8 @@ Possible values are:
 * socket (default)
 
 <div class="alert alert-info">
-    <b>Notice:</b> All these engines need their appropriate php extension to be installed and activated to work properly.
+    <b>Notice:</b> The cURL and stream wrapper engines need their appropriate php extension to be installed and activated to work properly. Otherwise, sockets are used.
 </div>
-
-
 
 ### subst
 
@@ -224,8 +222,8 @@ $web->subst( array &$old , string|array $new ); NULL
 $web->request( string $url, [ array $options = NULL ]); array | false
 ```
 
-Use can use [HTTP context options](http://www.php.net/manual/en/context.http.php) to configure the request for your needs.
-This way you can build request of every type, including the usage of cookies or auth mechanisms, proxy, user-agent,... and so on.
+You can use [HTTP context options](http://www.php.net/manual/en/context.http.php) to configure the request for your needs.
+This way you can build request of every type, including the usage of cookies or auth mechanisms, proxy, user-agent, and so on.
 The requested page will be cached as instructed by the remote server.
 
 Returns an array containing the content and the header. For example, let us have a look at a simple GET request to download a remote file:
@@ -257,9 +255,9 @@ array(4) {
 */
 ```
 
-It's easy as can be.
+It's easy as that!
 
-Let's move over to some more advanced examples.
+Let's move on to some more advanced examples.
 
 
 
@@ -333,10 +331,10 @@ $web->minify( string|array $files,[ string $mime = NULL ], [ bool $header = TRUE
 Example:
 
 ```php
-$minified = Web::instance()->minify('style.css,framework.css,null.css'); 
+$minified = Web::instance()->minify('style.css,framework.css,null.css');
 ```
 
-Notice, that any files processed by this function had to be located in one of the directories specified in [UI](quick-reference#ui) system var.
+Notice that the files processed by this function must be located in one of the directories specified in [UI](quick-reference#ui) system var.
 
 To get maximum performance, enable the system caching. Have a look a the [CACHE](quick-reference#cache) var.
 
@@ -346,7 +344,7 @@ To learn more about `minify` you may check the [User Guide](http://fatfreeframew
 
 ### rss
 
-**Parse a RSS feed and returns an array of all tags if not specified.**
+**Parse RSS feed and returns an array of all tags if not specified.**
 
 ``` php
 $web->rss( string $url, [ int $max = 10], [ string $tags = NULL ]); array | false
@@ -373,19 +371,9 @@ $web->slug( string $text); string
 
 The purpose of this function is to convert foreign characters to their approximate English keyboard character equivalents.
 Therefor it uses ISO-9 transliteration with a lookup table array that can be extended with the [DIACRITICS](quick-reference#diacritics) var.
-Furthermore it is designed to remove all non-alphanumeric characters and convert them to dashes.
+Furthermore, it is designed to remove all non-alphanumeric characters and convert them to dashes.
 
 ```php
 echo Web::instance()->slug('ĤÈĹĹŌ'); // returns: HELLO
 echo Web::instance()->slug('Ein schöner Artikel über Max & John'); // returns: ein-schoner-artikel-uber-max-john
-```
-
-
-
-### gzdecode
-
-**Decodes a gzip-compressed string if `gzdecode()` is available**
-
-``` php
-$web->gzdecode( string $str ); string
 ```
