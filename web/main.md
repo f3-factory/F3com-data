@@ -228,6 +228,102 @@ $web->subst( array &$old , string|array $new ); NULL
 $web->request( string $url, [ array $options = NULL ]); array | false
 ```
 
+Use can use [HTTP context options](http://www.php.net/manual/en/context.http.php) to configure the request for your needs.
+This way you can build request of every type, including the usage of cookies or auth mechanisms, proxy, user-agent,... and so on.
+The requested page will be cached as instructed by the remote server.
+
+Returns an array containing the content and the header. For example, let us have a look at a simple GET request to download a remote file:
+
+``` php
+$result = \Web::instance()->request('http://www.golem.de/1303/98339-55766-i_rc.jpg');
+var_dump( $result );
+/* returns:
+
+array(4) {
+    ["body"] => string(7761) " IMAGE BINARY DATA "
+    ["headers"]=>
+        array(11) {
+          [0] =>  string(15) "HTTP/1.1 200 OK"
+          [1] =>  string(13) "Server: nginx"
+          [2] =>  string(35) "Date: Thu, 16 May 2013 06:00:33 GMT"
+          [3] =>  string(24) "Content-Type: image/jpeg"
+          [4] =>  string(20) "Content-Length: 7761"
+          [5] =>  string(17) "Connection: close"
+          [6] =>  string(44) "Last-Modified: Fri, 22 Mar 2013 09:41:02 GMT"
+          [7] =>  string(38) "Expires: Sun, 16 Jun 2013 06:00:33 GMT"
+          [8] =>  string(30) "Cache-Control: max-age=2678400"
+          [9] =>  string(19) "X-Cache-Status: HIT"
+          [10] => string(20) "Accept-Ranges: bytes"
+        }
+    ["engine"] => string(6) "socket"
+    ["cached"] => bool(false)
+}
+*/
+```
+
+It's easy as can be.
+
+Let's move over to some more advanced examples.
+
+
+
+#### GET
+
+Perform a GET request with URL parameters:
+
+``` php
+$url = 'http://www.mydomain.com/index.php';
+$params = array(
+    'parameter1' => 'value1',
+    'parameter2' => 'value2'
+);
+$options = array('method' => 'GET');
+$url .= '?'.http_build_query($params);
+
+$result = \Web::instance()->request($url, $options);
+```
+
+
+
+#### POST
+
+Perform a POST request with POST data.
+
+``` php
+$url = 'http://www.mydomain.com/index.php';
+
+$postVars = array(
+    'parameter1' => 'value1',
+    'parameter2' => 'value2'
+);
+$options = array(
+    'method'  => 'POST',
+    'content' => http_build_query($postVars),
+);
+$result = \Web::instance()->request($url, $options);
+```
+
+
+
+#### PUT
+
+Upload a file via PUT request.
+
+``` php
+$f3 = \Base__instance();
+$web = \Web::instance();
+
+$url = 'http://www.mydomain.com/upload/';
+$file = '/path/to/myFile.zip';
+
+$options = array(
+    'method'  => 'PUT',
+    'content' => $f3->read($file),
+    'header' => array('Content-Type: '.$web->mime($file));
+);
+
+$result = $web->request($url, $options);
+```
 
 
 ### minify
