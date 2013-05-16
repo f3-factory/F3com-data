@@ -17,7 +17,6 @@ $web = \Web::instance();
 The Web class uses the [Prefab](prefab) factory wrapper, so you are able to grab the same instance of that class at any point of your code.
 
 
-
 ### mime
 
 **Detect MIME type using file extension**
@@ -51,7 +50,7 @@ $web->acceptable([ string|array $list = NULL ]); array | string | false
 It returns the MIME types stated in the HTTP Accept header as an array.
 
 ```php
-print_r(Web::instance()->acceptable();
+print_r(Web::instance()->acceptable());
 
 /* 
 Returns for example
