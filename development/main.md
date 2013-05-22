@@ -67,10 +67,10 @@ See what other users have made with F3.
     </thead>
     <tbody>
         <tr>
-            <td>Carb</td>
-            <td>A PHP command line tool for the automated generation of a new F3 project structure.</td>
-            <td><a href="https://github.com/wjgilmore" target="_blank">Jason Gilmore</a></td>
-            <td><a class="btn btn-info" href="https://github.com/wjgilmore/Carb" target="_blank">view</a></td>
+            <td>bugtrckr</td>
+            <td>minimal but feature rich bug tracking system</td>
+            <td><a href="https://github.com/sn0opy" target="_blank">Sascha Ohms</a></td>
+            <td><a class="btn btn-info" href="https://github.com/sn0opy/bugtrckr" target="_blank">view</a></td>
         </tr>
         <tr>
             <td>FatFree Ajax Boilerplate</td>
@@ -85,13 +85,47 @@ See what other users have made with F3.
             <td><a class="btn btn-info" href="https://github.com/blo4r/fatfree-blog" target="_blank">view</a></td>
         </tr>
         <tr>
+            <td>README</td>
+            <td>a blog platform for developers</td>
+            <td><a href="https://github.com/codevinsky" target="_blank">Jeremy Dowell</a></td>
+            <td><a class="btn btn-info" href="https://github.com/codevinsky/README" target="_blank">view</a></td>
+        </tr>
+        <tr>
             <td>selfoss</td>
             <td>selfoss: The new multipurpose rss reader, live stream, mashup, aggregation web application</td>
             <td><a href="https://github.com/SSilence" target="_blank">Tobias Zeising</a></td>
             <td><a class="btn btn-info" href="http://selfoss.aditu.de/" target="_blank">view</a></td>
         </tr>
+        <tr>
+            <td>toothPaste</td>
+            <td>Lightweight Pastebin with a nice design</td>
+            <td><a href="https://github.com/sn0opy" target="_blank">Sascha Ohms</a></td>
+            <td><a class="btn btn-info" href="https://github.com/sn0opy/toothpaste2" target="_blank">view</a></td>
+        </tr>
     </tbody>
 </table>
+
+<button type="button" class="btn btn-small" data-toggle="collapse" data-target="#projects-archive">view projects archive</button>
+<div id="projects-archive" class="collapse">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="span2">Plugin Name</th>
+                <th class="span7">Description</th>
+                <th class="span2">Author</th>
+                <th class="span1">Link</th>
+            <tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Carb</td>
+                <td>A PHP command line tool for the automated generation of a new F3 project structure.</td>
+                <td><a href="https://github.com/wjgilmore" target="_blank">Jason Gilmore</a></td>
+                <td><a class="btn btn-info" href="https://github.com/wjgilmore/Carb" target="_blank">view</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 ### User Plugins
 
@@ -106,16 +140,16 @@ See what other users have made with F3.
     </thead>
     <tbody>
         <tr>
+            <td>Currency</td>
+            <td>A currency rates converter, supports +90 currencies and Bitcoin</td>
+            <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
+            <td><a class="btn btn-info" href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Currency" target="_blank">view</a></td>
+        </tr>
+        <tr>
             <td>FAL</td>
             <td>A File Abstraction Layer across multiple filesystem adapters, with meta data support and F3 Caching features.</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
             <td><a class="btn btn-info" href="https://github.com/ikkez/F3-Sugar/tree/master-v3/FAL" target="_blank">view</a></td>
-        </tr>
-        <tr>
-            <td>FileUnit</td>
-            <td>This plugin offers a bunch of file system methods.</td>
-            <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
-            <td><a class="btn btn-info" href="https://github.com/ikkez/F3-Sugar/tree/master-v3/FileUnit" target="_blank">view</a></td>
         </tr>
         <tr>
             <td>Pagination</td>
@@ -287,5 +321,6 @@ The Fat-Free Framework is community-driven software. It can't be what it is toda
 * Дмитриев Иван
 * IT_GAP
 * Sergeev Andrey
+* Marion Dorsett
 
 Special thanks to the selfless others who expressed their desire to remain anonymous, yet share their time, contribute code, send donations, promote the framework to a wider audience, as well as provide encouragement and regular financial assistance. Their generosity is F3's prime motivation.
