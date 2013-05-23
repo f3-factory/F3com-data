@@ -1,12 +1,14 @@
 # Cache
 
-This class represents F3's multi protocoll Cache engine. It supports [Memcache](http://memcached.org/), [WinCache](http://www.iis.net/downloads/microsoft/wincache-extension), [APC](http://php.net/manual/en/book.apc.php), [XCache](http://xcache.lighttpd.net/) and filesystem based caching.
+This class represents F3's multi protocol Cache engine. It supports [Memcache](http://memcached.org/), [WinCache](http://www.iis.net/downloads/microsoft/wincache-extension), [APC](http://php.net/manual/en/book.apc.php), [XCache](http://xcache.lighttpd.net/) and filesystem based caching.
 
-The Cache engine auto-detection is activated by setting the [Cache](quick-reference#cache) system var to `TRUE`.
-
-Caching is a powerful method to get more performance out of your application. It is seamlessly integrated to all core and plugin features
+Caching is a powerful way to get more performance out of your application. It is seamlessly integrated to all core and plugin features
 like [setting cached hive keys](base#set), [cache whole route responses](base#caching), DB Query caching or JS/CSS minification.
 There is also a good [user guide section about caching](optimization#cache-engine) you really should have read.
+
+The Cache engine is deactivated by default. To activate it, using an auto-detected cache backend, set the [CACHE](quick-reference#cache) system var to `TRUE`.
+See [load()](cache#load) function for additional configuration.
+
 
 Namespace: `\` <br/>
 File location: `lib/base.php`
