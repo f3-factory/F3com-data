@@ -2,10 +2,9 @@
 
 - [Base] (base/)
 - [Cache](cache)
-- [Prefab](prefab)
+- [Prefab & Registry](prefab-registry)
 - [View](view)
 - [ISO](iso)
-- [Registry](registry)
 
 **Database**
 
