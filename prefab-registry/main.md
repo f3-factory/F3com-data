@@ -38,6 +38,10 @@ $obj=MyClass::instance(); // Second call: the object already exists and is simpl
 echo $obj->getYear();
 ```
 
+<div class="alert alert-info">
+    NB: Most of the classes coming with F3 are Prefab classes (Base, Cache, View, Template, Web, etc...)
+</div>
+
 ## Registry
 
 Under the hood, each single object is stored in the Registry. The Registry accepts a few commands:
