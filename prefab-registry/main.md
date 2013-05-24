@@ -7,9 +7,9 @@ File location: `lib/base.php`
 
 ---
 
-## Prefab 
+## Prefab
 
-If you want one of your classes to be a singleton, just make it extend the Prefab class:
+If you want one of your classes to be singletons, just make it extend the Prefab class:
 
 ``` php
 class MyClass extends \Prefab {
@@ -26,7 +26,7 @@ class MyClass extends \Prefab {
 }
 ```
 
-This way, the class will be instanciated no more than once. To retrieve the single object, use the static `instance()` method:
+This way, the class will be instantiated no more than once. To retrieve the single object, use the static `instance()` method:
 
 ``` php
 // somewhere in the code
@@ -39,7 +39,7 @@ echo $obj->getYear();
 ```
 
 <div class="alert alert-info">
-    NB: Most of the classes coming with F3 are Prefab classes (Base, Cache, View, Template, Web, etc...)
+    NB: Most F3 classes are derived from Prefab (Base, Cache, View, Template, Web, etc.)
 </div>
 
 ## Registry
@@ -84,9 +84,9 @@ else
 
 ## Passing arguments
 
-If you need to pass arguments during class instanciation, you can do it in two ways:
+If you need to pass arguments during class instantiation, you can do it in two ways:
 
-### Using Prefab 
+### Using Prefab
 
 ``` php
 // somewhere in the code
