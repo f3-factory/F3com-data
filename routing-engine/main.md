@@ -192,7 +192,7 @@ server {
     location ~ \.php$ {
         fastcgi_pass ip_address:port;
         fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
     }
 }
