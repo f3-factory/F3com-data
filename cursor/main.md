@@ -154,7 +154,7 @@ while(!$mapper->dry()) {
 $mapper->findone([ string|array $filter = NULL], [ array $options = NULL ], [ int $ttl = 0 ]); object|false
 ```
 
-If you only want to process a single entity in your business login, it is helpful to only load that single record too.
+If you only want to process a single entity in your business logic, it is helpful to only load that single record too.
 
 
 ### paginate
