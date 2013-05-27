@@ -175,14 +175,28 @@ $result = $mapper->paginate(0, 2);
 /*
 array(4) {
   ["subset"] => array(2) {
-        [0] => mapper object, #ID: 1
-        [1] => mapper object, #ID: 2
+        [0] => mapper object, #ID: 1, title: iPhone 5S is coming
+        [1] => mapper object, #ID: 2, title: Once upon a time
       }
   ["total"] => int(10)
   ["count"] => float(5)
   ["pos"] => int(0)
 }
 */
+
+$result = $mapper->paginate(1, 2);
+/*
+array(4) {
+  ["subset"] => array(2) {
+        [0] => mapper object, #ID: 3, title: F3 for the win
+        [1] => mapper object, #ID: 4, title: untitled
+      }
+  ["total"] => int(10)
+  ["count"] => float(5)
+  ["pos"] => int(1)
+}
+*/
+
 ```
 
 
