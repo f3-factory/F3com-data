@@ -14,6 +14,7 @@
 
 **ORM**
 
+- [Cursor](cursor)
 - [Jig Mapper](jig-mapper)
 - [Mongo Mapper](mongo-mapper)
 - [SQL Mapper](sql-mapper)
