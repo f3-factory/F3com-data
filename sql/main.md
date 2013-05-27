@@ -136,7 +136,7 @@ while an UPDATE statement would return the number of updated rows:
 echo $db->exec('UPDATE mytable SET id=id+10'); // outputs 4
 ```
 
-#### Parameters
+#### Parameterized queries
 
 The `exec()` method's 2nd argument is there to pass safely arguments (cf. [here](databases#parameterized-queries)).
 
@@ -164,10 +164,12 @@ and here's the short syntax for a unique placeholder:
 $db->exec('INSERT INTO mytable(name) VALUES(?)','Jim');
 ```
 
+#### Query caching
+
 The 3rd argument `$ttl` is used to enable query caching. Set it to your desired time-to-live in seconds and make sure [CACHE](quick-reference#cache) system var is configured.
 This way you can speed up your application when processing data that does not change very frequently.
 
-#### Array of statements
+#### Transaction
 
 Several SQL statements can be executed at once, if providing an array of statements. F3 will execute them as transaction, so if one statement fails, the whole query stack is rolled back.
 
@@ -188,7 +190,7 @@ $result=$db->exec(array(
 echo $result; // outputs 6 (deleted rows)
 ```
 
-If you need to have a return value for each statement, use a transaction (cf. below).
+If you need a return value for each statement, then you have to explicitly define a transaction and use `exec()` for each statement (cf. below).
 
 ### begin, rollback & commit
 
