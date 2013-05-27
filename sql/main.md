@@ -1,28 +1,28 @@
-# Sql 
+# SQL 
 
-The Sql class provides a lightweight, consistent interface for accessing Sql databases in PHP. It is a superset of the [PDO class](http://www.php.net/manual/en/class.pdo.php). 
+The SQL class provides a lightweight, consistent interface for accessing SQL databases in PHP. It is a superset of the [PDO class](http://www.php.net/manual/en/class.pdo.php). 
 
-Namespace: `\` <br/>
-File location: `lib/base.php`
+Namespace: `\DB` <br/>
+File location: `lib/db/sql.php`
 
 ---
 
 ## Constructor
 
 ```php
-$db=new \DB\Sql(string $dsn, [ string $user = NULL], [ string $pw = NULL], [ array $options = NULL]);
+$db=new \DB\SQL(string $dsn, [ string $user = NULL], [ string $pw = NULL], [ array $options = NULL]);
 ```
 
 For example, to connect to a MySQL database, the syntax looks like:
 
 ``` php
-$db=new \DB\Sql('mysql:host=localhost;port=3306;dbname=mysqldb','username','password');
+$db=new \DB\SQL('mysql:host=localhost;port=3306;dbname=mysqldb','username','password');
 ```
 
 While connecting to a SQLite database looks like:
 
 ``` php
-$db=new \DB\Sql('sqlite:/path/to/db.sqlite');
+$db=new \DB\SQL('sqlite:/path/to/db.sqlite');
 ```
 
 The 4th parameter allows to set additional PDO attributes:
@@ -32,7 +32,7 @@ $options=array(
   \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, // generic attribute
   \PDO::MYSQL_ATTR_COMPRESS => TRUE, // MySQL-specific attribute 
 );
-$db=new \DB\Sql('mysql:host=localhost;port=3306;dbname=mysqldb','username','password',$options);
+$db=new \DB\SQL('mysql:host=localhost;port=3306;dbname=mysqldb','username','password',$options);
 ```
 
 To see the list of available SQL drivers as well as the syntax and options specific to each of them, [go here](http://www.php.net/manual/en/pdo.drivers.php).
@@ -74,7 +74,7 @@ $db->schema(string $table, [ int $ttl=0]); array
 For example:
 
 ```php
-// CREATE TABLE mytable (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,name varchar(256) NULL DEFAULT 'none')
+// CREATE TABLE mytable (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name varchar(256) NULL DEFAULT 'none')
 $columns=$db->schema('mytable');
 var_dumps($columns);
 // outputs
@@ -101,7 +101,7 @@ array(2) {
 **Execute a SQL command**
 
 ```php
-$db->exec(string|array $commands, [ array $args = NULL], [ int $ttl = 0]); mixed
+$db->exec(string|array $commands, [ array $args = NULL], [ int $ttl = 0 ]); mixed
 ```
 
 This method execute one or more SQL statements and returns either the resulting rows (for SELECT statements) or the number of affected rows (for INSERT, DELETE, UPDATE statements).
@@ -164,9 +164,12 @@ and here's the short syntax for a unique placeholder:
 $db->exec('INSERT INTO mytable(name) VALUES(?)','Jim');
 ```
 
+The 3rd argument `$ttl` is used to enable query caching. Set it to your desired time-to-live in seconds and make sure [CACHE](quick-reference#cache) system var is configured.
+This way you can speed up your application when processing data that does not change very frequently.
+
 #### Array of statements
 
-Several SQL statements can be executed at once, if providing an array of statements.
+Several SQL statements can be executed at once, if providing an array of statements. F3 will execute them as transaction, so if one statement fails, the whole query stack is rolled back.
 
 <div class="alert alert-info">
     Be aware that the return value refers to the last executed statement only.
