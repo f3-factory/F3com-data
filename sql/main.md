@@ -108,7 +108,7 @@ This method execute one or more SQL statements and returns either the resulting 
 
 For example, if considering the following table `mytable`:
 
-<table class="table table-condensed table-striped">
+<table class="table table-bordered table-condensed table-striped">
   <thead>
     <tr><th>id</th><th>name</th></tr>
   </thead>

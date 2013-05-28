@@ -2,7 +2,7 @@
 
 This Cursor class is an abstract foundation of an [Active Record](http://en.wikipedia.org/wiki/Active_Record) implementation, that is used by all F3 Data Mapper.
 
-Have a look at the [SQL Mapper](sql-mapper), [Mongo Mapper](mongo-mapper) or [JIG Mapper](jig-mapper) page to get to know about how to create and use them with their own functions and the follwing described below.
+Have a look at the [SQL Mapper](sql-mapper), [Mongo Mapper](mongo-mapper) or [JIG Mapper](jig-mapper) page to get to know about how to create and use them with their own functions and the following described below.
 
 
 Namespace: `\DB` <br/>
@@ -25,7 +25,7 @@ the behaviour of these functions are the same. So imagine you have this data in 
     <tr>
         <td>1</td>
         <td>iPhone 5S is coming</td>
-        <td>lorem ipsun</td>
+        <td>lorem ipsum</td>
         <td>1</td>
     </tr>
     <tr>
@@ -54,7 +54,7 @@ the behaviour of these functions are the same. So imagine you have this data in 
 **Map to first record that matches criteria**
 
 ``` php
-$mapper->load([ strgin|array $filter = NULL ], [ array $options = NULL ]); array|false
+$mapper->load([ string|array $filter = NULL ], [ array $options = NULL ]); array|false
 ```
 
 The `load` method hydrates the mapper object with records. You can define a `$filter` to load only records that matches your criterias.
@@ -67,12 +67,12 @@ $mapper->load();
 echo $mapper->title; // iPhone 5S is coming
 ```
 
-The Cursor class extends the Magic class, which implement [ArrayAccess](http://php.net/manual/en/class.arrayaccess.php).
+The Cursor class extends the Magic class, which implements [ArrayAccess](http://php.net/manual/en/class.arrayaccess.php).
 This way you are able to access your data fields like object properties and array keys:
 
 ``` php
 echo $mapper->title; // iPhone 5S is coming
-echo $mapper['text']; // lorem ipsun
+echo $mapper['text']; // lorem ipsum
 ```
 
 
@@ -84,7 +84,7 @@ echo $mapper['text']; // lorem ipsun
 $mapper->next(); mixed
 ```
 
-When the mapper object is hydrated, an internal cursor pointer points to a single record. To move the pointer forward to another record, you can use this method.
+When a mapper object is hydrated, its internal cursor pointer points to a single record. To move the pointer forward to another record, you can use this method.
 
 ``` php
 $mapper->load();
@@ -134,13 +134,13 @@ $mapper->skip([ int $ofs = 1 ]); mixed
 $mapper->dry(); bool
 ```
 
-This is some kind of exist function. It returns TRUE if there is an active hydrated record on the current cursor position.
+This is some kind of "empty" function. It returns TRUE if the cursor is not mapped to any db record. 
 
 The next example loops through all loaded records and stops when the current cursor pointer is dry (not hydrated);
 
 ``` php
 $mapper->load();
-while(!$mapper->dry()) {
+while (!$mapper->dry()) {
     echo $mapper->title;
     $mapper->next();
 }
@@ -208,11 +208,11 @@ array(4) {
 $mapper->save(); mixed
 ```
 
-This method determines if the record should be updated or inserted as new entry.
+This method saves data to database. It is determined automatically if the record should be [updated](cursor#update) or [inserted](cursor#insert) as a new entry.
 
 ### erase
 
-**delete current record**
+**Delete current record**
 
 ``` php
 $mapper->erase(); null
@@ -220,7 +220,7 @@ $mapper->erase(); null
 
 ### reset
 
-**Reset cursor**
+**Reset/dehydrate the cursor**
 
 ``` php
 $mapper->reset(); null
@@ -229,7 +229,7 @@ $mapper->reset(); null
 
 ## Abstract Methods
 
-The following methos must be implemented by all extending mapper classes to work properly.
+The following methods must be implemented by all extending mapper classes to work properly.
 
 ### find
 
