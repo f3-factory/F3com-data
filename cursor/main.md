@@ -1,6 +1,6 @@
 # Cursor
 
-This Cursor class is an abstract foundation of an [Active Record](http://en.wikipedia.org/wiki/Active_Record) implementation, that is used by all F3 Data Mapper.
+This Cursor class is an abstract foundation of an [Active Record](http://en.wikipedia.org/wiki/Active_Record) implementation, that is used by all F3 Data Mappers.
 
 Have a look at the [SQL Mapper](sql-mapper), [Mongo Mapper](mongo-mapper) or [JIG Mapper](jig-mapper) page to get to know about how to create and use them with their own functions and the following described below.
 
@@ -12,7 +12,7 @@ File location: `lib/db/cursor.php`
 
 ## Cursor Methods
 
-The following methods are available for all Data Mappers. Even if the filter and option syntax may differ from one mapper to another,
+The following methods are available to all Data Mappers. Even if the filter and option syntax may differ from one mapper to another,
 the behaviour of these functions are the same. So imagine you have this data in your DB table, when reading the next examples.
 
 <table class="table table-bordered table-condensed table-striped">
@@ -57,15 +57,20 @@ the behaviour of these functions are the same. So imagine you have this data in 
 $mapper->load([ string|array $filter = NULL ], [ array $options = NULL ]); array|false
 ```
 
-The `load` method hydrates the mapper object with records. You can define a `$filter` to load only records that matches your criterias.
+The `load` method hydrates the mapper object with records. You can define a `$filter` to load only records that matches your criteria.
 You'll find detailed descriptions about the `$filter` and `$option` syntax on the mapper specific pages.
 
-If you do not specify any filter, than the first occuring record will be loaded:
+If you do not specify any filter, than the first record will be loaded:
 
 ``` php
 $mapper->load();
 echo $mapper->title; // iPhone 5S is coming
 ```
+
+<div class="alert alert-info">
+    <strong>Important:</strong><br>
+    Make sure there is enough memory for the result set returned by this function. Attempting to <code>load</code> (without arguments) from a huge database may go beyond PHP's <code>memory_limit</code>.
+</div>
 
 The Cursor class extends the Magic class, which implements [ArrayAccess](http://php.net/manual/en/class.arrayaccess.php).
 This way you are able to access your data fields like object properties and array keys:
@@ -73,6 +78,7 @@ This way you are able to access your data fields like object properties and arra
 ``` php
 echo $mapper->title; // iPhone 5S is coming
 echo $mapper['text']; // lorem ipsum
+echo $mapper->get('author'); // 1
 ```
 
 
@@ -93,12 +99,14 @@ $mapper->next();
 echo $mapper->title; // Once upon a time
 ```
 
+Internally, the Cursor class fetches all records from the underlying database matching the `load` filter. Any attempt to navigate to the next, previous, first or last record will just move the internal pointer, thereby reducing disk I/O.
+
 ### prev
 
 **Map previous record**
 
 ``` php
-$mapper->prev() mixed
+$mapper->prev(); mixed
 ```
 
 
@@ -134,7 +142,7 @@ $mapper->skip([ int $ofs = 1 ]); mixed
 $mapper->dry(); bool
 ```
 
-This is some kind of "empty" function. It returns TRUE if the cursor is not mapped to any db record. 
+This is some kind of "empty" function. It returns TRUE if the cursor is not mapped to any database record.
 
 The next example loops through all loaded records and stops when the current cursor pointer is dry (not hydrated);
 
@@ -154,7 +162,7 @@ while (!$mapper->dry()) {
 $mapper->findone([ string|array $filter = NULL], [ array $options = NULL ], [ int $ttl = 0 ]); object|false
 ```
 
-If you only want to process a single entity in your business logic, it is helpful to only load that single record too.
+Use this method if you only want to process a single entity in your business logic. It is helpful to only `load` that single record too.
 
 
 ### paginate
@@ -208,7 +216,7 @@ array(4) {
 $mapper->save(); mixed
 ```
 
-This method saves data to database. It is determined automatically if the record should be [updated](cursor#update) or [inserted](cursor#insert) as a new entry.
+This method saves data to database. The Cursor class determines automatically if the record should be [updated](cursor#update) or [inserted](cursor#insert) as a new entry, based on the return value of `dry`.
 
 ### erase
 
