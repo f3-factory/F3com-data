@@ -1,6 +1,6 @@
-# SQL 
+# SQL
 
-The SQL class provides a lightweight, consistent interface for accessing SQL databases in PHP. It is a superset of the [PDO class](http://www.php.net/manual/en/class.pdo.php). 
+The SQL class provides a lightweight, consistent interface for accessing SQL databases in PHP. It is a superset of the [PDO class](http://www.php.net/manual/en/class.pdo.php).
 
 Namespace: `\DB` <br/>
 File location: `lib/db/sql.php`
@@ -30,7 +30,7 @@ The 4th parameter allows to set additional PDO attributes:
 ``` php
 $options=array(
   \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, // generic attribute
-  \PDO::MYSQL_ATTR_COMPRESS => TRUE, // MySQL-specific attribute 
+  \PDO::MYSQL_ATTR_COMPRESS => TRUE, // MySQL-specific attribute
 );
 $db=new \DB\SQL('mysql:host=localhost;port=3306;dbname=mysqldb','username','password',$options);
 ```
@@ -76,19 +76,19 @@ For example:
 ```php
 // CREATE TABLE mytable (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name varchar(256) NULL DEFAULT 'none')
 $columns=$db->schema('mytable');
-var_dumps($columns);
+var_dump($columns);
 // outputs
 array(2) {
   ["id"]=>array(5) {
     ["type"]=>string(7) "INTEGER"
-    ["pdo_type"]=>int(1)
+    ["pdo_type"]=>int(1) // \PDO::PARAM_INT
     ["default"]=>NULL
     ["nullable"]=>bool(false)
     ["pkey"]=>bool(true)
   }
   ["name"]=>array(5) {
     ["type"]=>string(12) "varchar(256)"
-    ["pdo_type"]=>int(2)
+    ["pdo_type"]=>int(2) // \PDO::PARAM_STR
     ["default"]=>string(6) "'none'"
     ["nullable"]=>bool(true)
     ["pkey"]=>bool(false)
@@ -104,9 +104,9 @@ array(2) {
 $db->exec(string|array $commands, [ array $args = NULL], [ int $ttl = 0 ]); mixed
 ```
 
-This method execute one or more SQL statements and returns either the resulting rows (for SELECT statements) or the number of affected rows (for INSERT, DELETE, UPDATE statements).
+This method execute one or more SQL statements and returns either the resulting rows (for SELECT, CALL, EXPLAIN, PRAGMA, SHOW statements) or the number of affected rows (for INSERT, DELETE, UPDATE statements).
 
-For example, if considering the following table `mytable`:
+For example, consider the following table `mytable`:
 
 <table class="table table-bordered table-condensed table-striped">
   <thead>
@@ -127,7 +127,7 @@ $rows=$db->exec('SELECT id,name FROM mytable ORDER BY id DESC');
 echo count($rows); // outputs 4
 foreach($rows as $row)
   echo $row['name'];
-// outputs 'Averell,Jack,William,Joe,' 
+// outputs 'Averell,Jack,William,Joe,'
 ```
 
 while an UPDATE statement would return the number of updated rows:
@@ -138,7 +138,7 @@ echo $db->exec('UPDATE mytable SET id=id+10'); // outputs 4
 
 #### Parameterized queries
 
-The `exec()` method's 2nd argument is there to pass safely arguments (cf. [here](databases#parameterized-queries)).
+The `exec()` method's 2nd argument is there to pass arguments safely (cf. [here](databases#parameterized-queries)).
 
 For example, instead of writing:
 
@@ -158,7 +158,7 @@ Here's the equivalent syntax with unnamed placeholders:
 $db->exec('INSERT INTO mytable VALUES(?,?)',array(1=>5,2=>'Jim'))
 ```
 
-and here's the short syntax for a unique placeholder:
+and here's the short syntax for a single placeholder:
 
 ```php
 $db->exec('INSERT INTO mytable(name) VALUES(?)','Jim');
@@ -234,8 +234,8 @@ $db->exec('INSERT INTO mytable(name) VALUES(?)','Don');
 $db->exec('INSERT INTO mytable(name) VALUES(?)','Elliott');
 echo $db->log();
 // outputs:
-Mon, 27 May 2013 00:59:57 +0200 (0.1ms) INSERT INTO mytable(name) VALUES('Clyde') 
-Mon, 27 May 2013 00:59:57 +0200 (0.3ms) INSERT INTO mytable(name) VALUES('Don') 
-Mon, 27 May 2013 00:59:57 +0200 (0.2ms) INSERT INTO mytable(name) VALUES('Elliott') 
+Mon, 27 May 2013 00:59:57 +0200 (0.1ms) INSERT INTO mytable(name) VALUES('Clyde')
+Mon, 27 May 2013 00:59:57 +0200 (0.3ms) INSERT INTO mytable(name) VALUES('Don')
+Mon, 27 May 2013 00:59:57 +0200 (0.2ms) INSERT INTO mytable(name) VALUES('Elliott')
 ```
 
