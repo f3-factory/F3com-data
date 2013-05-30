@@ -1,6 +1,6 @@
-# Jig 
+# Jig
 
-Jig provides a simple way to store arrays of data into flat files. 
+Jig provides a simple way to store arrays of data into flat files.
 
 Namespace: `\DB` <br/>
 File location: `lib/db/jig.php`
@@ -24,7 +24,7 @@ $db=new \DB\Jig(string $dir, [ int $format = \DB\Jig::FORMAT_JSON ] );
 `$format` defines the storage format. Possible values are:
 
 * `\DB\Jig::FORMAT_JSON` which stores data in JSON format.
-* `\DB\Jig::FORMAT_Serialized` which serializes data. Depending on the [SERIALIZER](quick-reference#serializer) system variable, data is stored using the standard PHP serialization format, the igbinary format or ... JSON.
+* `\DB\Jig::FORMAT_Serialized` which serializes data. Depending on the [SERIALIZER](quick-reference#serializer) system variable, data is stored using the standard PHP serialization format, the igbinary format or JSON.
 
 ## Write
 
@@ -32,7 +32,7 @@ $db=new \DB\Jig(string $dir, [ int $format = \DB\Jig::FORMAT_JSON ] );
 $db->write(string $file, array $data); int
 ```
 
-This method writes data to a given file and returns the number of written bytes. E.g:
+This method writes data to a given file and returns the number of bytes written, e.g:
 
 ```php
 $db=new \DB\Jig('jig/',\DB\Jig::FORMAT_JSON);
@@ -51,7 +51,7 @@ echo $db->write('lineup',$lineup); // outputs 160
 $db->read(string $file); array
 ```
 
-This method retrieves the data stored in a given file. E.g: 
+This method retrieves the data stored in a given file, e.g:
 
 ```php
 $data=$db->read('lineup');
