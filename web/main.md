@@ -1,5 +1,5 @@
 # Web
-The Web class contains several helpers to interact with clients and servers based on HTTP like down- and uploads
+The Web class (and its descendants, [Geo](geo) and [Pingback](pingback)) contains several helpers to interact with HTTP clients and servers.
 
 Namespace: `\` <br/>
 File location: `lib/web.php`
@@ -14,7 +14,7 @@ File location: `lib/web.php`
 $web = \Web::instance();
 ```
 
-The Web class uses the [Prefab](prefab) factory wrapper, so you are able to grab the same instance of that class at any point of your code.
+The Web class uses the [Prefab](prefab) factory wrapper, so you can grab the same instance of that class at any point of your code.
 
 
 ### mime
@@ -25,19 +25,19 @@ The Web class uses the [Prefab](prefab) factory wrapper, so you are able to grab
 $web->mime( string $file ); string
 ```
 
-Detects MIME type by comparing the file extension against a predefined array. Use this in place of Fileinfo, which is not available on some server setups and would be more costly in terms of performance.
+Detects MIME type by comparing the file extension against a predefined array. Use this as a lightweight alternative to Fileinfo, which is not available on some server setups and would be more costly in terms of performance.
 In the following example, we see how to set the right response header content type to display an image by PHP.
 
 ```php
 $web = \Web::instance();
-
 $file = 'ui/images/south-park.jpg';
 $mime = $web->mime($file); // returns 'image/jpeg'
+
 header('Content-Type: '.$mime);
 echo $f3->read($file);
 ```
 
-If no known extension has been found, it will return 'application/octet-stream'.
+If an extension is not known to this method, it will return 'application/octet-stream'.
 
 ### acceptable
 
@@ -47,13 +47,13 @@ If no known extension has been found, it will return 'application/octet-stream'.
 $web->acceptable([ string|array $list = NULL ]); array | string | false
 ```
 
-It returns the MIME types stated in the HTTP Accept header as an array.
+It returns the MIME types stated by the browser in the HTTP Accept header as an array.
 
 ```php
 print_r(Web::instance()->acceptable());
 
 /*
-Returns for example
+Returns for example:
 
 Array
 (
@@ -80,7 +80,7 @@ $web->acceptable(array('application/xml','application/xhtml+xml')); // returns a
 $web->send( string $file, [ string $mime = NULL ], [ int $kbps = 0 ], [ bool $force = TRUE ]); int | false
 ```
 
-The 2nd argument `$kbps` defines the throttle speed, measured in Kilobits per second, if you like to slow down the file download for the user.
+The 2nd argument `$kbps` defines the throttle speed, measured in Kilobits per second, if you like to limit the download bandwidth for the user.
 
 In `$mime` argument you can explicitly set a mime type. Leave it to `NULL` to let the framework detect the type.
 
@@ -89,17 +89,16 @@ Use `$force` to force the "save file..." download dialog, otherwise it would jus
 Example:
 
 ```php
-$throttle = '8192' // throttle the download to 1024 Kilobytes per second
+$throttle = 32; // throttle the download to 32Kbps
 $mime = NULL; // let the framework detect the type
 
 $web->send('data/documents.zip', $mime, $throttle);
 ```
 
 
-
 ### receive
 
-**Receives and processes files from a client sent via PUT or POST.**
+**Receive and process files from a client sent via PUT or POST.**
 
 ``` php
 $web->receive([ callback $func = NULL ], [ bool $overwrite = FALSE], [ bool $slug = TRUE ]); int | false
@@ -164,7 +163,7 @@ Web::instance()->receive('callback', false, true);
 Web::instance()->progress( string $session_id ); int | false
 ```
 
-The `$session_id` ist the "key" of the `$_SESSION` array and is necessary to retrieve the status of a specific user. Please read the [PHP Docs](http://php.net/manual/session.upload-progress.php) for more information.
+The `$session_id` is the "key" of the `$_SESSION` array and is necessary to retrieve the status of a specific user. Please read the [PHP Docs](http://php.net/manual/session.upload-progress.php) for more information.
 
 
 
@@ -338,13 +337,13 @@ Notice that the files processed by this function must be located in one of the d
 
 To get maximum performance, enable the system caching. Have a look a the [CACHE](quick-reference#cache) var.
 
-To learn more about `minify` you may check the [User Guide](http://fatfreeframework.com/optimization#keeping-javascript-and-css-on-a-healthy-diet)
+To learn more about `minify`, check the [User Guide](http://fatfreeframework.com/optimization#keeping-javascript-and-css-on-a-healthy-diet).
 
 
 
 ### rss
 
-**Parse RSS feed and returns an array of all tags if not specified.**
+**Parse RSS feed and optionally return an array of all tags.**
 
 ``` php
 $web->rss( string $url, [ int $max = 10], [ string $tags = NULL ]); array | false
