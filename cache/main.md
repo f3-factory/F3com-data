@@ -6,7 +6,7 @@ Caching is a powerful way to get more performance out of your application. It is
 like [setting hive keys](base#set), [HTTP responses](base#caching), DB queries or JS/CSS minification.
 There is also a good [user guide section about caching](optimization#cache-engine) you really should have read.
 
-The Cache engine is deactivated by default. To activate it, using an auto-detected cache backend, set the [CACHE](quick-reference#cache) system var to `TRUE`.
+The Cache engine is deactivated by default. To activate it using an auto-detected cache backend, set the [CACHE](quick-reference#cache) system var to `TRUE`.
 See [load()](cache#load) function for additional configuration.
 
 
@@ -109,10 +109,10 @@ $cache->load( string|bool $dsn ); string
 
 Possible configurations for `$dsn` are:
 
-* `memcache=localhost:11211`
-* `folder=tmp/cache/`
 * `apc`
 * `wincache`
 * `xcache`
+* `memcache=localhost:11211`
+* `folder=tmp/cache/`
 
-Or set it `TRUE` for auto-detection, or `FALSE` to disable caching.
+Or set it `TRUE` for auto-detection (use filesystem fallback, if no shared memory engine available), or `FALSE` to disable caching.
