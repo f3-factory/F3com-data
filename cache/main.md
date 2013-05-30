@@ -23,7 +23,7 @@ File location: `lib/base.php`
 $cache = \Cache::instance();
 ```
 
-The Cache class uses the [Prefab](prefab) factory wrapper, so you are able to grab the same instance of that class at any point of your code.
+The Cache class uses the [Prefab](prefab-registry) factory wrapper, so you are able to grab the same instance of that class at any point of your code.
 
 
 ### exists

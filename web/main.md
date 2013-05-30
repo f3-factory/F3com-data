@@ -14,7 +14,7 @@ File location: `lib/web.php`
 $web = \Web::instance();
 ```
 
-The Web class uses the [Prefab](prefab) factory wrapper, so you can grab the same instance of that class at any point of your code.
+The Web class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code.
 
 
 ### mime
