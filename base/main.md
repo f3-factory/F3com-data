@@ -1179,7 +1179,11 @@ Otherwise it will display a default error page in HTML for synchronous requests,
 $f3->expire([ int $secs = 0 ]); void
 ```
 
+There is little need to call this method directly because it is automatically invoked at runtime by the framework, depending on whether the page should be cached  or otherwise. The framework sends the necessary HTTP cache control headers to the browser so you don't need to send it yourself.
 
+``` php
+$f3->expire(0); // sends 'Cache-Control: no-cache, no-store, must-revalidate'
+```
 
 ### highlight
 
@@ -1211,7 +1215,12 @@ This is used to grab the framework instance at any point of your code.
 $f3->status( int $code ); string
 ```
 
+Use this method for sending various HTTP status messages to the client, e.g.
 
+``` php
+$f3->status(403); // Sends 403 Forbidden header
+$f3->status(415); // Sends 415 Unsupported media type
+```
 
 ### unload
 
