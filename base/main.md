@@ -1077,7 +1077,23 @@ This method provides that facility to invoke callbacks and their arguments. F3 r
 $f3->chain( array|string $funcs, [ mixed $args = NULL ]); array
 ```
 
+This method invokes several callbacks in succession:
 
+``` php
+echo $f3->chain('a; b; c', 0);
+
+function a($n) {
+	return 'a: '.($n+1); // a: 1
+}
+
+function b($n) {
+	return 'b: '.($n+1); // b: 1
+}
+
+function c($n) {
+	return 'c: '.($n+1); // c: 1
+}
+```
 
 ### relay
 
@@ -1087,7 +1103,23 @@ $f3->chain( array|string $funcs, [ mixed $args = NULL ]); array
 $f3->relay( array|string $funcs, [ mixed $args = NULL ]); array
 ```
 
+This method invokes callback in succession like [chain](chain) but applies the result of the first function as argument of the succeeding function, i.e.:
 
+``` php
+echo $f3->relay('a; b; c', 0);
+
+function a($n) {
+	return 'a: '.($n+1); // a: 1
+}
+
+function b($n) {
+	return 'b: '.($n+1); // b: 2
+}
+
+function c($n) {
+	return 'c: '.($n+1); // c: 3
+}
+```
 
 ---
 ## File System
