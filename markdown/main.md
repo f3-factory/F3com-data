@@ -14,7 +14,7 @@ File location: `lib/markdown.php`
 $md = \Markdown::instance();
 ```
 
-The Markdown class uses the [Prefab](prefab) factory wrapper, so you can grab the same instance of that class at any point of your code.
+The Markdown class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code.
 
 
 ### convert
