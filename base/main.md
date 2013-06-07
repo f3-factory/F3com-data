@@ -1132,7 +1132,17 @@ function c($n) {
 $f3->mutex( string $id, callback $func, [ mixed $args = NULL ]); mixed
 ```
 
-A [Mutual Exclusion](http://en.wikipedia.org/wiki/Mutual_exclusion)(mutex) is a way of running your code in a newly created thread.
+A [Mutual Exclusion](http://en.wikipedia.org/wiki/Mutual_exclusion)(mutex) is a cross-platform mechanism for synchronizing access to resources, in such a way that a process that has acquired the mutex gains exclusive access to the resource. Other processes trying to acquire the same mutex will be in a suspended state until the mutex is released.
+
+``` php
+$f3->mutex('test',function() {
+	/* Critical section */
+	session_start();
+	$contents=file_get_contents('mutex');
+	sleep(5);
+	file_put_contents('mutex',$contents.date('r').' '.session_id()."\n");
+});
+```
 
 ### read
 
