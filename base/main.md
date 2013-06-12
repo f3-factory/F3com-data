@@ -1142,7 +1142,7 @@ A [Mutual Exclusion](http://en.wikipedia.org/wiki/Mutual_exclusion)(mutex) is a 
 
 ``` php
 $f3->mutex('test',function() {
-	/* Critical section */
+	// Critical section
 	session_start();
 	$contents=file_get_contents('mutex');
 	sleep(5);
