@@ -468,6 +468,8 @@ Array
 */
 ```
 
+---
+
 ## Encoding & Conversion
 
 ### fixslashes
@@ -750,6 +752,8 @@ $f3->unserialize( mixed $arg ); string
 
 See [serialize](base#serialize) for further description.
 
+---
+
 ## Localisation
 
 <div class="alert alert-info"><strong>Note:</strong> F3 follows ICU formatting rules but does not require PHP's <tt>intl</tt> module.</div>
@@ -835,6 +839,8 @@ $f3->set('LOCALES','dict/');
 
 A dictionary file can be a php file returning a key-value paired associative array, or an .ini-style formatted config file.
 [Read the guide about language files here](views-and-templates#multilingual-support).
+
+---
 
 ## Routing
 
@@ -959,6 +965,9 @@ class Bar {
 
 The 3rd argument `$ttl` defines the caching time in seconds. Setting this argument to a positive value will call the [expire](base#expire) function to set cache metadata in the HTTP response header. It also caches the route response, but only GET and HEAD requests are cacheable.
 
+If `CACHE` is turned off, `$ttl` will only control the browser cache using [expire](base#expire) header metadata.
+If `CACHE` is turned on, and there is a positive `$ttl` value set for the current request URI handler, F3 additionally will cache the output for this page, and refresh it when `$ttl` expires.
+Read more about it [here](https://groups.google.com/d/msg/f3-framework/lwaqZjtwCvU/PC-gK8Ki9PMJ) and [here](https://groups.google.com/d/msg/f3-framework/lwaqZjtwCvU/LDUlPhQfc84J).
 
 #### Bandwidth Throttling
 
@@ -1045,9 +1054,6 @@ The `PARAMS` var will contains all tokens as named keys, and additionally all to
     <p><b>Notice:</b> If a static and dynamic route pattern both match the current URI, then the static route pattern has priority.</p>
 </div>
 
-If `CACHE` is turned off, `$ttl` will only control the browser cache using [expire](base#expire) header metadata.
-If `CACHE` is turned on, and there is a positive `$ttl` value set for the current request URI handler, F3 additionally will cache the output for this page, and refresh it when `$ttl` expires.
-Read more about it [here](https://groups.google.com/d/msg/f3-framework/lwaqZjtwCvU/PC-gK8Ki9PMJ) and [here](https://groups.google.com/d/msg/f3-framework/lwaqZjtwCvU/LDUlPhQfc84J).
 
 
 ### call
@@ -1160,6 +1166,8 @@ $f3->read( string $file, [ bool $lf = FALSE ]); string
 ``` php
 $f3->write( string $file, mixed $data, [ bool $append = FALSE ]); int|FALSE
 ```
+
+---
 
 ## Misc
 
