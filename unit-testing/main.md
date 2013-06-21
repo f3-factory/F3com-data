@@ -74,13 +74,18 @@ Fat-Free gives you the freedom to display test results in any way you want. You 
 F3 gives you the ability to simulate HTTP requests from within your PHP program so you can test the behavior of a particular route. Here's a simple mock request:
 
 ``` php
-$f3->mock('GET /test?foo=bar');
+$f3->set('QUIET',TRUE);
+$f3->mock('GET /test?foo=bar'); // pass in any parameters using k v pairs
+$f3->run(); // run the route
+// run tests
+$f3->set('QUIET',FALSE);
+$f3->clear('ERROR');
 ```
 
 To mock a POST request and submit a simulated HTML form:
 
 ``` php
-$f3->mock('POST /test',array('foo'=>'bar'));
+$f3->mock('POST /test',array('foo'=>'bar')); // pass in form values using assoc array
 ```
 
 ## Expecting the Worst that can Happen
