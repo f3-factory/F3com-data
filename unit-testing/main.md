@@ -90,13 +90,13 @@ F3 gives you the ability to simulate HTTP requests from within your PHP program 
 Here's a simple mock request:
 
 ``` php
-$f3->set('QUIET',TRUE);
-$f3->mock('GET /test'); 
-$f3->run(); // run the route
-// run tests
+$f3->set('QUIET',TRUE);  // do not show output of the active route
+$f3->mock('GET /test');  // set the route that f3 will run
+$f3->run();  // run the route
+// run tests using expect() as shown above
 // ...
-$f3->set('QUIET',FALSE);
-$f3->clear('ERROR');
+$f3->set('QUIET',FALSE); // allow test results to be shown later
+$f3->clear('ERROR');  // clear any errors
 ```
 
 `Tip:` If you have a route defined with token parameters, i.e. /test/@name, you can test that route by setting a value for the token in the mock command, and access that value during testing from F3's PARAMS assoc array
@@ -106,8 +106,8 @@ $f3->mock('GET /test/steve);
 $f3->run();
 $name = $f3->get('PARAMS["name"]');
 $test->expect(
-    strlen($hello)==13,
-    'String length is 13'
+    $name =="steve",
+    'Uri param "name" equals "steve"'
 );
 
 ```
@@ -115,7 +115,7 @@ $test->expect(
 To mock a POST request and submit a simulated HTML form:
 
 ``` php
-$f3->mock('POST /test',array('foo'=>'bar')); // pass in form values using assoc array
+$f3->mock('POST /test', array('foo'=>'bar')); // pass in form values using assoc array
 ```
 
 `Tip:` When using mock, or displaying test results using a rendered template, or testing something in your database, you need to include config settings for F3 so it knows the location of your templates, db parameters, etc. 
