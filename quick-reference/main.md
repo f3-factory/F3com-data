@@ -280,58 +280,73 @@ Framework version.
 
 ## Template Directives
 
-```
-@token
-```
-* Replace `@token` with value of equivalent F3 variable.
+### Token
 
-```
-{{ mixed expr }}
-```
-* Evaluate. `expr` may include template tokens, constants, operators (unary, arithmetic, ternary and relational), parentheses, data type converters, and functions. If not an attribute of a template directive, result is echoed.
+*   `@token`
 
-```
-{{ string expr | raw }}
-```
-* Render unescaped `expr`. F3 auto-escapes strings by default.
+    Replace `@token` with value of equivalent F3 variable.
 
-```
-{{ string expr | esc }}
-```
-* Render escaped `expr`. This is the default framework behavior. The `| esc` suffix is only necessary if `ESCAPE` global variable is set to `FALSE`.
+*   `{{ mixed expr }}`
 
-```
-{{ string expr, arg1, ..., argN | format }}
-```
-* Render an ICU-formatted `expr` and pass the comma-separated arguments, where `arg1, ..., argn` is one of: `'date'`, `'time'`, `'number, integer'`, `'number, currency'`, or `'number, percent'`.
+    Evaluate. `expr` may include template tokens, constants, operators (unary, arithmetic, ternary and relational), parentheses, data type converters, and functions. If not an attribute of a template directive, result is echoed.
 
-```
+* `{{ string expr | raw }}`
+
+    Render unescaped `expr`. F3 auto-escapes strings by default.
+
+*   `{{ string expr | esc }}`
+
+    Render escaped `expr`. This is the default framework behavior. The `| esc` suffix is only necessary if `ESCAPE` global variable is set to `FALSE`.
+
+*   `{{ string expr, arg1, ..., argN | format }}`
+
+    Render an ICU-formatted `expr` and pass the comma-separated arguments, where `arg1, ..., argn` is one of: `'date'`, `'time'`, `'number, integer'`, `'number, currency'`, or `'number, percent'`.
+
+### Include
+
+``` html
 <include
     [ if="{{ bool condition }}" ]
     href="{{ string subtemplate }}"
 />
 ```
-* Get contents of `subtemplate` and insert at current position in template if optional condition is `TRUE`.
 
-```
+Get contents of `subtemplate` and insert at current position in template if optional condition is `TRUE`.
+
+### Exclude
+
+``` html
 <exclude>text-block</exclude>
 ```
-* Remove `text-block` at runtime. Used for embedding comments in templates.
+
+Remove `text-block` at runtime. Used for embedding comments in templates.
+An Alias for this is:
 
 ```
+{{* text-block *}}
+```
+
+### Ignore
+
+``` html
 <ignore>text-block</ignore>
 ```
-* Display `text-block` as-is, without interpretation/modification by the template engine.
+Display `text-block` as-is, without interpretation/modification by the template engine.
 
-```
+### Check
+
+``` html
 <check if="{{ bool condition }}">
     <true>true-block</true>
     <false>false-block</false>
 </check>
 ```
-* Evaluate condition. If `TRUE`, then `true-block` is rendered. Otherwise, `false-block` is used.
+Evaluate condition. If `TRUE`, then `true-block` is rendered. Otherwise, `false-block` is used.
+If there is no false block, the opening and closing tags for true are optional.
 
-```
+### Loop
+
+``` html
 <loop
     from="{{ statement }}"
     to="{{ bool expr }}"
@@ -339,9 +354,11 @@ Framework version.
     text-block
 </loop>
 ```
-* Evaluate `from` statement once. Check if the expression in the `to` attribute is `TRUE`, render `text-block` and evaluate `step` statement. Repeat iteration until `to` expression is `FALSE`.
+Evaluate `from` statement once. Check if the expression in the `to` attribute is `TRUE`, render `text-block` and evaluate `step` statement. Repeat iteration until `to` expression is `FALSE`.
 
-```
+### Repeat
+
+``` html
 <repeat
     group="{{ array @group|expr }}"
     [ key="{{ scalar @key }}" ]
@@ -350,12 +367,25 @@ Framework version.
     text-block
 </repeat>
 ```
-* Repeat `text-block` as many times as there are elements in the array variable `@group` or the expression `expr`. `@key` and `@value` function in the same manner as the key-value pair in the equivalent PHP `foreach()` statement. Variable represented by `key` in `counter` attribute increments by `1` with every iteration.
+Repeat `text-block` as many times as there are elements in the array variable `@group` or the expression `expr`. `@key` and `@value` function in the same manner as the key-value pair in the equivalent PHP `foreach()` statement. Variable represented by `key` in `counter` attribute increments by `1` with every iteration.
 
+### Switch
+
+``` html
+<switch expr="{{ scalar expr }}">
+    <case value="{{ scalar @value|expr }}" break="{{ bool TRUE|FALSE }}">
+        text-block
+    </case>
+    .
+    .
+    .
+    <default>
+        message
+    </default>
+</switch>
 ```
-{{* text-block *}}
-```
-* Alias for `<exclude>`.
+
+Equivalent of the PHP switch-case jump table structure.
 
 ## API Documentation
 
