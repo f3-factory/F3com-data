@@ -73,10 +73,10 @@ See what other users have made with F3.
             <td><a class="btn btn-info" href="https://github.com/sn0opy/bugtrckr" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>FatFree Ajax Boilerplate</td>
-            <td>F3 Ajax application with timers to monitor performance</td>
-            <td><a href="https://github.com/WilliamStam" target="_blank">William Stam</a></td>
-            <td><a class="btn btn-info" href="https://github.com/WilliamStam/FatFree-Ajax-Boilerplate" target="_blank">view</a></td>
+            <td>F3 Boilerplate</td>
+            <td>boilerplate MVC website code using html5boilerplate</td>
+            <td><a href="https://github.com/vijinho" target="_blank">Vijay Mahrra</a></td>
+            <td><a class="btn btn-info" href="https://github.com/vijinho/f3-boilerplate" target="_blank">view</a></td>
         </tr>
         <tr>
             <td>fatfree-blog</td>
@@ -122,6 +122,12 @@ See what other users have made with F3.
                 <td>A PHP command line tool for the automated generation of a new F3 project structure.</td>
                 <td><a href="https://github.com/wjgilmore" target="_blank">Jason Gilmore</a></td>
                 <td><a class="btn btn-info" href="https://github.com/wjgilmore/Carb" target="_blank">view</a></td>
+            </tr>
+            <tr>
+                <td>FatFree Ajax Boilerplate</td>
+                <td>F3 Ajax application with timers to monitor performance</td>
+                <td><a href="https://github.com/WilliamStam" target="_blank">William Stam</a></td>
+                <td><a class="btn btn-info" href="https://github.com/WilliamStam/FatFree-Ajax-Boilerplate" target="_blank">view</a></td>
             </tr>
         </tbody>
     </table>
@@ -322,5 +328,6 @@ The Fat-Free Framework is community-driven software. It can't be what it is toda
 * IT_GAP
 * Sergeev Andrey
 * Marion Dorsett
+* Lars Brandi Jensen
 
 Special thanks to the selfless others who expressed their desire to remain anonymous, yet share their time, contribute code, send donations, promote the framework to a wider audience, as well as provide encouragement and regular financial assistance. Their generosity is F3's prime motivation.
