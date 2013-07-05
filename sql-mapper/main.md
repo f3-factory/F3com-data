@@ -15,6 +15,79 @@ To use the SQL ORM, [create a valid SQL DB Connection](sql#constructor) and foll
 $mapper = new \DB\SQL\Mapper(\DB\SQL $db, string $table, [ int $ttl = 60 ])
 ```
 
+If you like to create a model class, you might like to wrap it up:
+
+``` php
+$f3->set('DB',new DB\SQL('sqlite:db/database.sqlite'));
+
+class User extends \DB\SQL\Mapper {
+    public function __construct() {
+        parent::__construct( \Base::instance()->get('DB'), 'users' );
+    }
+}
+
+$user = new User();
+$user->load('id = 1');
+// etc.
+```
+
+## Syntax
+
+### $filter
+
+The `$filter` argument for SQL accepts the following structure:
+
+``` php
+// string value for simple where strings
+string $whereClause
+// array value for parameterized queries
+array( string $whereClause, [ string $bindValue1 ], [ string $bindValue2 ], [...] )
+```
+
+It is recommended to use parameterized queries for all where conditions that may include user input data.
+In example with positional parameters:
+
+``` php
+array('username = ? and password = ? and deleted = 0','John','acbd18db4cc2f85cedef654fccc4a4d8')
+```
+
+Or with named parameters:
+
+``` php
+array(
+    'username = :user and password = :pass and deleted = 0',
+    ':user'=>'John',':pass'=>'acbd18db4cc2f85cedef654fccc4a4d8'
+    )
+```
+
+<div class="alert alert-info">
+Notice: You cannot use a named parameter more than once in a query. Due to a PDO limitation you need to create <code>:user1</code> and <code>:user2</code> with same value.
+</div>
+
+### $option
+
+The `$option` argument for SQL accepts the following structure:
+
+``` php
+array(
+    'order' => string $orderClause,
+    'group' => string $groupClause,
+    'limit' => integer $limit,
+    'offset' => integer $offset
+    )
+```
+
+i.e:
+
+``` php
+array(
+    'order' => 'score DESC, team_name ASC',
+    'group' => 'score, player',
+    'limit' => 20,
+    'offset' => 0
+    )
+```
+
 
 ## Methods
 
@@ -43,6 +116,18 @@ $mapper->foo = 'bar';
 $mapper['foo'] = 'bar';
 ```
 
+#### Virtual Fields
+
+If you set a new value to an empty / not hydrated mapper, you create a virtual field on it. This way you can add some aggregate functions to your query:
+
+``` php
+$scores = new Scores();
+$scores->sum_score = 'SUM(score)';
+$scores->avg_score = 'AVG(score)';
+$scores->load(null,array('group'=>'player_id'));
+echo $scores->sum_score; // returns the sum of all scores made by player_id
+echo $scores->avg_score; // returns the avarage score of that player
+```
 
 ### get
 
@@ -94,15 +179,16 @@ $mapper->cast([ object $obj = NULL ]); bool
 **Build query string and execute**
 
 ``` php
-$mapper->select( string $fields, [ array $filter = NULL],[ array $options = NULL ],[ int $ttl = 0 ]); array
+$mapper->select( string $fields, [ string|array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
 ```
+
 
 ### find
 
 **Return records that match criteria**
 
 ``` php
-$mapper->find([ array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
+$mapper->find([ string|array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
 ```
 
 
