@@ -44,6 +44,8 @@ string $whereClause
 array( string $whereClause, [ string $bindValue1 ], [ string $bindValue2 ], [...] )
 ```
 
+#### Parameterized Queries
+
 It is recommended to use parameterized queries for all where conditions that may include user input data.
 In example with positional parameters:
 
@@ -63,6 +65,14 @@ array(
 <div class="alert alert-info">
 Notice: You cannot use a named parameter more than once in a query. Due to a PDO limitation you need to create <code>:user1</code> and <code>:user2</code> with same value.
 </div>
+
+#### Search
+
+When you use a `LIKE` operator in your where condition, notice that the `%` wildcards do not belong into the where creteria, but goes into the bind parameter like this:
+
+```php
+$user->find(array('email LIKE ?','%gmail%')); // returns all users with an email adress at GMAIL
+```
 
 ### $option
 
