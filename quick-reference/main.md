@@ -384,8 +384,17 @@ Repeat `text-block` as many times as there are elements in the array variable `@
     </default>
 </switch>
 ```
-
 Equivalent of the PHP switch-case jump table structure.
+
+### Set
+
+``` html
+<!-- set some variables -->
+<set foo="{{ 1+2 }}" bar="{{ @foo+3 }}" baz="xyz" />
+<!-- set an array -->
+<set myarray="{{ array('a','b','c') }}" />
+```
+Used to set some variables dynamically within the template.
 
 ## API Documentation
 
