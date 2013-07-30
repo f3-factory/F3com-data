@@ -24,15 +24,71 @@ The constructor also has a 2nd argument, the `$flag` option. Setting it to `TRUE
 
 ## Processing
 
-### rgb
 ### invert
+**Invert image**
+
+``` php
+$img->invert();
+```
+
 ### brightness
+**Adjust brightness**
+
+``` php
+$img->brightness( int $level );
+```
+
+`$level` range: -255 to 255
+
 ### contrast
+**Adjust contrast**
+
+``` php
+$img->contrast( int $level );
+```
+
+`$level` range: -100 to 100
+
+
 ### grayscale
+**Convert to grayscale**
+
+``` php
+$img->grayscale();
+```
+
+
 ### smooth
+**Adjust smoothness**
+
+``` php
+$img->smooth( int $level);
+```
+`$level` range: -8 to 8, but as its been used for a matrix operation, greater values are applyable too, but may lead to unusable results.
+
 ### emboss
+**Emboss the image**
+
+``` php
+$img->emboss();
+```
+
 ### sepia
+**Apply sepia effect**
+
+``` php
+$img->sepia();
+```
+
 ### pixelate
+**Pixelate the image**
+
+``` php
+$img->pixelate( int $size );
+```
+
+`$size` is the block size of a pixel, usually range: 0 - 100
+
 ### blur
 ### sketch
 ### hflip
@@ -49,6 +105,13 @@ The constructor also has a 2nd argument, the `$flag` option. Setting it to `TRUE
 ## Info
 ### width
 ### height
+### rgb
+**Convert RGB hex triad to array**
+
+``` php
+$img->rgb( 0xFF0033 ); // returns array( 255, 0, 51 );
+```
+
 
 ## Output
 ### render
