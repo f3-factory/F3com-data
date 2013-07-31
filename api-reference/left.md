@@ -1,6 +1,6 @@
 **Framework Core**
 
-- [Base] (base/)
+- [Base] (base)
 - [Cache](cache)
 - [Prefab & Registry](prefab-registry)
 - [View](view)
@@ -28,4 +28,4 @@
 
 - [Web](web)
 - [Geo](geo)
-- and so on...
+- [Image](image)
