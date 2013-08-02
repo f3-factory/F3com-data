@@ -68,10 +68,10 @@ Notice: You cannot use a named parameter more than once in a query. Due to a PDO
 
 #### Search
 
-When you use a `LIKE` operator in your where condition, notice that the `%` wildcards do not belong into the where creteria, but goes into the bind parameter like this:
+When you use a `LIKE` operator in your where condition, notice that the `%` wildcards do not belong into the where criteria, but goes into the bind parameter like this:
 
 ```php
-$user->find(array('email LIKE ?','%gmail%')); // returns all users with an email adress at GMAIL
+$user->find(array('email LIKE ?','%gmail%')); // returns all users with an email address at GMAIL
 ```
 
 ### $option
