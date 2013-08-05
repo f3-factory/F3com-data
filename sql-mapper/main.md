@@ -66,6 +66,18 @@ array(
 Notice: You cannot use a named parameter more than once in a query. Due to a PDO limitation you need to create <code>:user1</code> and <code>:user2</code> with same value.
 </div>
 
+##### User-specified data type
+
+To force a bind value to be a specific PDO type, use the following syntax:
+
+``` php
+array(
+    'prize > :prize and active = 1',
+    ':prize' => array(123, \PDO::PARAM_INT)
+    )
+```
+
+
 #### Search
 
 When you use a `LIKE` operator in your where condition, notice that the `%` wildcards do not belong into the where criteria, but goes into the bind parameter like this:
