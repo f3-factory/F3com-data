@@ -3,7 +3,7 @@
 Welcome to the API documentation. It's intended as a feature reference to give you more detailed information about working with F3.
 You can also find many working examples in [the framework unit tests](https://github.com/bcosca/fatfree/tree/dev/app).
 
-<div class="row-fluid pb25">
+<div class="row-fluid pb25 ref">
     <div class="span6">
         <h3>Framework Core</h3>
         <a class="label" href="base">Base</a>
