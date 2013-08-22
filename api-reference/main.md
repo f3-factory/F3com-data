@@ -26,7 +26,7 @@ You can also find many working examples in [the framework unit tests](https://gi
     <div class="span6">
         <h3>Templating</h3>
         <a class="label" href="markdown">Markdown</a>
-        <span class="label" title="available soon">Template</span>
+        <a class="label" href="template">Template</a>
 
         <h3>Web Services</h3>
         <span class="label" title="available soon">Geo</span>
