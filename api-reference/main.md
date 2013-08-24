@@ -40,7 +40,7 @@ You can also find many working examples in [the framework unit tests](https://gi
         <span class="label" title="available soon">Auth</span>
         <span class="label" title="available soon">Basket</span>
         <a class="label" href="image">Image</a>
-        <span class="label" title="available soon">Log</span>
+        <a class="label" href="log">Log</a>
         <span class="label" title="available soon">Matrix</span>
         <span class="label" title="available soon">Session</span>
         <span class="label" title="available soon">Test</span>
