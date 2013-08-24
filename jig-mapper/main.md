@@ -76,7 +76,7 @@ Info: You can use all common comparision operators in your condition and a singl
 
 #### Search
 
-The best way to search in Jig is to use some `preg_match` condtions:
+The best way to search in Jig is to use some `preg_match` conditions:
 
 ```php
 $userList = $user->find(array('(isset(@email) && preg_match(?,@email))','/gmail/'));
