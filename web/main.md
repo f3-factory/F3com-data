@@ -303,7 +303,7 @@ $result = \Web::instance()->request($url, $options);
 Upload a file via PUT request.
 
 ``` php
-$f3 = \Base__instance();
+$f3 = \Base::instance();
 $web = \Web::instance();
 
 $url = 'http://www.mydomain.com/upload/';
