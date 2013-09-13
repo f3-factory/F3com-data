@@ -130,6 +130,7 @@ $web->receive(function($file){
             return false; // this file is not valid, return false will skip moving it
 
         // everything went fine, hurray!
+        return true; // allows the file to be moved from php tmp dir to your defined upload dir
     },
     $overwrite,
     $slug
