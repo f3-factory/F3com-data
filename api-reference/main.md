@@ -37,7 +37,7 @@ You can also find many working examples in [the framework unit tests](https://gi
 
         <h3>Misc</h3>
         <span class="label" title="available soon">Audit</span>
-        <span class="label" title="available soon">Auth</span>
+        <a class="label" href="auth">Auth</span>
         <span class="label" title="available soon">Basket</span>
         <a class="label" href="image">Image</a>
         <a class="label" href="log">Log</a>
