@@ -235,8 +235,8 @@ See what other users have made with F3.
             <td><a class="btn btn-info" href="https://github.com/uonick/fatfree-snippets" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>F3-Template Directives auto completion for PHPStorm / WebStorm IDE</td>
-            <td><a class="btn btn-info" href="https://gist.github.com/ikkez/4960231" target="_blank">view</a></td>
+            <td>Fat-Free Framework snippets for PHPStorm / WebStorm IDE</td>
+            <td><a class="btn btn-info" href="https://github.com/ikkez/F3-PhpStorm-Snippets" target="_blank">view</a></td>
         </tr>
         <tr>
             <td>Powered by F3 - Logos for your Website</td>
