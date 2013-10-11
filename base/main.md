@@ -896,7 +896,7 @@ After processing the incoming request URI (initiated by [run](base#run)), you'll
 
 <div class="alert alert-info">
     <b>Notice:</b> Routes and their according verbs are grouped by their url pattern. Static routes precedes routes with dynamic tokens or wildcards.
-    This means that having a static route, which overloads a matching dynamic route, requires you to define all required VERB pattern to this specific route seperatly. 
+    This means that having a static route, which overloads a matching dynamic route, requires you to define all required VERB pattern to this specific route separately. 
 </div>
 
 ##### Wildcards
