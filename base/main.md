@@ -894,6 +894,11 @@ $f3->route('GET /image/@width-@height/@file','ImageCompressor->render'); // /ima
 
 After processing the incoming request URI (initiated by [run](base#run)), you'll find the value of each of those tokens in the `PARAMS` system variable as named key, like `$f3->get('PARAMS.page')`.
 
+<div class="alert alert-info">
+    <b>Notice:</b> Routes and their according verbs are grouped by their url pattern. Static routes precedes routes with dynamic tokens or wildcards.
+    This means that having a static route, which overloads a matching dynamic route, requires you to define all required VERB pattern to this specific route seperatly. 
+</div>
+
 ##### Wildcards
 
 You can also define wildcards (`/*`) in your routing URI. You can also use them in combination with `@`-tokens.
