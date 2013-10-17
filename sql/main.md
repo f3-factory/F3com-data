@@ -239,3 +239,37 @@ Mon, 27 May 2013 00:59:57 +0200 (0.3ms) INSERT INTO mytable(name) VALUES('Don')
 Mon, 27 May 2013 00:59:57 +0200 (0.2ms) INSERT INTO mytable(name) VALUES('Elliott')
 ```
 
+### uuid
+
+**Returns unique connection identifier hash**
+
+``` php
+$db->uuid(); string
+```
+
+### type
+
+**Map data type of argument to a PDO constant**
+
+``` php
+$db->type( scalar $val ); int
+```
+
+### quote
+
+**Quote string**
+
+``` php
+$db->quote( string $val, [ int $type = \PDO::PARAM_STR ]); string
+```
+
+
+### quotekey
+
+**Returns quoted identifier name**
+
+``` php
+$db->quotekey( string $key ); string
+```
+
+This quotes a table or column key name, based on the current database engine. E.g in quotes `page` to `"page"` in sqlite.

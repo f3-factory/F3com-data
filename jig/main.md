@@ -26,7 +26,9 @@ $db=new \DB\Jig(string $dir, [ int $format = \DB\Jig::FORMAT_JSON ] );
 * `\DB\Jig::FORMAT_JSON` which stores data in JSON format.
 * `\DB\Jig::FORMAT_Serialized` which serializes data. Depending on the [SERIALIZER](quick-reference#serializer) system variable, data is stored using the standard PHP serialization format, the igbinary format or JSON.
 
-## Write
+## Methods
+
+### write
 
 ```php
 $db->write(string $file, array $data); int
@@ -45,7 +47,7 @@ $lineup=array(
 echo $db->write('lineup',$lineup); // outputs 160
 ```
 
-## Read
+### read
 
 ```php
 $db->read(string $file); array
@@ -58,9 +60,9 @@ $data=$db->read('lineup');
 echo $data['Robert']['birth']; // outputs 48 (cf. above)
 ```
 
-## Drop
+### drop
 
-This methods erases all the data stored in the current directory.
+**erases all the data stored in the storage directory**
 
 ```php
 $db=new \DB\Jig('jig/'); // jig/ is empty
@@ -69,3 +71,34 @@ $db->write('file2.dat',$data2); // jig/ contains file1.dat and file2.dat
 $db->drop(); // jig/ is empty
 ```
 
+### dir
+
+**Returns database storage directory**
+
+```php
+$db->dir(); string
+```
+
+### jot
+
+**jot down log entry**
+
+```php
+$db->jot( string $frame ); null
+```
+
+### log
+
+**Returns Jig profiler results**
+
+```php
+$db->log(); string
+```
+
+### uuid
+
+**Returns unique connection identifier hash**
+
+```php
+$db->uuid(); string
+```

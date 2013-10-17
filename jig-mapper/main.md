@@ -86,6 +86,18 @@ $userList = $user->find(array('(isset(@email) && preg_match(?,@email))','/gmail/
 // starts with john  => /^john/
 ```
 
+The equivalent of a SQL `IN` operator goes like this:
+
+```php
+$user->find(array('in_array('_id',array(1,2,3))'));
+```
+
+If your document uses an array field, i.e. tags, you can find all posts by tag with just switching the in_array parameters: 
+
+```php
+$post->find(array('isset(@tags) && in_array("fat-free",@tags)'));
+```
+
 ### $option
 
 The `$option` argument for Jig accepts the following structure:

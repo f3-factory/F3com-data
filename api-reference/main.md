@@ -14,7 +14,7 @@ You can also find many working examples in [the framework unit tests](https://gi
 
         <h3>Database</h3>
         <a class="label" href="jig">Jig</a>
-        <span class="label" title="available soon">Mongo</span>
+        <a class="label" href="mongo">Mongo</a>
         <a class="label" href="sql">SQL</a>
 
         <h3>Data Mapper</h3>
