@@ -35,7 +35,7 @@ $options=array(
 $db=new \DB\SQL('mysql:host=localhost;port=3306;dbname=mysqldb','username','password',$options);
 ```
 
-This is a list of links to DNS connection details of all currently supported engines in the the SQL layer:
+This is a list of links to DSN connection details of all currently supported engines in the the SQL layer:
 
   * [mysql](http://www.php.net/manual/en/ref.pdo-mysql.php): MySQL 5.x
   * [sqlite](http://www.php.net/manual/en/ref.pdo-sqlite.connection.php): SQLite 3 and SQLite 2
