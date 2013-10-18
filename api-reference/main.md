@@ -19,8 +19,9 @@ You can also find many working examples in [the framework unit tests](https://gi
 
         <h3>Data Mapper</h3>
         <a class="label" href="cursor">Cursor</a>
+        <span class="label" title="available soon">Basket</span>
         <a class="label" href="jig-mapper">Jig Mapper</a>
-        <span class="label" title="available soon">Mongo Mapper</span>
+        <a class="label" href="mongo-mapper">Mongo Mapper</a>
         <a class="label" href="sql-mapper">SQL Mapper</a>
     </div>
     <div class="span6">
@@ -38,7 +39,7 @@ You can also find many working examples in [the framework unit tests](https://gi
         <h3>Misc</h3>
         <span class="label" title="available soon">Audit</span>
         <a class="label" href="auth">Auth</a>
-        <span class="label" title="available soon">Basket</span>
+        <span class="label" title="available soon">Bcrypt</span>
         <a class="label" href="image">Image</a>
         <a class="label" href="log">Log</a>
         <span class="label" title="available soon">Matrix</span>
