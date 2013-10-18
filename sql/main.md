@@ -35,7 +35,15 @@ $options=array(
 $db=new \DB\SQL('mysql:host=localhost;port=3306;dbname=mysqldb','username','password',$options);
 ```
 
-To see the list of available SQL drivers as well as the syntax and options specific to each of them, [go here](http://www.php.net/manual/en/pdo.drivers.php).
+This is a list of links to DNS connection details of all currently supported engines in the the SQL layer:
+
+  * [mysql](http://www.php.net/manual/en/ref.pdo-mysql.php): MySQL 5.x
+  * [sqlite](http://www.php.net/manual/en/ref.pdo-sqlite.connection.php): SQLite 3 and SQLite 2
+  * [pgsql](http://www.php.net/manual/en/ref.pdo-pgsql.connection.php): PostgreSQL
+  * [sqlsrv](http://www.php.net/manual/en/ref.pdo-sqlsrv.connection.php): Microsoft SQL Server / SQL Azure
+  * [mssql, dblib, sybase](http://www.php.net/manual/en/ref.pdo-dblib.connection.php): FreeTDS / Microsoft SQL Server / Sybase
+  * [odbc](http://www.php.net/manual/en/ref.pdo-odbc.connection.php): ODBC v3
+  * [oci](http://www.php.net/manual/en/ref.pdo-oci.connection.php): Oracle
 
 ## Methods
 
