@@ -102,7 +102,7 @@ $f3->clear('ERROR');  // clear any errors
 `Tip:` If you have a route defined with token parameters, i.e. /test/@name, you can test that route by setting a value for the token in the mock command, and access that value during testing from F3's PARAMS assoc array
 
 ``` php
-$f3->mock('GET /test/steve); 
+$f3->mock('GET /test/steve'); 
 $f3->run();
 $name = $f3->get('PARAMS["name"]');
 $test->expect(
