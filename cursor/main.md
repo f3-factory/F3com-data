@@ -208,7 +208,7 @@ array(4) {
 
 ```
 
-The `subset` is the array ob mapper objects, `total` is the sum of all records for all pages,
+The `subset` is the array of mapper objects returned from find(), `total` is the sum of all records for all pages,
 `count` is the number of records for the current page and `pos` gives you the current subset cursor position ( it's the page number - 1).
 
 
