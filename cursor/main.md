@@ -185,9 +185,10 @@ array(4) {
   ["subset"] => array(2) {
         [0] => mapper object, #ID: 1, title: iPhone 5S is coming
         [1] => mapper object, #ID: 2, title: Once upon a time
+        [2] => mapper object, #ID: 3, title: F3 for the win
       }
-  ["total"] => int(10)
-  ["count"] => float(5)
+  ["total"] => int(5)
+  ["count"] => float(3)
   ["pos"] => int(0)
 }
 */
@@ -196,16 +197,19 @@ $result = $mapper->paginate(1, 2);
 /*
 array(4) {
   ["subset"] => array(2) {
-        [0] => mapper object, #ID: 3, title: F3 for the win
-        [1] => mapper object, #ID: 4, title: untitled
+        [0] => mapper object, #ID: 4, title: Zyra is legendary
+        [1] => mapper object, #ID: 5, title: untitled
       }
-  ["total"] => int(10)
-  ["count"] => float(5)
+  ["total"] => int(5)
+  ["count"] => float(2)
   ["pos"] => int(1)
 }
 */
 
 ```
+
+The `subset` is the array ob mapper objects, `total` is the sum of all records for all pages,
+`count` is the number of records for the current page and `pos` gives you the current subset cursor position ( it's the page number - 1).
 
 
 ### save
