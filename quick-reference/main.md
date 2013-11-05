@@ -21,6 +21,12 @@ Auto-detected HTTP user agent, e.g. `Mozilla/5.0 (Linux; Android 4.2.2; Nexus 7)
 Search path for user-defined PHP classes that the framework will attempt to autoload at runtime. Accepts a pipe (`|`), comma (`,`), or semi-colon (`;`) as path separator.
 
 
+### BAIL
+**Type:** `bool`
+
+If TRUE, framework continues execution after a non-fatal error is detected (default).
+
+
 ### BASE
 **Type:** `string`
 
