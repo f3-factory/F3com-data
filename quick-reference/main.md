@@ -169,6 +169,12 @@ Callback function to use as custom error handler.
 Framework name.
 
 
+### PATH
+**Type:** `string`
+
+The URL relative to BASE
+
+
 ### PARAMS
 **Type:** `array`
 
