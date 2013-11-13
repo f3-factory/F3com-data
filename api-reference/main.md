@@ -39,12 +39,12 @@ You can also find many working examples in [the framework unit tests](https://gi
         <h3>Misc</h3>
         <span class="label" title="available soon">Audit</span>
         <a class="label" href="auth">Auth</a>
-        <span class="label" title="available soon">Bcrypt</span>
+        <a class="label" href="bcrypt">Bcrypt</a>
         <a class="label" href="image">Image</a>
         <a class="label" href="log">Log</a>
         <span class="label" title="available soon">Matrix</span>
         <span class="label" title="available soon">Session</span>
-        <span class="label" title="available soon">Test</span>
+        <a class="label" href="test">Test</a>
         <span class="label" title="available soon">UTF8</span>
 
     </div>
