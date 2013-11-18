@@ -30,7 +30,7 @@ You can also find many working examples in [the framework unit tests](https://gi
         <a class="label" href="template">Template</a>
 
         <h3>Web Services</h3>
-        <span class="label" title="available soon">Geo</span>
+        <a class="label" href="geo">Geo</a>
         <span class="label" title="available soon">OpenID</span>
         <span class="label" title="available soon">PingBack</span>
         <span class="label" title="available soon">SMTP</span>
@@ -42,7 +42,7 @@ You can also find many working examples in [the framework unit tests](https://gi
         <a class="label" href="bcrypt">Bcrypt</a>
         <a class="label" href="image">Image</a>
         <a class="label" href="log">Log</a>
-        <span class="label" title="available soon">Matrix</span>
+        <a class="label" href="matrix">Matrix</a>
         <span class="label" title="available soon">Session</span>
         <a class="label" href="test">Test</a>
         <span class="label" title="available soon">UTF8</span>
