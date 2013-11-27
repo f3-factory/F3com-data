@@ -137,7 +137,7 @@ $web->receive(function($file){
 );
 ```
 <div class="alert alert-info">
-    <b>Notice:</b> Having trouble to get this working? Don't forget to set the <b>enctype="multipart/form-data"</b> attribute in your <b>&lt;form&gt;</b> tag.
+    <b>Notice:</b> Having trouble to get this working? Don't forget to set the <b>enctype="multipart/form-data"</b> attribute in your <b><form></b> tag.
 </div>
 
 A callback can also be another function or class method. Have a look at the [call()](base#call) function description to see all possibilities.
@@ -359,6 +359,36 @@ $tags = array('title', 'link', 'pubDate'); // Default: NULL (all tags)
 Web::instance()->rss('http://example.org/feed.rss', $count, $tags);
 ```
 
+### whois
+
+**Retrieve information from whois server**
+
+``` php
+$web->whois( string $addr, [ string $server = 'whois.internic.net']); string | false
+```
+
+example:
+
+``` php
+echo $web->whois('fatfreeframework.com');
+
+/* returns:
+Whois Server Version 2.0
+
+Domain names in the .com and .net domains can now be registered
+with many different competing registrars. Go to http://www.internic.net
+for detailed information.
+
+   Domain Name: FATFREEFRAMEWORK.COM
+   Registrar: INTERNETWORX LTD. & CO. KG
+   Whois Server: whois.domrobot.com
+   Referral URL: http://www.domrobot.com
+   Name Server: NS.INWX.DE
+   Name Server: NS2.INWX.DE
+   Name Server: NS3.INWX.EU
+...
+*/
+```
 
 
 ### slug
@@ -376,4 +406,21 @@ Furthermore, it is designed to remove all non-alphanumeric characters and conver
 ```php
 echo Web::instance()->slug('ĤÈĹĹŌ'); // returns: HELLO
 echo Web::instance()->slug('Ein schöner Artikel über Max & John'); // returns: ein-schoner-artikel-uber-max-john
+```
+
+### filler
+
+**Return chunk of text from standard Lorem Ipsum passage**
+
+``` php
+$web->filler([ int $count = 1], [ int $max = 20], [ bool $std = TRUE ]); string
+```
+
+This function might be useful to fill your empty layout with some placeholder text. Therefore `$count` controls the number of sentences being created with a randomly amount of words between 3 and `$max`. The `$std` var triggers if the first sentence will always be a fixed default text with a length of 124 chars.
+
+``` php
+echo $web->filler(3,5,false);
+/* returns 3 random sentences, with a maximum of 5 words, like this:
+Iste corporis aut. Exercitationem corporis rem harum repellat. Cupiditate eligendi debitis.'
+*/
 ```
