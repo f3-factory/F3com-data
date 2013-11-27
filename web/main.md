@@ -101,7 +101,7 @@ $web->send('data/documents.zip', $mime, $throttle);
 **Receive and process files from a client sent via PUT or POST.**
 
 ``` php
-$web->receive([ callback $func = NULL ], [ bool $overwrite = FALSE], [ bool $slug = TRUE ]); int | false
+$web->receive([ callback $func = NULL ], [ bool $overwrite = FALSE], [ bool $slug = TRUE ]); array | false
 ```
 
 This function fetches the user uploaded file(s) and move it into a directory, specified in [UPLOADS](quick-reference#uploads) system var. It returns `true` on success.
@@ -114,7 +114,7 @@ $f3->set('UPLOADS','uploads/'); // don't forget to set an Upload directory, and 
 $overwrite = false; // set to true, to overwrite an existing file; Default: false
 $slug = true; // rename file to filesystem-friendly version
 
-$web->receive(function($file){
+$files = $web->receive(function($file){
         var_dump($file);
         /* looks like:
           array(5) {
@@ -125,6 +125,8 @@ $web->receive(function($file){
               ["size"] =>     int(172245)
             }
         */
+        // $file['name'] already contains the slugged name now
+
         // maybe you want to check the file size
         if($file['size'] > (2 * 1024 * 1024)) // if bigger than 2 MB
             return false; // this file is not valid, return false will skip moving it
