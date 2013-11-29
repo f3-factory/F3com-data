@@ -43,7 +43,7 @@ You can also find many working examples in [the framework unit tests](https://gi
         <a class="label" href="image">Image</a>
         <a class="label" href="log">Log</a>
         <a class="label" href="matrix">Matrix</a>
-        <span class="label" title="available soon">Session</span>
+        <a class="label" href="session">Session</a>
         <a class="label" href="test">Test</a>
         <span class="label" title="available soon">UTF8</span>
 
