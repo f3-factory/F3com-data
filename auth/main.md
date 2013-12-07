@@ -6,7 +6,7 @@ File location: `lib/auth.php`
 
 ---
 
-## Instatiation
+## Instantiation
 ``` php
 $auth = new \Auth(string $storage, [ array $args = NULL ]);
 ```
@@ -36,7 +36,7 @@ Currently available authentication storages are:
 $auth->login(string $id, string $pw, [ string $realm = NULL ]);
 ```
 
-The `login()` is the core method of the Auth class.  By passing login credentials to it, it will authenticate the user against the given authentication storage.
+The `login()` is the core method of the Auth class. By passing login credentials to it, it will authenticate the user against the given authentication storage.
 
 Example:
 
@@ -58,7 +58,7 @@ The `basic()` method provides an alternative way to authenticate users. In this 
 
 You can manipulate the password by passing a method to `$func` before it's being compared with the password stored in the storage.
 
-By setting `$halt` to `FALSE` you surpress a `401 Unauthorized` error on unsuccessful login and the method will just return `FALSE`.
+By setting `$halt` to `FALSE` you suppress the `401 Unauthorized` error on unsuccessful login and the method will just return `FALSE`.
 
 ``` php
 $db = new \DB\SQL('mysql:host=localhost;dbname=project1', 'root', 'topsecret123');
