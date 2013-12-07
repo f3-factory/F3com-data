@@ -24,13 +24,13 @@ The Markdown class uses the [Prefab](prefab-registry) factory wrapper, so you ca
 $md->convert( string $txt ); string
 ```
 
-You can pass single lines of Markdown to the method.
+You can pass a string containing Markdown to the method:
 
 ```php
 Markdown::instance()->convert('**Bold text**'); // <strong>Bold text</strong>
 ```
 
-Or a file with containing Markdown syntax
+Or a path to a file containing Markdown syntax:
 
 ```php
 $md = Markdown::instance();
