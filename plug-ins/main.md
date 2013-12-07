@@ -18,13 +18,13 @@ $img->captcha('fonts/CoolFont.ttf',16,5,'SESSION.captcha_code');
 $img->render();
 ```
 
-This example generates a random image based on your desired TrueType font. The `fonts/` folder is a subfolder within application's `UI` path. The second parameter indicates the font size, and the third argument defines the number of hexadecimal characters to generate.
+This example generates a random image based on your desired TrueType font. The `fonts/` folder is a subfolder within application's `UI` path. The second parameter indicates the font size (a 2x magnification process is performed, i.e. a size of 16 will produce an image of around 32 pixels height), and the third parameter defines the number of hexadecimal characters to generate.
 
-The last argument represents an F3 variable name. This is where F3 will store the string equivalent of the CAPTCHA image. To make the string reload-safe, we specified a session variable: `SESSION.captcha_code` which maps to `$_SESSION['captcha_code']`, which you can use later to verify whether the input element in the form submitted matches this string.
+The last parameter represents an F3 variable name. This is where F3 will store the string equivalent of the CAPTCHA image. To make the string reload-safe, we specified a session variable: `SESSION.captcha_code` which maps to `$_SESSION['captcha_code']`, which you can use later to verify whether the input element in the form submitted matches this string.
 
 ### Image Processing
 
-The image plugin also provides additional processing features for scale, crop and overlay images, or adjusting brightness, contrast and many more. Please have a look to the [Image Class API reference](/image/) for additional features description.
+The image plugin also provides additional processing features for scale, crop and overlay images, or adjusting brightness, contrast and many more. Please have a look to the [Image Class API reference](/image) for additional features description.
 
 
 
