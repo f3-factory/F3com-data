@@ -1,6 +1,6 @@
 # Base
 
-The Base class represents the framework core. It contains everything you need to run a simple application. The file `base.php` also includes the essential [Cache](cache), [Prefab](prefab-registry), [View](view), [ISO](iso) and [Registry](registry) classes to reduce unnecessary disk I/O for optimal performance.
+The Base class represents the framework core. It contains everything you need to run a simple application. The file `base.php` also includes the essential [Cache](cache), [Prefab](prefab-registry), [View](view), [ISO](iso) and [Registry](prefab-registry#registry) classes to reduce unnecessary disk I/O for optimal performance.
 
 Feel free to remove all other files in the `lib/`-directory, if all you need are the basic features provided by this package.
 
