@@ -6,7 +6,7 @@ File location: `lib/image.php`
 
 ---
 
-## Instatiation
+## Instantiation
 
 ``` php
 $img = new Image([ string $file = NULL ], [ bool $flag = FALSE ], [ string $path = '' ]);
