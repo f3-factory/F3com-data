@@ -1,5 +1,5 @@
 # Web
-The Web class (and its descendants, [Geo](geo) and [Pingback](pingback)) contains several helpers to interact with HTTP clients and servers.
+The Web class (and its descendants, [Geo](geo) and [Pingback](#pingback)) contains several helpers to interact with HTTP clients and servers.
 
 Namespace: `\` <br/>
 File location: `lib/web.php`
