@@ -7,7 +7,7 @@ File location: `lib/test.php`
 ---
 
 
-### Instatiation
+### Instantiation
 
 ``` php
 $test=new Test($level);
