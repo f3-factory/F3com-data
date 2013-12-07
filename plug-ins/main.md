@@ -24,7 +24,7 @@ The last argument represents an F3 variable name. This is where F3 will store th
 
 ### Image Processing
 
-The image plugin also provides additional processing features for scale, crop and overlay images, or adjusting brightness, contrast and many more. Please have a look to the [Image Class API reference](image) for additional features description.
+The image plugin also provides additional processing features for scale, crop and overlay images, or adjusting brightness, contrast and many more. Please have a look to the [Image Class API reference](/image) for additional features description.
 
 
 
