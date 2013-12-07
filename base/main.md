@@ -69,7 +69,7 @@ It is also possible to set php globals using GET, POST, COOKIE or SESSION.
 
 <div class="alert alert-info"><strong>Notice:</strong> If you set or access a key of SESSION, the session gets started automatically. There's no need for you to do it by yourself.</div>
 
-The framework has its own [system variables] (system-variables). You can change them using set() to modify a framework behaviour, for example
+The framework has its own [system variables] (quick-reference#system-variables). You can change them using set() to modify a framework behaviour, for example
 
 ``` php
 $f3->set('CACHE', TRUE);
