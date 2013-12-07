@@ -47,7 +47,7 @@ F3 maintains its own symbol table for framework and application variables, which
 
 * You can use framework variables directly in your templates.
 * You don't have to instruct PHP to reference a variable outside the current scope using a global keyword inside each function or method. All F3 variables are global to your application.
-* Setting the Fat-Free equivalent of a PHP global like `SESSION` also changes PHP's underlying `$_SESSION`. Altering the latter also alters the framework counterpart.
+* Setting the Fat-Free equivalent of a PHP global like `SESSION` also changes PHP's underlying `$_SESSION`. Altering the later also alters the framework counterpart.
 
 Fat-Free does not maintain just a dumb storage for variables and their values. It can also automate session management and other things. Assigning or retrieving a value through F3's `SESSION` variable auto-starts the session. If you use `$_SESSION` (or session-related functions) directly, instead of the framework variable `SESSION`, your application becomes responsible for managing sessions.
 
@@ -57,7 +57,7 @@ There are several predefined global variables used internally by Fat-Free, and y
 
 The framework has several variables to help you keep your files and directory structures organized. We've seen how we can automate class loading by using the `AUTOLOAD`. There's a `UI` global variable, which contains the path pointing to the location of your HTML views/templates. `DEBUG` is another variable you'll be using quite often during application development and it's used for setting the verbosity of error traces.
 
-Refer to the [Quick Reference](quick-reference) if you need a comprehensive list of built-in framework variables.
+Refer to the [Quick Reference](quick-reference) for a comprehensive list of built-in framework variables.
 
 ## Naming Rules
 
@@ -222,7 +222,7 @@ Instead of lengthy `$f3->set()` statements in your code, you can instruct the fr
 $f3->config('setup.cfg');
 ```
 
-String values need not be quoted, unless you want leading or trailing spaces included. If a comma should be treated as part of a string, enclose the string using double-quotes - otherwise, the value will be treated as an array (the comma is used as an array element separator). Strings can span multiple lines:
+String values need not be quoted, unless you want leading or trailing spaces included. If a comma should be treated as part of a string, enclose the string using double-quotes - otherwise, the value will be treated as an array (the comma is used as an array element separator). Strings can span over several lines:
 
 ``` ini
 [globals]
