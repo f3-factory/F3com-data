@@ -39,7 +39,7 @@ $test->expect(
 );
 
 // This test should succeed
-$test->expect
+$test->expect(
     is_string($hello),
     'Return value is a string'
 );
@@ -66,19 +66,19 @@ Save it in a file called `test.php`. This way we can preserve the integrity of `
 Now here's the meat of our unit testing process.
 
 For each test you want to run, call the `expect()` method of the `Test` class.
-`expect()` has 2 arguments.
-1st arg `test` is the test to be run. This needs to be a simple test that will result in a Pass or Fail condition. ex: $i==1
-2nd arg `text` is the text to be displayed for this test, when test results are displayed . ex: "input equals numeric 1".
+`expect()` has 2 arguments.  
+1st arg `test` is the test to be run. This needs to be a simple test that will result in a Pass or Fail condition. ex: `$i==1`  
+2nd arg `text` is the text to be displayed for this test, when test results will be displayed. ex: "input equals numeric 1".
 
 When the tests are run, F3's built-in `Test` class will keeps track of the result of each `expect()` method call. 
 The output of each `$test->expect()` call is saved in a multi-dimensional array named `results` with the keys 
-   `text` (mirroring argument 2 of `expect()`), 
-   `status` (boolean representing the result of a test), 
+   `text` (mirroring argument 2 of `expect()`),  
+   `status` (boolean representing the result of a test),  
    `source` (file name/line number of the specific test to aid in debugging).
 
 At the end of your test, you can iterate through this multidim array, print the text of the test, and then print the status of the test (`true` if the test passed, `false` if the test failed, and include the source file and line for debugging)
 
-Fat-Free gives you the freedom to display test results in any way you want. You can have the output in plain text or even a nice-looking HTML template, by rendering a temaplte file that interates through the $test->results() array. 
+Fat-Free gives you the freedom to display test results in any way you want. You can have the output in plain text or even a nice-looking HTML template, by rendering a template file that interates through the $test->results() array. 
 
 
 So how do we run our unit test? If you saved `test.php` in the document root folder, you can just open your browser and specify the address `http://localhost/test.php`. That's all there is to it.

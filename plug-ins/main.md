@@ -2,7 +2,7 @@
 
 ## About F3 Plug-Ins
 
-Plug-ins are nothing more than autoloaded classes that use framework built-ins to extend F3's features and functionality. If you'd like to contribute, leave a note at the Fat-Free Discussion Area hosted by Google Groups or tell us about it in the FreeNode `#fatfree` IRC channel. Someone else might be involved in a similar project. The framework community will appreciate it a lot if we unify our efforts.
+Plug-ins are nothing more than autoloaded classes that use framework built-ins to extend F3's features and functionality. If you'd like to contribute, leave a note at [the Fat-Free Discussion Area](https://groups.google.com/forum/#!forum/f3-framework) hosted by Google Groups or tell us about it in the FreeNode `#fatfree` IRC channel. Someone else might be involved in a similar project. The framework community will appreciate it a lot if we unify our efforts.
 
 
 
@@ -18,13 +18,13 @@ $img->captcha('fonts/CoolFont.ttf',16,5,'SESSION.captcha_code');
 $img->render();
 ```
 
-This example generates an random image based on your desired TrueType font. The `fonts/` folder is a subfolder within application's `UI` path. The second parameter indicates the font size, and the third argument defines the number of hexadecimal characters to generate.
+This example generates a random image based on your desired TrueType font. The `fonts/` folder is a subfolder within application's `UI` path. The second parameter indicates the font size (a 2x magnification process is performed, i.e. a size of 16 will produce an image of around 32 pixels height), and the third parameter defines the number of hexadecimal characters to generate.
 
-The last argument represents an F3 variable name. This is where F3 will store the string equivalent of the CAPTCHA image. To make the string reload-safe, we specified a session variable: `SESSION.captcha_code` which maps to `$_SESSION['captcha_code']`, which you can use later to verify whether the input element in the form submitted matches this string.
+The last parameter represents an F3 variable name. This is where F3 will store the string equivalent of the CAPTCHA image. To make the string reload-safe, we specified a session variable: `SESSION.captcha_code` which maps to `$_SESSION['captcha_code']`, which you can use later to verify whether the input element in the form submitted matches this string.
 
 ### Image Processing
 
-The image plugin also provides additional processing features for scale, crop and overlay images, or adjusting brightness, contrast and many more. Please have a look to the [Image Class API reference](image) for additional feature description.
+The image plugin also provides additional processing features for scale, crop and overlay images, or adjusting brightness, contrast and many more. Please have a look to the [Image Class API reference](/image) for additional features description.
 
 
 
@@ -41,7 +41,7 @@ $logger->write('User John logged in.');
 
 ## Markdown
 
-Convert your favorite [Markdown](http://en.wikipedia.org/wiki/Markdown) text to HTML.
+Convert your favorite [Markdown (Wikipedia)](http://en.wikipedia.org/wiki/Markdown) text to HTML.
 
 ``` php
 $filePath = 'content/readme.md';
@@ -65,7 +65,7 @@ $request=$web->request('http://www.google.com/');
 $request=Web::instance()->request('http://www.google.com/');
 ```
 
-This simple example sends an HTTP request to the page located at www.google.com and stores it in the `$request` PHP variable. The `request()` method returns an array containing the HTTP response such that `$request['headers']` and `$request['body']` represent the response headers and body, respectively. We could have saved the contents using the F3::set command, or echo'ed the output directly to our browser. Retrieving another HTML page on the net may not have any practical purpose. But it can be particularly useful in ReSTful applications, like querying a CouchDB server.
+This simple example sends an HTTP request to the page located at www.google.com and stores it in the `$request` PHP variable. The `request()` method returns an array containing the HTTP response such that `$request['headers']` and `$request['body']` represent the response headers and body, respectively. We could have saved the contents using the F3::set command, or echo'ed the output directly to the browser. Retrieving another HTML page from the net may not have any practical purpose. But it can be particularly useful in ReSTful applications, like querying a CouchDB server.
 
 ``` php
 $host='localhost:5984';
