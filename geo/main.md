@@ -24,7 +24,7 @@ The Geo class uses the [Prefab](prefab-registry) factory wrapper, so you can gra
 ``` php
 $geo->tzinfo( string $zone); array
 ```
-This method accepts any available timezone string, which can be found here [http://php.net/manual/en/timezones.php](http://php.net/manual/en/timezones.php). In example:
+This method accepts any available timezone string, which can be found here [http://php.net/manual/en/timezones.php](http://php.net/manual/en/timezones.php). For example:
 
 ``` php
 /** @var \Web\Geo $geo */
