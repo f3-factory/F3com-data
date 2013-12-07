@@ -125,18 +125,18 @@ The `request()` method can also be used in complex SOAP or XML-RPC applications,
 
 There are many more Plug-Ins available for F3. Have a look into their API Reference to get more information about them.
 
-* [Audit](audit)
+* [Audit](#audit)
 * [Auth](auth)
-* [Basket](basket)
+* [Basket](#basket)
 * [Image](image)
 * [Log](log)
 * [Markdown](markdown)
-* [SMTP](smtp)
+* [SMTP](#smtp)
 * [Template](template)
 * [Test](test)
 * [Web](web)
 * [Geo](geo)
-* [OpenID](openid)
-* [PingBack](pingback)
+* [OpenID](#openid)
+* [PingBack](#pingback)
 
 Still haven't found what you're looking for? Maybe you'll find it in the [User Contributed Plug-Ins](development#user-plugins) section.
