@@ -65,7 +65,7 @@ $request=$web->request('http://www.google.com/');
 $request=Web::instance()->request('http://www.google.com/');
 ```
 
-This simple example sends an HTTP request to the page located at www.google.com and stores it in the `$request` PHP variable. The `request()` method returns an array containing the HTTP response such that `$request['headers']` and `$request['body']` represent the response headers and body, respectively. We could have saved the contents using the F3::set command, or echo'ed the output directly to the browser. Retrieving another HTML page from the net may not have any practical purpose. But it can be particularly useful in [ReSTful](http://fatfreeframework.com/routing-engine#representational-state-transfer-(rest) ) applications, like querying a CouchDB server.
+This simple example sends an HTTP request to the page located at www.google.com and stores it in the `$request` PHP variable. The `request()` method returns an array containing the HTTP response such that `$request['headers']` and `$request['body']` represent the response headers and body, respectively. We could have saved the contents using the F3::set command, or echo'ed the output directly to the browser. Retrieving another HTML page from the net may not have any practical purpose. But it can be particularly useful in ReSTful applications, like querying a CouchDB server.
 
 ``` php
 $host='localhost:5984';
