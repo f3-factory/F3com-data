@@ -1114,7 +1114,7 @@ function c($n) {
 $f3->relay( array|string $funcs, [ mixed $args = NULL ]); array
 ```
 
-This method invokes callback in succession like [chain](chain) but applies the result of the first function as argument of the succeeding function, i.e.:
+This method invokes callback in succession like [chain](#chain) but applies the result of the first function as argument of the succeeding function, i.e.:
 
 ``` php
 echo $f3->relay('a; b; c', 0);
@@ -1143,7 +1143,7 @@ function c($n) {
 $f3->mutex( string $id, callback $func, [ mixed $args = NULL ]); mixed
 ```
 
-A [Mutual Exclusion](http://en.wikipedia.org/wiki/Mutual_exclusion)(mutex) is a cross-platform mechanism for synchronizing access to resources, in such a way that a process that has acquired the mutex gains exclusive access to the resource. Other processes trying to acquire the same mutex will be in a suspended state until the mutex is released.
+A [Mutual Exclusion (mutex)](http://en.wikipedia.org/wiki/Mutual_exclusion)(Wikipedia) is a cross-platform mechanism for synchronizing access to resources, in such a way that a process that has acquired the mutex gains exclusive access to the resource. Other processes trying to acquire the same mutex will be in a suspended state until the mutex is released.
 
 ``` php
 $f3->mutex('test',function() {
