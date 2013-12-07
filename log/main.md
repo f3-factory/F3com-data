@@ -6,7 +6,7 @@ File location: `lib/log.php`
 
 ---
 
-### Instatiation
+### Instantiation
 
 You can create a new Logger object and specify a log file like this:
 
