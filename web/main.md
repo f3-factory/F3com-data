@@ -139,7 +139,7 @@ $files = $web->receive(function($file){
 );
 ```
 <div class="alert alert-info">
-    <b>Notice:</b> Having trouble to get this working? Don't forget to set the <b>enctype="multipart/form-data"</b> attribute in your <b><form></b> tag.
+    <b>Notice:</b> Having trouble to get this working? Don't forget to set the <b>enctype="multipart/form-data"</b> attribute in your <b>&lt;form&gt;</b> tag.
 </div>
 
 A callback can also be another function or class method. Have a look at the [call()](base#call) function description to see all possibilities.
