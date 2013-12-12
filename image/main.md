@@ -205,7 +205,7 @@ The `$size` argument defines the width and height of the resulting image. `$bloc
 $img->captcha( string $font, [ int $size = 24 ], [ int $len = 5 ], [ string|bool $key = NULL], [ string $path='' ]);
 ```
 
-This renders a captcha image. Please have a look to this [user guide section about rendering captcha images](plug-ins#captcha-images), to see a little example.
+This renders a captcha image. Please have a look to this [user guide section about rendering captcha images](plug-ins#captcha-images), to see a little example. Length parameter should be min 5 max 23. 
 If your font file is not located in an `UI` directory, you can the set its location with the `$path` argument.
 
 ## Info
