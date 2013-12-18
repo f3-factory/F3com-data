@@ -88,6 +88,45 @@ An important point to consider: You will get Fat-Free (and yourself) confused if
 Another thing: Fat-Free sees `GET /brew` as separate and distinct from the route
 `GET /brew/@count`. Each can have different route handlers.
 
++
+ +### Named Routes
+ +
+ +When you define a route, you can assign it a name. Use the route name in your code and templates instead of a typed url. Then if you need to change your urls to please the marketing overlords, you only need to make the change where the route was defined. The route names must follow php variable naming rules (no dots, dashes nor hyphens).
+ +
+ +Let's name a route:-
+ +
+ +``` php
+ +$f3->route('GET @beer_list : /beer', 'Beer->list');
+ +```
+ +
+ +The name is inserted after the route VERB (GET) preceeded by an @symbol, and separated from the URL portion by a colon symbol. You can insert a space around the colon if that makes it easier to read your code (as shown here).
+ +
+ +To access the named route in a template, get the value of the named route as the key of the ALIASES hive array:-
+ +
+ +``` html
+ +<a href="{{@ALIASES.beer_list}}">view beer list</a>
+ +```
+ +
+ +To redirect the visitor to a new URL, call the named route inside the reroute function:-
+ +
+ +``` php
+ +$f3->reroute('@beer_list'); // note the single quotes, named route will be rendered as a string value
+ +```
+ +
+ +If you use tokens in your route, F3 will replace those tokens with their current value. If you want to change the token's value before calling reroute, pass it as the 2nd argument.:-
+ +
+ +``` php
+ +$f3->route('GET @beer_list : /beer/@country', 'Beer->list');
+ +// ...
+ +$f3->reroute('@beer_list(@country=Germany)'); // a set of name=value vars is passed as arg to named route
+ +// if more than 1 token needed
+ +$f3->reroute('@beer_list(@country=Germany,@village=Rhine)');
+ +```
+ +
+ +
+ +
+ +
+
 ## Dynamic Web Sites
 
 Wait a second - in all the previous examples, we never really created any directory in our hard
