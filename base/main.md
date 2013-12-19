@@ -84,7 +84,7 @@ Hive keys are case-sensitive. Root hive keys are checked for validity against th
 **Retrieve contents of hive key**
 
 ``` php
-$f3->get( string $key, [ string|array $args = NULL ]);mixed
+$f3->get( string $key, [ string|array $args = NULL ]); mixed
 ```
 
 to get a previously saved framework var, use:
@@ -184,7 +184,7 @@ If the 2nd argument `$add` is `false`, it just returns the read-only hive key co
 
 ### exists
 
-**Return TRUE if hive key is not empty, or timestamp and TTL if cached**
+**Return TRUE if hive key is not set, or timestamp and TTL if cached**
 
 ``` php
 $f3->exists( string $key ); bool
@@ -208,6 +208,26 @@ $f3->exists('POST.submit');
 The exists function also checks the Cache backend storage, if the key was not found in the hive. If the key was found in cache, it returns `array($timestamp,$ttl)`.
 
 <div class="alert alert-info"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
+
+### devoid
+
+**Return TRUE if hive key is empty and not cached**
+
+``` php
+$f3->devoid( string $key ); bool
+```
+
+Usage:
+
+``` php
+$f3->set('foo','');
+$f3->set('bar',array());
+$f3->set('baz',array(),10);
+
+$f3->devoid('foo'); // true
+$f3->devoid('bar'); // true
+$f3->devoid('baz'); // false
+```
 
 ### clear
 
@@ -468,6 +488,30 @@ Array
 */
 ```
 
+
+### merge
+
+**Merge array with hive array variable**
+
+``` php
+$f3->merge( string $key, string $src ); array
+```
+
+Example:
+
+``` php
+$f3->set('foo',array('blue','green'));
+$f3->merge('foo', array('red', 'yellow'));
+/* foo is now:
+array (size=4)
+  0 => string 'blue' (length=4)
+  1 => string 'green' (length=5)
+  2 => string 'red' (length=3)
+  3 => string 'yellow' (length=6)
+*/
+```
+
+
 ---
 
 ## Encoding & Conversion
@@ -516,10 +560,11 @@ Array
 **Convert PHP expression/value to compressed exportable string**
 
 ``` php
-$f3->stringify( mixed $arg ); string
+$f3->stringify( mixed $arg, [ bool $detail = TRUE ]); string
 ```
 
-<!-- testing tocify vs reserved words -->
+The `$detail` parameter controls whether to walk recursive into nested objects or not.
+
 ### csv
 
 **Flatten array values and return as CSV string**
@@ -639,19 +684,19 @@ echo $f3->decode("&amp;sect;9: convert symbols &amp;amp; umlauts like &amp;auml;
 // §9: convert symbols &amp; umlauts like ä ü ö welcome!
 ```
 
-### scrub
+### clean
 
 **Remove HTML tags (except those enumerated) and non-printable characters to mitigate XSS/code injection attacks**
 
 ``` php
-$f3->scrub( mixed &$var, [ string $tags=NULL ]); string
+$f3->clean( mixed $var, [ string $tags = NULL ]); string
 ```
 
 Example:
 
 ``` php
 $foo = "99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>";
-echo $f3->scrub($foo); // 99 bottles of beer on the wall. alert(1);
+echo $f3->clean($foo); // 99 bottles of beer on the wall. alert(1);
 echo $foo // 99 bottles of beer on the wall. alert(1);
 ```
 
@@ -659,69 +704,21 @@ You can also define a list of allowed html tags, that will not be removed:
 
 ``` php
 $foo = "<h1><b>nice</b> <span>news</span> article <em>headline</em></h1>";
-$f3->scrub($foo,'h1,span');
+$f3->clean($foo,'h1,span');
 // <h1>nice <span>news</span> article headline</h1>
 ```
 
 <div class="alert alert-info">It is recommended to use this function to sanitize submitted form input.</div>
 
-### esc
 
-**Encode characters to equivalent HTML entities**
+### scrub
 
-``` php
-$f3->esc( mixed $arg ); string
-```
-
-Usage:
+**Similar to clean(), except that variable is passed by reference**
 
 ``` php
-echo $f3->esc("99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>");
-// 99 bottles of &amp;lt;b&amp;gt;beer&amp;lt;/b&amp;gt; on the wall. &amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;
+$f3->scrub( mixed &$var, [ string $tags = NULL ]); string
 ```
 
-This also works with arrays and object properties:
-
-``` php
-$myArray = array('<b>foo</b>',array('<script>alert(1)</script>'),'key'=>'<i>foo</i>');
-print_r($f3->esc($myArray));
-/*
-    [0] => &amp;lt;b&amp;gt;foo&amp;lt;/b&amp;gt;
-    [1] => Array
-        (
-            [0] => &amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;
-        )
-    [key] => &amp;lt;i&amp;gt;foo&amp;lt;/i&amp;gt;
-*/
-
-$myObj = new stdClass();
-$myObj->title = '<h1>Hello World</h1>';
-var_dump($f3->esc($myObj));
-/*
-    object(stdClass)#23 (1) {
-      ["title"] => string(32) "&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;"
-    }
-*/
-```
-
-<div class="alert alert-info">If the system var <b>ESCAPE</b> is turned on (it is by default), then every hive key access using a template token like <b>{{@myContent}}</b> automatically get escaped by this function. If this is not desired, look into the <a href="template">template</a> section for further post processors.</div>
-
-### raw
-
-**Decode HTML entities to equivalent characters**
-
-``` php
-$f3->raw( mixed $arg ); string
-```
-
-Example:
-
-``` php
-$f3->raw("99 bottles of &amp;lt;b&amp;gt;beer&amp;lt;/b&amp;gt; on the wall. &amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;");
-// 99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>
-```
-
-This method also handles nested array elements and objects properties, like `$f3->esc()` does too.
 
 ### serialize
 
@@ -781,6 +778,7 @@ Current supported types are:
 * number,integer
 * number,currency
 * number,percent
+* number,decimal
 * plural
 
 ``` php
@@ -792,6 +790,8 @@ echo $f3->format('Price: {0,number,currency}',29.90);
 //outputs the string 'Price: $29.90'
 echo $f3->format('Percentage: {0,number,percent}',0.175);
 //outputs the string 'Percentage: 18%' //Note that the percentage is rendered as an integer
+echo $f3->format('Decimal Number: {0,number,decimal,2}', 0.171231235);
+//outputs the string 'Decimal Number: 0,17'
 ```
 
 The **plural** type syntax is a bit more complex since it allows you to relate the output to the input quantity. The accepted keywords are *zero*, *one*, *two* and *other*.
@@ -809,7 +809,7 @@ echo $f3->format($string,3);//outputs the string 'There are 3 items in your cart
 **Assign/auto-detect language**
 
 ``` php
-$f3->language([ string $code = NULL ]); string
+$f3->language( string $code ); string
 ```
 
 This function is used while booting the framework to auto-detect the possible user language, by looking at the HTTP request headers, specifically the Accept-Language header sent by the browser.
@@ -844,6 +844,22 @@ A dictionary file can be a php file returning a key-value paired associative arr
 
 ## Routing
 
+### build
+
+**Replace tokenized URL with current route's token values**
+
+``` php
+$f3->build( string $url); string
+```
+
+Example:
+
+``` php
+// for instance you called `/channel/@channel` with PARAMS.channel = fatfree
+echo $f3->build('/subscribe/@channel');
+// return `/subscribe/fatfree`
+```
+
 ### mock
 
 **Mock HTTP request**
@@ -852,11 +868,20 @@ A dictionary file can be a php file returning a key-value paired associative arr
 $f3->mock( string $pattern , [ array $args = NULL ], [ array $headers = NULL ], [ string $body = NULL]); null
 ```
 
-Fires a HTTP request.
+This emulates a HTTP request.
 
 ``` php
 $f3->mock('GET /page/view');
 ```
+
+### parse
+
+**Parse string containing key-value pairs and use as routing tokens**
+
+``` php
+$f3->parse( string str); NULL
+```
+
 
 ### route
 
@@ -1172,6 +1197,14 @@ $f3->read( string $file, [ bool $lf = FALSE ]); string
 $f3->write( string $file, mixed $data, [ bool $append = FALSE ]); int|FALSE
 ```
 
+### rel
+
+**Return path relative to the base directory**
+
+``` php
+$f3->rel( string $url ); string
+```
+
 ---
 
 ## Misc
@@ -1282,7 +1315,7 @@ $f3->status(415); // Sends 415 Unsupported media type
 **Execute framework/application shutdown sequence**
 
 ``` php
-$f3->unload(); null
+$f3->unload( string $cwd ); null
 ```
 
 This will shutdown the application and calls the shutdown handler defined in [UNLOAD](quick-reference#unload).
