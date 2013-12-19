@@ -42,7 +42,7 @@ $view->render(string $file , [ string $mime = 'text/html' ], [ array $hive = NUL
     <strong>Note:</strong><br>
     The <code>$mime</code> argument is responsible for generating the proper auto-generated <code>Content-type</code> header.
     <br>
-    If no data hive is provided, the global F3 hive is used.
+    If no data <code>$hive</code> is provided, the global F3 hive is used.
 </div>
 
 Here's how to use it in your route handler using the F3 hive:
@@ -117,3 +117,77 @@ echo $view->render('myview.csv','text/csv',array('urls'=>$urls));
 <?php echo $url;?>
 <?php endforeach;?>
 ```
+
+## Methods
+
+### dupe
+
+**Attempt to clone object**
+
+``` php
+$view->dupe( object $arg ); object
+```
+
+The View is rendered within a sandbox that contains a copy of the whole hive data. The each hive key gets encoded by [esc()](view#esc) to ensure a clean an secure way of rendering your data into the view.
+Therefor the dupe method tries to clone any object in the hive and encode the copy instead. This way the objects data retains consistently in the hive for any further processing after rendering a view. Otherwise the original object becomes encodes too, because PHP always passes references of objects.
+This attempt of cloning objects just works for PHP >= 5.4.0.
+
+
+### esc
+
+**Encode characters to equivalent HTML entities**
+
+``` php
+$view->esc( mixed $arg ); string
+```
+
+Usage:
+
+``` php
+echo $view->esc("99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>");
+// 99 bottles of &amp;lt;b&amp;gt;beer&amp;lt;/b&amp;gt; on the wall. &amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;
+```
+
+This also works with arrays and object properties:
+
+``` php
+$myArray = array('<b>foo</b>',array('<script>alert(1)</script>'),'key'=>'<i>foo</i>');
+print_r($view->esc($myArray));
+/*
+    [0] => &amp;lt;b&amp;gt;foo&amp;lt;/b&amp;gt;
+    [1] => Array
+        (
+            [0] => &amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;
+        )
+    [key] => &amp;lt;i&amp;gt;foo&amp;lt;/i&amp;gt;
+*/
+
+$myObj = new stdClass();
+$myObj->title = '<h1>Hello World</h1>';
+var_dump($view->esc($myObj));
+/*
+    object(stdClass)#23 (1) {
+      ["title"] => string(32) "&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;"
+    }
+*/
+```
+
+<div class="alert alert-info">If the system var <b>ESCAPE</b> is turned on (it is by default), then every hive key access using a template token like <b>{{@myContent}}</b> automatically get escaped by this function. If this is not desired, look into the <a href="template">template</a> section for further post processors.</div>
+
+
+### raw
+
+**Decode HTML entities to equivalent characters**
+
+``` php
+$view->raw( mixed $arg ); string
+```
+
+Example:
+
+``` php
+$view->raw("99 bottles of &amp;lt;b&amp;gt;beer&amp;lt;/b&amp;gt; on the wall. &amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;");
+// 99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>
+```
+
+This method also handles nested array elements and objects properties, like `$view->esc()` does too.
