@@ -52,4 +52,4 @@ You can also find extensive working examples in the [source code of the framewor
 </div>
 
 
-The framework API documentation is also contained in `lib/api/index.html` of the distribution package. F3 uses [Doxygen](http://www.stack.nl/~dimitri/doxygen/ "Doxygen is a tool for generating documentation from annotated source code") to generate the documentation in HTML format.
+The framework API documentation is also contained in the distribution package, at `lib/api/index.html` . F3 uses [Doxygen](http://www.stack.nl/~dimitri/doxygen/ "Doxygen is a tool for generating documentation from annotated source code") to create basic reference documentation in HTML format from comments in the F3 source files.
