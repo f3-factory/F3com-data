@@ -7,7 +7,7 @@ There's no better time to start developing Web applications the easy way than ri
 	Download the latest release
 </a>
 
-Or grab the [nightly build](https://github.com/bcosca/fatfree/archive/dev.zip). See the version
+Or grab the [nightly build](https://github.com/bcosca/fatfree/archive/dev.zip "dev package @ GitHub"). See the version
 [changelog](https://github.com/bcosca/fatfree/blob/master/lib/changelog.txt) and
 [system requirements](system-requirements) for additional information.
 

@@ -5,7 +5,7 @@
 Our first example wasn't too hard to swallow, was it? If you like a little more flavor in your
 Fat-Free soup, insert another route before the `$f3->run()` command:
 
-``` php
+```php
 $f3->route('GET /about',
     function() {
         echo 'Donations go to a local charity... us!';
@@ -16,7 +16,7 @@ $f3->route('GET /about',
 You don't want to clutter the global namespace with function names? Fat-Free recognizes
 different ways of mapping route handlers to OOP classes and methods:
 
-``` php
+```php
 class WebPage {
     function display() {
         echo 'I cannot object to an object';
@@ -28,7 +28,7 @@ $f3->route('GET /about','WebPage->display');
 
 HTTP requests can also be routed to static class methods:
 
-``` php
+```php
 $f3->route('GET /login','Auth::login');
 ```
 
@@ -37,7 +37,7 @@ $f3->route('GET /login','Auth::login');
 As a demonstration of Fat-Free's powerful domain-specific language (DSL),
 you can specify a single route to handle different possibilities:
 
-``` php
+```php
 $f3->route('GET /brew/@count',
     function($f3) {
         echo $f3->get('PARAMS.count').' bottles of beer on the wall.';
@@ -64,7 +64,7 @@ whereas `@foo.bar` translates to `@foo['bar']`.
 
 Here's another way to access tokens in a request pattern:
 
-``` php
+```php
 $f3->route('GET /brew/@count',
     function($f3,$params) {
         echo $params['count'].' bottles of beer on the wall.';
@@ -75,7 +75,7 @@ $f3->route('GET /brew/@count',
 You can use the asterisk (`*`) to accept any URL after the `/brew` route - if you don't really
 care about the rest of the path:
 
-``` php
+```php
 $f3->route('GET /brew/*',
     function() {
         echo 'Enough beer! We always end up here.';
@@ -95,7 +95,7 @@ When you define a route, you can assign it a name. Use the route name in your co
 
 Let's name a route:-
 
-``` php
+```php
 $f3->route('GET @beer_list: /beer', 'Beer->list');
 ```
 
@@ -109,14 +109,14 @@ To access the named route in a template, get the value of the named route as the
 
 To redirect the visitor to a new URL, call the named route inside the `reroute()` method like:-
 
-``` php
+```php
 // a named route is a string value
 $f3->reroute('@beer_list'); // note the single quotes
 ```
 
 If you use tokens in your route, F3 will replace those tokens with their current value. If you want to change the token's value before calling reroute, pass it as the 2nd argument.:-
 
-``` php
+```php
 $f3->route('GET @beer_list: /beer/@country', 'Beer->bycountry');
 $f3->route('GET @beer_list: /beer/@country/@village', 'Beer->byvillage');
 
@@ -255,7 +255,7 @@ $HTTP["host"] =~ "www\.example\.com$" {
 So let's get back to coding. You can declare a page obsolete and redirect your visitors to
 another site:
 
-``` php
+```php
 $f3->route('GET|HEAD /obsoletepage',
     function($f3) {
         $f3->reroute('/newpage');
@@ -293,11 +293,11 @@ prefix because of the presence of the `@breed` token, displaying an `HTTP 404 No
 message programmatically becomes necessary when the program doesn't find any match in our
 database. To do that, use the following command:
 
-``` php
+```php
 $f3->error(404);
 ```
 
-## Representational State Transfer (ReST)
+## ReST: Representational State Transfer
 
 Fat-Free's architecture is based on the concept that HTTP URIs represent abstract Web resources
 (not limited to HTML) and each resource can move from one application state to another. For this
@@ -310,7 +310,7 @@ and implementing it is more straightforward.
 
 Here's an example of a ReST interface:
 
-``` php
+```php
 class Item {
     function get() {}
     function post() {}
@@ -326,7 +326,7 @@ $f3->run();
 Fat-Free's `$f3->map()` method provides a ReST interface by mapping HTTP methods in routes to
 the equivalent methods of an object or a PHP class. If your application receives an incoming
 HTTP request like `GET /cart/123`, Fat-Free will automatically transfer control to the object's
-or class' `get()` method. On the other hand, a `POST /cart/123` request will be routed to the
+or class' `get()` method. Similarly, a `POST /cart/123` request will be routed to the
 `Item` class' `post()` method.
 
 **Note:** Browsers do not implement the HTTP `PUT` and `DELETE` methods in regular HTML forms.
@@ -347,7 +347,7 @@ classes saved in different files and different locations. The framework can do t
 automatically for you. Just save your files (one class per file) in a folder and tell the
 framework to automatically load the appropriate file once you invoke a method in the class:
 
-``` php
+```php
 $f3->set('AUTOLOAD','autoload/');
 ```
 
@@ -357,7 +357,7 @@ organized and in different folders, you can instruct the framework to autoload t
 class when a static method is called or when an object is instantiated. Modify the `AUTOLOAD`
 variable this way:
 
-``` php
+```php
 $f3->set('AUTOLOAD','admin/autoload/; user/autoload/; default/');
 ```
 
@@ -372,7 +372,7 @@ it detects a `new Foo\BarBaz` statement in your application.
 so if you want the framework to autoload a PHP 5.3 namespaced class that's invoked in the
 following manner:
 
-``` php
+```php
 $f3->set('AUTOLOAD','autoload/');
 $obj=new Gadgets\iPad;
 ```
@@ -381,7 +381,7 @@ You can create a folder hierarchy that follows the same structure. Assuming `/va
 your Web root, then F3 will look for the class in `/var/www/html/autoload/gadgets/ipad.php`. The
 file `ipad.php` should have the following minimum code:
 
-``` php
+```php
 namespace Gadgets;
 class iPad {}
 ```
@@ -389,7 +389,7 @@ class iPad {}
 Remember: All directory names in Fat-Free must end with a slash. You can assign a search path
 for the autoloader as follows:
 
-``` php
+```php
 $f3->set('AUTOLOAD','main/;aux/');
 ```
 
@@ -398,7 +398,7 @@ $f3->set('AUTOLOAD','main/;aux/');
 F3, being a namespace-aware framework, allows you to use a method in namespaced class as a route
  handler, and there are several ways of doing it. To call a static method:
 
-``` php
+```php
 $f3->set('AUTOLOAD','classes/');
 $f3->route('GET|POST /','Main\Home::show');
 ```
@@ -409,7 +409,7 @@ loaded automatically.
 
 If you prefer to work with objects:
 
-``` php
+```php
 $f3->route('GET|POST /','Main\Home->show');
 ```
 
@@ -420,7 +420,7 @@ will instantiate the `Home` class at runtime and call the `show()` method therea
 F3 has a couple of routing event listeners that might help you improve the flow and structure of
 controller classes. Say you have a route defined as follows:
 
-``` php
+```php
 $f3->route('GET /','Main->home');
 ```
 
@@ -435,7 +435,7 @@ the method gets executed if it's defined.
 
 Here's another F3 goodie:
 
-``` php
+```php
 $f3->route('GET /products/@action','Products->@action');
 ```
 
@@ -445,7 +445,7 @@ route handler. F3 will then look for a class named `Products` and execute the `i
 
 Dynamic route handlers may have various forms:
 
-``` php
+```php
 // static method
 $f3->route('GET /public/@genre','Main::@genre');
 // object mode
@@ -460,7 +460,7 @@ or method associated with the current route, i.e. an undefined class or method.
 Routing patterns may contain modifiers that direct the framework to base its routing decision on
 the type of HTTP request:
 
-``` php
+```php
 $f3->route('GET /example [ajax]','Page->getFragment');
 $f3->route('GET /example [sync]','Page->getFull');
 ```

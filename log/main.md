@@ -1,16 +1,16 @@
 # Log
 This is the F3 custom Logger class.
 
-Namespace: `\` <br/>
-File location: `lib/log.php`
-
 ---
+
+Namespace: `\` <br>
+File location: `lib/log.php`
 
 ### Instantiation
 
 You can create a new Logger object and specify a log file like this:
 
-``` php
+```php
 $logger = new Log('error.log');
 ```
 
@@ -20,7 +20,7 @@ If the file and folder does not exist, the Logger tries to create them.
 ### write
 **Write specified text to log file**
 
-``` php
+```php
 $logger->write( string $text, [ string $format = 'r' ]);
 ```
 
@@ -30,6 +30,6 @@ The `$format` argument defines the date format that is going to be added to the 
 ### erase
 **erases the whole log file**
 
-``` php
+```php
 $logger->erase();
 ```

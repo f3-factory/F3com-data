@@ -12,7 +12,7 @@ Plug-ins are nothing more than autoloaded classes that use framework built-ins t
 
 There might be instances when you want to make your forms more secure against spam bots and malicious automated scripts. F3 provides a `captcha()` method to generate images with random text that are designed to be recognizable only by humans.
 
-``` php
+```php
 $img = new Image();
 $img->captcha('fonts/CoolFont.ttf',16,5,'SESSION.captcha_code');
 $img->render();
@@ -20,7 +20,14 @@ $img->render();
 
 This example generates a random image based on your desired TrueType font. The `fonts/` folder is a subfolder within application's `UI` path. The second parameter indicates the font size (a 2x magnification process is performed, i.e. a size of 16 will produce an image of around 32 pixels height). The third parameter defines the quantity of hexadecimal characters to generate, valid values between minimum of 4 and maximum of 13.
 
-The last parameter represents an F3 variable name. This is where F3 will store the string equivalent of the CAPTCHA image. To make the string reload-safe, we specified a session variable: `SESSION.captcha_code` which maps to `$_SESSION['captcha_code']`, which you can use later to verify whether the input element in the form submitted matches this string.
++dfdfdf  fd ffsd
++ sdsds df dd
+*dsdsd dfdsfsd
+* rfgfgf dfsdfd
+-retr rtrtr
+- rtrtr r trt r
+
+The last parameter represents a F3 variable name. Use it to store the string equivalent of the CAPTCHA image, in order to compare it with the user input. To make the string reload-safe, we specified a session variable: `SESSION.captcha_code` which maps to `$_SESSION['captcha_code']`, which you can use later to verify whether the input element in the form submitted matches this string.
 
 ### Image Processing
 
@@ -32,7 +39,7 @@ The image plugin also provides additional processing features for scale, crop an
 
 See how easy it is to create a custom Logger to save all your interesting application events.
 
-``` php
+```php
 $logger = new \Log('app-events.log');
 $logger->write('User John logged in.');
 ```
@@ -43,7 +50,7 @@ $logger->write('User John logged in.');
 
 Convert your favorite [Markdown (Wikipedia)](http://en.wikipedia.org/wiki/Markdown) text to HTML.
 
-``` php
+```php
 $filePath = 'content/readme.md';
 $fileContent = $f3->read($filePath); // read file contents
 
@@ -58,7 +65,7 @@ echo \Markdown::instance()->convert($fileContent);
 
 We've covered almost every feature available in the framework to run a stand-alone Web server. For most applications, these features will serve you quite well. But what do you do if your application needs data from another Web server on the network? F3 has the Web plugin to help you in this situation:
 
-``` php
+```php
 $web=new Web;
 $request=$web->request('http://www.google.com/');
 // another way to do it:
@@ -67,7 +74,7 @@ $request=Web::instance()->request('http://www.google.com/');
 
 This simple example sends an HTTP request to the page located at www.google.com and stores it in the `$request` PHP variable. The `request()` method returns an array containing the HTTP response such that `$request['headers']` and `$request['body']` represent the response headers and body, respectively. We could have saved the contents using the F3::set command, or echo'ed the output directly to the browser. Retrieving another HTML page from the net may not have any practical purpose. But it can be particularly useful in ReSTful applications, like querying a CouchDB server.
 
-``` php
+```php
 $host='localhost:5984';
 $web->request($host.'/_all_dbs'),
 $web->request($host.'/testdb/',array('method'=>'PUT'));
@@ -75,7 +82,7 @@ $web->request($host.'/testdb/',array('method'=>'PUT'));
 
 You may have noticed that you can pass an array of additional options to the `request()` method:
 
-``` php
+```php
 $web->request(
     'https://www.example.com:443?'.
     http_build_query(
@@ -104,7 +111,7 @@ Fat-Free will use whatever means are available on your Web server for the `reque
 
 F3 has a utility for sending files to an HTTP client, i.e. fulfilling download requests. You can use it to hide the real path to your download files. This adds some layer of security because users won't be able to download files if they don't know the file names and their locations. Here's how it's done:
 
-``` php
+```php
 $f3->route('GET /downloads/@filename',
     function($f3,$args) {
         // send() method returns FALSE if file doesn't exist

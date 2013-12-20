@@ -1,16 +1,15 @@
 # Markdown
-This is F3's own implementation of Markdown. Markdown is intended for writing human-readable text that can be converted to HTML afterwards. For more information and a full documentation of the syntax, please have a look at the [project homepage](http://daringfireball.net/projects/markdown/).
-
-Namespace: `\` <br/>
-File location: `lib/markdown.php`
+This is F3's own implementation of Markdown. Markdown is intended for writing human-readable text that can be converted to HTML afterwards. The goal of Markdown’s formatting syntax is to make it as readable as possible. For more information, please refer to the project website and the [Markdown Syntax Documentation](http://daringfireball.net/projects/markdown/syntax "Markdown Syntax Documentation on the project website").
 
 ---
+Namespace: `\` <br>
+File location: `lib/markdown.php`
 
 ### instance
 
-**Return class instance**
+**Return unique class instance**
 
-``` php
+```php
 $md = \Markdown::instance();
 ```
 
@@ -18,25 +17,22 @@ The Markdown class uses the [Prefab](prefab-registry) factory wrapper, so you ca
 
 
 ### convert
-** Render HTML equivalent of markdown **
+** Convert a given Markdown string to its equivalent HTML **
 
 ```php
-$md->convert( string $txt ); string
+$md->convert( string $txt ); // returns a HTML string
 ```
 
-You can pass a string containing Markdown to the method:
+The convert method accept a string containing Markdown syntax:
 
 ```php
-Markdown::instance()->convert('**Bold text**'); // <strong>Bold text</strong>
+echo Markdown::instance()->convert('**Bold text**'); // <strong>Bold text</strong>
 ```
 
-Or a path to a file containing Markdown syntax:
+The string can be an entire file containing Markdown syntax:
 
 ```php
-$md = Markdown::instance();
-$content = F3::instance()->read('my_file.md'); // returns the content as string
-
-$md->convert($content);
+$html = Markdown::instance()->convert(F3::instance()->read('my_file_full_of_markdown.md'));
 ```
 
 
