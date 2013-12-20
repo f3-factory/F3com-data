@@ -1,5 +1,5 @@
 # Auth
-The Auth class is used to authenticate against several storages.
+The Auth class is used to authenticate user credentials (username / password) against an access data list (stored in a database table, etc).
 
 Namespace: `\` <br>
 File location: `lib/auth.php`
@@ -11,7 +11,7 @@ File location: `lib/auth.php`
 $auth = new \Auth(string $storage [, array $args = NULL ]);
 ```
 
-You can map the class internal keys `id` and `pw` with your current storage structure. Given an example for F3's Jig:
+You can map the class internal keys `id` and `pw` with your data table field names (i.e. 'username' , 'password'). Given an example for F3's Jig (simple file-based db):
 
 ```php
 $db = new \DB\Jig('data/');
@@ -19,7 +19,7 @@ $db_mapper = new \DB\Jig\Mapper($db, 'users');
 $auth = new \Auth($db_mapper, array('id' => 'username', 'pw' => 'password'));
 ```
 
-Currently available authentication storages are:
+Currently available authentication storage resources are:
 
 * Jig
 * SQL
@@ -30,13 +30,13 @@ Currently available authentication storages are:
 ## Authenticating
 
 ### Login
-**Used to authenticate credentials against an authentication storage**
+**Used to test submitted credentials against an authentication data list**
 
 ``` php
 bool login ( string $id, string $pw [, string $realm = NULL ] )
 ```
 
-The `login()` is the core method of the Auth class. By passing login credentials to it, it will authenticate the user against the given authentication storage.
+The `login()` is the core method of the Auth class. By passing login credentials to it, it will authenticate the user against the auth objects authentication storage resource. Returns `true` on success, `false` on failure.
 
 Example:
 
@@ -44,26 +44,25 @@ Example:
 $db = new \DB\Jig('data/');
 $user = new \DB\Jig\Mapper($db, 'users');
 $auth = new \Auth($user, array('id'=>'user_id', 'pw'=>'password'));
-$auth->login('admin','secret'); // returns true on successful login
+$login_result = $auth->login('admin','secret_pwd'); // returns true on successful login
 ```
 
 ### Basic
 **HTTP basic authentication mechanism**
 
 ```php
-bool basic ( [ string $func = NULL [, bool $halt = TRUE ]] )
+bool basic ( [ string $func = NULL ] )
 ```
 
-The `basic()` method provides an alternative way to authenticate users. In this case the browser will display a login prompt to authenticate the user. 
+The `basic()` method provides a way to authenticate a user without using webpage forms. The browser will display a login dialog box, prompting the user to enter their username and password credentials.  
 
-You can manipulate the password by passing a method to `$func` before it's being compared with the password kept in the storage.
+`$func` is the name of a callback function that can be used to manipulate the submitted `password` before it is compared against the password kept in the data storage resource, for example if you hash your passwords before storing them in your database. The submitted password is passed to your callback function as an argument.
 
-By setting `$halt` to `FALSE` you suppress the `401 Unauthorized` error on unsuccessful login and the method will just return `FALSE`.
 
 ```php
 $db = new \DB\SQL('mysql:host=localhost;dbname=project1', 'root', 'topsecret123');
 $user = new \DB\SQL\Mapper($db, 'users');
 $auth = new \Auth($user, array('id'=>'user_id', 'pw'=>'password'));
-$auth->basic(); // a prompt will open up to authenticate the user
+$auth->basic(); // a network login prompt will display to authenticate the user
 ```
-
+![network login prompt](http://i.stack.imgur.com/QnUZW.png "Example of Network Login Prompt")
