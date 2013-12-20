@@ -2,7 +2,7 @@
 
 The Jig Object-Document-Mapper is an implementation of the abstract [Active Record Cursor class](cursor). Have a look into it for additional method descriptions.
 
-Namespace: `\DB\Jig` <br/>
+Namespace: `\DB\Jig` <br>
 File location: `lib/db/jig/mapper.php`
 
 ---
@@ -11,13 +11,13 @@ File location: `lib/db/jig/mapper.php`
 
 To use the Jig ODM, [create a valid Jig DB Connection](jig#constructor) and follow this example:
 
-``` php
+```php
 $mapper = new \DB\Jig\Mapper(\DB\Jig $db, string $file)
 ```
 
 If you like to create a model class, you might like to wrap it up:
 
-``` php
+```php
 $f3->set('DB',new DB\Jig('data/'));
 
 class User extends \DB\Jig\Mapper {
@@ -42,7 +42,7 @@ Notice: The primary key of Jig documents is named <code>_id</code>.
 
 The `$filter` argument for Jig accepts the following structure:
 
-``` php
+```php
 // array value for parameterized queries
 array( string $expr, [ string $bindValue1 ], [ string $bindValue2 ], [...] )
 ```
@@ -50,7 +50,7 @@ array( string $expr, [ string $bindValue1 ], [ string $bindValue2 ], [...] )
 The `$expr` part must contain a valid code expression, where all mapper fields are prefixed by a `@`-char. You can bind values to them with positional or named tokens.
 Here is an example:
 
-``` php
+```php
 // positional tokens
 array('@username = ? and @password = ?','John','acbd18db4cc2f85cedef654fccc4a4d8')
 // named tokens
@@ -63,7 +63,7 @@ array('@username = :user and @password = :pw',':user'=>'John',':pw'=>'acbd18db4c
 To create a valid `$expr` string, keep in mind to add additional field existence checks to prevent running into weird undefined variable errors.
 Adding some checks for that can be achieved easiely by adding some `isset` conditions:
 
-``` php
+```php
 array(
     '(isset(@username) && @username == ?) && (isset(@password) && @password = ?)',
     'John','acbd18db4cc2f85cedef654fccc4a4d8'
@@ -102,7 +102,7 @@ $post->find(array('isset(@tags) && in_array("fat-free",@tags)'));
 
 The `$option` argument for Jig accepts the following structure:
 
-``` php
+```php
 array(
     'order' => string $orderClause,
     'limit' => integer $limit,
@@ -112,7 +112,7 @@ array(
 
 i.e:
 
-``` php
+```php
 array(
     'order' => 'score SORT_DESC, team_name SORT_ASC',
     'limit' => 20,
@@ -126,7 +126,7 @@ array(
 
 **Return TRUE if field is defined**
 
-``` php
+```php
 $mapper->exists( string $key ); bool
 ```
 
@@ -135,14 +135,14 @@ $mapper->exists( string $key ); bool
 
 **Assign value to field**
 
-``` php
+```php
 $mapper->set( string $key, scalar $val ); scalar|FALSE
 ```
 
 This class also takes advantage from the Magic and ArrayAccess class implementation.
 This way you can also set and get variable with direct access like this:
 
-``` php
+```php
 $mapper->foo = 'bar';
 $mapper['foo'] = 'bar';
 ```
@@ -152,7 +152,7 @@ $mapper['foo'] = 'bar';
 
 **Retrieve value of field**
 
-``` php
+```php
 $mapper->get( string $key ); scalar|FALSE
 ```
 
@@ -161,7 +161,7 @@ $mapper->get( string $key ); scalar|FALSE
 
 **Clear value of field**
 
-``` php
+```php
 $mapper->clear( string $key ); NULL
 ```
 
@@ -170,7 +170,7 @@ $mapper->clear( string $key ); NULL
 
 **Return fields of mapper object as an associative array**
 
-``` php
+```php
 $mapper->cast([ object $obj = NULL ]); bool
 ```
 
@@ -179,7 +179,7 @@ $mapper->cast([ object $obj = NULL ]); bool
 
 **Convert tokens in string expression to variable names**
 
-``` php
+```php
 $mapper->token( string $str ); string
 ```
 
@@ -188,7 +188,7 @@ $mapper->token( string $str ); string
 
 **Return records that match criteria**
 
-``` php
+```php
 $mapper->find([ string|array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ], [ bool $log=TRUE ]); array
 ```
 
@@ -197,14 +197,14 @@ $mapper->find([ string|array $filter = NULL ],[ array $options = NULL ],[ int $t
 
 **Count records that match criteria**
 
-``` php
+```php
 $mapper->count([ string|array $filter = NULL ]); int
 ```
 
 ### insert
 **Insert new record**
 
-``` php
+```php
 $mapper->insert(); array
 ```
 
@@ -212,7 +212,7 @@ $mapper->insert(); array
 ### update
 **Update current record**
 
-``` php
+```php
 $mapper->update(); array
 ```
 
@@ -220,7 +220,7 @@ $mapper->update(); array
 ### erase
 **Delete current record**
 
-``` php
+```php
 $mapper->erase([ string|array $filter = NULL ]); int
 ```
 
@@ -228,7 +228,7 @@ $mapper->erase([ string|array $filter = NULL ]); int
 ### copyfrom
 **Hydrate mapper object using hive array variable**
 
-``` php
+```php
 $mapper->copyfrom( string $key ); NULL
 ```
 
@@ -236,7 +236,7 @@ $mapper->copyfrom( string $key ); NULL
 ### copyto
 **Populate hive array variable with mapper fields**
 
-``` php
+```php
 $mapper->copyto( string $key ); NULL
 ```
 

@@ -1,7 +1,7 @@
 # Matrix
 The matrix class offers some generic array utilities
 
-Namespace: `\` <br/>
+Namespace: `\` <br>
 File location: `lib/matrix.php`
 
 ---
@@ -10,7 +10,7 @@ File location: `lib/matrix.php`
 
 **Return class instance**
 
-``` php
+```php
 $matrix = \Matrix::instance();
 ```
 
@@ -19,13 +19,13 @@ The Matrix class uses the [Prefab](prefab-registry) factory wrapper, so you can 
 ### calendar
 **Return month calendar of specified date, with optional setting for first day of week (0 for Sunday)**
 
-``` php
+```php
 $matrix->calendar(string $date, [ int $first = 0 ]); array
 ```
 
 example:
 
-``` php
+```php
 $cal = $matrix->calendar('2001-09-11');
 /*
 array(
@@ -43,13 +43,13 @@ array(
 
 **Change the key of a two-dimensional array element**
 
-``` php
+```php
 $matrix->changekey(array &$var, string $old, string $new); null
 ```
 
 example:
 
-``` php
+```php
 $array=array(
   'id'=>array(456,123,345,234),
   'name'=>array('ringo','paul','george','john'),
@@ -68,13 +68,13 @@ array(
 
 **Retrieve values from a specified column of a multi-dimensional array variable**
 
-``` php
+```php
 $matrix->pick(array $var, mixed $col); array
 ```
 
 example:
 
-``` php
+```php
 $array=array(
   array('id'=>123,'name'=>'paul','sales'=>0.35),
   array('id'=>456,'name'=>'ringo','sales'=>0.13),
@@ -92,13 +92,13 @@ array('ringo','paul','george','john')
 
 **Sort a multi-dimensional array variable on a specified column**
 
-``` php
+```php
 $matrix->sort(array &$var, mixed $col, [ int $order=SORT_ASC ]); bool
 ```
 
 example:
 
-``` php
+```php
 $array=array(
   array('id'=>123,'name'=>'paul','sales'=>0.35),
   array('id'=>456,'name'=>'ringo','sales'=>0.13),
@@ -122,13 +122,13 @@ array(
 
 **Rotate a two-dimensional array variable**
 
-``` php
+```php
 $matrix->transpose(array &$var); null
 ```
 
 example:
 
-``` php
+```php
 $array=array(
   array('id'=>123,'name'=>'paul','sales'=>0.35),
   array('id'=>456,'name'=>'ringo','sales'=>0.13),

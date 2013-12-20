@@ -1,7 +1,7 @@
 # Web
 The Web class (and its descendants, [Geo](geo) and [Pingback](pingback)) contains several helpers to interact with HTTP clients and servers.
 
-Namespace: `\` <br/>
+Namespace: `\` <br>
 File location: `lib/web.php`
 
 ---
@@ -10,7 +10,7 @@ File location: `lib/web.php`
 
 **Return class instance**
 
-``` php
+```php
 $web = \Web::instance();
 ```
 
@@ -21,8 +21,8 @@ The Web class uses the [Prefab](prefab-registry) factory wrapper, so you can gra
 
 **Detect MIME type using file extension**
 
-``` php
-$web->mime( string $file ); string
+```php
+string mime ( string $file )
 ```
 
 Detects MIME type by comparing the file extension against a predefined array. Use this as a lightweight alternative to Fileinfo, which is not available on some server setups and would be more costly in terms of performance.
@@ -43,8 +43,8 @@ If an extension is not known to this method, it will return 'application/octet-s
 
 **Returns the list of acceptable MIME types of the browser.**
 
-``` php
-$web->acceptable([ string|array $list = NULL ]); array | string | false
+```php
+array|string|false acceptable ( [ string|array $list = NULL ] )
 ```
 
 It returns the MIME types stated by the browser in the HTTP Accept header as an array.
@@ -66,18 +66,16 @@ Array
 
 If a list of MIME types is specified, it returns the best match, or FALSE if none found.
 
-``` php
+```php
 $web->acceptable(array('application/xml','application/xhtml+xml')); // returns application/xhtml+xml
 ```
-
-
 
 ### send
 
 **Transmits a file to the client and returns the file size on success**
 
-``` php
-$web->send( string $file, [ string $mime = NULL ], [ int $kbps = 0 ], [ bool $force = TRUE ]); int | false
+```php
+int | false send ( string $file [, string $mime = NULL [, int $kbps = 0 [, bool $force = TRUE ]]] )
 ```
 
 The 2nd argument `$kbps` defines the throttle speed, measured in Kilobits per second, if you like to limit the download bandwidth for the user.
@@ -95,20 +93,19 @@ $mime = NULL; // let the framework detect the type
 $web->send('data/documents.zip', $mime, $throttle);
 ```
 
-
 ### receive
 
 **Receive and process files from a client sent via PUT or POST.**
 
-``` php
-$web->receive([ callback $func = NULL ], [ bool $overwrite = FALSE], [ bool $slug = TRUE ]); array | false
+```php
+array|false receive ( [ callback $func = NULL [, bool $overwrite = FALSE [, callback|bool $slug = TRUE ]]] )
 ```
 
 This function fetches the user uploaded file(s) and move it into a directory, specified in [UPLOADS](quick-reference#uploads) system var. It returns `true` on success.
 
 You can set an optional upload handler function to validate uploaded files, before moving them to their desired location. Lets have a look at this:
 
-``` php
+```php
 $f3->set('UPLOADS','uploads/'); // don't forget to set an Upload directory, and make it writable!
 
 $overwrite = false; // set to true, to overwrite an existing file; Default: false
@@ -156,19 +153,15 @@ Web::instance()->receive('callback', false, true);
     <b>Notice:</b> The callback function will be called for every successful upload if specified.
 </div>
 
-
-
 ### progress
 
 **Returns the progress of a file upload if `session.upload_progress.enabled` is set to `1` in the php.ini**
 
 ```php
-Web::instance()->progress( string $session_id ); int | false
+int|false Web::instance()->progress ( string $session_id )
 ```
 
 The `$session_id` is the "key" of the `$_SESSION` array and is necessary to retrieve the status of a specific user. Please read the [PHP Docs](http://php.net/manual/session.upload-progress.php) for more information.
-
-
 
 ### _curl
 Perform HTTP requests via cURL. It's a protected method and is used by `Web->request()`.
@@ -186,13 +179,12 @@ Perform a HTTP request on low-level via TCP/IP sockets. It's a protected method 
 Returns an array containing the content and the header.
 
 
-
 ### engine
 
 **Specify the HTTP request engine to use**
 
-``` php
-$web->engine([ string $arg = 'socket' ]); string
+```php
+string engine ( [ string $arg = 'socket' ] )
 ```
 
 Sets the engine to be used by `Web->request()`. If the selected engine is not available, it falls back to an applicable substitute.
@@ -210,18 +202,16 @@ Possible values are:
 
 **Replace old headers with new elements**
 
-``` php
-$web->subst( array &$old , string|array $new ); NULL
+```php
+NULL subst ( array &$old, string|array $new )
 ```
-
-
 
 ### request
 
 **Perform a HTTP request**
 
-``` php
-$web->request( string $url, [ array $options = NULL ]); array | false
+```php
+array|false request ( string $url [, array $options = NULL ] )
 ```
 
 You can use [HTTP context options](http://www.php.net/manual/en/context.http.php) to configure the request for your needs.
@@ -230,30 +220,30 @@ The requested page will be cached as instructed by the remote server.
 
 Returns an array containing the content and the header. For example, let us have a look at a simple GET request to download a remote file:
 
-``` php
-$result = \Web::instance()->request('http://www.golem.de/1303/98339-55766-i_rc.jpg');
-var_dump( $result );
+```php
+var_dump( \Web::instance()->request('http://www.golem.de/1303/98339-55766-i_rc.jpg' ));
 /* returns:
 
 array(4) {
-    ["body"] => string(7761) " IMAGE BINARY DATA "
-    ["headers"]=>
-        array(11) {
-          [0] =>  string(15) "HTTP/1.1 200 OK"
-          [1] =>  string(13) "Server: nginx"
-          [2] =>  string(35) "Date: Thu, 16 May 2013 06:00:33 GMT"
-          [3] =>  string(24) "Content-Type: image/jpeg"
-          [4] =>  string(20) "Content-Length: 7761"
-          [5] =>  string(17) "Connection: close"
-          [6] =>  string(44) "Last-Modified: Fri, 22 Mar 2013 09:41:02 GMT"
-          [7] =>  string(38) "Expires: Sun, 16 Jun 2013 06:00:33 GMT"
-          [8] =>  string(30) "Cache-Control: max-age=2678400"
-          [9] =>  string(19) "X-Cache-Status: HIT"
-          [10] => string(20) "Accept-Ranges: bytes"
-        }
-    ["engine"] => string(6) "socket"
-    ["cached"] => bool(false)
-}
+    'body' => string " IMAGE BINARY DATA " (length=7761)
+    'headers' => 
+        array (size=14)
+        0 => string 'HTTP/1.1 200 OK' (length=15)
+        1 => string 'Server: nginx' (length=13)
+        2 => string 'Date: Thu, 18 Dec 2013 12:40:11 GMT' (length=35)
+        3 => string 'Content-Type: image/jpeg' (length=24)
+        4 => string 'Content-Length: 7761' (length=20)
+        5 => string 'Connection: close' (length=17)
+        6 => string 'Keep-Alive: timeout=3' (length=21)
+        7 => string 'Last-Modified: Fri, 22 Mar 2013 09:41:02 GMT' (length=44)
+        8 => string 'ETag: "514c272e-1e51"' (length=21)
+        9 => string 'X-UPSTREAM: www1.golem.de' (length=25)
+        10 => string 'Expires: Sun, 18 Jan 2014 12:40:11 GMT' (length=38)
+        11 => string 'Cache-Control: max-age=2678400' (length=30)
+        12 => string 'X-Cache-Status: HIT' (length=19)
+        13 => string 'Accept-Ranges: bytes' (length=20)
+    'engine' => string 'cURL' (length=4)
+    'cached' => boolean false}
 */
 ```
 
@@ -267,7 +257,7 @@ Let's move on to some more advanced examples.
 
 Perform a GET request with URL parameters:
 
-``` php
+```php
 $url = 'http://www.mydomain.com/index.php';
 $params = array(
     'parameter1' => 'value1',
@@ -285,7 +275,7 @@ $result = \Web::instance()->request($url, $options);
 
 Perform a POST request with POST data.
 
-``` php
+```php
 $url = 'http://www.mydomain.com/index.php';
 
 $postVars = array(
@@ -305,7 +295,7 @@ $result = \Web::instance()->request($url, $options);
 
 Upload a file via PUT request.
 
-``` php
+```php
 $f3 = \Base::instance();
 $web = \Web::instance();
 
@@ -326,7 +316,7 @@ $result = $web->request($url, $options);
 
 **Minify CSS and Javascript files by stripping whitespaces and comments. Returns a combined output as a string.**
 
-``` php
+```php
 $web->minify( string|array $files,[ string $mime = NULL ], [ bool $header = TRUE ]); string
 ```
 
@@ -348,7 +338,7 @@ To learn more about `minify`, check the [User Guide](http://fatfreeframework.com
 
 **Parse RSS feed and optionally return an array of all tags.**
 
-``` php
+```php
 $web->rss( string $url, [ int $max = 10], [ string $tags = NULL ]); array | false
 ```
 
@@ -365,13 +355,13 @@ Web::instance()->rss('http://example.org/feed.rss', $count, $tags);
 
 **Retrieve information from whois server**
 
-``` php
+```php
 $web->whois( string $addr, [ string $server = 'whois.internic.net']); string | false
 ```
 
 example:
 
-``` php
+```php
 echo $web->whois('fatfreeframework.com');
 
 /* returns:
@@ -397,7 +387,7 @@ for detailed information.
 
 **Method to return a URL- and filesystem-friendly string.**
 
-``` php
+```php
 $web->slug( string $text); string
 ```
 
@@ -414,13 +404,13 @@ echo Web::instance()->slug('Ein schöner Artikel über Max & John'); // returns:
 
 **Return chunk of text from standard Lorem Ipsum passage**
 
-``` php
+```php
 $web->filler([ int $count = 1], [ int $max = 20], [ bool $std = TRUE ]); string
 ```
 
 This function might be useful to fill your empty layout with some placeholder text. Therefore `$count` controls the number of sentences being created with a randomly amount of words between 3 and `$max`. The `$std` var triggers if the first sentence will always be a fixed default text with a length of 124 chars.
 
-``` php
+```php
 echo $web->filler(3,5,false);
 /* returns 3 random sentences, with a maximum of 5 words, like this:
 Iste corporis aut. Exercitationem corporis rem harum repellat. Cupiditate eligendi debitis.'

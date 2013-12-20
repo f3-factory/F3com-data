@@ -4,14 +4,12 @@
 
 The Fat-Free Framework is an open source PHP framework, written by Bong Cosca in 2009.
 The philosophy behind the framework and its approach to software architecture is towards minimalism in structural components, avoiding application complexity and striking a balance between code elegance, application performance and programmer productivity.
-Out comes a full-featured toolkit for web artisans, that will make your daily work a lot easier, no matter if you're a beginner or expert.
+The Fat-Free PHP Framework is engineered specifically with usability and user experience as its primary design goals. Out comes a full-featured toolkit for web artisans, that will make your daily work a lot easier, no matter if you're a beginner or expert.
 
-**Now version 3.0 is finally here!**
+**Now version 3 is here!** &nbsp; &nbsp; &nbsp; [CHANGELOG.txt](https://github.com/bcosca/fatfree/blob/master/lib/changelog.txt)
 
-The latest official release marks a major milestone in the development of the Fat-Free Framework. Packed with exciting new features and outstanding documentation that took several months to develop and refine, version 3.0 is finally available for download. The code base has been rewritten from the ground up to provide enterprise-class architecture and performance but with the same user-friendly features and lightweight footprint.
-It is highly recommended that experienced users develop new applications with this version to take advantage of the latest features and significant improvements.
-
-
+The latest official release marks another major milestone in the development of the Fat-Free Framework. Packed with exciting new features and outstanding documentation that took several months to develop and refine, the new version is finally available for download. The code base has been rewritten from the ground up to provide enterprise-class architecture and performance but with the same user-friendly features and lightweight footprint.
+It is highly recommended that experienced users develop new applications with this version to take advantage of the latest features and the numerous significant improvements.
 
 ## Fair Licensing
 
@@ -49,10 +47,9 @@ If all you want is a zipball, grab it [**here**](https://github.com/bcosca/fatfr
 To file a bug report, visit [`https://github.com/bcosca/fatfree/issues`](https://github.com/bcosca/fatfree/issues).
 
 
-
 ## Community
 
-See what other users have made with F3.
+See what other users have made with F3:
 
 ### Projects Around F3
 
@@ -74,7 +71,7 @@ See what other users have made with F3.
         </tr>
         <tr>
             <td>F3 Boilerplate</td>
-            <td>boilerplate MVC website code using html5boilerplate</td>
+            <td>A F3 boilerplate MVC website skeleton. It's basically a skeleton web application you can use to learn the Fat-Free Framework and use as a base for your future projects.</td>
             <td><a href="https://github.com/vijinho" target="_blank">Vijay Mahrra</a></td>
             <td><a class="btn btn-info" href="https://github.com/vijinho/f3-boilerplate" target="_blank">view</a></td>
         </tr>
@@ -94,13 +91,13 @@ See what other users have made with F3.
             <td>selfoss</td>
             <td>selfoss: The new multipurpose rss reader, live stream, mashup, aggregation web application</td>
             <td><a href="https://github.com/SSilence" target="_blank">Tobias Zeising</a></td>
-            <td><a class="btn btn-info" href="http://selfoss.aditu.de/" target="_blank">view</a></td>
+            <td><a class="btn btn-info" href="http://selfoss.aditu.de/" target="_blank" title="selfoss the web based open source rss reader and multi source mashup aggregator">view</a></td>
         </tr>
         <tr>
-            <td>toothPaste</td>
+            <td>ToothPaste-F3</td>
             <td>Lightweight Pastebin with a nice design</td>
             <td><a href="https://github.com/sn0opy" target="_blank">Sascha Ohms</a></td>
-            <td><a class="btn btn-info" href="https://github.com/sn0opy/toothpaste2" target="_blank">view</a></td>
+            <td><a class="btn btn-info" href="https://github.com/sn0opy/ToothPaste-F3" target="_blank" title="ToothPaste is a lightweight open source pastebin. It supports syntax highlighting and file upload.">view</a></td>
         </tr>
     </tbody>
 </table>
@@ -219,37 +216,35 @@ See what other users have made with F3.
 </div>
 
 
-
 ### Some more Goodies
 
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th class="span11">Name</th>
-            <th class="span1">Link</th>
+            <th class="span10">Name</th>
+            <th class="span2">Link</th>
         <tr>
     </thead>
     <tbody>
         <tr>
-            <td>Fat-Free Framework snippets for Sublime Text 2 and 3</td>
+            <td>PHP Fat-Free Framework snippets for Sublime Text 2 and 3</td>
             <td><a class="btn btn-info" href="https://github.com/uonick/fatfree-snippets" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>Fat-Free Framework snippets for PHPStorm / WebStorm IDE</td>
+            <td>PHP Fat-Free Framework snippets for the PHPStorm / WebStorm IDE</td>
             <td><a class="btn btn-info" href="https://github.com/ikkez/F3-PhpStorm-Snippets" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>Powered by F3 - Logos for your Website</td>
-            <td><a class="btn btn-info" href="https://github.com/bcosca/fatfree/blob/archive/f3-logos.zip" target="_blank">view</a></td>
+            <td>Logos "Powered by F3" for your Website</td>
+            <td><a class="btn btn-info" href="https://github.com/bcosca/fatfree/raw/archive/f3-logos.zip" target="_blank">download</a></td>
         </tr>
     </tbody>
 </table>
 
 
-
 ## Credits
 
-The Fat-Free Framework is community-driven software. It can't be what it is today without the help and support from the following people and organizations:
+The PHP Fat-Free Framework is community-driven software. It can't be what it is today without the help and support from the following people and organizations:
 
 <div class="multicolumn three"></div>
 

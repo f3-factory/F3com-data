@@ -4,7 +4,7 @@
 
 Caching static Web pages - so the code in some route handlers can be skipped and templates don't have to be reprocessed - is one way of reducing your Web server's work load so it can focus on other tasks. You can activate the framework's cache engine by providing a third argument to the `$f3->route()` method. Just specify the number of seconds before a cached Web page expires:
 
-``` php
+```php
 $f3->route('GET /my_page','App->method',60);
 ```
 
@@ -28,7 +28,7 @@ PHP needs to be set up correctly for the F3 cache engine to work properly. Your 
 
 Similar to routes, Fat-Free also allows you to cache database queries. Speed gains can be quite significant, specially when used on complex SQL statements that involve look-up of static data or database content that rarely changes. Activating the database query cache so the framework doesn't have to re-execute the SQL statements every time is as simple as adding a 3rd argument to the F3::sql command - the cache timeout. For example:
 
-``` php
+```php
 $db->exec('SELECT * from sizes;',NULL,86400);
 ```
 
@@ -36,31 +36,31 @@ If we expect the result of this database query to always be `Small`, `Medium`, a
 
 The SQL data mapper also uses the cache engine to optimize synchronization of table structures with the objects that represent them. The default is `60` seconds. If you make any changes to a table's structure in your database engine, you'll have to wait for the cache timer to expire before seeing the effect in your application. You can change this behavior by specifying a third argument to the data mapper constructor. Set it to a high value if you don't expect to make any further changes to your table structure.
 
-``` php
+```php
 $user=new DB\SQL\Mapper($db,'users',86400);
 ```
 
 By default, Fat-Free's cache engine is disabled. You can enable it and allow it to auto-detect APC, WinCache or XCache. If it cannot find an appropriate backend, F3 will use the filesystem, i.e. the `tmp/cache/` folder:
 
-``` php
+```php
 $f3->set('CACHE',TRUE);
 ```
 
 Disabling the cache is as simple as:
 
-``` php
+```php
 $f3->set('CACHE',FALSE);
 ```
 
 If you wish to override the auto-detection feature, you can do so - as in the case of a Memcached back-end which F3 also supports:
 
-``` php
+```php
 $f3->set('CACHE','memcache=localhost:11211');
 ```
 
 You can also use the cache engine to store your own variables. These variables will persist between HTTP requests and remain in cache until the engine receives instructions to delete them. To save a value in the cache:
 
-``` php
+```php
 $f3->set('var','I want this value saved',90);
 ```
 
@@ -70,21 +70,21 @@ $f3->set('var','I want this value saved',90);
 
 Fat-Free also has a Javascript and CSS compressor available in the Web plug-in. It can combine all your CSS files into one stylesheet (or Javascript files into a single script) so the number of components on a Web page are decreased. Reducing the number of HTTP requests to your Web server results in faster page loading. First you need to prepare your HTML template so it can take advantage of this feature. Something like:
 
-``` html
+```html
 <link rel="stylesheet" type="text/css"
 	href="/minify/css?files=typo.css,grid.css" />
 ```
 
 Do the same with your Javascript files:
 
-``` html
+```html
 <script type="text/javascript" src="/minify/js?&files=underscore.js">
 </script>
 ```
 
 Of course we need to set up a route so your application can handle the necessary call to the Fat-Free CSS/Javascript compressor:
 
-``` php
+```php
 $f3->route('GET /minify/@type',
     function($f3,$args) {
         $f3->set('UI',$args['type'].'/');
@@ -110,7 +110,7 @@ Want to make your site run even faster? Fat-Free works best with either Alternat
 
 A fast application that processes all HTTP requests and responds to them at the shortest time possible is not always a good idea - specially if your bandwidth is limited or traffic on your Web site is particularly heavy. Serving pages ASAP also makes your application vulnerable to Denial-of-Service (DOS) attacks. F3 has a bandwidth throttling feature that allows you to control how fast your Web pages are served. Your can specifies how much time it should take to process a request:
 
-``` php
+```php
 $f3->route('GET /throttledpage','MyApp->handler',0,128);
 ```
 

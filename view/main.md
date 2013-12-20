@@ -35,7 +35,7 @@ echo implode("\r\n",$urls);
 The View class makes it easy to separate the two steps defined above, since it requires rendering a filename and a data hive:
 
 ``` php
-$view->render(string $file , [ string $mime = 'text/html' ], [ array $hive = NULL ]); string
+string render ( string $file [, string $mime = 'text/html' [, array $hive = NULL ]] )
 ```
 
 <div class="alert alert-info">
@@ -49,11 +49,11 @@ Here's how to use it in your route handler using the F3 hive:
 
 ```php
 $f3->set('urls',
-	array(
-		'http://domain.tld/home',
-		'http://domain.tld/contact',
-		'http://domain.tld/about'
-	)
+    array(
+        'http://domain.tld/home',
+        'http://domain.tld/contact',
+        'http://domain.tld/about'
+    )
 );
 $view=\View::instance();
 echo $view->render('myview.html','text/html');
@@ -125,7 +125,7 @@ echo $view->render('myview.csv','text/csv',array('urls'=>$urls));
 **Attempt to clone object**
 
 ``` php
-$view->dupe( object $arg ); object
+object dupe ( object $arg )
 ```
 
 The View is rendered within a sandbox that contains a copy of the whole hive data. The each hive key gets encoded by [esc()](view#esc) to ensure a clean an secure way of rendering your data into the view.
@@ -138,7 +138,7 @@ This attempt of cloning objects just works for PHP >= 5.4.0.
 **Encode characters to equivalent HTML entities**
 
 ``` php
-$view->esc( mixed $arg ); string
+string esc ( mixed $arg )
 ```
 
 Usage:
@@ -180,7 +180,7 @@ var_dump($view->esc($myObj));
 **Decode HTML entities to equivalent characters**
 
 ``` php
-$view->raw( mixed $arg ); string
+string raw ( mixed $arg )
 ```
 
 Example:

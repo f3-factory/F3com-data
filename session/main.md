@@ -24,13 +24,11 @@ $f3->set('SESSION.test',123);
 echo $f3->get('SESSION.test');
 ```
 
-
-
 ### SQL
 
 This class provides a SQL-based session handler.
 
-Namespace: `\DB\SQL` <br/>
+Namespace: `\DB\SQL` <br>
 File location: `lib/db/sql/session.php`
 
 Assuming that you have a working [SQL DB](sql) object in `DB` hive key, use:
@@ -52,7 +50,7 @@ It will automatically create the needed table, if the `session` table is not exi
 This class provides a Mongo-based session handler.
 
 
-Namespace: `\DB\Mongo` <br/>
+Namespace: `\DB\Mongo` <br>
 File location: `lib/db/mongo/session.php`
 
 Assuming that you have a working [Mongo DB](mongo) object in `DB` hive key, use:
@@ -74,7 +72,7 @@ The table name can be controlled by the 2nd `$table` parameter in constructor.
 This class provides a JIG-based session handler.
 
 
-Namespace: `\DB\Jig` <br/>
+Namespace: `\DB\Jig` <br>
 File location: `lib/db/jig/session.php`
 
 Assuming that you have a working [Jig DB](jig) object in `DB` hive key, use:

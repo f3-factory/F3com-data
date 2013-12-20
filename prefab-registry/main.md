@@ -2,16 +2,16 @@
 
 Prefab is a factory wrapper for singleton classes. It uses the Registry class to store objects.
 
-Namespace: `\` <br/>
+Namespace: `\` <br>
 File location: `lib/base.php`
 
 ---
 
 ## Prefab
 
-If you want one of your classes to be singletons, just make it extend the Prefab class:
+If you want one of your classes to be singleton, just make it extend the Prefab class:
 
-``` php
+```php
 class MyClass extends \Prefab {
 
   private $year;
@@ -28,7 +28,7 @@ class MyClass extends \Prefab {
 
 This way, the class will be instantiated no more than once. To retrieve the single object, use the static `instance()` method:
 
-``` php
+```php
 // somewhere in the code
 $obj=MyClass::instance(); // First call: a new object is created
 echo $obj->getYear();
@@ -39,7 +39,7 @@ echo $obj->getYear();
 ```
 
 <div class="alert alert-info">
-    NB: Most F3 classes are derived from Prefab (Base, Cache, View, Template, Web, etc.)
+<i class="icon-thumbs-up"></i> <strong>NB</strong>: Most F3 classes (Base, Cache, View, Template, Web, etc.) are derived from Prefab
 </div>
 
 ## Registry
@@ -50,7 +50,7 @@ Under the hood, each single object is stored in the Registry. The Registry accep
 
 ** Retrieve an object from the registry **
 
-``` php
+```php
 $obj=\Registry::get('MyClass');
 ```
 
@@ -58,7 +58,7 @@ $obj=\Registry::get('MyClass');
 
 ** Store an object into the registry **
 
-``` php
+```php
 $obj=new MyClass();
 \Registry::set('MyClass',$obj);
 ```
@@ -67,7 +67,7 @@ $obj=new MyClass();
 
 ** Remove an object from the registry **
 
-``` php
+```php
 \Registry::clear('MyClass');
 ```
 
@@ -75,7 +75,7 @@ $obj=new MyClass();
 
 ** Check if an object is stored in the registry **
 
-``` php
+```php
 if (\Registry::exists('MyClass'))
   echo 'Singleton instanciated';
 else
@@ -88,23 +88,24 @@ If you need to pass arguments during class instantiation, you can do it in two w
 
 ### Using Prefab
 
-``` php
+```php
 // somewhere in the code
-$obj=MyClass::instance($a,$b); // First call: a new object is created
+$obj = MyClass::instance($a,$b); // First call: a new object is created
 
 // somewhere else in the code
-$obj=MyClass::instance(); // Second call: the existing object is returned
+$obj = MyClass::instance(); // Second call: the existing object is returned
 ```
 
-<div class="alert alert-info">
-    Beware that the arguments passed to the <em>instance()</em> function after the first call will be ignored.
+<div class="alert alert-warning">
+<i class="icon-warning-sign"></i> Beware that the arguments passed to the <em>instance()</em> function after the first call will be ignored.
 </div>
 
 ### Using Registry
 
-``` php
-$obj1=new MyClass($arg1);
+```php
+$obj1 = new MyClass($arg1);
 \Registry::set('MyClass1',$obj1);
-$obj2=new MyClass($arg2);
+
+$obj2 = new MyClass($arg2);
 \Registry::set('MyClass2',$obj2);
 ```

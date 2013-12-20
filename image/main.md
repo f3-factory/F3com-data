@@ -1,46 +1,46 @@
 # Image
 The Image class offers a bunch of image processing features.
 
-Namespace: `\` <br/>
+Namespace: `\` <br>
 File location: `lib/image.php`
 
 ---
 
 ## Instantiation
 
-``` php
-$img = new Image([ string $file = NULL ], [ bool $flag = FALSE ], [ string $path = '' ]);
+```php
+$img = new Image ( [ string $file = NULL [, bool $flag = FALSE [, string $path = '' ]]] )
 ```
 
-You can create a new Image object and load an existing image file like this:
+You can create a new Image object from an existing image file like this:
 
-``` php
-$img = new Image('path/to/your/image.jpg');
+```php
+$img = new Image('path/to/your/image.jpg'); // relative to UI search path
 ```
 
-To create a new empty image, i.e. for creating a captcha, just leave out the first `$file` argument:
+To create a new empty Image, i.e. for creating a captcha, just leave out the first `$file` argument:
 
-``` php
+```php
 $img = new Image();
 ```
 
-The constructor also has a 2nd argument, the `$flag` option. Setting it to `TRUE` enables the file history, which can save additional states for the current file.
+The constructor also has a 2nd argument, the `$flag` option. Setting it to `TRUE` enables the file [history](image#history), which can save additional states for the current file.
 
-If your image file is not located in an `UI` directory, you can use the `$path` argument to set its location.
+If your image file is not located within one of the [UI](quick-reference#ui) search paths, you must use the `$path` argument to specify its directory path.
 
 ## Processing
 
 ### invert
 **Invert image**
 
-``` php
+```php
 $img->invert();
 ```
 
 ### brightness
 **Adjust brightness**
 
-``` php
+```php
 $img->brightness( int $level );
 ```
 
@@ -49,7 +49,7 @@ $img->brightness( int $level );
 ### contrast
 **Adjust contrast**
 
-``` php
+```php
 $img->contrast( int $level );
 ```
 
@@ -59,7 +59,7 @@ $img->contrast( int $level );
 ### grayscale
 **Convert to grayscale**
 
-``` php
+```php
 $img->grayscale();
 ```
 
@@ -67,7 +67,7 @@ $img->grayscale();
 ### smooth
 **Adjust smoothness**
 
-``` php
+```php
 $img->smooth( int $level);
 ```
 `$level` range: -8 to 8, but as its been used for a matrix operation, greater values are applyable too, but may lead to unusable results.
@@ -75,21 +75,21 @@ $img->smooth( int $level);
 ### emboss
 **Emboss the image**
 
-``` php
+```php
 $img->emboss();
 ```
 
 ### sepia
 **Apply sepia effect**
 
-``` php
+```php
 $img->sepia();
 ```
 
 ### pixelate
 **Pixelate the image**
 
-``` php
+```php
 $img->pixelate( int $size );
 ```
 
@@ -98,7 +98,7 @@ $img->pixelate( int $size );
 ### blur
 **Blur the image using Gaussian filter**
 
-``` php
+```php
 $img->blur( bool $selective );
 ```
 
@@ -108,35 +108,35 @@ Set `$selective` to `TRUE` to use a selective blur, otherwise a gaussian blur is
 ### sketch
 **Apply sketch effect**
 
-``` php
+```php
 $img->sketch();
 ```
 
 ### hflip
 **Flip on horizontal axis**
 
-``` php
+```php
 $img->hflip();
 ```
 
 ### vflip
 **Flip on vertical axis**
 
-``` php
+```php
 $img->vflip();
 ```
 
 ### crop
 **Crop the image**
 
-``` php
+```php
 $img->crop( int $x1, int $y1, int $x2, int $y2);
 ```
 
 ### resize
 **Resize image (Maintain aspect ratio)**
 
-``` php
+```php
 $img->resize( int $width, int $height, [ bool $crop = TRUE ], [ bool $enlarge = TRUE ]);
 ```
 
@@ -148,14 +148,14 @@ If `$enlarge` is `FALSE` the image will not be scaled up to fit in the resize bo
 ### rotate
 **Rotate image**
 
-``` php
+```php
 $img->rotate( int $angle );
 ```
 
 ### overlay
 **Apply an image overlay**
 
-``` php
+```php
 $img->overlay( Image $img, [ bool|int $align = NULL ]);
 ```
 
@@ -163,7 +163,7 @@ This is used to merge to images, i.e. for watermarks. You need to provide anothe
 
 Example:
 
-``` php
+```php
 $img = new \Image;
 $img = new \Image('images/south-park.jpg');
 
@@ -191,7 +191,7 @@ y - align:
 ### identicon
 **Generate identicon**
 
-``` php
+```php
 $img->identicon( string $str, [ int $size = 64 ], [ int $blocks = 4 ]);
 ```
 
@@ -201,18 +201,18 @@ The `$size` argument defines the width and height of the resulting image. `$bloc
 ### captcha
 **Generate CAPTCHA image**
 
-``` php
-$img->captcha( string $font, [ int $size = 24 ], [ int $len = 5 ], [ string|bool $key = NULL], [ string $path='' ]);
+```php
+$img->captcha( string $font, [ int $size = 24 ], [ int $len = 5 ], [ string|bool $key = NULL], [ string $path='' ], [ $foregroundcolor=0xFFF ], [ $backgroundcolor=0x000 ] );
 ```
 
-This renders a captcha image. Please have a look to this [user guide section about rendering captcha images](plug-ins#captcha-images), to see a little example. Length parameter should be min 5 max 23. 
-If your font file is not located in an `UI` directory, you can the set its location with the `$path` argument.
+This renders a captcha image. Please have a look to this [user guide section about rendering captcha images](plug-ins#captcha-images), to see a little example.
+If your font file is not located in the `UI` directory, you can then set its location with the `$path` argument.
 
 ## Info
 ### width
 **Return image width**
 
-``` php
+```php
 $img->width();
 ```
 
@@ -220,14 +220,14 @@ $img->width();
 ### height
 **Return image height**
 
-``` php
+```php
 $img->height();
 ```
 
 ### rgb
 **Convert RGB hex triad to array**
 
-``` php
+```php
 $img->rgb( 0xFF0033 ); // returns array( 255, 0, 51 );
 ```
 
@@ -235,33 +235,33 @@ $img->rgb( 0xFF0033 ); // returns array( 255, 0, 51 );
 ## Output
 
 ### render
-**Send image to HTTP client**
+**Output a raw image stream to the HTTP client**
 
-``` php
-$img->render();
+```php
+$img->render( [ string $imageformat = 'png' [, int $quality [, int $filters ]]] ); // PNG by default
 ```
 
-You can pass multiple arguments into this method. The first will define the filetype. For instance this example will render the image as PNG file:
+You can pass multiple variable arguments to this method. The first argument defines the image format. You can use either `png`, `jpeg`, `gif` or `wbmp`. If not specified, the PNG image format will be used. For instance this example will output a PNG image:
 
-``` php
-$img->render('png');
+```php
+$img->render(); // Send a [Content-Type: image/png] stream to the HTTP client
 ```
 
-You can use `png`, `jpeg`, `git` or `wbmp` as first argument. Any additional arguments refers to the appropriate php render method:
+You can use `png`, `jpeg`, `gif` or `wbmp` as first argument. All additional arguments are the same as the ones of the relative php render methods:
 
-*   [imagepng](http://www.php.net/manual/en/function.imagepng.php)
-*   [imagejpeg](http://www.php.net/manual/en/function.imagejpeg.php)
-*   [imagegif](http://www.php.net/manual/en/function.imagegif.php)
-*   [imagewbmp](http://www.php.net/manual/en/function.imagewbmp.php)
+*   [imagepng](http://www.php.net/manual/en/function.imagepng.php "Official PHP documentation @ php.net")
+*   [imagejpeg](http://www.php.net/manual/en/function.imagejpeg.php "Official PHP documentation @ php.net")
+*   [imagegif](http://www.php.net/manual/en/function.imagegif.php "Official PHP documentation @ php.net")
+*   [imagewbmp](http://www.php.net/manual/en/function.imagewbmp.php "Official PHP documentation @ php.net")
 
 ### dump
 **Return image as a string**
 
-``` php
+```php
 $img->dump();
 ```
 
-This method accepts the same arguments like the `render()` method.
+This method accepts the same arguments as the [`render()`](image#render) method above.
 
 ## History
 
@@ -270,7 +270,7 @@ The next methods only take effect when the initial `$flag` argument is `TRUE`.
 ### save
 **Save current state**
 
-``` php
+```php
 $img->save();
 ```
 
@@ -279,7 +279,7 @@ This will create a new temporary image of the current state.
 ### restore
 **Revert to specified state**
 
-``` php
+```php
 $img->restore([ int $state = 1 ]);
 ```
 
@@ -288,6 +288,6 @@ This fetches the original image state from the temp folder.
 ### undo
 **Undo most recently applied filter**
 
-``` php
+```php
 $img->undo();
 ```

@@ -1,7 +1,7 @@
 # Geo
 The Geo plugin gives you a handful of location-based features.
 
-Namespace: `\Web` <br/>
+Namespace: `\Web` <br>
 File location: `lib/web/geo.php`
 
 ---
@@ -10,7 +10,7 @@ File location: `lib/web/geo.php`
 
 **Return class instance**
 
-``` php
+```php
 $geo = \Web\Geo::instance();
 ```
 
@@ -21,86 +21,97 @@ The Geo class uses the [Prefab](prefab-registry) factory wrapper, so you can gra
 
 **Returns information about specified Unix time zone**
 
-``` php
-$geo->tzinfo( string $zone); array
+```php
+array tzinfo ( string $zone )
 ```
-This method accepts any available timezone string, which can be found here [http://php.net/manual/en/timezones.php](http://php.net/manual/en/timezones.php). For example:
 
-``` php
+This method accepts any [supported timezone strings](http://php.net/manual/en/timezones.php "PHP Manual :: List of Supported Timezones") and returns an array as follows:
+
+array (size=5) :
+
++ **offset**: The time zone offset measured relatively to GMT
++ **country**: ISO 3166-1-alpha-2 country code as per [PHP DateTimeZone::getLocation](http://www.php.net/manual/en/datetimezone.getlocation.php)
++ **latitude**: latitude as per [PHP DateTimeZone::getLocation](http://www.php.net/manual/en/datetimezone.getlocation.php)
++ **longitude**: longitude as per [PHP DateTimeZone::getLocation](http://www.php.net/manual/en/datetimezone.getlocation.php)
++ **dst**: A boolean flag that reflects daylight savings time adjustment
+
+For example:
+
+```php
 /** @var \Web\Geo $geo */
 $geo = \Web\Geo::instance();
-var_dump($geo->tzinfo('Europe/Berlin'));
+var_dump($geo->tzinfo('Australia/Darwin'));
 /* returns:
-array(5) {
-  ["offset"] => int(1)
-  ["country"] => string(2) "DE"
-  ["latitude"] => float(52.5)
-  ["longitude"] => float(13.36667)
-  ["dst"] => bool(false)
-}*/
+array (size=5)
+  'offset' => float 9.5
+  'country' => string 'AU' (length=2)
+  'latitude' => float -12.46667
+  'longitude' => float 130.83333
+  'dst' => boolean false
+*/
 ```
 
 ### location
 
-**Return geolocation data based on specified/auto-detected IP address**
+**Return geolocation data based on a specified or auto-detected IP address**
 
-``` php
-$geo->location([ string $ip = NULL]); array|FALSE
+```php
+array|FALSE location ( [ string $ip = NULL] )
 ```
 
 Example:
 
 ```php
 $geo = \Web\Geo::instance();
-var_dump($geo->location());
+var_dump($geo->location()); // locate client IP
 /* returns:
-array(12) {
-  ["request"] => string(12) "46.38.242.62"
-  ["credit"] => string(145) "Some of the returned data includes GeoLite data created by MaxMind, available from <a href=\'http://www.maxmind.com\'>http://www.maxmind.com</a>."
-  ["city"] => string(0) ""
-  ["area_code"] => string(1) "0"
-  ["dma_code"] => string(1) "0"
-  ["country_code"] => string(2) "DE"
-  ["country_name"] => string(7) "Germany"
-  ["continent_code"] => string(2) "EU"
-  ["latitude"] => string(2) "51"
-  ["longitude"] => string(1) "9"
-  ["region_code"] => string(0) ""
-  ["region_name"] => NULL
-}*/
+array (size=12)
+  'request' => string '85.2.88.43' (length=10)
+  'credit' => string 'Some of the returned data includes GeoLite data created by MaxMind, available from <a href=\'http://www.maxmind.com\'>http://www.maxmind.com</a>.' (length=145)
+  'city' => string 'Lutry' (length=5)
+  'area_code' => string '0' (length=1)
+  'dma_code' => string '0' (length=1)
+  'country_code' => string 'CH' (length=2)
+  'country_name' => string 'Switzerland' (length=11)
+  'continent_code' => string 'EU' (length=2)
+  'latitude' => string '46.504902' (length=9)
+  'longitude' => string '6.6852' (length=6)
+  'region_code' => string '23' (length=2)
+  'region_name' => string '23' (length=2)
+*/
 ```
 
 ### weather
 **Return weather data based on specified latitude/longitude**
 
-``` php
-$geo->weather( float $latitude, float $longitude); array|FALSE
+```php
+array|FALSE weather ( float $latitude, float $longitude )
 ```
 
 Example:
 
-``` php
+```php
 $geo = \Web\Geo::instance();
-$loc = $geo->location('46.38.242.62');
+$loc = $geo->location('95.143.172.183'); // locate specific IP
 var_dump($geo->weather($loc['latitude'],$loc['longitude']));
 /* returns:
-array(17) {
-  ["weatherCondition"] => string(3) "n/a"
-  ["clouds"] => string(13) "broken clouds"
-  ["observation"] => string(59) "ETHF 181320Z 21009KT 9999 BKN017 OVC025 05/02 Q1010 WHT WHT"
-  ["windDirection"] => int(210)
-  ["ICAO"] => string(4) "ETHF"
-  ["elevation"] => int(181)
-  ["countryCode"] => string(2) "DE"
-  ["cloudsCode"] => string(3) "BKN"
-  ["lng"] => float(9.2666666666667)
-  ["temperature"] => string(1) "5"
-  ["dewPoint"] => string(1) "2"
-  ["windSpeed"] => string(2) "09"
-  ["humidity"] => int(80)
-  ["stationName"] => string(8) "Fritzlar"
-  ["datetime"] => string(19) "2013-11-18 13:20:00"
-  ["lat"] => float(51.116666666667)
-  ["hectoPascAltimeter"] => int(1010)
-}*/
+array (size=17)
+  'weatherCondition' => string 'n/a' (length=3)
+  'clouds' => string 'few clouds' (length=10)
+  'observation' => string 'ETHF 171620Z 33002KT 9999 FEW160 SCT210 05/00 Q1025 BLU+' (length=56)
+  'windDirection' => int 330
+  'ICAO' => string 'ETHF' (length=4)
+  'elevation' => int 181
+  'countryCode' => string 'DE' (length=2)
+  'cloudsCode' => string 'FEW' (length=3)
+  'lng' => float 9.2666666666667
+  'temperature' => string '5' (length=1)
+  'dewPoint' => string '0' (length=1)
+  'windSpeed' => string '02' (length=2)
+  'humidity' => int 70
+  'stationName' => string 'Fritzlar' (length=8)
+  'datetime' => string '2013-12-17 16:20:00' (length=19)
+  'lat' => float 51.116666666667
+  'hectoPascAltimeter' => int 1025
+*/
 ```

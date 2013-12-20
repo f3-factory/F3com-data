@@ -10,7 +10,7 @@ F3 makes it easy for you to debug programs - without getting in the way of your 
 
 A unit (or test fixture) can be a function/method or a class. Let's have a simple example:
 
-``` php
+```php
 function hello() {
     return 'Hello, World';
 }
@@ -18,7 +18,7 @@ function hello() {
 
 Save it in a file called `hello.php`. Now how do we know it really runs as expected? Let's create our test procedure:
 
-``` php
+```php
 $f3=require(__DIR__.'/lib/base.php'); // path to f3 
 
 // Set up
@@ -52,12 +52,12 @@ $test->expect(
 
 // Display the results; not MVC but let's keep it simple
 foreach ($test->results() as $result) {
-    echo $result['text'].'<br />';
+    echo $result['text'].'<br>';
     if ($result['status'])
         echo 'Pass';
     else
         echo 'Fail ('.$result['source'].')';
-    echo '<br />';
+    echo '<br>';
 }
 ```
 
@@ -66,11 +66,10 @@ Save it in a file called `test.php`. This way we can preserve the integrity of `
 Now here's the meat of our unit testing process.
 
 For each test you want to run, call the `expect()` method of the `Test` class.
-`expect()` has 2 arguments.
+`expect()` has 2 arguments:
 
-1st arg `test` is the test to be run. This needs to be a simple test that will result in a Pass or Fail condition. ex: `$i==1`
-
-2nd arg `text` is the text to be displayed for this test, when test results are displayed. ex: "input equals numeric 1".
+1. `test` is the test to be run. This needs to be a simple test that will result in a Pass or Fail condition. ex: `$i==1`
+2. `text` is the text to be displayed for this test, when test results are displayed. ex: "input equals numeric 1".
 
 When the tests are run, F3's built-in `Test` class will keeps track of the result of each `expect()` method call. 
 The output of each `$test->expect()` call is saved in a multi-dimensional array named `results` with the keys:
@@ -92,7 +91,7 @@ F3 gives you the ability to simulate HTTP requests from within your PHP program 
 
 Here's a simple mock request:
 
-``` php
+```php
 $f3->set('QUIET',TRUE);  // do not show output of the active route
 $f3->mock('GET /test');  // set the route that f3 will run
 $f3->run();  // run the route
@@ -104,7 +103,7 @@ $f3->clear('ERROR');  // clear any errors
 
 `Tip:` If you have a route defined with token parameters, i.e. /test/@name, you can test that route by setting a value for the token in the mock command, and access that value during testing from F3's PARAMS assoc array
 
-``` php
+```php
 $f3->mock('GET /test/steve'); 
 $f3->run();
 $name = $f3->get('PARAMS["name"]');
@@ -117,7 +116,7 @@ $test->expect(
 
 To mock a POST request and submit a simulated HTML form:
 
-``` php
+```php
 $f3->mock('POST /test', array('foo'=>'bar')); // pass in form values using assoc array
 ```
 

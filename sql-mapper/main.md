@@ -2,7 +2,7 @@
 
 The SQL Object-Relational-Mapper is an implementation of the abstract [Active Record Cursor class](cursor).
 
-Namespace: `\DB\SQL` <br/>
+Namespace: `\DB\SQL` <br>
 File location: `lib/db/sql/mapper.php`
 
 ---
@@ -11,13 +11,13 @@ File location: `lib/db/sql/mapper.php`
 
 To use the SQL ORM, [create a valid SQL DB Connection](sql#constructor) and follow this example:
 
-``` php
+```php
 $mapper = new \DB\SQL\Mapper(\DB\SQL $db, string $table, [ int $ttl = 60 ])
 ```
 
 If you like to create a model class, you might like to wrap it up:
 
-``` php
+```php
 $f3->set('DB',new DB\SQL('sqlite:db/database.sqlite'));
 
 class User extends \DB\SQL\Mapper {
@@ -37,7 +37,7 @@ $user->load('id = 1');
 
 The `$filter` argument for SQL accepts the following structure:
 
-``` php
+```php
 // string value for simple where strings
 string $whereClause
 // array value for parameterized queries
@@ -49,13 +49,13 @@ array( string $whereClause, [ string $bindValue1 ], [ string $bindValue2 ], [...
 It is recommended to use parameterized queries for all where conditions that may include user input data.
 In example with positional parameters:
 
-``` php
+```php
 array('username = ? and password = ? and deleted = 0','John','acbd18db4cc2f85cedef654fccc4a4d8')
 ```
 
 Or with named parameters:
 
-``` php
+```php
 array(
     'username = :user and password = :pass and deleted = 0',
     ':user'=>'John',':pass'=>'acbd18db4cc2f85cedef654fccc4a4d8'
@@ -70,7 +70,7 @@ Notice: You cannot use a named parameter more than once in a query. Due to a PDO
 
 To force a bind value to be a specific PDO type, use the following syntax:
 
-``` php
+```php
 array(
     'prize > :prize and active = 1',
     ':prize' => array(123, \PDO::PARAM_INT)
@@ -90,7 +90,7 @@ $user->find(array('email LIKE ?','%gmail%')); // returns all users with an email
 
 The `$option` argument for SQL accepts the following structure:
 
-``` php
+```php
 array(
     'order' => string $orderClause,
     'group' => string $groupClause,
@@ -101,7 +101,7 @@ array(
 
 i.e:
 
-``` php
+```php
 array(
     'order' => 'score DESC, team_name ASC',
     'group' => 'score, player',
@@ -117,7 +117,7 @@ array(
 
 **Return TRUE if field is defined**
 
-``` php
+```php
 $mapper->exists( string $key ); bool
 ```
 
@@ -126,14 +126,14 @@ $mapper->exists( string $key ); bool
 
 **Assign value to field**
 
-``` php
+```php
 $mapper->set( string $key, scalar $val ); scalar
 ```
 
 This class also takes advantage from the Magic and ArrayAccess class implementation.
 This way you can also set and get variable with direct access like this:
 
-``` php
+```php
 $mapper->foo = 'bar';
 $mapper['foo'] = 'bar';
 ```
@@ -142,7 +142,7 @@ $mapper['foo'] = 'bar';
 
 If you set a new value to an empty / not hydrated mapper, you create a virtual field on it. This way you can add some aggregate functions to your query:
 
-``` php
+```php
 $scores = new Scores();
 $scores->sum_score = 'SUM(score)';
 $scores->avg_score = 'AVG(score)';
@@ -155,7 +155,7 @@ echo $scores->avg_score; // returns the avarage score of that player
 
 **Retrieve value of field**
 
-``` php
+```php
 $mapper->get( string $key ); scalar
 ```
 
@@ -164,7 +164,7 @@ $mapper->get( string $key ); scalar
 
 **Clear value of field**
 
-``` php
+```php
 $mapper->clear( string $key ); NULL
 ```
 
@@ -173,7 +173,7 @@ $mapper->clear( string $key ); NULL
 
 **Get PHP type equivalent of PDO constant**
 
-``` php
+```php
 $mapper->type( string $pdo ); string
 ```
 
@@ -182,7 +182,7 @@ $mapper->type( string $pdo ); string
 
 **Cast value to PHP type**
 
-``` php
+```php
 $mapper->value( string $type, scalar $val ); scalar
 ```
 
@@ -191,7 +191,7 @@ $mapper->value( string $type, scalar $val ); scalar
 
 **Return fields of mapper object as an associative array**
 
-``` php
+```php
 $mapper->cast([ object $obj = NULL ]); bool
 ```
 
@@ -200,7 +200,7 @@ $mapper->cast([ object $obj = NULL ]); bool
 
 **Build query string and execute**
 
-``` php
+```php
 $mapper->select( string $fields, [ string|array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
 ```
 
@@ -209,7 +209,7 @@ $mapper->select( string $fields, [ string|array $filter = NULL ],[ array $option
 
 **Return records that match criteria**
 
-``` php
+```php
 $mapper->find([ string|array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
 ```
 
@@ -218,14 +218,14 @@ $mapper->find([ string|array $filter = NULL ],[ array $options = NULL ],[ int $t
 
 **Count records that match criteria**
 
-``` php
+```php
 $mapper->count([ string|array $filter = NULL ]); int
 ```
 
 ### insert
 **Insert new record**
 
-``` php
+```php
 $mapper->insert(); array
 ```
 
@@ -233,7 +233,7 @@ $mapper->insert(); array
 ### update
 **Update current record**
 
-``` php
+```php
 $mapper->update(); array
 ```
 
@@ -241,7 +241,7 @@ $mapper->update(); array
 ### erase
 **Delete current record**
 
-``` php
+```php
 $mapper->erase([ string|array $filter = NULL ]); int
 ```
 
@@ -249,7 +249,7 @@ $mapper->erase([ string|array $filter = NULL ]); int
 ### copyfrom
 **Hydrate mapper object using hive array variable**
 
-``` php
+```php
 $mapper->copyfrom( string $key ); NULL
 ```
 
@@ -257,7 +257,7 @@ $mapper->copyfrom( string $key ); NULL
 ### copyto
 **Populate hive array variable with mapper fields**
 
-``` php
+```php
 $mapper->copyto( string $key ); NULL
 ```
 
@@ -265,7 +265,7 @@ $mapper->copyto( string $key ); NULL
 ### schema
 **Returns the table schema**
 
-``` php
+```php
 $mapper->schema();
 ```
 

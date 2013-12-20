@@ -10,15 +10,19 @@ File location: `lib/db/mongo.php`
 ## Constructor
 
 ```php
-$db=new \DB\Mongo(string $dsn, string $dbname, [ array $options = NULL]);
+$db = new \DB\Mongo ( string $dsn, string $dbname [, array $options = NULL] );
 ```
+`$dsn` defines a datasource name to the server.
+
+`$dbname` defines the database name.
+
+With the `$options` parameter, you can define an array of options for the connection. Currently available options can be found in the [PHP MongoClient Manual](http://www.php.net/manual/en/mongoclient.construct.php).
+
 For example, to connect to a MongoDB database, the syntax looks like:
 
-``` php
+```php
 $db = new \DB\Mongo('mongodb://localhost:27017','testdb');
 ```
-
-In the `$options` parameter, you can define serveral connection settings. More details about that on the [PHP MongoClient Manual](http://www.php.net/manual/en/mongoclient.construct.php) site.
 
 
 ## Methods
@@ -27,16 +31,16 @@ In the `$options` parameter, you can define serveral connection settings. More d
 
 **Return data source name**
 
-``` php
-echo $db->dsn();
+```php
+string dsn ( )
 ```
 
 ### uuid
 
 **Returns unique connection UUID**
 
-``` php
-echo $db->uuid();
+```php
+string uuid ( )
 ```
 
 ### log
@@ -44,7 +48,7 @@ echo $db->uuid();
 **Return MongoDB profiler results**
 
 ```php
-echo $db->log();
+string log ( )
 ```
 
 ### drop
@@ -52,6 +56,6 @@ echo $db->log();
 **Intercept native call to re-enable profiler**
 
 ```php
-$db->drop(); int
+int drop()
 ```
 This drops the database currently being used and re-enables its log profiler

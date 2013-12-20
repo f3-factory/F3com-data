@@ -1,8 +1,8 @@
 # SQL
 
-The SQL class provides a lightweight, consistent interface for accessing SQL databases in PHP. It is a superset of the [PDO class](http://www.php.net/manual/en/class.pdo.php).
+The SQL class provides a lightweight, consistent interface for accessing SQL databases in PHP. It is a superset of the [php PDO class](http://www.php.net/manual/en/class.pdo.php).
 
-Namespace: `\DB` <br/>
+Namespace: `\DB` <br>
 File location: `lib/db/sql.php`
 
 ---
@@ -10,32 +10,32 @@ File location: `lib/db/sql.php`
 ## Constructor
 
 ```php
-$db=new \DB\SQL(string $dsn, [ string $user = NULL], [ string $pw = NULL], [ array $options = NULL]);
+$db = new \DB\SQL ( string $dsn [, string $user = NULL [, string $pw = NULL [, array $options = NULL ]]] );
 ```
 
 For example, to connect to a MySQL database, the syntax looks like:
 
-``` php
+```php
 $db=new \DB\SQL('mysql:host=localhost;port=3306;dbname=mysqldb','username','password');
 ```
 
-While connecting to a SQLite database looks like:
+While connecting to a SQLite database it would look like:
 
-``` php
+```php
 $db=new \DB\SQL('sqlite:/path/to/db.sqlite');
 ```
 
-The 4th parameter allows to set additional PDO attributes:
+The 4th parameter is an array of options you can use to set additional PDO attributes:
 
-``` php
-$options=array(
-  \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, // generic attribute
-  \PDO::MYSQL_ATTR_COMPRESS => TRUE, // MySQL-specific attribute
+```php
+$options = array(
+    \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, // generic attribute
+    \PDO::MYSQL_ATTR_COMPRESS => TRUE, // MySQL-specific attribute
 );
-$db=new \DB\SQL('mysql:host=localhost;port=3306;dbname=mysqldb','username','password',$options);
+$db = new \DB\SQL('mysql:host=localhost;port=3306;dbname=mysqldb','username','password', $options);
 ```
 
-This is a list of links to DSN connection details of all currently supported engines in the the SQL layer:
+Here is a list of links to DSN connection details for all currently supported engines in the the SQL layer:
 
 * [mysql](http://www.php.net/manual/en/ref.pdo-mysql.php): MySQL 5.x
 * [sqlite](http://www.php.net/manual/en/ref.pdo-sqlite.connection.php): SQLite 3 and SQLite 2
@@ -51,7 +51,7 @@ This is a list of links to DSN connection details of all currently supported eng
 
 **Returns the SQL driver name**
 
-``` php
+```php
 echo $db->driver(); // mysql
 ```
 
@@ -59,7 +59,7 @@ echo $db->driver(); // mysql
 
 **Returns the server version**
 
-``` php
+```php
 echo $db->version(); // 5.1.51
 ```
 
@@ -76,10 +76,10 @@ echo $db->name(); // mysqldb
 **Retrieve schema of SQL table**
 
 ```php
-$db->schema(string $table, [ int $ttl=0]); array
+array schema ( string $table [, int $ttl=0 ] )
 ```
 
-For example:
+Example of use:
 
 ```php
 // CREATE TABLE mytable (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name varchar(256) NULL DEFAULT 'none')
@@ -109,7 +109,7 @@ array(2) {
 **Execute a SQL command**
 
 ```php
-$db->exec(string|array $commands, [ array $args = NULL], [ int $ttl = 0 ]); mixed
+mixed exec ( string|array $commands [, array $args = NULL [, int $ttl = 0 ]] )
 ```
 
 This method execute one or more SQL statements and returns either the resulting rows (for SELECT, CALL, EXPLAIN, PRAGMA, SHOW statements) or the number of affected rows (for INSERT, DELETE, UPDATE statements).
@@ -240,7 +240,9 @@ echo $db->count(); // outputs 2
 $db->exec('INSERT INTO mytable(name) VALUES(?)','Clyde');
 $db->exec('INSERT INTO mytable(name) VALUES(?)','Don');
 $db->exec('INSERT INTO mytable(name) VALUES(?)','Elliott');
+
 echo $db->log();
+
 // outputs:
 Mon, 27 May 2013 00:59:57 +0200 (0.1ms) INSERT INTO mytable(name) VALUES('Clyde')
 Mon, 27 May 2013 00:59:57 +0200 (0.3ms) INSERT INTO mytable(name) VALUES('Don')
@@ -251,33 +253,32 @@ Mon, 27 May 2013 00:59:57 +0200 (0.2ms) INSERT INTO mytable(name) VALUES('Elliot
 
 **Returns unique connection identifier hash**
 
-``` php
-$db->uuid(); string
+```php
+string uuid ( )
 ```
 
 ### type
 
 **Map data type of argument to a PDO constant**
 
-``` php
-$db->type( scalar $val ); int
+```php
+int type ( scalar $val )
 ```
 
 ### quote
 
 **Quote string**
 
-``` php
-$db->quote( string $val, [ int $type = \PDO::PARAM_STR ]); string
+```php
+string quote ( string $val [, int $type = \PDO::PARAM_STR ] )
 ```
-
 
 ### quotekey
 
 **Returns quoted identifier name**
 
-``` php
-$db->quotekey( string $key ); string
+```php
+string quotekey ( string $key )
 ```
 
 This quotes a table or column key name, based on the current database engine. E.g in quotes `page` to `"page"` in sqlite.
