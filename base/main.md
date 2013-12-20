@@ -2,57 +2,58 @@
 
 The Base class represents the framework core. It contains everything you need to run a simple application. The file `base.php` also includes the essential [Cache](cache), [Prefab](prefab-registry), [View](view), [ISO](iso) and [Registry](prefab-registry#registry) classes to reduce unnecessary disk I/O for optimal performance.
 
-Feel free to remove all other files in the `lib/`-directory, if all you need are the basic features provided by this package.
-
-Namespace: `\` <br/>
-File location: `lib/base.php`
+Feel free to remove all other files in the `lib/` directory, if all you need are the basic features provided by this package.
 
 ---
 
+Namespace: `\` <br>
+File location: `lib/base.php`
+
 ## The Hive
 
-The hive is a memory array to hold your framework variables in a key / value pair. Storing a value in the hive ensures it is globaly available to all classes and methods in your application.
+The hive is a memory array to hold your framework variables in the form of key / value pairs. Storing a value in the hive ensures it is globaly available to all classes and methods in your application.
 
 ### set
 
 **Bind value to hive key**
 
-``` php
-$f3->set ( string $key, mixed $val, [ int $ttl = 0 ]); mixed
+```php
+mixed set ( string $key, mixed $val [, int $ttl = 0 ] )
 ```
+*Examples of setting framework variables:*
 
-setting framework variables
-
-``` php
+```php
 $f3->set('a',123); // a=123, integer
 $f3->set('b','c'); // b='c', string
 $f3->set('c','whatever'); // c='whatever', string
 $f3->set('d',TRUE); // d=TRUE, boolean
 ```
+*Setting arrays:*
 
-setting arrays
-
-``` php
+```php
 $f3->set('hash',array( 'x'=>1,'y'=>2,'z'=>3 ) );
-// dot notation is also possible
+// dot notation is also possible:
 $f3->set('hash.x',1);
 $f3->set('hash.y',2);
 $f3->set('hash.z',3);
 ```
+*Setting objects properties:*
 
-objects properties
-
-``` php
+```php
 $f3->set('a',new \stdClass);
-$f3->set('a->hello','world');
+$f3->set('a->hello','world'); // echo $f3->get('a')->hello; // world
 ```
+<br>
+Caching properties:
 
-If the `$ttl` parameter is > 0, and the CACHE framework variable is enabled, the specified variable will be cached for X seconds. Already cached vars will be updated and get the new expiration `$ttl`.
+If the `$ttl` parameter is > 0, and the [CACHE](quick-reference#cache) framework variable is set `$f3->set('CACHE', TRUE)`, the specified variable will be cached for `$ttl` seconds. Already cached vars will be updated and get the new expiration `$ttl`.
 If the key was already cached before and `$ttl` is 0, then the key value will also be updated in cache, by reusing the old expiration time.
 
-You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from Cache.
+You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from the [Cache](cache).
 
-``` php
+*Examples of caching framework variables:*
+
+```php
 // cache string
 $f3->set('simplevar','foo bar 1337', 3600); // cache for 1 hour
 //cache big computed arrays
@@ -65,42 +66,44 @@ $f3->set('fruits',array(
 $f3->set('myClass1', new myClass('arg1'), 3600);
 ```
 
-It is also possible to set php globals using GET, POST, COOKIE or SESSION.
+**F3 framework system variables**
+
+The framework has its own [system variables] (quick-reference#system-variables). You can change them using `$f3->set('VARNAME')` to modify a framework behaviour, for example:
+
+```php
+$f3->set('CACHE', TRUE);
+$f3->set('HALT', FALSE);
+$f3->set('CASELESS', FALSE);
+```
+
+It is also possible to set the PHP globals through F3's [COOKIE, GET, POST, REQUEST, SESSION, FILES, SERVER, ENV system variables](quick-reference#cookie,-get,-post,-request,-session,-files,-server,-env). These 8 variables are automatically in synch with the underlying PHP globals.
 
 <div class="alert alert-info"><strong>Notice:</strong> If you set or access a key of SESSION, the session gets started automatically. There's no need for you to do it by yourself.</div>
 
-The framework has its own [system variables] (quick-reference#system-variables). You can change them using set() to modify a framework behaviour, for example
-
-``` php
-$f3->set('CACHE', TRUE);
-```
-
-Hive keys are case-sensitive. Root hive keys are checked for validity against these valid chars: [ a-z A-Z 0-9 _ ]
-
-
+**Remember**: Hive keys are _case-sensitive_. Furthermore, root hive keys are checked for validity against these allowed chars: [ a-z A-Z 0-9 _ ]
 
 ### get
 
 **Retrieve contents of hive key**
 
-``` php
-$f3->get( string $key, [ string|array $args = NULL ]); mixed
+```php
+mixed get ( string $key [, string|array $args = NULL ] )
 ```
 
 to get a previously saved framework var, use:
 
-``` php
+```php
 $f3->set('myVar','hello world');
 echo $f3->get('myVar'); // outputs the string 'hello world'
 $local_var = $f3->get('myVar'); // $local_var holds the string 'hello world'
 ```
 
-<div class="alert alert-info"><strong>Notice:</strong> F3 tries to load the var from Cache when using get(), if the var was not defined at runtime before and caching is enabled.</div>
+<div class="alert alert-info"><strong>Notice:</strong> When caching is enabled and the var hasn't been defined at runtime before, F3 tries to load the var from Cache when using get().</div>
 
-Accessing arrays is easy. You can also use the JS dot notation, which makes it much easier to read and write.
+Accessing arrays is easy. You can also use the JS dot notation `'myarray.bar'`, which makes it much easier to read and write.
 <!-- special alignment ez 2 read 4 beginners -->
 
-``` php
+```php
 $f3->set('myarray',
            array(
                     0 => 'value_0',
@@ -122,16 +125,16 @@ echo $f3->get('myarray[baz]'); // 4.56, notice alternate use of single, double a
 
 **Sync PHP global variable with corresponding hive key**
 
-``` php
-$f3->sync( string $key ); array
+```php
+array sync ( string $key )
 ```
 
 Usage:
 
-``` php
-$f3->sync('SESSION');
-// ensures php global var SESSION is the same as F3 framework variable SESSION
+```php
+$f3->sync('SESSION'); // ensures PHP global var SESSION is the same as F3 variable SESSION
 ```
+The 
 
 <div class="alert alert-info">
     F3 will automatically sync the following PHP globals:
@@ -144,13 +147,13 @@ $f3->sync('SESSION');
 
 **Get reference to hive key and its contents**
 
-``` php
-&$f3->ref( string $key, [ bool $add = true ]); mixed
+```php
+mixed &ref ( string $key [, bool $add = true ] )
 ```
 
 Usage:
 
-``` php
+```php
 $f3->set('name','John');
 $b = &$f3->ref('name'); // $b is a reference to framework variable 'name' , not a copy
 $b = 'Chuck'; // modifiying the reference updates the framework variable 'name'
@@ -159,7 +162,7 @@ echo $f3->get('name'); // Chuck
 
 You can also add non-existent hive keys, array elements, and object properties, when 2nd argument is TRUE by default.
 
-``` php
+```php
 
 $new = &$f3->ref('newVar'); // creates new framework hive var 'newVar' and returns reference to it
 $new = 'hello world'; // set value of php variable, also updates reference
@@ -180,42 +183,51 @@ $my_array = $f3->get('hero');
 echo $my_array['name']; // 'SpongeBob'
 ```
 
-If the 2nd argument `$add` is `false`, it just returns the read-only hive key contents. This behaviour is used by get(). If the hive key does not exist, it returns NULL.
+If the 2nd argument `$add` is `false`, it just returns the read-only hive key content. This behaviour is used by get(). If the hive key does not exist, it returns NULL.
 
 ### exists
 
-**Return TRUE if hive key is not set, or timestamp and TTL if cached**
+**Return TRUE if the hive key is not set (or return timestamp and TTL if cached)**
 
-``` php
-$f3->exists( string $key ); bool
+```php
+bool exists ( string $key [, mixed &$val=NULL] )
 ```
 
-<div class="alert alert-info"><strong>Notice:</strong> exists uses PHP's `isset()` function to determine if a variable is set and is not NULL.</div>
+The `exists` function also checks the Cache backend storage when the key is not found in the hive. If the key is found in cache, it then returns `array ( $timestamp, $ttl )`.
+
+<div class="alert alert-info"><strong>Notice:</strong> exists uses PHP's `isset()` function to determine if the hive key is set and is not NULL.</div>
 
 Usage:
 
-``` php
+```php
 $f3->set('foo','value');
 
 $f3->exists('foo'); // true
 $f3->exists('bar'); // false, was not set above
+```
 
+`exists` is specially useful with [PHP global variables automatically synched by F3](base#sync):
+
+```php
+// Synched hive keys with PHP global variables
 $f3->exists('COOKIE.userid');
 $f3->exists('SESSION.login');
 $f3->exists('POST.submit');
 ```
 
-The exists function also checks the Cache backend storage, if the key was not found in the hive. If the key was found in cache, it returns `array($timestamp,$ttl)`.
-
-<div class="alert alert-info"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
+<div class="alert alert-warning"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
 
 ### devoid
 
-**Return TRUE if hive key is empty and not cached**
+**Return TRUE if the hive key is empty and not cached**
 
-``` php
-$f3->devoid( string $key ); bool
+```php
+bool devoid ( string $key )
 ```
+
+The `devoid` function also checks the Cache backend storage, if the key was not found in the hive.
+
+<div class="alert alert-info"><strong>Notice:</strong> devoid uses PHP's `empty()` function to determine if the hive key is empty and not cached.</div>
 
 Usage:
 
@@ -233,13 +245,13 @@ $f3->devoid('baz'); // false
 
 **Unset hive key, key no longer exists**
 
-``` php
-$f3->clear( string $key ); void
+```php
+void clear ( string $key )
 ```
 
 To remove a hive key and its value completely from memory:
 
-``` php
+```php
 $f3->clear('foobar');
 $f3->clear('myArray.param1'); // removes key `param1` from array `myArray`
 ```
@@ -248,7 +260,7 @@ If the given hive key was cached before, it will be cleared from cache too.
 
 Some more special usages:
 
-``` php
+```php
 $f3->clear('SESSION'); // destroys the user SESSION
 $f3->clear('COOKIE.foobar'); // removes a cookie
 $f3->clear('CACHE'); // clears all cache contents
@@ -260,13 +272,13 @@ $f3->clear('CACHE'); // clears all cache contents
 
 **Multi-variable assignment using associative array**
 
-``` php
-$f3->mset(array $vars, [ string $prefix = ''], [ integer $ttl = 0 ]); void
+```php
+void mset ( array $vars [, string $prefix = '' [, integer $ttl = 0 ]] )
 ```
 
 Usage:
 
-``` php
+```php
 $f3->mset(
     array(
         'var1'=>'value1',
@@ -282,7 +294,7 @@ echo $f3->get('var3'); // value3
 
 You can append all key names using the 2nd argument `$prefix`.
 
-``` php
+```php
 $f3->mset(
     array(
         'var1'=>'value1',
@@ -301,59 +313,65 @@ To cache all vars, set a positive numeric integer value to `$ttl` in seconds.
 
 ### hive
 
-**return all hive contents as array.**
+**Return the whole hive contents as an array**
 
-``` php
-echo "HIVE CONTENTS <pre>" . var_export( $f3->hive(), true ) . "</pre>";
-```
-
-### copy
-
-**Copy contents of hive variable to another**
-
-``` php
-$f3->copy( string $src, string $dst); mixed
+```php
+array hive ()
 ```
 
 Usage:
 
-``` php
-$f3->set('var_1','value123');
-$f3->copy('var_1','foo'); // foo = "value123"
-echo $f3->get('foo'); // "value123"
+```php
+printf ("A Busy Hive: <pre>%s</pre>", var_export( $f3->hive(), true ) );
 ```
 
-Returns writable reference to `$dst` hive variable.
+### copy
+
+**Copy contents of a hive variable to another**
+
+```php
+mixed copy ( string $src, string $dst )
+```
+
+Return a writable reference to a new `$dst` hive key. If `$dst` already exists in the hive, it simply gets overwritten.
+
+Usage:
+
+```php
+$f3->set ('foo','123'); // $f3->set('bar','barbar');
+$f3->copy('foo','bar'); // bar = '123'
+$f3->set ('foo','456'); echo $f3->get('bar'); // '123'
+```
 
 ### concat
 
 **Concatenate string to hive string variable**
 
-``` php
-$f3->concat( string $key, string $val ); void
+```php
+string concat ( string $key, string $val )
 ```
+
+Return result of the concatenation. **Note**: If `$key` does not exist in the hive, it is automatically created in the hive.
 
 Usage:
 
-``` php
-$f3->set('cart_count', 4);
-$f3->concat('cart_count,' items in your shopping cart');
-echo $f3->get('cart_count'); // "4 items in your shopping cart"
+```php
+$f3->set('cart_count', 99); $f3->set('cart_item', 'ballons');
+$f3->concat('cart_count', ' Luft'.$f3->get('cart_item') );
+$f3->concat('cart_legend', $f3->get('cart_count')); // new 'cart_legend' hive key is created
 ```
-
-Returns writable reference to `$key` hive variable.
 
 ### flip
 
 **Swap keys and values of hive array variable**
 
-``` php
-$f3->flip( string $key ); array
+```php
+array flip ( string $key )
 ```
 
 Usage:
 
-``` php
+```php
 $f3->set('data', array(
     'foo1' => 'bar1',
     'foo2 '=> 'bar2',
@@ -376,13 +394,13 @@ Array
 
 **Add element to the end of hive array variable**
 
-``` php
-$f3->push( string $key, mixed $val ); mixed
+```php
+mixed push ( string $key, mixed $val )
 ```
 
 Usage:
 
-``` php
+```php
 $f3->set('fruits',array(
     'apple',
     'banana',
@@ -406,13 +424,13 @@ Array
 
 **Remove last element of hive array variable**
 
-``` php
-$f3->pop( string $key ); mixed
+```php
+mixed pop ( string $key )
 ```
 
 Usage:
 
-``` php
+```php
 $f3->set('fruits',array(
 	'apple',
 	'banana',
@@ -434,13 +452,13 @@ Array
 
 **Add element to the beginning of hive array variable**
 
-``` php
-$f3->unshift( string $key, string $val ); mixed
+```php
+mixed unshift ( string $key, string $val )
 ```
 
 Usage:
 
-``` php
+```php
 $f3->set('fruits',array(
 	'apple',
 	'banana',
@@ -462,55 +480,60 @@ Array
 
 ### shift
 
-**Remove first element of hive array variable**
+**Remove first element of a hive array variable**
 
-``` php
-$f3->shift( string $key ); mixed
+```php
+array|NULL shift ( string $key )
 ```
 
-Usage:
+Return the left-shifted hive array variable, or `NULL` if the hive array variable is empty or is not an array. 
 
-``` php
-$f3->set('fruits',array(
-	'apple',
-	'banana',
-	'peach'
-));
-$f3->shift('fruits'); // returns "apple"
+<div class="alert alert-warning">
+<b>Notice</b>: <code>shift</code> use the PHP function <code>array_shift()</code>. It means that all numerical array keys of the hive array variable will be modified to start counting from zero while literal keys won't be touched
+</div>
 
+Example:
+
+```php
+$f3->set('fruits', array(
+    'crunchy'=>'apples',    '11'=>'bananas',
+    '6'=>'kiwis',           'juicy'=>'peaches' ));
+$f3->shift('fruits'); // returns "apples"
 print_r($f3->get('fruits'));
 /* output:
 Array
 (
-    [0] => banana
-    [1] => peach
+    [0] => bananas
+    [1] => kiwis
+    [juicy] => peaches
 )
 */
 ```
-
 
 ### merge
 
 **Merge array with hive array variable**
 
-``` php
-$f3->merge( string $key, string $src ); array
+```php
+array merge ( string $key, array $src )
 ```
+
+Return the resulting array of the merge.
 
 Example:
 
 ``` php
-$f3->set('foo',array('blue','green'));
+$f3->set('foo', array('blue','green'));
 $f3->merge('foo', array('red', 'yellow'));
-/* foo is now:
+
+/* 'foo' now is:
 array (size=4)
-  0 => string 'blue' (length=4)
-  1 => string 'green' (length=5)
-  2 => string 'red' (length=3)
-  3 => string 'yellow' (length=6)
+  [0] => string 'blue' (length=4)
+  [1] => string 'green' (length=5)
+  [2] => string 'red' (length=3)
+  [3] => string 'yellow' (length=6)
 */
 ```
-
 
 ---
 
@@ -520,8 +543,8 @@ array (size=4)
 
 **Convert backslashes to slashes**
 
-``` php
-$f3->fixslashes( string $str ); string
+```php
+string fixslashes ( string $str )
 ```
 
 Usage:
@@ -535,13 +558,13 @@ $filepath = $f3->fixslashes($filepath); // /www/mysite/myfile.txt
 
 **Split comma-, semi-colon, or pipe-separated string**
 
-``` php
-$f3->split( string $str ); array
+```php
+array split ( string $str )
 ```
 
 Usage:
 
-``` php
+```php
 $data = 'value1,value2;value3|value4';
 print_r($f3->split($data));
 /* output:
@@ -559,38 +582,38 @@ Array
 
 **Convert PHP expression/value to compressed exportable string**
 
-``` php
-$f3->stringify( mixed $arg, [ bool $detail = TRUE ]); string
+```php
+string stringify ( mixed $arg [, $detail = TRUE ] )
 ```
 
-The `$detail` parameter controls whether to walk recursive into nested objects or not.
+The `$detail` parameter controls whether to walk recursively into nested objects or not.
 
 ### csv
 
 **Flatten array values and return as CSV string**
 
-``` php
-$f3->csv( array $args ); string
+```php
+string csv ( array $args )
 ```
 
 Usage:
 
-``` php
-$data = array('value1','value2','value3');
-$f3->csv($data); // returns: "'value1','value2','value3'"
+```php
+$elements = array('water','earth','wind','fire');
+echo $f3->csv($elements); // displays "'water','earth','wind','fire'" (string, length 29)
 ```
 
 ### camelcase
 
 **Convert snake_case string to camelCase**
 
-``` php
-$f3->camelcase( string $str ); string
+```php
+string camelcase ( string $str )
 ```
 
 Usage:
 
-``` php
+```php
 $str_s_c = 'user_name';
 $f3->camelcase($str_s_c); // returns: "userName"
 ```
@@ -598,13 +621,13 @@ $f3->camelcase($str_s_c); // returns: "userName"
 
 **Convert camelCase string to snake_case**
 
-``` php
-$f3->snakecase( string $str ); string
+```php
+string snakecase ( string $str )
 ```
 
 Usage:
 
-``` php
+```php
 $str_CC = 'userName';
 $f3->snakecase($str_CC); // returns: "user_name"
 ```
@@ -613,35 +636,35 @@ $f3->snakecase($str_CC); // returns: "user_name"
 
 **Return -1 if specified number is negative, 0 if zero,	or 1 if the number is positive**
 
-``` php
-$f3->sign( mixed $num ); integer
+```php
+int sign ( mixed $num )
 ```
 
 ### hash
 
 **Generate 64bit/base36 hash**
 
-``` php
-$f3->hash( string $str ); string
+```php
+string hash ( string $str )
 ```
 
 Example:
 
-``` php
-echo $f3->hash('foobar'); // 0i43fmgps1r
+```php
+var_dump($f3->hash('foobar')); // string '0i43fmgps1r' (length=11)
 ```
 
 ### base64
 
 **Return Base64-encoded equivalent**
 
-``` php
-$f3->base64( string $data, string $mime ); string
+```php
+string base64 ( string $data, string $mime )
 ```
 
 Example:
 
-``` php
+```php
 echo $f3->base64('<h1>foobar</h1>','text/html');
 // data:text/html;base64,PGgxPmZvb2JhcjwvaDE+
 ```
@@ -650,101 +673,164 @@ echo $f3->base64('<h1>foobar</h1>','text/html');
 
 **Convert special characters to HTML entities**
 
-``` php
-$f3->encode( string $str ); string
+```php
+string encode ( string $str )
 ```
 
 Encodes symbols like `& " ' < >` and other chars, based on your applications ENCODING setting. (default: UTF-8)
 
 Example:
 
-``` php
+```php
 echo $f3->encode("we <b>want</b> 'sugar & candy'");
-// we &amp;lt;b&amp;gt;want&amp;lt;/b&amp;gt; 'sugar &amp;amp; candy'
+// we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'
 
 echo $f3->encode("§9: convert symbols & umlauts like ä ü ö");
-// &amp;sect;9: convert symbols &amp;amp; umlauts like &amp;auml; &amp;uuml; &amp;ouml;
+// &sect;9: convert symbols &amp; umlauts like &auml; &uuml; &ouml;
 ```
 
 ### decode
 
 **Convert HTML entities back to characters**
 
-``` php
-$f3->decode( string $str ); string
+```php
+string decode ( string $str )
 ```
 
 Example:
 
-``` php
-echo $f3->decode("we &amp;lt;b&amp;gt;want&amp;lt;/b&amp;gt; 'sugar &amp;amp; candy'");
-// we <b>want</b> 'sugar &amp; candy'
+```php
+echo $f3->decode("we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'");
+// we <b>want</b> 'sugar & candy'
 
-echo $f3->decode("&amp;sect;9: convert symbols &amp;amp; umlauts like &amp;auml; &amp;uuml; &amp;ouml;");
-// §9: convert symbols &amp; umlauts like ä ü ö welcome!
+echo $f3->decode("&sect;9: convert symbols &amp; umlauts like &auml; &uuml; &ouml;");
+// §9: convert symbols & umlauts like ä ü ö welcome!
 ```
 
 ### clean
 
 **Remove HTML tags (except those enumerated) and non-printable characters to mitigate XSS/code injection attacks**
 
-``` php
-$f3->clean( mixed $var, [ string $tags = NULL ]); string
+```php
+string clean ( mixed $var [, string $tags = NULL ] )
+```
+`$var` can be either a `string` or an `array`. In the latter case, it will be recursively traversed to clean each and every element.
+
+`$tags` defines a list [<small>(as per the split syntax)</small>](base#split) of _allowed_ html tags that will **not** be removed.
+
+<div class="alert alert-success"><strong>Advice</strong>: It is recommended to use this function to sanitize submitted form input.</div>
+
+Examples:
+
+```php
+$foo = "99 bottles of <b>beer</b> on the wall. <script>alert('scripty!')</script>";
+echo $f3->clean($foo); // "99 bottles of beer on the wall. alert('scripty!')"
 ```
 
-Example:
-
-``` php
-$foo = "99 bottles of <b>beer</b> on the wall. <script>alert(1);</script>";
-echo $f3->clean($foo); // 99 bottles of beer on the wall. alert(1);
-echo $foo // 99 bottles of beer on the wall. alert(1);
-```
-
-You can also define a list of allowed html tags, that will not be removed:
-
-``` php
+```php
 $foo = "<h1><b>nice</b> <span>news</span> article <em>headline</em></h1>";
-$f3->clean($foo,'h1,span');
-// <h1>nice <span>news</span> article headline</h1>
+$h1 = $f3->clean($foo,'h1,span'); // <h1>nice <span>news</span> article headline</h1>
 ```
-
-<div class="alert alert-info">It is recommended to use this function to sanitize submitted form input.</div>
-
 
 ### scrub
 
 **Similar to clean(), except that variable is passed by reference**
 
-``` php
-$f3->scrub( mixed &$var, [ string $tags = NULL ]); string
+```php
+string scrub ( mixed &$var [, string $tags = NULL ] )
 ```
 
+Example:
+
+```php
+$foo = "99 bottles of <b>beer</b> on the wall. <script>alert('scripty!')</script>";
+$bar = $f3->scrub($foo);
+echo $foo; // 99 bottles of beer on the wall. alert('scripty!')
+```
+
+### esc
+
+**Encode characters to equivalent HTML entities**
+
+```php
+string esc ( mixed $arg )
+```
+
+Usage:
+
+```php
+echo $f3->esc("99 bottles of <b>beer</b> on the wall. <script>alert('scripty!');</script>");
+// 99 bottles of &lt;b&gt;beer&lt;/b&gt; on the wall. &lt;script&gt;alert('scripty!');&lt;/script&gt;
+```
+
+This also works with arrays and object properties:
+
+```php
+$myArray = array('<b>foo</b>',array('<script>alert('scripty!')</script>'),'key'=>'<i>foo</i>');
+print_r($f3->esc($myArray));
+/*
+    [0] => &lt;b&gt;foo&lt;/b&gt;
+    [1] => Array
+        (
+            [0] => &lt;script&gt;alert(1)&lt;/script&gt;
+        )
+    [key] => &lt;i&gt;foo&lt;/i&gt;
+*/
+
+$myObj = new stdClass();
+$myObj->title = '<h1>Hello World</h1>';
+var_dump($f3->esc($myObj));
+/*
+    object(stdClass)#23 (1) {
+      ["title"] => string(32) "&lt;h1&gt;Hello World&lt;/h1&gt;"
+    }
+*/
+```
+
+<div class="alert alert-info">If the system var <b>ESCAPE</b> is turned on (it is by default), then every hive key access using a template token like <b>{{@myContent}}</b> automatically get escaped by this function. If this is not desired, look into the <a href="template">template</a> section for further post processors.</div>
+
+### raw
+
+**Decode HTML entities to equivalent characters**
+
+```php
+string raw ( mixed $arg )
+```
+
+Example:
+
+```php
+$f3->raw("99 bottles of &lt;b&gt;beer&lt;/b&gt; on the wall. &lt;script&gt;alert('scripty!');&lt;/script&gt;");
+// 99 bottles of <b>beer</b> on the wall. <script>alert('scripty!');</script>
+```
+
+This method also handles nested array elements and objects properties, like `$f3->esc()` does too.
 
 ### serialize
 
 **Return string representation of PHP value**
 
-``` php
-$f3->serialize( mixed $arg ); string
+```php
+string serialize ( mixed $arg )
 ```
 
 Usage:
 
-``` php
+```php
 // example using json_encode
 $myArray = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
 echo $f3->serialize($myArray);  // outputs {"a":1,"b":2,"c":3,"d":4,"e":5}
 ```
 
-Depending on the `SERIALIZER` system variable, this method converts anything into a portable string expression. Possible values are **igbinary**, **json** and **php**.
-F3 checks on startup, if igbinary is available and prioritize it, as the igbinary extension works much faster and uses less disc space for serializing. Check [igbinary on github](https://github.com/igbinary/igbinary).
+Depending on the [SERIALIZER](quick-reference#serializer "Definition and usage of the SERIALIZER system variable") system variable, this method converts anything into a portable string expression. Possible values are **igbinary**, **json** and **php**.
+F3 checks on startup if igbinary is available and prioritize it, as the igbinary extension works much faster and uses less disc space for serializing. Check [igbinary on github](https://github.com/igbinary/igbinary "Igbinary is a drop in replacement for the standard php serializer").
 
 ### unserialize
 
 **Return PHP value derived from string**
 
-``` php
-$f3->unserialize( mixed $arg ); string
+```php
+string unserialize ( mixed $arg )
 ```
 
 See [serialize](base#serialize) for further description.
@@ -759,14 +845,14 @@ See [serialize](base#serialize) for further description.
 
 **Return locale-aware formatted string**
 
-``` php
-$f3->format( string $format [, mixed $arg0 [, mixed $arg1...] ] ); string
+```php
+string format( string $format [, mixed $arg0 [, mixed $arg1...]] )
 ```
 
 The `$format` string contains one or more placeholders identified by a position index enclosed in curly braces, the starting index being 0.
 The placeholders are replaced by the values of the provided arguments.
 
-``` php
+```php
 echo $f3->format('Name: {0} - Age: {1}','John',23); //outputs the string 'Name: John - Age: 23'
 ```
 
@@ -781,7 +867,7 @@ Current supported types are:
 * number,decimal
 * plural
 
-``` php
+```php
 echo $f3->format('Current date: {0,date} - Current time: {0,time}',time());
 //outputs the string 'Current date: 04/12/2013 - Current time: 11:49:57'
 echo $f3->format('{0} is displayed as a decimal number while {0,number,integer} is rounded',12.54);
@@ -796,7 +882,7 @@ echo $f3->format('Decimal Number: {0,number,decimal,2}', 0.171231235);
 
 The **plural** type syntax is a bit more complex since it allows you to relate the output to the input quantity. The accepted keywords are *zero*, *one*, *two* and *other*.
 
-``` php
+```php
 $string='{0,plural,zero {Your cart is empty.},one {One item in your cart.},two {A pair of items in your cart.},other {There are # items in your cart.}}';
 echo $f3->format($string,0);//outputs the string 'Your cart is empty.'
 echo $f3->format($string,1);//outputs the string 'One item in your cart.'
@@ -808,32 +894,32 @@ echo $f3->format($string,3);//outputs the string 'There are 3 items in your cart
 
 **Assign/auto-detect language**
 
-``` php
-$f3->language( string $code ); string
+```php
+string language ( [ string $code = NULL ] )
 ```
 
 This function is used while booting the framework to auto-detect the possible user language, by looking at the HTTP request headers, specifically the Accept-Language header sent by the browser.
-Use the `LANGUAGE` system variable to get and set languages, since it also handles some dependencies like changing dictionary files.
-The `FALLBACK` system variable defines a default language, that will be used, if none of the detected languages are available as a dictionary file.
+Use the [LANGUAGE](quick-reference#language "Definition and usage of the LANGUAGE system variable") system variable to get and set languages, since it also handles some dependencies like changing dictionary files.
+The  [FALLBACK](quick-reference#fallback "Definition and usage of the FALLBACK system variable") system variable defines a default language, that will be used, if none of the detected languages are available as a dictionary file.
 
 Example:
 
-``` php
-$f3->get('LANGUAGE'); // de_DE,de,en_US,en
-$f3->set('LANGUAGE','en_UK,en_US,en');
+```php
+$f3->get('LANGUAGE'); // 'de_DE,de,en_US,en'
+$f3->set('LANGUAGE', 'en_UK,en_US,en');
 ```
 
 ### lexicon
 
 **Transfer lexicon entries to hive**
 
-``` php
-$f3->lexicon(string $path ); array
+```php
+array lexicon ( string $path )
 ```
 
 This function is used while booting the framework to auto-load the dictionary files, located within the defined path in `LOCALES` var.
 
-``` php
+```php
 $f3->set('LOCALES','dict/');
 ```
 
@@ -849,91 +935,102 @@ A dictionary file can be a php file returning a key-value paired associative arr
 **Replace tokenized URL with current route's token values**
 
 ``` php
-$f3->build( string $url); string
+string build ( string $url )
 ```
 
 Example:
 
 ``` php
-// for instance you called `/channel/@channel` with PARAMS.channel = fatfree
-echo $f3->build('/subscribe/@channel');
-// return `/subscribe/fatfree`
+// for instance the route is '/subscribe/@channel' with PARAMS.channel = 'fatfree'
+
+echo $f3->build('@channel'); // displays 'fatfree'
+echo $f3->build('/get-it/now/@channel'); // displays '/get-it/now/fatfree'
+echo $f3->build('/subscribe/@channel');  // displays '/subscribe/fatfree'
 ```
 
 ### mock
 
-**Mock HTTP request**
+**Mock an HTTP request**
 
-``` php
-$f3->mock( string $pattern , [ array $args = NULL ], [ array $headers = NULL ], [ string $body = NULL]); null
+```php
+NULL mock ( string $pattern [, array $args = NULL [, array $headers = NULL [, string $body = NULL ]]] )
 ```
 
-This emulates a HTTP request.
+This emulates an HTTP request.
 
-``` php
+Basic usage example:
+
+```php
 $f3->mock('GET /page/view');
 ```
 
 ### parse
 
-**Parse string containing key-value pairs and use as routing tokens**
+**Parse a string containing key-value pairs and use them as routing tokens**
 
 ``` php
-$f3->parse( string str); NULL
+NULL parse ( string $str )
 ```
 
+Example:
+
+```php
+$f3->parse('framework=f3 , speed=fast , features=full');
+echo $f3->get('PARAMS.framework');  // 'f3'
+echo $f3->get('PARAMS.speed');      // 'fast'
+```
 
 ### route
 
-**Bind handler to route pattern**
+**Bind a route pattern to a given handler**
 
-``` php
-$f3->route( string|array $pattern, callback $handler, [ int $ttl = 0 ], [ int $kbps = 0 ]); null
+```php
+null route ( string|array $pattern, callback $handler [, int $ttl = 0 [, int $kbps = 0 ]] )
 ```
 
 Basic usage example:
 
-``` php
+```php
 $f3->route('POST /login','AuthController->login');
 ```
 
 #### Route Pattern
 
-The `$pattern` var describes a route pattern, that consists of the request type and a request URI, both separated by a space char.
+The `$pattern` var describes a route pattern, that consists of the request type(s) and a request URI, both separated by a space char.
 
 ##### Verbs
 
 Possible request type (Verb) definitions, that F3 will process, are: **GET**, **POST**, **PUT**, **DELETE**, **HEAD**, **PATCH**, **CONNECT**.
 
-You can combine multiple verbs, to use the same route handler for all of them. They are separated by a pipe char like `GET|POST`.
+You can combine multiple verbs, to use the same route handler for all of them. Simply separate them by a pipe char, like `GET|POST`.
 
 ##### Tokens
 
-The request URI may contain one or more **token**, that a meant for defining dynamic routes. Tokens are indicated by a `@`-char. See this example:
+The request URI may contain one or more **token(s)**, that a meant for defining dynamic routes. Tokens are indicated by a `@` char prior their name. See this example:
 
-``` php
-$f3->route('GET|HEAD /@page','PageController->display'); // /about
+```php
+$f3->route('GET|HEAD /@page','PageController->display'); // ex: /about
 $f3->route('POST /@category/@thread','ForumThread->saveAnswer'); // /games/battlefield3
 $f3->route('GET /image/@width-@height/@file','ImageCompressor->render'); // /image/300-200/mario.jpg
 ```
 
-After processing the incoming request URI (initiated by [run](base#run)), you'll find the value of each of those tokens in the `PARAMS` system variable as named key, like `$f3->get('PARAMS.page')`.
+After processing the incoming request URI (initiated by [run](base#run)), you'll find the value of each of those tokens in the `PARAMS` system variable as named key, like `$f3->get('PARAMS.file')`. // 'mario.jpg'
 
 <div class="alert alert-info">
-    <b>Notice:</b> Routes and their according verbs are grouped by their url pattern. Static routes precedes routes with dynamic tokens or wildcards.
-    This means that having a static route, which overloads a matching dynamic route, requires you to define all required VERB pattern to this specific route separately. 
+    <b>Notice:</b> Routes and their according verbs are grouped by their URL pattern. Static routes _precede_ routes with dynamic tokens or wildcards.
+    This means that having a static route, which overloads a matching dynamic route, requires you to define separately all required VERB patterns to this specific route. 
 </div>
 
 ##### Wildcards
 
-You can also define wildcards (`/*`) in your routing URI. You can also use them in combination with `@`-tokens.
+You can also define wildcards (`/*`) in your routing URI. Furthermore, you can use them in combination with `@` tokens.
 
-``` php
-$f3->route('GET /path/*/@page',function($f3,$params){
+```php
+$f3->route('GET /path/*/@page', function($f3,$params) {
     // called URI: "/path/cat/page1"
     // $params is the same as $f3->get('PARAMS');
     $params[0]; // contains the full route path. "/path/cat/page"
-    $params[1]; // and further numeric keys in PARAMS holds the catched wildcard paths and tokens. in this case "cat"
+    $params[1]; // and further numeric keys in PARAMS hold the catched wildcard paths and tokens. in this case "cat"
     $params['page']; // is your last segment, in this case "page1"
 });
 ```
@@ -944,7 +1041,7 @@ $f3->route('GET /path/*/@page',function($f3,$params){
 
 The route above also works with sub categories. Just call `/path/cat/subcat/page1`
 
-``` php
+```php
 $params[1]; // now contains "/cat/subcat"
 ```
 
@@ -958,7 +1055,7 @@ Any further wildcards can only contain exactly one part between the slashes (`/`
 
 Since `F3 v3.0.7` it is possible to assign multiple routes to the same route handler, using an array of routes in `$pattern`. It would look like this:
 
-``` php
+```php
 $f3->route(
   array(
     'GET /archive',
@@ -979,7 +1076,7 @@ Can be a callable class method like 'Foo->bar' or 'Foo::bar', a function name, o
 
 F3 automatically passes the framework object to methods of route handler controller classes, i.e.
 
-``` php
+```php
 $f3->set('hello','world');
 $f3->route('GET /foo/@file','Bar->baz');
 
@@ -1007,13 +1104,13 @@ Set the 4th argument `$kbps` to your desired speed limit, to enable throttling. 
 
 **Reroute to specified URI**
 
-``` php
-$f3->reroute( string $uri, [ bool $permanent = FALSE]); null
+```php
+null reroute ( string $uri [, bool $permanent = FALSE] )
 ```
 
-Examples:
+Examples of usage:
 
-``` php
+```php
 // an old page is moved permanently
 $f3->route('GET|HEAD /obsoletepage', function($f3) {
         $f3->reroute('/newpage', true);
@@ -1038,17 +1135,17 @@ $f3->route('GET /partners', function($f3) {
 
 **Provide ReST interface by mapping HTTP verb to class method**
 
-``` php
-$f3->map( string $url, string $class, [ int $ttl = 0], [ int $kbps = 0 ]); null
+```php
+null map ( string $url, string $class [, int $ttl = 0 [, int $kbps = 0 ]] )
 ```
 
 Its syntax works slightly similar to the **route** function, but you need not to define a HTTP request method in the 1st argument,
 because they are mapped as functions in the Class you prodive in the `$class` argument.
-[Read more about the REST support in the User Guide](routing-engine#representational-state-transfer-%28rest%29).
+[Read more about the REST support in the User Guide](routing-engine#rest-representational-state-transfer).
 
-Example:
+Example of usage:
 
-``` php
+```php
 $f3->map('/news/@item','News');
 
 class News {
@@ -1063,13 +1160,13 @@ class News {
 
 **Match routes against incoming URI and call their route handler**
 
-``` php
-$f3->run(); null
+```php
+null run ()
 ```
 
-Example:
+Example of usage:
 
-``` php
+```php
 $f3 = require __DIR__.'/lib/base.php';
 $f3->route('GET /',function(){
     echo "Hello World";
@@ -1081,17 +1178,16 @@ After processing the incoming request URI, the routing pattern that matches that
 The `PARAMS` var will contains all tokens as named keys, and additionally all tokens and wildcards as numeric keys, depending on their order of appearance.
 
 <div class="alert alert-info">
-    <p><b>Notice:</b> If a static and dynamic route pattern both match the current URI, then the static route pattern has priority.</p>
+<p><i class="icon-exclamation-sign"></i> <b>Notice:</b><br>If a static and dynamic route pattern both match the current URI, then the static route pattern has priority.</p>
 </div>
-
 
 
 ### call
 
 **Execute callback/hooks (supports 'class->method' format)**
 
-``` php
-$f3->call( callback $func, [ mixed $args = NULL ], [ string $hooks = '' ]); mixed|false
+```php
+mixed|false call ( callback $func [, mixed $args = NULL [, string $hooks = '' ]] )
 ```
 
 This method provides that facility to invoke callbacks and their arguments. F3 recognizes these as valid callbacks:
@@ -1109,13 +1205,13 @@ This method provides that facility to invoke callbacks and their arguments. F3 r
 
 **Execute specified callbacks in succession; Apply same arguments to all callbacks**
 
-``` php
-$f3->chain( array|string $funcs, [ mixed $args = NULL ]); array
+```php
+array chain ( array|string $funcs [, mixed $args = NULL ] )
 ```
 
 This method invokes several callbacks in succession:
 
-``` php
+```php
 echo $f3->chain('a; b; c', 0);
 
 function a($n) {
@@ -1135,13 +1231,13 @@ function c($n) {
 
 **Execute specified callbacks in succession; Relay result of previous callback as argument to the next callback**
 
-``` php
-$f3->relay( array|string $funcs, [ mixed $args = NULL ]); array
+```php
+array relay ( array|string $funcs [, mixed $args = NULL ] )
 ```
 
 This method invokes callback in succession like [chain](#chain) but applies the result of the first function as argument of the succeeding function, i.e.:
 
-``` php
+```php
 echo $f3->relay('a; b; c', 0);
 
 function a($n) {
@@ -1160,17 +1256,18 @@ function c($n) {
 ---
 ## File System
 
+
 ### mutex
 
-**Create mutex, invoke callback then drop ownership when done**
+** Create mutex, invoke callback then drop ownership when done**
 
-``` php
-$f3->mutex( string $id, callback $func, [ mixed $args = NULL ]); mixed
+```php
+mixed mutex ( string $id, callback $func [, mixed $args = NULL ] )
 ```
 
-A [Mutual Exclusion (mutex)](http://en.wikipedia.org/wiki/Mutual_exclusion)(Wikipedia) is a cross-platform mechanism for synchronizing access to resources, in such a way that a process that has acquired the mutex gains exclusive access to the resource. Other processes trying to acquire the same mutex will be in a suspended state until the mutex is released.
+A [Mutual Exclusion (mutex)](http://en.wikipedia.org/wiki/Mutual_exclusion "Wikipedia :: Mutual Exclusion") is a cross-platform mechanism for synchronizing access to resources, in such a way that a process that has acquired the mutex gains exclusive access to the resource. Other processes trying to acquire the same mutex will be in a suspended state until the mutex is released.
 
-``` php
+```php
 $f3->mutex('test',function() {
 	// Critical section
 	session_start();
@@ -1184,25 +1281,39 @@ $f3->mutex('test',function() {
 
 **Read file (with option to apply Unix LF as standard line ending)**
 
-``` php
-$f3->read( string $file, [ bool $lf = FALSE ]); string
+```php
+string|FALSE read ( string $file [, bool $lf = FALSE ] )
 ```
 
+Uses the [`file_get_contents()`](http://www.php.net/file_get_contents "PHP Manual :: file_get_contents") <small>PHP function</small> to read the entire `$file` and return it as a string. Returns `FALSE` on failure.
+
+IF `$lf` is `TRUE`, an EOL conversion to UNIX LF format is performed on all the lines ending.
 
 ### write
 
 **Exclusive file write**
 
-``` php
-$f3->write( string $file, mixed $data, [ bool $append = FALSE ]); int|FALSE
+```php
+int|FALSE write ( string $file, mixed $data [, bool $append = FALSE ] )
 ```
+
+Uses the [`file_put_contents()`](http://www.php.net/file_put_contents "PHP Manual :: file_put_contents") <small>PHP function</small> with the `LOCK_EX` <small>PHP</small> flag to acquire an exclusive lock on the file while proceeding to the writing.
+
+If `$append` is `TRUE` and the `$file` already exits, the `$data` is appended to the file content instead of overwriting it.
 
 ### rel
 
 **Return path relative to the base directory**
 
 ``` php
-$f3->rel( string $url ); string
+string rel ( string $url )
+```
+
+Example:
+
+```php
+$f3->set('BASE','http://fatfreeframework.com/');
+echo $f3->rel( 'http://fatfreeframework.com/gui/img/supported_dbs.jpg' ); // 'gui/img/supported_dbs.jpg'
 ```
 
 ---
@@ -1211,23 +1322,22 @@ $f3->rel( string $url ); string
 
 ### blacklisted
 
-**Return TRUE if IPv4 address exists in DNSBL**
+**Lookup visitor's IP against common DNS blacklist services**
 
-``` php
-$f3->blacklisted( string $ip ); bool
+```php
+bool blacklisted ( string $ip )
 ```
 
-This function get called while bootstrapping the application and will lookup the visitors IP against common DNS blacklist services
-you can define in [DNSBL](quick-reference#dnsbl). This is very useful to protect your application against Spam bots or DOS attacks.
+This function get called while bootstrapping the application and will lookup the visitors IP against common DNS blacklist services defined by the [DNSBL system variable](quick-reference#dnsbl). This is very useful to protect your application against Spam bots or DOS attacks.
 
-
+**Return `TRUE` if the IPv4 `$ip` address is present in [DNSBL](quick-reference#dnsbl)**
 
 ### config
 
 **Configure framework according to .ini-style file settings**
 
-``` php
-$f3->config( string $file ); null
+```php
+null config ( string $file )
 ```
 
 This will parse a configuration file, provided by `$file` and setup the framework with variables and routes.
@@ -1235,41 +1345,39 @@ This will parse a configuration file, provided by `$file` and setup the framewor
 See the user guide section about [configuration files](framework-variables#configuration-files) to get a full description about how to setup your ini file.
 
 
-
 ### dump
 
-**Dump expression with syntax highlighting**
+**Dump (_echo_) expression with syntax highlighting**
 
-``` php
-$f3->dump( mixed $expr ); null
+```php
+null dump ( mixed $expr )
 ```
 
+<i class="icon-thumbs-up"></i> _NOTICE: The syntax highlighting depends on the [DEBUG level](quick-reference#debug "The DEBUG system variable")_.
 
 
 ### error
 
 **Execute error handler**
 
-``` php
-$f3->error( int $code,[ string $text = '' ], [ array $trace = NULL ]); null
+```php
+null error ( int $code [, string $text = '' [, array $trace = NULL ]] )
 ```
 
 Calling this function logs an error and executes the [ONERROR](quick-reference#onerror) handler if defined.
 Otherwise it will display a default error page in HTML for synchronous requests, or gives a JSON string for AJAX requests.
 
-
-
 ### expire
 
 **Send cache metadata to HTTP client**
 
-``` php
-$f3->expire([ int $secs = 0 ]); void
+```php
+void expire ( [ int $secs = 0 ] )
 ```
 
 There is little need to call this method directly because it is automatically invoked at runtime by the framework, depending on whether the page should be cached  or otherwise. The framework sends the necessary HTTP cache control headers to the browser so you don't need to send it yourself.
 
-``` php
+```php
 $f3->expire(0); // sends 'Cache-Control: no-cache, no-store, must-revalidate'
 ```
 
@@ -1277,35 +1385,31 @@ $f3->expire(0); // sends 'Cache-Control: no-cache, no-store, must-revalidate'
 
 **Apply syntax highlighting**
 
-``` php
-$f3->highlight( string $text ); string
+```php
+string highlight ( string $text )
 ```
-
-
 
 ### instance
 
 **Return class instance**
 
-``` php
+```php
 $f3 = \Base::instance();
 ```
 
 This is used to grab the framework instance at any point of your code.
 
-
-
 ### status
 
 **Send HTTP/1.1 status header; Return text equivalent of status code**
 
-``` php
-$f3->status( int $code ); string
+```php
+string status ( int $code )
 ```
 
 Use this method for sending various HTTP status messages to the client, e.g.
 
-``` php
+```php
 $f3->status(403); // Sends 403 Forbidden header
 $f3->status(415); // Sends 415 Unsupported media type
 ```
@@ -1314,8 +1418,11 @@ $f3->status(415); // Sends 415 Unsupported media type
 
 **Execute framework/application shutdown sequence**
 
-``` php
-$f3->unload( string $cwd ); null
+```php
+NULL unload ( $cwd )
 ```
+First, changes PHP's current directory to directory `$cwd`, and write session data and end session by calling the `session_commit()` <small>PHP function</small>.
 
-This will shutdown the application and calls the shutdown handler defined in [UNLOAD](quick-reference#unload).
+Then shutdown the application and calls the shutdown handler defined in [UNLOAD](quick-reference#unload).
+
+As a final fallback, an HTTP error `500` is raised if one of the following `E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR` is detected and not handled by the shutdown handler.

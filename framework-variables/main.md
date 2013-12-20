@@ -6,7 +6,7 @@ Variables defined in Fat-Free are global, i.e. they can be accessed by any MVC c
 
 To assign a value to a Fat-Free variable:
 
-``` php
+```php
 $f3->set('var',value)
 ```
 
@@ -14,7 +14,7 @@ $f3->set('var',value)
 
 To set several variables at once:
 
-``` php
+```php
 $f3->mset(
     array(
         'foo'=>'bar',
@@ -25,19 +25,19 @@ $f3->mset(
 
 To retrieve the value of a framework variable named `var`:
 
-``` php
+```php
 $f3->get('var')
 ```
 
 To remove a Fat-Free variable from memory if you no longer need it (discard it so it doesn't interfere with your other functions/methods), use the method:
 
-``` php
+```php
 $f3->clear('var')
 ```
 
 To find out if a variable has been previously defined:
 
-``` php
+```php
 $f3->exists('var')
 ```
 
@@ -71,7 +71,7 @@ You should not use PHP reserved words like `if`, `for`, `class`, `default`, etc.
 
 F3 also provides a number of tools to help you with framework variables.
 
-``` php
+```php
 $f3->set('a','fire');
 $f3->concat('a','cracker');
 echo $f3->get('a'); // returns the string 'firecracker'
@@ -82,7 +82,7 @@ echo $f3->get('b'); // returns the same string: 'firecracker'
 
 F3 also provides some primitive methods for working with array variables:
 
-``` php
+```php
 $f3->set('colors',array('red','blue','yellow'));
 $f3->push('colors','green'); // works like PHP's array_push()
 echo $f3->pop('colors'); // returns 'green'
@@ -139,7 +139,7 @@ Fat-Free generates its own HTML error pages, with stack traces to help you with 
 
 If you feel it's a bit too plain or wish to do other things when the error occurs, you may create your own custom error handler:
 
-``` php
+```php
 $f3->set('ONERROR',
     function($f3) {
         // custom error handler code goes here
@@ -153,15 +153,16 @@ $f3->set('ONERROR',
 F3 maintains a global variable containing the details of the latest error that occurred in your application. The `ERROR` variable is an array structured as follows:
 
 ```
-ERROR.code - displays the error code (404, 500, etc.)
-ERROR.title - header and page title
-ERROR.text - error context
-ERROR.trace - stack trace
+`ERROR.code` - the HTTP status error code (`404`, `500`, etc.)
+`ERROR.status` - a brief description of the HTTP status code. e.g. `'Not Found'`
+`ERROR.title` - header and page title
+`ERROR.text` - error context
+`ERROR.trace` - stack trace stored in an `array()`
 ```
 
 While developing your application, it's best to set the debug level to maximum so you can trace all errors to their root cause:
 
-``` php
+```php
 $f3->set('DEBUG',3);
 ```
 
@@ -169,15 +170,15 @@ Just insert the command in your application's bootstrap sequence.
 
 Once your application is ready for release, simply remove the statement from your application, or replace it with:
 
-``` php
+```php
 $f3->set('DEBUG',0);
 ```
 
 This will suppress the stack trace output in any system-generated HTML error page (because it's not meant to be seen by your site visitors).
 
-`DEBUG` can have values ranging from 0 (stack trace suppressed) to 3 (most verbose).
+`DEBUG` can have values ranging from 0 (stack trace suppressed) to 2 (most verbose with classes & functions calls logs).
 
-**Don't forget!** Stack traces may contain paths, file names, database commands, user names and passwords. You might expose your Web site to unnecessary security risks if you fail to set the `DEBUG` global variable to 0 in a production environment.
+<i class="icon-warning-sign"></i> **Don't forget!** Stack traces may contain paths, file names, database commands, user names and passwords. You might expose your Web site to unnecessary security risks if you fail to set the `DEBUG` global variable to `0` in a production environment.
 
 ## Configuration Files
 
@@ -185,7 +186,7 @@ If your application needs to be user-configurable, F3 provides a handy method fo
 
 Instead of creating a PHP script that contains the following sample code:
 
-``` php
+```php
 $f3->set('num',123);
 $f3->set('str','abc');
 $f3->set('hash',array('x'=>1,'y'=>2,'z'=>3));
@@ -218,7 +219,7 @@ mix="this",123.45,FALSE
 
 Instead of lengthy `$f3->set()` statements in your code, you can instruct the framework to load a configuration file as code substitute. Let's save the above text as setup.cfg. We can then call it with a simple:
 
-``` php
+```php
 $f3->config('setup.cfg');
 ```
 

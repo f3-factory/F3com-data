@@ -4,43 +4,43 @@
 
 
 ### AGENT
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-Auto-detected HTTP user agent, e.g. `Mozilla/5.0 (Linux; Android 4.2.2; Nexus 7) AppleWebKit/537.31`.
+A string containing the auto-detected HTTP user agent, e.g. `'Mozilla/5.0 (Linux; Android 4.2.2; Nexus 7) AppleWebKit/537.31'`
 
 
 ### AJAX
-**Type:** `bool`
+**Type:** `bool` &nbsp; &nbsp; **Default value:** auto-detected
 
-`TRUE` if an XML HTTP request is detected, `FALSE` otherwise.
+`TRUE` if an XML HTTP request is detected, `FALSE` otherwise. Default value: Result of the expression `$headers['X-Requested-With']=='XMLHttpRequest'`
 
 
 ### AUTOLOAD
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `'./'`
 
-Search path for user-defined PHP classes that the framework will attempt to autoload at runtime. Accepts a pipe (`|`), comma (`,`), or semi-colon (`;`) as path separator.
+Search path(**s**) for user-defined PHP classes that the framework will attempt to autoload at runtime. When specifying multiple paths, you can use a pipe (`|`), comma (`,`), or semi-colon (`;`) as path separator. Remember paths must end with a `'/'`. e.g. `$f3->set('AUTOLOAD', 'app/;inc/,./');`
 
 
 ### BASE
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** Result of `$_SERVER['SCRIPT_NAME']`
 
-Path to the `index.php` main/front controller.
+Path to the `index.php` main/front controller. `Read-only`
 
 
 ### BODY
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** Result of `file_get_contents('php://input')`
 
 HTTP request body for ReSTful post-processing.
 
 
 ### CACHE
-**Type:** `bool|string`
+**Type:** `bool|string` &nbsp; &nbsp; **Default value:** `FALSE`
 
-Cache backend. Unless assigned a value like `'memcache=localhost'` (and the PHP memcache module is present), F3 auto-detects the presence of APC, WinCache and XCache and uses the first available PHP module if set to TRUE. If none of these PHP modules are available, a filesystem-based backend is used (default directory: `tmp/cache`). The framework disables the cache engine if assigned a `FALSE` value.
+Cache backend. When set to `TRUE`, and unless you assign a configuration value like `'memcache=localhost'` (and the [PHP memcache module](http://www.php.net/manual/en/intro.memcache.php "Information on the Memcache module") is available), F3 auto-detects the presence of APC, WinCache and XCache and then uses the first available PHP module. If none of these PHP modules is available, a filesystem-based backend is used (default directory: `tmp/cache`). The framework doesn't use any cache engine when a `FALSE` value is assigned.
 
 
 ### CASELESS
-**Type:** `bool`
+**Type:** `bool` &nbsp; &nbsp; **Default value:** `TRUE`
 
 Pattern matching of routes against incoming URIs is case-insensitive by default. Set to `FALSE` to make it case-sensitive.
 
@@ -48,247 +48,281 @@ Pattern matching of routes against incoming URIs is case-insensitive by default.
 ### COOKIE, GET, POST, REQUEST, SESSION, FILES, SERVER, ENV
 **Type:** `array`
 
-Framework equivalents of PHP globals. Variables may be used throughout an application. However, direct use in templates is not advised due to security risks.
+Framework equivalents of PHP globals. For your convenience, F3 automatically synchronizes these variables with the underlying PHP globals.
+These variables may be used throughout an application. However, direct use in templates is not advised due to security risks.
 
 
 ### DEBUG
-**Type:** `integer`
+**Type:** `integer` &nbsp; &nbsp; **Default value:** `0`
 
-Stack trace verbosity. Assign values 1 to 3 for increasing verbosity levels. Zero (0) suppresses the stack trace. This is the default value and it should be the assigned setting on a production server.
+Verbosity level of the stack trace. Assign values between 0 to 3 for increasing verbosity levels as follow:
 
+* 0 : suppresses logs of the stack trace.
+* 1 : logs files & lines.
+* 2 : logs classes & functions as well.
+* 3 : logs detailed infos of the objects as well.
 
-### DNSBL
-**Type:** `string`
-
-Comma-separated list of [DNS blacklist servers](http://whatismyipaddress.com/blacklist-check). Framework generates a `403 Forbidden` error if the user's IPv4 address is listed on the specified server(s).
+<i class="icon-warning-sign"></i> _**NOTICE:** Only the default value of &nbsp;`0` should be used on production servers_.
 
 
 ### DIACRITICS
-**Type:** `string`
+**Type:** `array` &nbsp; &nbsp; **Default value:** `array()`
 
 Key-value pairs for foreign-to-ASCII character translations.
 
 
-### ENCODING
-**Type:** `string`
+### DNSBL
+**Type:** `string` &nbsp; &nbsp; **Default value:** an empty string `''`
 
- Character set used for document encoding. Default value is `UTF-8`.
+Comma-separated list of [DNS blacklist servers](http://whatismyipaddress.com/blacklist-check "Blacklist Check List"). Framework generates a `403 Forbidden` error if the user's IPv4 address is listed on the specified server(s).
+
+
+### ENCODING
+**Type:** `string` &nbsp; &nbsp; **Default value:** `'UTF-8'`
+
+ Character set used for [document encoding](views-and-templates#document-encoding).
 
 
 ### ERROR
-**Type:** `array`
+**Type:** `array` &nbsp; &nbsp; **Default value:** `NULL`
 
-Information about the last HTTP error that occurred. `ERROR.code` is the HTTP status code. `ERROR.title` contains a brief description of the error. `ERROR.text` provides greater detail. For HTTP 500 errors, use `ERROR.trace` to retrieve the stack trace.
+Information about the last HTTP error that occurred:
+
+* `ERROR.code` is the [HTTP status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html "List of the HTTP Status Code Definitions"). e.g. `307`
+* `ERROR.status` is a brief description of the HTTP status code. e.g. `'Temporary Redirect'`
+* `ERROR.title` contains a brief description of the error.
+* `ERROR.text` provides greater detail.
+* `ERROR.trace` is used for HTTP 500 errors, to retrieve the stack trace. `array()`
 
 
 ### ESCAPE
-**Type:** `bool`
+**Type:** `bool` &nbsp; &nbsp; **Default value:** `TRUE`
 
-Used to enable/disable auto-escaping.
+Used to enable/disable auto-escaping [@tokens](/quick-reference#token) used in templates.
 
 
 ### EXEMPT
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `NULL`
 
-Comma-separated list of IPv4 addresses exempt from DNSBL lookups.
+Comma-separated list of IPv4 addresses to exempt from DNSBL lookups.
 
 
 ### FALLBACK
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `'en'`
 
 Language (and dictionary) to use if no translation is available.
 
 
 ### HALT
-**Type:** `bool`
+**Type:** `bool` &nbsp; &nbsp; **Default value:** `TRUE`
 
-If TRUE (default), framework stops execution after a non-fatal error is detected.
+If `TRUE`, the framework, after having logged stack trace and errors, stops execution (`die` without any status) when a _non-fatal_ error is detected.
 
 
 ### HEADERS
-**Type:** `rray`
+**Type:** `array` &nbsp; &nbsp; **Default value:** auto-detected
 
-HTTP request headers received by the server.
+HTTP request headers received by the server. e.g. (simplified)
 
+```
+array ( 
+'Host' => 'fatfreeframework.com'
+'Accept-Encoding' => 'gzip,deflate,sdch',
+'Accept-Language' => 'en-US,en;q=0.8,ja;q=0.6'
+)
+```
 
 ### HIGHLIGHT
-**Type:** `bool`
+**Type:** `bool` &nbsp; &nbsp; **Default value:** `TRUE`
 
-Enable/disable syntax highlighting of stack traces. Default value: `TRUE` (requires `code.css` stylesheet).
+Enable/disable syntax highlighting of stack traces. When enabled, requires `code.css` stylesheet.
 
 
 ### HOST
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** Result of `$_SERVER['SERVER_NAME']`
 
-Server host name. If `$_SERVER['SERVER_NAME']` is not available, return value of `gethostname()` is used.
+Server host name.
 
 
 ### IP
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-Remote IP address. The framework derives the address from headers if HTTP client is behind a proxy server.
+Remote IP address. The framework derives the address from headers if HTTP client is behind a proxy server. Default value: First match of `Client-IP` then `X-Forwarded-For` then `$_SERVER['REMOTE_ADDR']`, otherwise set to `''`
 
 ### JAR
 **Type:** `array`
 
 Default cookie parameters. Consists of the following options:
 
-* `expire` Unix timestamp, when the cookie should expire
-* `path` The path on the server in which the cookie will be available on
-* `domain` The domain that the cookie is available to
-* `secure` only set the cookie, when a secure HTTPS connection exists
-* `httponly` Make the cookie accessible only through the HTTP protocol.
+* `expire` Unix timestamp, when the cookie should expire. Default value: `0`
+* `path` The path on the server in which the cookie will be available. Default value: `'/'`
+* `domain` The domain that the cookie is available to. Default value: `$_SERVER['SERVER_NAME']` if available, else `''`
+* `secure` Set the cookie when a secure HTTPS connection exists. Default value: `$_SERVER['HTTPS']=='on'`
+* `httponly` Make the cookie accessible only through the HTTP protocol. Default value: `TRUE`
+
+You can refer to [session_set_cookie_params() in the PHP Manual](http://www.php.net/manual/en/function.session-set-cookie-params.php) for more information.
 
 ### LANGUAGE
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-Current active language. Value is used to load the appropriate language translation file in the folder pointed to by `LOCALES`. If set to `NULL`, language is auto-detected from the HTTP `Accept-Language` request header.
+Current active language(s). Value is used to load the appropriate language(s) translation file(s) in the folder pointed to by `LOCALES`. Default value: auto-detected from the HTTP `Accept-Language` request header, e.g. `'en-US,en,es'`
 
 
 ### LOCALES
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `'./'`
 
-Location of the language dictionaries.
+Location of the language(s) dictionaries.
 
 
 ### LOGS
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `'./'`
 
 Location of custom logs.
 
 
 ### ONERROR
-**Type:** `mixed`
+**Type:** `mixed` &nbsp; &nbsp; **Default value:** `NULL`
 
-Callback function to use as custom error handler.
-
+Name of the callback function to use as custom error handler, or `NULL`. 
+**Notice**: If no callback function is specified, a default error page is generated (HTML5 for synchronous requests, JSON string for AJAX requests).
 
 ### PACKAGE
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `'Fat-Free Framework'` :)
 
-Framework name.
-
-
-### PATH
-**Type:** `string`
-
-The URL relative to BASE
+A string containing the name of the Framework.
 
 
 ### PARAMS
-**Type:** `array`
+**Type:** `array` &nbsp; &nbsp; **Default value:** `array()`
 
-Captured values of tokens defined in a `route()` pattern. `PARAMS.0` contains the captured URL relative to the Web root.
+Captured values of tokens defined in a `route()` pattern. `PARAMS[0]` contains the captured URL relative to the Web root.
+
+
+### PATH
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
+
+The URL relative to BASE. Default value: `parse_url($_SERVER['REQUEST_URI'],PHP_URL_PATH)`
 
 
 ### PATTERN
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `NULL`
 
 Contains the routing pattern that matches the current request URI.
 
 
 ### PLUGINS
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `&#95;&#95;DIR&#95;&#95;.'/'`
 
-Location of F3 plugins. Default value is the folder where the framework code resides, i.e. the path to `base.php`.
+Location of F3 plugins. The default value is the folder where the framework code resides, i.e. the path to `base.php`.
 
 
 ### PORT
-**Type:** `integer`
+**Type:** `integer` &nbsp; &nbsp; **Default value:** auto-detected
 
-TCP/IP listening port used by the Web server.
+TCP/IP listening port used by the Web server. Default value: `$_SERVER['SERVER_PORT']` or `NULL` if not available.
+
+
+### PREFIX
+**Type:** `string` &nbsp; &nbsp; **Default value:** `NULL`
+
+Prefix to use with LANGUAGE and LOCALES.
 
 
 ### QUIET
-**Type:** `bool`
+**Type:** `bool` &nbsp; &nbsp; **Default value:** `FALSE`
 
-Toggle switch for suppressing or enabling standard output and error messages. Particularly useful in unit testing.
+Toggle switch for suppressing or enabling standard output and error messages. Particularly useful in [unit testing](unit-testing).
 
 
 ### REALM
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-Full canonical URL.
+Full canonical URL. Default value: Result of `'http(s)://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']`
 
 
 ### RESPONSE
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** an empty string `''`
 
 The body of the last HTTP response. F3 populates this variable regardless of the `QUIET` setting.
 
 
 ### ROOT
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-Absolute path to document root folder.
+Absolute path to document root folder. Default value: Result of `$_SERVER['DOCUMENT_ROOT']`
 
 
 ### ROUTES
-**Type:** `array`
+**Type:** `array` &nbsp; &nbsp; **Default value:** `array()`
 
-Contains the defined application routes.
+Contains the defined application routes. 
 
+**Notice**: A route is more than just a URL. It's an HTTP verb (or verbs) _AND_ a URL
 
 ### SCHEME
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-Server protocol, i.e. `http` or `https`.
+Server protocol. Default value: `'http'` or `'https'`
 
 
 ### SERIALIZER
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-Default serializer. Normally set to `php`, unless PHP `igbinary` extension is auto-detected. Assign `json` if desired.
+Define the default serializer used by the [Base->serialize() method](base#serialize "Definition and usage of the Base->serialize method"). Default value: `igbinary` if available, otherwise set to `php`. You can assign `json` if desired. Default value: First match of `'igbinary'` then `'php'`
 
 
 ### TEMP
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `'tmp/'`
 
-Temporary folder for cache, filesystem locks, compiled F3 templates, etc. Default is the `tmp/` folder inside the Web root. Adjust accordingly to conform to your site's security policies.
+Temporary folder for cache, filesystem locks, compiled F3 templates, etc. The default value is the `'tmp/'` folder inside the Web root. _Adjust accordingly to conform to your site's security policies_.
+
+
+### TIME
+**Type:** `float` &nbsp; &nbsp; **Default value:** auto-detected
+
+Starting time of the framework. Default value: The current Unix time in seconds accurate to the nearest microsecond as per the [PHP function microtime(**TRUE**)](http://php.net/microtime).
 
 
 ### TZ
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-Default timezone. Changing this value automatically calls the underlying `date_default_timezone_set()` function. See the [list of supported timezones](http://de2.php.net/manual/en/timezones.php) to get a possible value to use here.
+Timezone to use. Changing this value automatically calls the underlying PHP function `date_default_timezone_set()`. See the [list of supported timezones](http://php.net/manual/en/timezones.php) to get a possible value to use here. Default value: Result of `date_default_timezone_get()` if available, otherwise fallback to `'UTC'`
 
 
 ### UI
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `'./'`
 
-Search path for user interface files used by the `View` and `Template` classes' `render()` method. Default value is the Web root. Accepts a pipe (`|`), comma (`,`), or semi-colon (`;`) as separator for multiple paths.
+Search path for user interface files used by the `View` and `Template` classes' `render()` method.<br>Accepts a pipe (`|`), comma (`,`), or semi-colon (`;`) as separator for multiple paths.
 
 
 ### UNLOAD
-**Type:** `callback`
+**Type:** `callback` &nbsp; &nbsp; **Default value:** `NULL`
 
-Executed by framework on script shutdown.
+Defines the shutdown handler the framework will executed on [application shutdown](base#unload).
 
 
 ### UPLOADS
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** `'./'`
 
-Directory where file uploads are saved.
+Directory where file uploads are saved.: 
 
 
 ### URI
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-Current HTTP request URI.
+A reference to the current HTTP request URI. Default value: Result of `&$_SERVER['REQUEST_URI']`
 
 
 ### VERB
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-Current HTTP request method.
+A reference to the current HTTP request method. Default value: Result of `&$_SERVER['REQUEST_METHOD']`
 
 
 ### VERSION
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default value:** e.g. `'3.2.0-Release'`
 
-Framework version.
-
-
+A string containing the version of the Framework.
 
 ## Template Directives
 
@@ -296,43 +330,41 @@ Framework version.
 
 *   `@token`
 
-    Replace `@token` with value of equivalent F3 variable.
+    Replace `@token` with the value of the equivalent F3 variable.
 
 *   `{{ mixed expr }}`
 
-    Evaluate. `expr` may include template tokens, constants, operators (unary, arithmetic, ternary and relational), parentheses, data type converters, and functions. If not an attribute of a template directive, result is echoed.
+    Evaluate expression `expr`. Expression can include template tokens, constants, operators (unary, arithmetic, ternary and relational), parentheses, data type converters, and functions. _If not an attribute of a template directive, the result is echo'ed_.
 
-* `{{ string expr | raw }}`
+*   `{{ string expr [ | esc ] }}`
 
-    Render unescaped `expr`. F3 auto-escapes strings by default.
+    Render expression `expr` _escaped_. This is the default framework behavior. The `| esc` suffix is only necessary if the [ESCAPE](/quick-reference#error) global variable has been set to `FALSE`.
 
-*   `{{ string expr | esc }}`
+*   `{{ string expr | raw }}`
 
-    Render escaped `expr`. This is the default framework behavior. The `| esc` suffix is only necessary if `ESCAPE` global variable is set to `FALSE`.
+    Render expression `expr` _unescaped_. As F3 auto-escapes string tokens by default, you can use this suffix to by-pass the escaping of a particular token.
 
 *   `{{ string expr, arg1, ..., argN | format }}`
 
-    Render an ICU-formatted `expr` and pass the comma-separated arguments, where `arg1, ..., argn` is one of: `'date'`, `'time'`, `'number, integer'`, `'number, currency'`, or `'number, percent'`.
+    Render the expression `expr` in ICU-format and pass the comma-separated arguments, where `arg1, ..., argn` is one of: `'date'`, `'time'`, `'number, integer'`, `'number, currency'`, or `'number, percent'`. (<small>More information about [ICU formatting of Numbers, Currencies, Dates and Times](http://userguide.icu-project.org/formatparse "International Components for Unicode Formatting and Parsing")</small>).
 
 ### Include
 
-``` html
+```html
 <include
     [ if="{{ bool condition }}" ]
     href="{{ string subtemplate }}"
 />
 ```
 
-Get contents of `subtemplate` and insert at current position in template if optional condition is `TRUE`.
+Get contents of `subtemplate` and insert at current position in template [ if optional condition is `TRUE` ].
 
 ### Exclude
 
-``` html
+```html
 <exclude>text-block</exclude>
 ```
-
-Remove `text-block` at runtime. Used for embedding comments in templates.
-An Alias for this is:
+Exclude `text-block` at runtime. Used for embedding comments in templates. An Alias for this is:
 
 ```
 {{* text-block *}}
@@ -340,25 +372,30 @@ An Alias for this is:
 
 ### Ignore
 
-``` html
+```html
 <ignore>text-block</ignore>
 ```
-Display `text-block` as-is, without interpretation/modification by the template engine.
+Display `text-block` as it is, without any interpretation/modification by the template engine.
 
 ### Check
 
-``` html
+```html
 <check if="{{ bool condition }}">
     <true>true-block</true>
     <false>false-block</false>
 </check>
 ```
-Evaluate condition. If `TRUE`, then `true-block` is rendered. Otherwise, `false-block` is used.
-If there is no false block, the opening and closing tags for true are optional.
+Evaluate `condition`. If `TRUE`, the `true-block` is rendered; else the `false-block` is rendered.
+
+***Short form***: If you don't need and don't specify a false block, then, for your convenience, F3 makes the opening and closing tags for true optional:
+
+```html
+<check if="{{ @debugmode && @showtrace }}"><code>{{ @showtrace }}</code></check>
+```
 
 ### Loop
 
-``` html
+```html
 <loop
     from="{{ statement }}"
     to="{{ bool expr }}"
@@ -370,7 +407,7 @@ Evaluate `from` statement once. Check if the expression in the `to` attribute is
 
 ### Repeat
 
-``` html
+```html
 <repeat
     group="{{ array @group|expr }}"
     [ key="{{ scalar @key }}" ]
@@ -383,7 +420,7 @@ Repeat `text-block` as many times as there are elements in the array variable `@
 
 ### Switch
 
-``` html
+```html
 <switch expr="{{ scalar expr }}">
     <case value="{{ scalar @value|expr }}" break="{{ bool TRUE|FALSE }}">
         text-block
@@ -400,7 +437,7 @@ Equivalent of the PHP switch-case jump table structure.
 
 ### Set
 
-``` html
+```html
 <!-- set some variables -->
 <set foo="{{ 1+2 }}" bar="{{ @foo+3 }}" baz="xyz" />
 <!-- set an array -->
@@ -410,4 +447,4 @@ Used to set some variables dynamically within the template.
 
 ## API Documentation
 
-The framework API documentation is contained in `lib/api.chm` of the distribution package. F3 uses [Doxygen](http://www.stack.nl/~dimitri/doxygen/) to generate output in compiled HTML format. You need a CHM reader to view its tree-structured contents. For Mac users, there's [Chmox](http://chmox.sourceforge.net/) and [iChm](http://code.google.com/p/ichm/). Linux users have more choices: [xCHM](http://xchm.sourceforge.net/), [GnoCHM](http://gnochm.sourceforge.net/), [ChmSee](http://code.google.com/p/chmsee/), and [Kchmviewer](http://www.ulduzsoft.com/linux/kchmviewer/). Windows supports `.chm` files right out of the box.
+The framework API documentation is also contained in `lib/api/index.html` of the distribution package. F3 uses [Doxygen](http://www.stack.nl/~dimitri/doxygen/ "Doxygen is a tool for generating documentation from annotated source code") to generate the documentation in HTML format.

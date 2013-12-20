@@ -2,22 +2,22 @@
 
 The Mongo Object-Document-Mapper (ODM) is an implementation of the abstract [Active Record Cursor class](cursor). Have a look into it for inherited method descriptions.
 
-Namespace: `\DB\Mongo` <br/>
-File location: `lib/db/mongo/mapper.php`
-
 ---
+
+Namespace: `\DB\Mongo` <br>
+File location: `lib/db/mongo/mapper.php`
 
 ## Instantiation
 
 To use the Mongo ODM, [create a valid MongoDB Connection](mongo#constructor) and follow this example:
 
-``` php
+```php
 $mapper = new \DB\Mongo\Mapper(\DB\Mongo $db, string $collection);
 ```
 
 If you like to create a model class, you might like to wrap it up:
 
-``` php
+```php
 $f3->set('DB', new \DB\Mongo('mongodb://localhost:27017','fatfree');
 
 class User extends \DB\SQL\Mongo {
@@ -39,7 +39,7 @@ The `$filter` argument for Mongo accepts the common mongo find array,
 see [db.collection.find reference](http://docs.mongodb.org/manual/reference/method/db.collection.find/)
 and [query-documents tutorial](http://docs.mongodb.org/manual/tutorial/query-documents/).
 
-``` php
+```php
 array([ array $find ]);
 ```
 
@@ -48,7 +48,7 @@ array([ array $find ]);
 
 The `$option` argument for Mongo accepts the following structure:
 
-``` php
+```php
 array(
     'group' => array (
         'keys',
@@ -72,7 +72,7 @@ And for more about `order`, and a look at the [cursor.sort reference](http://doc
 
 **Return TRUE if field is defined**
 
-``` php
+```php
 $mapper->exists( string $key ); bool
 ```
 
@@ -81,14 +81,14 @@ $mapper->exists( string $key ); bool
 
 **Assign value to field**
 
-``` php
+```php
 $mapper->set( string $key, scalar $val ); scalar|FALSE
 ```
 
 This class also takes advantage from the Magic and ArrayAccess class implementation.
 This way you can also set and get variable with direct access like this:
 
-``` php
+```php
 $mapper->foo = 'bar';
 $mapper['foo'] = 'bar';
 ```
@@ -98,7 +98,7 @@ $mapper['foo'] = 'bar';
 
 **Retrieve value of field**
 
-``` php
+```php
 $mapper->get( string $key ); scalar|FALSE
 ```
 
@@ -107,7 +107,7 @@ $mapper->get( string $key ); scalar|FALSE
 
 **Delete field**
 
-``` php
+```php
 $mapper->clear( string $key ); NULL
 ```
 
@@ -116,7 +116,7 @@ $mapper->clear( string $key ); NULL
 
 **Return fields of mapper object as an associative array**
 
-``` php
+```php
 $mapper->cast([ object $obj = NULL ]); array
 ```
 
@@ -125,7 +125,7 @@ $mapper->cast([ object $obj = NULL ]); array
 
 **Build query and execute**
 
-``` php
+```php
 $mapper->select( string $fields, [ array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
 ```
 
@@ -134,7 +134,7 @@ $mapper->select( string $fields, [ array $filter = NULL ],[ array $options = NUL
 
 **Return records that match criteria**
 
-``` php
+```php
 $mapper->find([ array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
 ```
 
@@ -143,14 +143,14 @@ $mapper->find([ array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 
 
 **Count records that match criteria**
 
-``` php
+```php
 $mapper->count([ array $filter = NULL ],[ int $ttl = 0 ]); int
 ```
 
 ### insert
 **Insert new record**
 
-``` php
+```php
 $mapper->insert(); array
 ```
 
@@ -158,7 +158,7 @@ $mapper->insert(); array
 ### update
 **Update current record**
 
-``` php
+```php
 $mapper->update(); array
 ```
 
@@ -166,7 +166,7 @@ $mapper->update(); array
 ### erase
 **Delete current record**
 
-``` php
+```php
 $mapper->erase([ array $filter = NULL ]); bool
 ```
 
@@ -174,7 +174,7 @@ $mapper->erase([ array $filter = NULL ]); bool
 ### copyfrom
 **Hydrate mapper object using hive array variable**
 
-``` php
+```php
 $mapper->copyfrom( string $key ); NULL
 ```
 
@@ -182,6 +182,6 @@ $mapper->copyfrom( string $key ); NULL
 ### copyto
 **Populate hive array variable with mapper fields**
 
-``` php
+```php
 $mapper->copyto( string $key ); NULL
 ```

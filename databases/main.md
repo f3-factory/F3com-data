@@ -6,13 +6,13 @@ Fat-Free is designed to make the job of interfacing with SQL databases a breeze.
 
 Establishing communication with a SQL engine like MySQL, SQLite, SQL Server, Sybase, and Oracle is done using the familiar `$f3->set()` command. Connecting to a SQLite database would be:
 
-``` php
+```php
 $db=new DB\SQL('sqlite:/absolute/path/to/your/database.sqlite'));
 ```
 
 Another example, this time with MySQL:
 
-``` php
+```php
 $db=new DB\SQL(
     'mysql:host=localhost;port=3306;dbname=mysqldb',
     'admin',
@@ -26,7 +26,7 @@ OK. That was easy, wasn't it? That's pretty much how you would do the same thing
 
 Let's continue our PHP code:
 
-``` php
+```php
 $f3->set('result',$db->exec('SELECT brandName FROM wherever'));
 echo Template::instance()->render('abc.htm');
 ```
@@ -35,7 +35,7 @@ Huh, what's going on here? Shouldn't we be setting up things like PDOs, statemen
 
 This time we create an HTML template like `abc.htm` that has at a minimum the following:
 
-``` html
+```html
 <repeat group="{{ @result }}" value="{{ @item }}">
     <span>{{ @item.brandName  }}</span>
 </repeat>
@@ -47,7 +47,7 @@ In most instances, the SQL command set should be enough to generate a Web-ready 
 
 Here's another example. Instead of a single statement provided as an argument to the `$db->exec()` command, you can also pass an array of SQL statements:
 
-``` php
+```php
 $db->exec(
     array(
         'DELETE FROM diet WHERE food="cola"',
@@ -61,7 +61,7 @@ F3 is smart enough to know that if you're passing an array of SQL instructions, 
 
 You can also start and end a transaction programmatically:
 
-``` php
+```php
 $db->begin();
 $db->exec('DELETE FROM diet WHERE food="cola"');
 $db->exec('INSERT INTO diet (food) VALUES ("carrot")');
@@ -73,7 +73,7 @@ A rollback will occur if any of the statements encounter an error.
 
 To get a list of all database instructions issued:
 
-``` php
+```php
 echo $db->log();
 ```
 
@@ -81,7 +81,7 @@ echo $db->log();
 
 Passing string arguments to SQL statements is fraught with danger. Consider this:
 
-``` php
+```php
 $db->exec(
     'SELECT * FROM users '.
     'WHERE username="'.$f3->get('POST.userID'.'"')
@@ -96,7 +96,7 @@ admin"; DELETE FROM users; SELECT "1
 
 Luckily, parameterized queries help you mitigate these risks:
 
-``` php
+```php
 $db->exec(
     'SELECT * FROM users WHERE userID=?',
     $f3->get('POST.userID')
@@ -107,7 +107,7 @@ If F3 detects that the value of the query parameter/token is a string, the under
 
 Our example in the previous section will be a lot safer from SQL injection if written this way:
 
-``` php
+```php
 $db->exec(
     array(
         'DELETE FROM diet WHERE food=:name',
@@ -141,7 +141,7 @@ CREATE TABLE users (
 
 Now back to SQL. First, we establish communication with our database.
 
-``` php
+```php
 $db=new DB\SQL(
     'mysql:host=localhost;port=3306;dbname=mysqldb',
     'admin',
@@ -151,7 +151,7 @@ $db=new DB\SQL(
 
 To retrieve a record from our table:
 
-``` php
+```php
 $user=new DB\SQL\Mapper($db,'users');
 $user->load(array('userID=?','tarzan'));
 ```
@@ -162,7 +162,7 @@ Easy, wasn't it? F3 understands that a SQL table already has a structural defini
 
 If you prefer working with NoSQL databases, the similarities in query syntax are superficial. In the case of the MongoDB data mapper, the equivalent code would be:
 
-``` php
+```php
 $db=new DB\Mongo('mongodb://localhost:27017','testdb');
 $user=new DB\Mongo\Mapper($db,'users');
 $user->load(array('userID'=>'tarzan'));
@@ -170,7 +170,7 @@ $user->load(array('userID'=>'tarzan'));
 
 With Jig, the syntax is similar to F3's template engine:
 
-``` php
+```php
 $db=new DB\Jig('db/data/',DB\Jig::FORMAT_JSON);
 $user=new DB\Jig\Mapper($db,'users');
 $user->load(array('@userID=?','tarzan'));
@@ -188,14 +188,14 @@ SQL identifiers should not use reserved words, and should be limited to alphanum
 
 Let's say we want to increment the user's number of visits and update the corresponding record in our users table, we can add the following code:
 
-``` php
+```php
 $user->visits++;
 $user->save();
 ```
 
 If we wanted to insert a record, we follow this process:
 
-``` php
+```php
 $user=new DB\SQL\Mapper($db,'users');
 // or $user=new DB\Mongo\Mapper($db,'users');
 // or $user=new DB\Jig\Mapper($db,'users');
@@ -209,7 +209,7 @@ We still use the same `save()` method. But how does F3 know when a record should
 
 A mapper object will not be empty after a `save()`. If you wish to add a new record to your database, you must first dehydrate the mapper:
 
-``` php
+```php
 $user->reset();
 $user->userID='cheetah';
 $user->password=md5('unknown');
@@ -224,7 +224,7 @@ Although the issue of having primary keys in all tables in your database is argu
 
 To remove a mapped record from our table, invoke the `erase()` method on an auto-hydrated data mapper. For example:
 
-``` php
+```php
 $user=new DB\SQL\Mapper($db,'users');
 $user->load(array('userID=? AND password=?','cheetah','ch1mp'));
 $user->erase();
@@ -232,7 +232,7 @@ $user->erase();
 
 Jig's query syntax would be slightly similar:
 
-``` php
+```php
 $user=new DB\Jig\Mapper($db,'users');
 $user->load(array('@userID=? AND @password=?','cheetah','chimp'));
 $user->erase();
@@ -240,7 +240,7 @@ $user->erase();
 
 And the MongoDB equivalent would be:
 
-``` php
+```php
 $user=new DB\Mongo\Mapper($db,'users');
 $user->load(array('userID'=>'cheetah','password'=>'chimp'));
 $user->erase();
@@ -250,7 +250,7 @@ $user->erase();
 
 To find out whether our data mapper was hydrated or not:
 
-``` php
+```php
 if ($user->dry())
     echo 'No record matching criteria';
 ```
@@ -259,7 +259,7 @@ if ($user->dry())
 
 We've covered the CRUD handlers. There are some extra methods that you might find useful:
 
-``` php
+```php
 $f3->set('user',new DB\SQL\Mapper($db,'users'));
 $f3->get('user')->copyFrom('POST');
 $f3->get('user')->save();
@@ -270,7 +270,7 @@ The `copyFrom()` method hydrates the mapper object with elements from a framewor
 
 On the other hand, if we wanted to retrieve a record and copy the field values to a framework variable for later use, like template rendering:
 
-``` php
+```php
 $f3->set('user',new DB\SQL\Mapper($db,'users'));
 $f3->get('user')->load(array('userID=?','jane'));
 $f3->get('user')->copyTo('POST');
@@ -278,7 +278,7 @@ $f3->get('user')->copyTo('POST');
 
 We can then assign {{ @POST.userID }} to the same input field's value attribute. To sum up, the HTML input field will look like this:
 
-``` html
+```html
 <input type="text" name="userID" value="{{ @POST.userID }}"/>
 ```
 
@@ -288,7 +288,7 @@ The `save()`, `update()`, `copyFrom()` data mapper methods and the parameterized
 
 By default, a data mapper's `load()` method retrieves only the first record that matches the specified criteria. If you have more than one that meets the same condition as the first record loaded, you can use the `skip()` method for navigation:
 
-``` php
+```php
 $user=new DB\SQL\Mapper($db,'users');
 $user->load('visits>3');
 // Rewritten as a parameterized query
@@ -318,7 +318,7 @@ Use the `dry()` method to check if you've maneuvered beyond the limits of the re
 
 The `load()` method accepts a second argument: an array of options containing key-value pairs such as:
 
-``` php
+```php
 $user->load(
     array('visits>?',3),
     array(
@@ -340,7 +340,7 @@ LIMIT 3 OFFSET 5;
 
 This is one way of presenting data in small chunks. Here's another way of paginating results:
 
-``` php
+```php
 $page=$user->paginate(2,5,array('visits>?',3));
 ```
 
@@ -361,7 +361,7 @@ There are instances when you need to retrieve a computed value of a field, or a 
 Suppose we have the following table defined as:
 
 ``` sql
-CREATE TABLE products
+CREATE TABLE products (
     productID VARCHAR(30),
     description VARCHAR(255),
     supplierID VARCHAR(30),
@@ -373,7 +373,7 @@ CREATE TABLE products
 
 No `totalprice` field exists, so we can tell the framework to request from the database engine the arithmetic product of the two fields:
 
-``` php
+```php
 $item=new DB\SQL\Mapper($db,'products');
 $item->totalprice='unitprice*quantity';
 $item->load(array('productID=:pid',':pid'=>'apple'));
@@ -384,7 +384,7 @@ The above code snippet defines a virtual field called `totalprice` which is comp
 
 You can have more complex virtual fields:
 
-``` php
+```php
 $item->mostNumber='MAX(quantity)';
 $item->load();
 echo $item->mostNumber;
@@ -394,7 +394,7 @@ This time the framework retrieves the product with the highest quantity (notice 
 
 You can also derive a value from another table:
 
-``` php
+```php
 $item->supplierName=
     'SELECT name FROM suppliers '.
     'WHERE products.supplierID=suppliers.supplierID';
@@ -412,29 +412,32 @@ Remember that a virtual field must be defined prior to data retrieval. The ORM d
 
 If you have no need for record-by-record navigation, you can retrieve an entire batch of records in one shot:
 
-``` php
+```php
 $frequentUsers=$user->find(array('visits>?',3),array('order'=>'userID'));
 ```
 
 Jig mapper's query syntax has a slight resemblance:
 
-``` php
+```php
 $frequentUsers=$user->find(array('@visits>?',3),array('order'=>'userID'));
 ```
 
 The equivalent code using the MongoDB mapper:
 
-``` php
+```php
 $frequentUsers=$user->find(array('visits'=>array('$gt'=>3)),array('userID'=>1));
 ```
 
 The `find()` method searches the `users` table for records that match the criteria, sorts the result by `userID` and returns the result as an array of mapper objects. `find('visits>3')` is different from `load('visits>3')`. The latter refers to the current `$user` object. `find()` does not have any effect on `skip()`.
 
-**Important:** Declaring an empty condition, NULL, or a zero-length string as the first argument of `find()` or `load()` will retrieve all records. Be sure you know what you're doing - you might exceed PHP's memory_limit on large tables or collections.
+<div class="alert alert-warning">
+    <strong>Important:</strong><br>
+    Declaring an empty condition, NULL, or a zero-length string as the first argument of <code>find()</code> or <code>load()</code> will retrieve <strong>all</strong> records. Be sure you know what you're doing - you might exceed PHP's `memory_limit` on large tables or collections
+</div>
 
 The `find()` method has the following syntax:
 
-``` php
+```php
 find(
     $criteria,
     array(
@@ -448,7 +451,7 @@ find(
 
 find() returns an array of objects. Each object is a mapper to a record that matches the specified criteria.:
 
-``` php
+```php
 $place=new DB\SQL\Mapper($db,'places');
 $list=$place->find('state="New York"');
 foreach ($list as $obj)
@@ -457,21 +460,21 @@ foreach ($list as $obj)
 
 If you need to convert a mapper object to an associative array, use the `cast()` method:
 
-``` php
+```php
 $array=$place->cast();
 echo $array['city'].', '.$array['country'];
 ```
 
 To retrieve the number of records in a table that match a certain condition, use the `count()` method.
 
-``` php
+```php
 if (!$user->count(array('visits>?',10)))
     echo 'We need a better ad campaign!';
 ```
 
 There's also a `select()` method that's similar to `find()` but provides more fine-grained control over fields returned. It has a SQL-like syntax:
 
-``` php
+```php
 select(
     'foo, bar, MIN(baz) AS lowest',
     'foo > ?',
@@ -490,7 +493,7 @@ Much like the `find()` method, `select()` does not alter the mapper object's con
 
 If you ever want to find out which SQL statements issued directly by your application (or indirectly thru mapper objects) are causing performance bottlenecks, you can do so with a simple:
 
-``` php
+```php
 echo $db->log();
 ```
 
@@ -500,7 +503,7 @@ F3 keeps track of all commands issued to the underlying SQL database driver, as 
 
 In most cases, you can live by the comforts given by the data mapper methods we've discussed so far. If you need the framework to do some heavy-duty work, you can extend the SQL mapper by declaring your own classes with custom methods - but you can't avoid getting your hands greasy on some hardcore SQL:
 
-``` php
+```php
 class Vendor extends DB\SQL\Mapper {
 
     // Instantiate mapper
@@ -555,7 +558,7 @@ CREATE VIEW combined AS
 
 Your application code becomes simple because it does not have to maintain two mapper objects (one for the projects table and another for users) just to retrieve data from two joined tables:
 
-``` php
+```php
 $combined=new DB\SQL\Mapper($db,'combined');
 $combined->load(array('project=?',123));
 echo $combined->name;

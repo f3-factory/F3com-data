@@ -1,7 +1,7 @@
 # API Reference
 
 Welcome to the API documentation. It's intended as a feature reference to give you more detailed information about working with F3.
-You can also find many working examples in [the framework unit tests](https://github.com/bcosca/fatfree/tree/dev/app).
+You can also find extensive working examples in [<i class="icon-thumbs-up"></i> the source code of the framework unit tests app](https://github.com/bcosca/fatfree/tree/dev/app).
 
 <div class="row-fluid pb25 ref">
     <div class="span6">
@@ -11,13 +11,17 @@ You can also find many working examples in [the framework unit tests](https://gi
         <a class="label" href="iso">ISO</a>
         <a class="label" href="prefab-registry">Prefab & Registry</a>
         <a class="label" href="view">View</a>
+        <a class="label" href="preview">Preview</a>
 
-        <h3>Database</h3>
+        <h3>Databases</h3>
         <a class="label" href="jig">Jig</a>
+        <span class="label" title="available soon">Jig Session</span>
         <a class="label" href="mongo">Mongo</a>
+        <span class="label" title="available soon">Mongo Session</span>
         <a class="label" href="sql">SQL</a>
+        <span class="label" title="available soon">SQL Session</span>
 
-        <h3>Data Mapper</h3>
+        <h3>Data Mappers</h3>
         <a class="label" href="cursor">Cursor</a>
         <span class="label" title="available soon">Basket</span>
         <a class="label" href="jig-mapper">Jig Mapper</a>
@@ -51,4 +55,4 @@ You can also find many working examples in [the framework unit tests](https://gi
 </div>
 
 
-The framework API documentation is also contained in `lib/api/index.html` of the distribution package. F3 uses [Doxygen](http://www.stack.nl/~dimitri/doxygen/) to generate output in compiled HTML format.
+The framework API documentation is also contained in `lib/api/index.html` of the distribution package. F3 uses [Doxygen](http://www.stack.nl/~dimitri/doxygen/ "Doxygen is a tool for generating documentation from annotated source code") to generate the documentation in HTML format.
