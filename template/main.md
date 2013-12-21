@@ -1,6 +1,7 @@
 # Template
 
 F3's own lightning fast and extendable template engine gives you all the flexibility you need for modern and clean templating.
+This Template plugin extends the [Preview](preview) class and is especially made for XML-style templates.
 Make sure you have read the user guide section about [templating](views-and-templates#a-quick-look-at-the-f3-template-language).
 
 Namespace: `\` <br>
@@ -18,21 +19,6 @@ $template = \Template::instance();
 
 The Template class uses the [Prefab](prefab-registry) factory wrapper, so you can, and you should, grab the same instance of that Template class at any point of your code.
 
-
-### token
-** Convert token to variable **
-
-```php
-string token ( string $str )
-```
-
-Example:
-
-```php
-echo $template->token ('My {{@color}} car looks nice');
-
-// returns the string  'My $color car looks nice'
-```
 
 ### render
 ** Render and return a template given by its filename **
@@ -61,12 +47,6 @@ echo $template->render('layout.html'); // assumes layout.html is in the UI folde
 $flow = $template->render('widgets/tweeter-feeds.html', 'application/json', NULL, 300 ); // cache for 5 minutes
 ```
 
-### resolve
-** Render template string **
-
-```php
-string resolve ( string $str, array $hive = NULL )
-```
 
 ### extend
 ** Extend F3 template engine with a custom tag **
@@ -138,4 +118,50 @@ and scales the image given by the `src` attribute to the specified `width="60" h
 
 Knowing that F3 templates are all pre-rendered and cached. This way our Image Tag Renderer will only process the file once and not on every request.
 
-Combine your tag processing by using the [token](template#token) method to add some support for dynamic values in your tag attributes and write some php calls to the result to generate fully flexible view helper.
+Combine your tag processing by using the [token](preview#token) method to add some support for dynamic values in your tag attributes and write some php calls to the result to generate fully flexible view helper.
+
+
+### parse
+
+**Parse string for template directives and tokens**
+
+```php
+string|array parse ( string $text )
+```
+
+This method parses the template string and builds a tree structure of handled nodes found in the template.
+
+In example:
+
+
+```html
+<div>
+    <h1>My favorite books</h1>
+    <ul>
+    <F3:repeat group="{{ @books }}" value="{{ @book }}">
+        <li>{{ @book.title }}</li>
+    </F3:repeat>
+    </ul>
+</div>
+```
+
+returns:
+
+```php
+array (size=3)
+  0 => string '<div>
+    <h1>My favorite books</h1>
+    <ul>
+    ' (length=53)
+  1 =>
+    array (size=1)
+      'repeat' =>
+        array (size=2)
+          '@attrib' =>
+            array (size=2)
+              'group' => string '{{ @books }}' (length=12)
+              'value' => string '{{ @book }}' (length=11)
+          0 => string '<li>{{ @book.title }}</li>' (length=38)
+  2 => string '</ul>
+  </div>' (length=19)
+```
