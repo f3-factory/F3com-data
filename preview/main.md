@@ -39,8 +39,8 @@ Lets have a look at a simple example:
 ``` php
 string build ( build $node )
 ```
-
-This method becomes useful when creating new template extensions can custom tag handlers. It builds the php code out of the given markup, that is used later in the pre-rendered template.
+This method builds the php code out of the given markup, that is used later in the pre-rendered template.
+To know about this method becomes useful when you're creating new template extensions or custom tag handlers. 
 
 In example it converts this piece of token:
 
