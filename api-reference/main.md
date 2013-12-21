@@ -20,7 +20,7 @@ You can also find extensive working examples in the [source code of the framewor
 
         <h3>Data Mappers</h3>
         <a class="label" href="cursor">Cursor</a>
-        <span class="label" title="available soon">Basket</span>
+        <a class="label" href="basket">Basket</a>
         <a class="label" href="jig-mapper">Jig Mapper</a>
         <a class="label" href="mongo-mapper">Mongo Mapper</a>
         <a class="label" href="sql-mapper">SQL Mapper</a>
