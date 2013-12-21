@@ -1,11 +1,11 @@
 # Jig
 
-Jig provides a simple way to store arrays of data into flat files.
+The Jig class provides a simple way to store arrays of data into flat ASCII files.
+
+---
 
 Namespace: `\DB` <br>
 File location: `lib/db/jig.php`
-
----
 
 ## Constructor
 
@@ -36,7 +36,7 @@ $db = new \DB\Jig ( string $dir [, int $format = \DB\Jig::FORMAT_JSON ] );
 array read ( string $file )
 ```
 
-This method retrieves the data stored in a given Jig file.
+This method retrieves the data stored in a given Jig database file.
 
 For example:
 
@@ -47,13 +47,13 @@ echo $data['Robert']['birth']; // 82 (see below)
 
 ### write
 
-**Write data to file**
+**Write data to a Jig database file**
 
 ```php
-int write ( string $file, array $data )
+int|FALSE write ( string $file, array $data )
 ```
 
-This method writes data to a Jig database file and returns the number of bytes written.
+This method writes data to a Jig database file and returns the number of bytes that were written to the file, or FALSE on failure. 
 
 For example:
 
@@ -65,7 +65,7 @@ $team=array(
   'John'    => array('birth'=>88,'instr'=>'drums'),
   'Anna'    => array(            'instr'=>'keyboards'),
 );
-echo $db->write('team',$team); // outputs 231
+echo $db->write('team',$team); // outputs 231 (int)
 ```
 
 ### drop
