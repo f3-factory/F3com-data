@@ -2,10 +2,10 @@
 
 The Jig class provides a simple way to store arrays of data into flat ASCII files.
 
----
-
 Namespace: `\DB` <br>
 File location: `lib/db/jig.php`
+
+---
 
 ## Constructor
 
