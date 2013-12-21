@@ -51,7 +51,7 @@ In example it converts this piece of token:
 into:
 
 ```php
-<p><?php echo $this->esc($book['title']); ?></p>
+<?php echo $this->esc($book['title']); ?>
 ```
 
 ### render
