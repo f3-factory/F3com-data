@@ -20,36 +20,9 @@ $template = \Template::instance();
 The Template class uses the [Prefab](prefab-registry) factory wrapper, so you can, and you should, grab the same instance of that Template class at any point of your code.
 
 
-### render
-** Render and return a template given by its filename **
-
-```php
-string render ( string $filename [, string $mime = 'text/html' [, array $hive = NULL [, int $ttl = 0 ]]] )
-```
-
-The `$filename` argument expects a file path that is within any defined directories by F3's [UI](quick-reference#ui) system variables. Remember, for your convenience, [UI](quick-reference#ui) can be multiple paths.
-
-Actually, the render method first try to load your specified template from the temporary folder [TEMP](quick-reference#temp) acting as a file cache for compiled templates. The specified template file is only load if needed: F3 is smart enough to detect if a newer version of the template file has been saved and then it builds a php based view file and only then renders the php view again.
-
-Once rendered, F3 escape the content according to the [ESCAPE](quick-reference#escape) system variable, and sets the appropriate `Content-Type:` value of the HTTP header. If you'd like to get the response returned as JSON, XML or as E-Mail content, just change the `$mime` type parameter accordingly to your needs. (While the charset of the content is defined by the [ENCODING](quick-reference#encoding) system variable)
-
-The `$hive` argument allows you to use an explicit array of variables for that template. By default the rendered template has access to the whole F3 hive with all it's variables.
-
-The `$ttl` argument specifies, in seconds, the Time To Live in the F3 cache for the php based compiled view file. When a `$ttl` is given, F3 will store the compiled view in the cache. On the next request, if the time specified by `$ttl` has passed, the compiled view will be rebuild from the template and stored again in the cache for another cycle.
-
-Examples:
-
-```php
-echo $template->render('layout.html'); // assumes layout.html is in the UI folder
-```
-
-```php
-$flow = $template->render('widgets/tweeter-feeds.html', 'application/json', NULL, 300 ); // cache for 5 minutes
-```
-
-
 ### extend
-** Extend F3 template engine with a custom tag **
+
+**Extend F3 template engine with a custom tag**
 
 ```php
 void extend ( string $tag, callback $func )
@@ -114,7 +87,7 @@ The basic snippet above takes all html tags that look like this:
 <image src="images/south-park.jpg" width="60" height="60" crop="true" />
 ```
 
-and scales the image given by the `src` attribute to the specified `width="60" height="60"` dimensions, then copies the new scaled image to the `TEMP` folder and finaly generates an HTML output similar to `<img src="/tmp/0dgsnl2kmnb.png" />` in your template.
+and scales the image given by the `src` attribute to the specified `width="60" height="60"` dimensions, then copies the new scaled image to the `TEMP` folder and finally generates an HTML output similar to `<img src="/tmp/0dgsnl2kmnb.png" width="60" height="60" />` in your template.
 
 Knowing that F3 templates are all pre-rendered and cached. This way our Image Tag Renderer will only process the file once and not on every request.
 
