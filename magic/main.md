@@ -1,22 +1,60 @@
-# Magic : PHP magic wrapper
+# Magic
 
-The Magic class is a PHP magic wrapper.
-
----
+The Magic class is a PHP magic wrapper and implements the [ArrayAccess Interface](http://www.php.net/manual/en/class.arrayaccess.php "php.net ArrayAccess Reference").
 
 Namespace: `\` <br>
 File location: `lib/magic.php`
 
-<div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
-<p>This function is currently not documented; only its argument list is available.</p></div>
+---
+
+## Instantiation
 
 
-## ~~Instantiation~~
-### Magic is an abstract class
+The Magic class is an [abstract class](http://www.php.net/manual/en/language.oop5.abstract.php "php.net Class Abstraction Manual"), which means that you need to extend it with another class, that then can take advantage of the magic wrapper.
+
+It implements the ArrayAccess Interfaces and wraps some [magic methods](http://www.php.net/manual/en/language.oop5.magic.php "php.net Magic Methods Manual") towards them. This way you can use an underlying object as same why like a normal array.
+Let's have a look at this example:
+
+```php
+class User extends Magic {
+
+    protected $data;
+
+    function exists($key) {
+        return array_key_exists($key,$this->data);
+    }
+
+    function set($key, $val) {
+        $this->data[$key] = $val;
+    }
+
+    function get($key) {
+        return $this->data[$key];
+    }
+
+    function clear($key) {
+        unset($this->data[$key]);
+    }
+}
+```
+
+Now you can also access an user object like an Array or set the user data with objects properties and vice versa.
+
+```php
+$user = new User();
+$user->name = 'John';
+$user['age'] = 28;
+$user->set('mail','john@email.com');
+
+echo $user['name']; // John
+echo $user->get('age'); // 28
+echo $user->mail; // john@email.com
+```
 
 
-## Methods
+## Abstract Methods
 
+When creating a new descendant class you need to implement these functions in your new class.
 
 ### exists
 
@@ -28,12 +66,6 @@ bool exists ( string $key )
 
 This function allows you to return TRUE if key is not empty
 
-Example:
-
-``` php
-echo $magic->exists($key) // displays '@TODO' 
-```
-
 ### set
 
 **Bind value to key**
@@ -44,11 +76,6 @@ mixed set ( string $key, mixed $val )
 
 This function allows you to bind value to key
 
-Example:
-
-``` php
-echo $magic->set($key, $val) // displays '@TODO' 
-```
 
 ### get
 
@@ -60,11 +87,7 @@ mixed get ( string $key )
 
 This function allows you to retrieve contents of key
 
-Example:
 
-``` php
-echo $magic->get($key) // displays '@TODO' 
-```
 
 ### clear
 
@@ -76,11 +99,10 @@ NULL clear ( string $key )
 
 This function allows you to unset key
 
-Example:
 
-``` php
-echo $magic->clear($key) // displays '@TODO' 
-```
+## Parent Methods
+
+The following methods are needed for internal implementation. You don't need them in your magic child class. Stick to the abstract methods.
 
 ### visible
 
@@ -90,13 +112,8 @@ echo $magic->clear($key) // displays '@TODO'
 private bool visible ( string $key ) 
 ```
 
-This function allows you to return TRUE if property has public visibility
+This function returns TRUE if property has public visibility. This is important to know to decide if we call the magic setter/getter or just bypass the public property.
 
-Example:
-
-``` php
-echo $magic->visible($key) // displays '@TODO' 
-```
 
 ### offsetexists
 
@@ -106,13 +123,6 @@ echo $magic->visible($key) // displays '@TODO'
 mixed offsetexists ( string $key ) 
 ```
 
-This function allows you to convenience method for checking property value
-
-Example:
-
-``` php
-echo $magic->offsetexists($key) // displays '@TODO' 
-```
 
 ### __isset
 
@@ -122,13 +132,6 @@ echo $magic->offsetexists($key) // displays '@TODO'
 mixed __isset ( string $key ) 
 ```
 
-This function allows you to alias for offsetexists()
-
-Example:
-
-``` php
-echo $magic->__isset($key) // displays '@TODO' 
-```
 
 ### offsetset
 
@@ -138,13 +141,6 @@ echo $magic->__isset($key) // displays '@TODO'
 mixed offsetset ( string $key, scalar $val ) 
 ```
 
-This function allows you to convenience method for assigning property value
-
-Example:
-
-``` php
-echo $magic->offsetset($key, $val) // displays '@TODO' 
-```
 
 ### __set
 
@@ -154,13 +150,6 @@ echo $magic->offsetset($key, $val) // displays '@TODO'
 mixed __set ( string $key, scalar $val ) 
 ```
 
-This function allows you to alias for offsetset()
-
-Example:
-
-``` php
-echo $magic->__set($key, $val) // displays '@TODO' 
-```
 
 ### offsetget
 
@@ -170,13 +159,6 @@ echo $magic->__set($key, $val) // displays '@TODO'
 mixed offsetget ( string $key ) 
 ```
 
-This function allows you to convenience method for retrieving property value
-
-Example:
-
-``` php
-echo $magic->offsetget($key) // displays '@TODO' 
-```
 
 ### __get
 
@@ -186,13 +168,6 @@ echo $magic->offsetget($key) // displays '@TODO'
 mixed __get ( string $key ) 
 ```
 
-This function allows you to alias for offsetget()
-
-Example:
-
-``` php
-echo $magic->__get($key) // displays '@TODO' 
-```
 
 ### offsetunset
 
@@ -204,11 +179,6 @@ NULL offsetunset ( string $key )
 
 This function allows you to convenience method for checking property value
 
-Example:
-
-``` php
-echo $magic->offsetunset($key) // displays '@TODO' 
-```
 
 ### __unset
 
@@ -216,12 +186,4 @@ echo $magic->offsetunset($key) // displays '@TODO'
 
 ``` php
 NULL __unset ( string $key ) 
-```
-
-This function allows you to alias for offsetunset()
-
-Example:
-
-``` php
-echo $magic->__unset($key) // displays '@TODO' 
 ```

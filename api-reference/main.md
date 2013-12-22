@@ -43,6 +43,7 @@ You can also find extensive working examples in the [source code of the framewor
         <a class="label" href="bcrypt" title="The Bcrypt plugin is a secure and lightweight password hashing library">Bcrypt</a>
         <a class="label" href="image" title="The Image class offers a bunch of image processing features">Image</a>
         <a class="label" href="log" title="This is the F3 custom Logger class">Log</a>
+        <a class="label" href="magic" title="A PHP magic wrapper">Magic</a>
         <a class="label" href="matrix" title="The matrix class offers some generic array utilities">Matrix</a>
         <a class="label" href="session" title="The SESSION handlers of the framework">Session</a>
         <a class="label" href="test" title="The Test class is a simple unit testing stack, where you can add multiple tests to and serve out their results">Test</a>
