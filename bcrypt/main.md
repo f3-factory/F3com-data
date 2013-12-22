@@ -1,7 +1,7 @@
 # Bcrypt
 The Bcrypt plugin is a secure and lightweight password hashing library.
 
-Namespace: `\` <br/>
+Namespace: `\` <br>
 File location: `lib/bcrypt.php`
 
 ---

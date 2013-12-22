@@ -2,6 +2,7 @@
 
 The SQL Object-Relational-Mapper is an implementation of the abstract [Active Record Cursor class](cursor).
 
+
 Namespace: `\DB\SQL` <br>
 File location: `lib/db/sql/mapper.php`
 

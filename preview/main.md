@@ -8,7 +8,6 @@ File location: `lib/base.php`
 
 ---
 
-
 ## Render a Preview Template
 
 The Preview Template class offers a mechanism for extremely lightweight templating that just calls some php expressions which are wrapped into the `{~ ~}` control chars.

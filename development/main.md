@@ -2,13 +2,16 @@
 
 ## About
 
-The Fat-Free Framework is an open source PHP framework, written by Bong Cosca in 2009.
+The Fat-Free Framework is an open source PHP framework, written by Bong Cosca from 2009 to now.
 The philosophy behind the framework and its approach to software architecture is towards minimalism in structural components, avoiding application complexity and striking a balance between code elegance, application performance and programmer productivity.
 The Fat-Free PHP Framework is engineered specifically with usability and user experience as its primary design goals. Out comes a full-featured toolkit for web artisans, that will make your daily work a lot easier, no matter if you're a beginner or expert.
 
-**Now version 3 is here!** &nbsp; &nbsp; &nbsp; [CHANGELOG.txt](https://github.com/bcosca/fatfree/blob/master/lib/changelog.txt)
+**Now version 3.2 is here!** &nbsp; &nbsp; &nbsp; [CHANGELOG.txt](https://github.com/bcosca/fatfree/blob/master/lib/changelog.txt)
 
-The latest official release marks another major milestone in the development of the Fat-Free Framework. Packed with exciting new features and outstanding documentation that took several months to develop and refine, the new version is finally available for download. The code base has been rewritten from the ground up to provide enterprise-class architecture and performance but with the same user-friendly features and lightweight footprint.
+The latest official release marks another major milestone in the development of the Fat-Free Framework. Packed with exciting new features and outstanding documentation that consumed significant time and effort to develop and refine, version 3.2 is finally [available for download](https://github.com/bcosca/fatfree/archive/master.zip "Download the latest release"). This edition is packed with a bunch of new usability and security features.
+
+F3 has a stable enterprise-class architecture. Unbeatable performance, user-friendly features and a lightweight footprint. What more can you ask for?
+
 It is highly recommended that experienced users develop new applications with this version to take advantage of the latest features and the numerous significant improvements.
 
 ## Fair Licensing
@@ -71,7 +74,7 @@ See what other users have made with F3:
         </tr>
         <tr>
             <td>F3 Boilerplate</td>
-            <td>A F3 boilerplate MVC website skeleton. It's basically a skeleton web application you can use to learn the Fat-Free Framework and use as a base for your future projects.</td>
+            <td>A F3 boilerplate MVC website skeleton using [HTML5 Boilerplate](http://html5boilerplate.com/ "HTML5 Boilerplate :: The web's most popular front-end template").<br>It's basically a skeleton web application you can use to learn the Fat-Free Framework and use as a base for your future projects.</td>
             <td><a href="https://github.com/vijinho" target="_blank">Vijay Mahrra</a></td>
             <td><a class="btn btn-info" href="https://github.com/vijinho/f3-boilerplate" target="_blank">view</a></td>
         </tr>
@@ -227,11 +230,11 @@ See what other users have made with F3:
     </thead>
     <tbody>
         <tr>
-            <td>PHP Fat-Free Framework snippets for Sublime Text 2 and 3</td>
+            <td>Fat-Free PHP Framework snippets for Sublime Text 2 and 3</td>
             <td><a class="btn btn-info" href="https://github.com/uonick/fatfree-snippets" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>PHP Fat-Free Framework snippets for the PHPStorm / WebStorm IDE</td>
+            <td>Fat-Free PHP Framework snippets for the PHPStorm / WebStorm IDE</td>
             <td><a class="btn btn-info" href="https://github.com/ikkez/F3-PhpStorm-Snippets" target="_blank">view</a></td>
         </tr>
         <tr>
@@ -244,7 +247,7 @@ See what other users have made with F3:
 
 ## Credits
 
-The PHP Fat-Free Framework is community-driven software. It can't be what it is today without the help and support from the following people and organizations:
+The Fat-Free PHP Framework is community-driven software. It can't be what it is today without the help and support from the following people and organizations:
 
 <div class="multicolumn three"></div>
 

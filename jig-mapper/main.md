@@ -2,6 +2,7 @@
 
 The Jig Object-Document-Mapper is an implementation of the abstract [Active Record Cursor class](cursor). Have a look into it for additional method descriptions.
 
+
 Namespace: `\DB\Jig` <br>
 File location: `lib/db/jig/mapper.php`
 

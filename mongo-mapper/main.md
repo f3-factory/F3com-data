@@ -2,10 +2,11 @@
 
 The Mongo Object-Document-Mapper (ODM) is an implementation of the abstract [Active Record Cursor class](cursor). Have a look into it for inherited method descriptions.
 
+---
+
 Namespace: `\DB\Mongo` <br>
 File location: `lib/db/mongo/mapper.php`
 
----
 
 ## Instantiation
 
