@@ -141,7 +141,7 @@ Enable/disable syntax highlighting of stack traces. When enabled, requires `code
 ### HOST
 **Type:** `string`,`Read-Only`
 
-Server host name.
+Server host name. Default value: `$_SERVER['SERVER_NAME']`
 
 
 ### IP
@@ -154,7 +154,7 @@ Remote IP address. The framework derives the address from headers if HTTP client
 
 Default cookie parameters. Consists of the following options:
 
-* `expire` Unix timestamp, when the cookie should expire.Default: `0`  
+* `expire` Unix timestamp, when the cookie should expire. Default: `0`  
 * `path` The path on the server in which the cookie will be available. Default: `'/'`
 * `domain` The domain that the cookie is available to. Default: `$_SERVER['SERVER_NAME']` if available, else `''`
 * `secure` Set the cookie when a secure HTTPS connection exists. Default: `$_SERVER['HTTPS']=='on'`
@@ -164,7 +164,6 @@ You can refer to [session_set_cookie_params() in the PHP Manual](http://www.php.
 
 ### LANGUAGE
 **Type:** `string` &nbsp; &nbsp; **Default:** auto-detected
-
 Current active language(s). Value is used to load the appropriate language(s) translation file(s) in the folder pointed to by `LOCALES`. Default value: auto-detected from the HTTP `Accept-Language` request header, e.g. `'en-US,en,es'`.
 If set to `NULL`, language is auto-detected from the HTTP `Accept-Language` request header.
 
@@ -249,7 +248,7 @@ The body of the last HTTP response. F3 populates this variable regardless of the
 ### ROOT
 **Type:** `string`, `Read-Only`
 
-Absolute path to document root folder.
+Absolute path to document root folder. Default: `$_SERVER['DOCUMENT_ROOT']`
 
 
 ### ROUTES
@@ -316,11 +315,11 @@ A reference to the current HTTP request URI.
 ### VERB
 **Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
 
-A reference to the current HTTP request method.
+A reference to the current HTTP request method. Default: `&$_SERVER['REQUEST_METHOD']`
 
 
 ### VERSION
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default:** e.g. `'3.2.1-Release'`
 
 A string containing the version of the Framework.
 

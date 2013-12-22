@@ -59,7 +59,7 @@ array|false load ( [ string|array $filter = NULL [, array $options = NULL ]] )
 The `load` method hydrates the mapper object with records. You can define a `$filter` to load only records that matches your criteria.
 You can find detailed descriptions about the `$filter` and `$option` syntax on the mapper specific pages: [Jig Mapper](jig-mapper#$filter), [Mongo Mapper](mongo-mapper#$filter) and [SQL Mapper](sql-mapper#$filter).
 
-Let's start with a simple example where we do not specify any filter: the first record will be loaded.
+Let's start with a simple example where we do not specify any filter: the first record will be loaded:
 
 ```php
 $mapper->load();  // by default, loads the 1st record
@@ -206,7 +206,7 @@ array(4) {
 
 ```
 
-The `subset` key contains an array of mapper objects returned from find(), `total` is the sum of all records for all pages, `count` is the number of records for the current page and `pos` gives you the current subset cursor position ( it's the page number - 1).
+The subset is the array of mapper objects returned from find(), `total` is the sum of all records for all pages, `count` is the number of records for the current page and `pos` gives you the current subset cursor position ( it's the page number - 1).
 
 
 ### save

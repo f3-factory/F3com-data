@@ -1,12 +1,14 @@
 # Markdown
 This is F3's own implementation of Markdown. Markdown is intended for writing human-readable text that can be converted to HTML afterwards. The goal of the Markdown formatting syntax is to make it as readable as possible. For more information, please refer to the project website and the [Markdown Syntax Documentation](http://daringfireball.net/projects/markdown/syntax "Markdown Syntax Documentation on the project website").
 
-Namespace: `\` <br/>
+---
+
+Namespace: `\` <br>
 File location: `lib/markdown.php`
 
 ---
 
-### instance
+### Instantiation
 
 **Return unique class instance**
 

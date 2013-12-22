@@ -24,7 +24,7 @@ To create a new empty Image, i.e. for creating a captcha, just leave out the fir
 $img = new Image();
 ```
 
-The constructor also has a 2nd argument, the `$flag` option. Setting it to `TRUE` enables the file [history](image#history), which can save additional states for the current file.
+The constructor also has a 2nd argument, the `$flag` option. Setting it to `TRUE` enables the file [history](image#history), which can save additional states for the current file, allowing for example to [revert](image#restore) to a specified state after having applied a filter.
 
 If your image file is not located within one of the [UI](quick-reference#ui) search paths, you must use the `$path` argument to specify its directory path.
 
@@ -103,7 +103,6 @@ $img->blur( bool $selective );
 ```
 
 Set `$selective` to `TRUE` to use a selective blur, otherwise a gaussian blur is used.
-
 
 ### sketch
 **Apply sketch effect**
@@ -216,7 +215,6 @@ If your font file is not located in the `UI` directory, you can then set its loc
 $img->width();
 ```
 
-
 ### height
 **Return image height**
 
@@ -230,7 +228,6 @@ $img->height();
 ```php
 $img->rgb( 0xFF0033 ); // returns array( 255, 0, 51 );
 ```
-
 
 ## Output
 
@@ -265,7 +262,7 @@ This method accepts the same arguments as the [`render()`](image#render) method 
 
 ## History
 
-The next methods only take effect when the initial `$flag` argument is `TRUE`.
+The next methods only take effect when the `$flag` argument of the [constructor](image#instantiation) was set to `TRUE`.
 
 ### save
 **Save current state**

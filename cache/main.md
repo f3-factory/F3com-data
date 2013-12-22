@@ -15,7 +15,7 @@ File location: `lib/base.php`
 
 ---
 
-### instance
+### Instantiation
 
 **Return class instance**
 

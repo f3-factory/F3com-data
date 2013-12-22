@@ -1,12 +1,12 @@
 # Matrix
 The matrix class offers some generic array utilities
 
+---
+
 Namespace: `\` <br>
 File location: `lib/matrix.php`
 
----
-
-### instance
+### Instantiation
 
 **Return class instance**
 

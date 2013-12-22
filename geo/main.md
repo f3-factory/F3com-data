@@ -6,7 +6,7 @@ File location: `lib/web/geo.php`
 
 ---
 
-### instance
+### Instantiation
 
 **Return class instance**
 

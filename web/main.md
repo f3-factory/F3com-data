@@ -6,7 +6,7 @@ File location: `lib/web.php`
 
 ---
 
-### instance
+### Instantiation
 
 **Return class instance**
 

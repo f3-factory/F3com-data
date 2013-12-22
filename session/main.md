@@ -5,14 +5,14 @@ To use them, just create a new instance of the certain class once. The plugins w
 which syncs the frameworks [SESSION](quick-reference#cookie,-get,-post,-request,-session,-files,-server,-env) hive key
 to the corresponding new session handler class.
 
+Namespace: `\` <br>
+File location: `lib/session.php`
+
 ---
 
 ### Cache
 
 The Session class provides a lightweight [Cache](cache)-based session handler.
-
-Namespace: `\` <br/>
-File location: `lib/session.php`
 
 Ensure that you enabled the [CACHE](quick-reference#cache) to make this work. Usage:
 
