@@ -59,7 +59,7 @@ array|false load ( [ string|array $filter = NULL [, array $options = NULL ]] )
 The `load` method hydrates the mapper object with records. You can define a `$filter` to load only records that matches your criteria.
 You can find detailed descriptions about the `$filter` and `$option` syntax on the mapper specific pages: [Jig Mapper](jig-mapper#$filter), [Mongo Mapper](mongo-mapper#$filter) and [SQL Mapper](sql-mapper#$filter).
 
-Let's start with a simple example where we do not specify any filter: the first record will be loaded.
+Let's start with a simple example where we do not specify any filter, so the first record will be loaded:
 
 ```php
 $mapper->load();  // by default, loads the 1st record

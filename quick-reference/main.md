@@ -154,7 +154,7 @@ Remote IP address. The framework derives the address from headers if HTTP client
 
 Default cookie parameters. Consists of the following options:
 
-* `expire` Unix timestamp, when the cookie should expire.Default: `0`  
+* `expire` Unix timestamp, when the cookie should expire. Default: `0`  
 * `path` The path on the server in which the cookie will be available. Default: `'/'`
 * `domain` The domain that the cookie is available to. Default: `$_SERVER['SERVER_NAME']` if available, else `''`
 * `secure` Set the cookie when a secure HTTPS connection exists. Default: `$_SERVER['HTTPS']=='on'`
