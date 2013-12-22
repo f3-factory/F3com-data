@@ -2,7 +2,7 @@
 
 The Mongo class is a lightweight MongoDB wrapper. For full class details refer [class.mongodb.php @ php.net](http://php.net/manual/en/class.mongodb.php).
 
-Namespace: `\DB` <br/>
+Namespace: `\DB` <br>
 File location: `lib/db/mongo.php`
 
 ---

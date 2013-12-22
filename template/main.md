@@ -9,7 +9,7 @@ File location: `lib/template.php`
 
 ---
 
-### instance
+### Instantiation
 
 **Return unique class instance**
 

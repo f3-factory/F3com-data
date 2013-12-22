@@ -6,7 +6,7 @@ File location: `lib/matrix.php`
 
 ---
 
-### instance
+### Instantiation
 
 **Return class instance**
 

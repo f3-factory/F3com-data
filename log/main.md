@@ -1,6 +1,7 @@
 # Log
 This is the F3 custom Logger class.
 
+
 Namespace: `\` <br>
 File location: `lib/log.php`
 
