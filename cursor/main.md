@@ -224,7 +224,7 @@ This method saves data to the database. The `Cursor` class automatically determi
 **Delete current record**
 
 ```php
-null erase ( )
+erase ( )
 ```
 
 ### reset
@@ -232,7 +232,7 @@ null erase ( )
 **Reset/dehydrate the cursor**
 
 ```php
-null reset ( )
+reset ( )
 ```
 
 

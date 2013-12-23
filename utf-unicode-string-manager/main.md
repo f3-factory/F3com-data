@@ -2,10 +2,10 @@
 
 The UTF class is an utility class that eases the handling of Unicode strings.
 
----
-
 Namespace: `\` <br>
 File location: `lib/utf.php`
+
+---
 
 <div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
 <p>This function is currently not documented; only its argument list is available.</p></div>
@@ -54,7 +54,7 @@ This function allows you to get string length
 Example:
 
 ``` php
-echo $utf->strlen($str) // displays 8 (int)
+echo $utf->strlen($str); // displays 8 (int)
 ```
 
 ### strpos
@@ -70,7 +70,7 @@ This function allows you to find position of first occurrence of a string
 Example:
 
 ``` php
-echo $utf->strpos($stack, $needle, $ofs, $case) // displays '@TODO' 
+echo $utf->strpos($stack, $needle, $ofs, $case); // displays '@TODO' 
 ```
 
 ### strripos
@@ -86,7 +86,7 @@ This function allows you to finds position of last occurrence of a string (case-
 Example:
 
 ``` php
-echo $utf->strripos($stack, $needle, $ofs) // displays '@TODO' 
+echo $utf->strripos($stack, $needle, $ofs); // displays '@TODO' 
 ```
 
 ### strrpos
@@ -102,7 +102,7 @@ This function allows you to find position of last occurrence of a string
 Example:
 
 ``` php
-echo $utf->strrpos($stack, $needle, $ofs, $case) // displays '@TODO' 
+echo $utf->strrpos($stack, $needle, $ofs, $case); // displays '@TODO' 
 ```
 
 ### stristr
@@ -118,7 +118,7 @@ This function allows you to returns part of haystack string from the first occur
 Example:
 
 ``` php
-echo $utf->stristr($stack, $needle, $before) // displays '@TODO' 
+echo $utf->stristr($stack, $needle, $before); // displays '@TODO' 
 ```
 
 ### strstr
@@ -134,7 +134,7 @@ This function allows you to returns part of haystack string from the first occur
 Example:
 
 ``` php
-echo $utf->strstr($stack, $needle, $before, $case) // displays '@TODO' 
+echo $utf->strstr($stack, $needle, $before, $case); // displays '@TODO' 
 ```
 
 ### substr
@@ -150,7 +150,7 @@ This function allows you to return part of a string
 Example:
 
 ``` php
-echo $utf->substr($str, $start, $len) // displays '@TODO' 
+echo $utf->substr($str, $start, $len); // displays '@TODO' 
 ```
 
 ### substr_count
@@ -166,7 +166,7 @@ This function allows you to count the number of substring occurrences
 Example:
 
 ``` php
-echo $utf->substr_count($stack, $needle) // displays '@TODO' 
+echo $utf->substr_count($stack, $needle); // displays '@TODO' 
 ```
 
 ### ltrim
@@ -182,7 +182,7 @@ This function allows you to strip whitespaces from the beginning of a string
 Example:
 
 ``` php
-echo $utf->ltrim($str) // displays '@TODO' 
+echo $utf->ltrim($str); // displays '@TODO' 
 ```
 
 ### rtrim
@@ -198,7 +198,7 @@ This function allows you to strip whitespaces from the end of a string
 Example:
 
 ``` php
-echo $utf->rtrim($str) // displays '@TODO' 
+echo $utf->rtrim($str); // displays '@TODO' 
 ```
 
 ### trim
@@ -214,7 +214,7 @@ This function allows you to strip whitespaces from the beginning and end of a st
 Example:
 
 ``` php
-echo $utf->trim($str) // displays '@TODO' 
+echo $utf->trim($str); // displays '@TODO' 
 ```
 
 ### bom

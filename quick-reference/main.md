@@ -40,7 +40,7 @@ Cache backend. When set to `TRUE`, and unless you assign a configuration value l
 
 
 ### CASELESS
-**Type:** `bool` &nbsp; &nbsp; **Default value:** `TRUE`
+**Type:** `bool` &nbsp; &nbsp; **Default:** `TRUE`
 
 Pattern matching of routes against incoming URIs is case-insensitive by default. Set to `FALSE` to make it case-sensitive.
 
@@ -141,7 +141,7 @@ Enable/disable syntax highlighting of stack traces. When enabled, requires `code
 ### HOST
 **Type:** `string`,`Read-Only`
 
-Server host name.
+Server host name. Default: `$_SERVER['SERVER_NAME']`
 
 
 ### IP
@@ -165,7 +165,7 @@ You can refer to [session_set_cookie_params() in the PHP Manual](http://www.php.
 ### LANGUAGE
 **Type:** `string` &nbsp; &nbsp; **Default:** auto-detected
 
-Current active language(s). Value is used to load the appropriate language(s) translation file(s) in the folder pointed to by `LOCALES`. Default value: auto-detected from the HTTP `Accept-Language` request header, e.g. `'en-US,en,es'`.
+Current active language(s). Value is used to load the appropriate language(s) translation file(s) in the folder pointed to by `LOCALES`. Default: auto-detected from the HTTP `Accept-Language` request header, e.g. `'en-US,en,es'`.
 If set to `NULL`, language is auto-detected from the HTTP `Accept-Language` request header.
 
 ### LOCALES
@@ -249,7 +249,7 @@ The body of the last HTTP response. F3 populates this variable regardless of the
 ### ROOT
 **Type:** `string`, `Read-Only`
 
-Absolute path to document root folder.
+Absolute path to document root folder. Default: `$_SERVER['DOCUMENT_ROOT']`
 
 
 ### ROUTES
@@ -262,13 +262,13 @@ Contains the defined application routes.
 ### SCHEME
 **Type:** `string`, `Read-Only`
 
-Server protocol. Default value: `'http'` or `'https'`
+Server protocol. Default: `'http'` or `'https'`
 
 
 ### SERIALIZER
 **Type:** `string` &nbsp; &nbsp; **Default:** auto-detected
 
-Define the default serializer used by the [Base->serialize() method](base#serialize "Definition and usage of the Base->serialize method"). Default value: `igbinary` if available, otherwise set to `php`. Default value: First match of `'igbinary'` then `'php'`
+Define the default serializer used by the [Base->serialize() method](base#serialize "Definition and usage of the Base->serialize method"). Default value: `igbinary` if available, otherwise set to `php`. Default: First match of `'igbinary'` then `'php'`
 
 
 ### TEMP
@@ -314,13 +314,13 @@ A reference to the current HTTP request URI.
 
 
 ### VERB
-**Type:** `string` &nbsp; &nbsp; **Default value:** auto-detected
+**Type:** `string` &nbsp; &nbsp; **Default:** auto-detected
 
-A reference to the current HTTP request method.
+A reference to the current HTTP request method. Default: `&$_SERVER['REQUEST_METHOD']`
 
 
 ### VERSION
-**Type:** `string`
+**Type:** `string` &nbsp; &nbsp; **Default:** e.g. `'3.2.1-Release'`
 
 A string containing the version of the Framework.
 

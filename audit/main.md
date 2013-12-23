@@ -2,10 +2,10 @@
 
 The Audit class is a data validator.
 
----
-
 Namespace: `\` <br>
 File location: `lib/./lib/audit.php.php`
+
+---
 
 <div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
 <p>This function is currently not documented; only its argument list is available.</p></div>
@@ -38,7 +38,7 @@ This function allows you to return TRUE if string is a valid URL
 Example:
 
 ``` php
-echo $audit->url($str) // displays '@TODO' 
+$audit->url($str); // returns TRUE or FALSE
 ```
 
 ### email
@@ -54,7 +54,7 @@ This function allows you to return TRUE if string is a valid e-mail address; Che
 Example:
 
 ``` php
-echo $audit->email($str, $mx) // displays '@TODO' 
+$audit->email($str, $mx); // returns TRUE or FALSE
 ```
 
 ### ipv4
@@ -70,7 +70,7 @@ This function allows you to return TRUE if string is a valid IPV4 address
 Example:
 
 ``` php
-echo $audit->ipv4($addr) // displays '@TODO' 
+$audit->ipv4($addr); // returns TRUE or FALSE
 ```
 
 ### ipv6
@@ -86,7 +86,7 @@ This function allows you to return TRUE if string is a valid IPV6 address
 Example:
 
 ``` php
-echo $audit->ipv6($addr) // displays '@TODO' 
+$audit->ipv6($addr); // returns TRUE or FALSE
 ```
 
 ### isprivate
@@ -102,7 +102,7 @@ This function allows you to return TRUE if IP address is within private range
 Example:
 
 ``` php
-echo $audit->isprivate($addr) // displays '@TODO' 
+$audit->isprivate($addr); // returns TRUE or FALSE
 ```
 
 ### isreserved
@@ -118,7 +118,7 @@ This function allows you to return TRUE if IP address is within reserved range
 Example:
 
 ``` php
-echo $audit->isreserved($addr) // displays '@TODO' 
+$audit->isreserved($addr); // returns TRUE or FALSE
 ```
 
 ### ispublic
@@ -134,7 +134,7 @@ This function allows you to return TRUE if IP address is neither private nor res
 Example:
 
 ``` php
-echo $audit->ispublic($addr) // displays '@TODO' 
+$audit->ispublic($addr); // returns TRUE or FALSE
 ```
 
 ### isdesktop
@@ -150,7 +150,7 @@ This function allows you to return TRUE if user agent is a desktop browser
 Example:
 
 ``` php
-echo $audit->isdesktop() // displays '@TODO' 
+$audit->isdesktop(); // returns TRUE or FALSE
 ```
 
 ### ismobile
@@ -166,7 +166,7 @@ This function allows you to return TRUE if user agent is a mobile device
 Example:
 
 ``` php
-echo $audit->ismobile() // displays '@TODO' 
+$audit->ismobile(); // returns TRUE or FALSE
 ```
 
 ### isbot
@@ -182,7 +182,7 @@ This function allows you to return TRUE if user agent is a Web bot
 Example:
 
 ``` php
-echo $audit->isbot() // displays '@TODO' 
+$audit->isbot(); // returns TRUE or FALSE
 ```
 
 ### mod10
@@ -198,7 +198,7 @@ This function allows you to return TRUE if specified ID has a valid (Luhn) Mod-1
 Example:
 
 ``` php
-echo $audit->mod10($id) // displays '@TODO' 
+$audit->mod10($id); // returns TRUE or FALSE
 ```
 
 ### card
@@ -209,12 +209,14 @@ echo $audit->mod10($id) // displays '@TODO'
 string|FALSE card ( string $id ) 
 ```
 
-This function allows you to return credit card type if number is valid
+This function allows you to retrieve the type of a credit card if the given number is valid. Returns `FALSE` otherwise.
+
+Returned values for possible credit card types are: `'American Express'`, `'Diners Club'`, `'Discover'`, `'JCB'`, `'MasterCard'` & `'Visa'`
 
 Example:
 
 ``` php
-echo $audit->card($id) // displays '@TODO' 
+echo $audit->card($customer_card_id); // displays e.g. 'Discover'
 ```
 
 ### entropy
@@ -222,13 +224,13 @@ echo $audit->card($id) // displays '@TODO'
 **Return entropy estimate of a password (NIST 800-63)**
 
 ``` php
-int entropy ( string $str ) 
+int|float entropy ( string $str ) 
 ```
 
-This function allows you to return entropy estimate of a password (NIST 800-63)
+This function allows you to retrieve the entropy estimate of a given password as per [NIST Special Publication 800-63](http://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63 "Wikipedia :: NIST Special Publication 800-63") 
 
 Example:
 
 ``` php
-echo $audit->entropy($str) // displays '@TODO' 
+echo $audit->entropy($pretty_good_customer_password); // displays e.g. '28.5' 
 ```

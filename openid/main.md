@@ -2,10 +2,10 @@
 
 The OpenID class is a OpenID consumer.
 
----
-
 Namespace: `Web` <br>
 File location: `lib/web/openid.php`
+
+---
 
 <div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
 <p>This function is currently not documented; only its argument list is available.</p></div>
@@ -22,46 +22,27 @@ $openid = new OpenID ();
 The OpenID class extends the [Magic](magic) class.
 
 
-
 ## Methods
 
-
-### discover
-
-**Determine OpenID provider**
-
-``` php
-protected string|FALSE discover ( string $proxy ) 
-```
-
-This function allows you to determine OpenID provider 
-
-Example:
-
-``` php
-
-echo $openid->discover($proxy) // displays '@TODO'
-
-
-```
 
 ### auth
 
 **Initiate OpenID authentication sequence; Return FALSE on failure or redirect to OpenID provider URL**
 
 ``` php
-bool auth ( [ string $proxy = NULL, array $attr = array(), string|array $reqd = NULL ] ] ] ) 
+bool auth ( [ string $proxy = NULL [ , array $attr = array() [ , string|array $reqd = NULL ] ] ] ) 
 ```
 
-This function allows you to initiate OpenID authentication sequence; Return FALSE on failure or redirect to OpenID provider URL 
+This function allows you to initiate an OpenID authentication sequence; Returns `FALSE` on failure or redirect to the OpenID provider URL. 
+
++ `$proxy` 
++ `$attr`
++ `$reqd` OpenID required fields can be declared as comma-separated string or array. 
 
 Example:
 
 ``` php
-
-echo $openid->auth($proxy, $attr, $reqd) // displays '@TODO'
-
-
+$openid->auth($proxy, $attr, $reqd); // returns TRUE or FALSE
 ```
 
 ### verified
@@ -72,15 +53,12 @@ echo $openid->auth($proxy, $attr, $reqd) // displays '@TODO'
 bool verified ( [ string $proxy = NULL ] ) 
 ```
 
-This function allows you to return TRUE if OpenID verification was successful 
+This function allows you check if the OpenID verification was successful. 
 
 Example:
 
 ``` php
-
-echo $openid->verified($proxy) // displays '@TODO'
-
-
+$openid->verified($proxy); // returns TRUE or FALSE
 ```
 
 ### response
@@ -91,15 +69,12 @@ echo $openid->verified($proxy) // displays '@TODO'
 array response (  ) 
 ```
 
-This function allows you to return OpenID response fields 
+This function allows you to return the OpenID response fields. 
 
 Example:
 
 ``` php
-
-echo $openid->response() // displays '@TODO'
-
-
+$openid_response = $openid->response();
 ```
 
 ### exists
@@ -110,15 +85,12 @@ echo $openid->response() // displays '@TODO'
 bool exists ( string $key ) 
 ```
 
-This function allows you to return TRUE if OpenID request parameter exists 
+This function allows you to check if an OpenID request parameter exists. 
 
 Example:
 
 ``` php
-
-echo $openid->exists($key) // displays '@TODO'
-
-
+$exists = $openid->exists($key); // returns TRUE or FALSE
 ```
 
 ### set
@@ -129,15 +101,12 @@ echo $openid->exists($key) // displays '@TODO'
 string set ( string $key, string $val ) 
 ```
 
-This function allows you to bind value to OpenID request parameter 
+This function allows you to bind a value to an OpenID request parameter. 
 
 Example:
 
 ``` php
-
-echo $openid->set($key, $val) // displays '@TODO'
-
-
+$value_set = $openid->set('openid.mode', 'checkid_setup'); // returns 'checkid_setup
 ```
 
 ### get
@@ -148,15 +117,12 @@ echo $openid->set($key, $val) // displays '@TODO'
 mixed get ( string $key ) 
 ```
 
-This function allows you to return value of OpenID request parameter 
+This function allows you to retrieve the value of an OpenID request parameter. 
 
 Example:
 
 ``` php
-
-echo $openid->get($key) // displays '@TODO'
-
-
+$is_valid = $openid->get('is_valid'); // returns TRUE or FALSE
 ```
 
 ### clear
@@ -164,7 +130,7 @@ echo $openid->get($key) // displays '@TODO'
 **Remove OpenID request parameter**
 
 ``` php
-NULL clear ( $key ) 
+clear ( $key ) 
 ```
 
 This function allows you to remove OpenID request parameter 
@@ -172,8 +138,17 @@ This function allows you to remove OpenID request parameter
 Example:
 
 ``` php
-
-echo $openid->clear($key) // displays '@TODO'
-
-
+$openid->clear('openid.sig');
 ```
+
+### discover
+
+**Determine OpenID provider**
+
+``` php
+protected string|FALSE discover ( string $proxy ) 
+```
+
+This _protected_ function is used internally and allows to determine the OpenID provider. 
+
+

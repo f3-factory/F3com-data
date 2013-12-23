@@ -1340,7 +1340,7 @@ $f3->expire(0); // sends 'Cache-Control: no-cache, no-store, must-revalidate'
 string highlight ( string $text )
 ```
 
-### instance
+### Instantiation
 
 **Return class instance**
 
