@@ -230,11 +230,11 @@ See what other users have made with F3:
     </thead>
     <tbody>
         <tr>
-            <td>PHP Fat-Free Framework snippets for Sublime Text 2 and 3</td>
+            <td>Fat-Free PHP Framework snippets for Sublime Text 2 and 3</td>
             <td><a class="btn btn-info" href="https://github.com/uonick/fatfree-snippets" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>PHP Fat-Free Framework snippets for the PHPStorm / WebStorm IDE</td>
+            <td>Fat-Free PHP Framework snippets for the PHPStorm / WebStorm IDE</td>
             <td><a class="btn btn-info" href="https://github.com/ikkez/F3-PhpStorm-Snippets" target="_blank">view</a></td>
         </tr>
         <tr>
@@ -247,7 +247,7 @@ See what other users have made with F3:
 
 ## Credits
 
-The PHP Fat-Free Framework is community-driven software. It can't be what it is today without the help and support from the following people and organizations:
+The Fat-Free PHP Framework is community-driven software. It can't be what it is today without the help and support from the following people and organizations:
 
 <div class="multicolumn three"></div>
 
