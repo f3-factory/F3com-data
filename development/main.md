@@ -4,7 +4,7 @@
 
 The Fat-Free Framework is an open source PHP framework, written by Bong Cosca from 2009 to now.
 The philosophy behind the framework and its approach to software architecture is towards minimalism in structural components, avoiding application complexity and striking a balance between code elegance, application performance and programmer productivity.
-The Fat-Free PHP Framework is engineered specifically with usability and user experience as its primary design goals. Out comes a full-featured toolkit for web artisans, that will make your daily work a lot easier, no matter if you're a beginner or expert.
+The Fat-Free Framework is engineered specifically with usability and user experience as its primary design goals. Out comes a full-featured toolkit for web artisans, that will make your daily work a lot easier, no matter if you're a beginner or expert.
 
 **Now version 3.2 is here!** &nbsp; &nbsp; &nbsp; [CHANGELOG.txt](https://github.com/bcosca/fatfree/blob/master/lib/changelog.txt)
 
@@ -230,11 +230,11 @@ See what other users have made with F3:
     </thead>
     <tbody>
         <tr>
-            <td>Fat-Free PHP Framework snippets for Sublime Text 2 and 3</td>
+            <td>Fat-Free Framework snippets for Sublime Text 2 and 3</td>
             <td><a class="btn btn-info" href="https://github.com/uonick/fatfree-snippets" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>Fat-Free PHP Framework snippets for the PHPStorm / WebStorm IDE</td>
+            <td>Fat-Free Framework snippets for the PHPStorm / WebStorm IDE</td>
             <td><a class="btn btn-info" href="https://github.com/ikkez/F3-PhpStorm-Snippets" target="_blank">view</a></td>
         </tr>
         <tr>
@@ -247,7 +247,7 @@ See what other users have made with F3:
 
 ## Credits
 
-The Fat-Free PHP Framework is community-driven software. It can't be what it is today without the help and support from the following people and organizations:
+The Fat-Free Framework is community-driven software. It can't be what it is today without the help and support from the following people and organizations:
 
 <div class="multicolumn three"></div>
 
