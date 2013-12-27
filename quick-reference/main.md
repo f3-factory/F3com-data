@@ -77,6 +77,12 @@ Additional key-value pairs for foreign-to-ASCII character translations.
 Comma-separated list of [DNS blacklist servers](http://whatismyipaddress.com/blacklist-check "Blacklist Check List"). Framework generates a `403 Forbidden` error if the user's IPv4 address is listed on the specified server(s).
 
 
+### EMOJI
+**Type:** `array` &nbsp; &nbsp; **Default:** `array()`, empty array
+
+Additional key-value pairs of emoji tokens to add to the basic set used when translating a string to Unicode font-supported symbols. (see [`\UTF->emojify()`](utf-unicode-string-manager#emojify))
+
+
 ### ENCODING
 **Type:** `string` &nbsp; &nbsp; **Default:** `'UTF-8'`
 

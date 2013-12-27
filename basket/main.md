@@ -13,8 +13,8 @@ File location: `lib/basket.php`
 This is how you create a new Basket mapper:
 
 ```php
-$basket = new \Basket()
-
+$basket = new \Basket();
+$basket_named = new \Basket( 'discounted-items' );
 ```
 Please refer to the [__construct](basket#&#95;&#95;construct) method for details.
 
@@ -30,7 +30,7 @@ Please refer to the [__construct](basket#&#95;&#95;construct) method for details
 bool exists ( string $key ) 
 ```
 
-This function allows you to check if a named field is defined 
+This function allows you to check if a named field is defined. 
 
 Example:
 
@@ -51,10 +51,13 @@ This function allows you to assign a value to a field.
 
 **Notice**: The $key '`_id`' is a reserved key and would result in `set()` returning FALSE and not saving the key/value pair.
 
+Returns the assigned value $val on success or FALSE if $key equals the reserved key '`_id`'.
+
 Example:
 
 ```php
-$val = $basket->set($key, $val);
+$val = $basket->set('product_code', 2764);
+$val = $basket->set('product_discount', TRUE);
 ```
 
 ### get
@@ -65,7 +68,7 @@ $val = $basket->set($key, $val);
 scalar|FALSE get ( string $key ) 
 ```
 
-This function allows you to retrieve the value of a field 
+This function allows you to retrieve the value of a field. 
 
 Example:
 
@@ -97,7 +100,7 @@ $basket->clear('amount');
 array|FALSE find ( string $key, mixed $val ) 
 ```
 
-This function allows you to find items that match key/value pair. It returns an array of basket mapper objects.
+This function allows you to find items that match key/value pair. It returns an array of basket mapper objects. 
 
 Example:
 
@@ -128,7 +131,7 @@ echo $result[0]->get('name'); // displays 'cherry'
 object|FALSE findone ( string $key, mixed $val ) 
 ```
 
-This function allows you to get the first item that matches the given key/value pair 
+This function allows you to get the first item that matches the given key/value pair. 
 
 Example:
 
@@ -145,7 +148,7 @@ echo $result->get('name'); // displays 'peach'
 array load ( string $key, mixed $val ) 
 ```
 
-This function allows you to map current item to the matching key/value pair 
+This function allows you to map current item to the matching key/value pair. 
 
 Example:
 
@@ -165,7 +168,7 @@ echo $basket->get('amount'); // displays '10' (int)
 bool dry (  ) 
 ```
 
-This function allows you to check if the current item is empty/undefined 
+This function allows you to check if the current item is empty/undefined. 
 
 Example:
 
@@ -188,7 +191,7 @@ $basket->dry(); // FALSE, this mapper is hydrated
 int count (  ) 
 ```
 
-This function allows you to return the number of items in the basket 
+This function allows you to return the number of items in the basket. 
 
 Example:
 
@@ -204,7 +207,7 @@ echo $basket->count(); // displays '2' (int)
 array save (  ) 
 ```
 
-This function allows you to save the current basket item 
+This function allows you to save the current basket item. 
 
 Example:
 
@@ -222,7 +225,7 @@ $basket->save();
 bool erase ( string $key, mixed $val ) 
 ```
 
-This function allows you to erase the basket item matching the given key/value pair 
+This function allows you to erase the basket item matching the given key/value pair. 
 
 Example:
 
@@ -238,7 +241,7 @@ $basket->erase('name','peach'); // returns TRUE
 reset (  ) 
 ```
 
-This function allows you to reset the cursor 
+This function allows you to reset the cursor. 
 
 Example:
 
@@ -257,7 +260,7 @@ $basket->dry();	// true, mapper is empty again
 drop (  ) 
 ```
 
-This function allows you to completely empty the basket contents. The basket is removed from the SESSION as well.
+This function allows you to completely empty the basket contents. The basket is removed from the SESSION as well. 
 
 Example:
 
@@ -273,7 +276,7 @@ $basket->drop();
 copyfrom ( string $key ) 
 ```
 
-This function allows you to hydrate the basket using a hive array variable 
+This function allows you to hydrate the basket using a hive array variable. 
 
 Example:
 
@@ -291,7 +294,7 @@ $basket->get('name'); // banana
 copyto ( string $key ) 
 ```
 
-This function allows you to populate a hive array variable with basket contents 
+This function allows you to populate a hive array variable with basket contents. 
 
 Example:
 
@@ -307,7 +310,7 @@ $basket->copyto($key);
 array checkout (  ) 
 ```
 
-This function allows you to check out basket contents, which means it returns all items and clears the whole basket.
+This function allows you to check out basket contents, which means it returns all items and clears the whole basket. 
 
 Example:
 
@@ -325,11 +328,11 @@ void __construct ( [ string $key = 'basket' ] )
 
 The constructor allows you to instantiate the class. 
 
-The `$key` parameter is an equivalent to a database table name.
+The `$key` parameter is an equivalent to a database table name. 
 
 Example:
 
 ```php
-$basket = new Basket('shoppingcart');
+$basket = new Basket( 'puppy-cart' );
 ```
 

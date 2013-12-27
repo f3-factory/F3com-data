@@ -16,6 +16,8 @@ Here's an important point to consider when designing your application. Don't cac
 
 For example, you designed your site in such a way that all your Web pages have the menu options: `"Home"`, `"About Us"`, and `"Login"`, displayed when a user is not logged into your application. You also want the menu options to change to: `"Home"`, `"About Us"`, and `"Logout"`, once the user has logged in. If you instructed Fat-Free to cache the contents of `"About Us"` page (which includes the menu options), it does so and also sends the same instruction to the HTTP client. Regardless of the user's session state, i.e. logged in or logged out, the user's browser will take a snapshot of the page at the session state it was in. Future requests by the user for the `"About Us"` page before the cache timeout expires will display the same menu options available at that time the page was initially saved. Now, a user may have already logged in, but the menu options are still the same as if no such event occurred. That's not the kind of behavior we want from our application.
 
+Furthermore, when using included files in cached files, e.g. `require_once('../inc/account_header.php')`, the relative paths used won't work anymore, as the cached files are not stored in the original files directory. You'll either need to provide the full path to your included files; or tell F3 to store the cached files in a directory php can find; or add the path where the cached files are stored to the php include path (this can be done in the php.ini file).
+
 Some pointers:
 
 * Don't cache dynamic pages. It's quite obvious you don't want to cache data that changes frequently. You can, however, activate caching on pages that contain data updated on an hourly, daily or even yearly basis.For security reasons, the framework restricts cache engine usage to HTTP `GET` routes only. It will not cache submitted forms!Don't activate the cache on Web pages that at first glance look static. In our example, the "About Us" content may be static, but the menu isn't.
@@ -68,39 +70,41 @@ $f3->set('var','I want this value saved',90);
 
 ## Keeping Javascript and CSS on a Healthy Diet
 
-Fat-Free also has a Javascript and CSS compressor available in the Web plug-in. It can combine all your CSS files into one stylesheet (or Javascript files into a single script) so the number of components on a Web page are decreased. Reducing the number of HTTP requests to your Web server results in faster page loading. First you need to prepare your HTML template so it can take advantage of this feature. Something like:
+Fat-Free also has a Javascript and CSS compressor available in the [Web plug-in](web#minify). It can combine all your CSS files into one stylesheet and all your Javascript files into one single script in order to drastically reduce th number of HTTP requests needed by a Web page. Reducing the number of HTTP requests to your Web server results in faster page loading and a better UX. 
+
+To put this easy improvement in place, you first need to prepare your HTML templates to take advantage of this feature.
+
+For the CSS, you could start like this:
 
 ```html
-<link rel="stylesheet" type="text/css"
-	href="/minify/css?files=typo.css,grid.css" />
+<link rel="stylesheet" type="text/css" href="/minify/css?files=typo.css,grid.css" />
 ```
 
-Do the same with your Javascript files:
+And do the same with your Javascript files:
 
 ```html
-<script type="text/javascript" src="/minify/js?&files=underscore.js">
-</script>
+<script type="text/javascript" src="/minify/js?files=dialog.js,main.js"></script>
 ```
 
-Of course we need to set up a route so your application can handle the necessary call to the Fat-Free CSS/Javascript compressor:
+Of course we need to set up a route to handle the necessary call to the Fat-Free CSS/Javascript compressor:
 
 ```php
-$f3->route('GET /minify/@type',
-    function($f3,$args) {
-        $f3->set('UI',$args['type'].'/');
+$f3->route('GET /minify/@type', // @type will make `PARAMS.type` variable base point to the correct path
+    function($f3, $args) {
+        $f3->set('UI',$args['type'].'/'); // make sure you organize your files in sub-folders, per type
         echo Web::instance()->minify($_GET['files']);
     },
-    3600
+    3600*24 // Save minified file in F3 cache for 24 hours
 );
 ```
 
-And that's all there is to it! `minify()` reads each file (`typo.css` and `grid.css` in our CSS example, `underscore.js` in our Javascript example), strips off all unnecessary whitespaces and comments, combines all of the related items as a single Web page component, and attaches a far-future expiry date so the user's Web browser can cache the data. It's important that the `PARAMS.type` variable base points to the correct path. Otherwise, the URL rewriting mechanism inside the compressor won't find the CSS/Javascript files.
+And that's all there is to it! `minify()` reads each file (`typo.css` and `grid.css` in our CSS example, `dialog.js` and `main.js` in our Javascript example), strips off all unnecessary whitespaces and comments, combines all of the related items as a single Web page component, and attaches a far-future expiry date so the user's Web browser can cache the data. It's important that the `PARAMS.type` variable base points to the correct path. Otherwise, the URL rewriting mechanism inside the compressor won't find the CSS/Javascript files.
 
 ## Client-Side Caching
 
 In our examples, the framework sends a far-future expiry date to the client's Web browser so any request for the same CSS or Javascript block will come from the user's hard drive. On the server side, F3 will check each request and see if the CSS or Javascript blocks have already been cached. The route we specified has a cache refresh period of `3600` seconds. Additionally, if the Web browser sends an `If-Modified-Since` request header and the framework sees the cache hasn't changed, F3 just sends an `HTTP 304 Not Modified` response so no content is actually delivered. Without the `If-Modified-Since` header, Fat-Free renders the output from the cached file if available. Otherwise, the relevant code is executed.
 
-Tip: If you're not modifying your Javascript/CSS files frequently (as it would be if you're using a Javascript library like jQuery, MooTools, Dojo, etc.), consider adding a cache timer to the route leading to your Javascript/CSS minify handler (3rd argument of F3::route()) so Fat-Free doesn't have compress and combine these files each time such a request is received.
+Tip: If you're not modifying your Javascript/CSS files frequently (as it would be if you're using a Javascript library like jQuery, MooTools, Dojo, etc.), consider adding a cache timer to the route leading to your Javascript/CSS minify handler (3rd argument of F3::route()) so Fat-Free doesn't have to compress and combine these files each time the request is received.
 
 ## PHP Code Acceleration
 
@@ -108,12 +112,12 @@ Want to make your site run even faster? Fat-Free works best with either Alternat
 
 ## Bandwidth Throttling
 
-A fast application that processes all HTTP requests and responds to them at the shortest time possible is not always a good idea - specially if your bandwidth is limited or traffic on your Web site is particularly heavy. Serving pages ASAP also makes your application vulnerable to Denial-of-Service (DOS) attacks. F3 has a bandwidth throttling feature that allows you to control how fast your Web pages are served. Your can specifies how much time it should take to process a request:
+A fast application that processes all HTTP requests and responds to them at the shortest time possible is not always a good idea - specially if your bandwidth is limited or traffic on your Web site is particularly heavy. Serving pages ASAP also makes your application vulnerable to Denial-of-Service (DOS) attacks. F3 has a bandwidth throttling feature that allows you to control how fast your Web pages are served. Your can specifies the bandwidth to use when a request is served when you define the route:
 
 ```php
-$f3->route('GET /throttledpage','MyApp->handler',0,128);
+$f3->route('GET /login','\Backoffice\Login->handler', 0, 512); // limit sent data to 512 Kbps
 ```
 
-In this example, the framework will serve the Web page at a rate of 128KiBps.
+In this example, the framework will serve the GET requests to /login at a maximum rate of ~64 KB/s (512 Kbps).
 
 Bandwidth throttling at the application level can be particularly useful for login pages. Slow responses to dictionary attacks is a good way of mitigating this kind of security risk.

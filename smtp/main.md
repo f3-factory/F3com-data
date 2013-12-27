@@ -48,7 +48,7 @@ echo $smtp->set('Subject', 'Sent with the F3 SMTP plug-in');
 string|NULL get ( string $key ) 
 ```
 
-This function allows you to return the value of an e-mail header 
+This function allows you to return the value of an e-mail header. 
 
 Example:
 
@@ -61,10 +61,10 @@ echo $smtp->get('From'); // displays e.g. 'J. W. von Goethe <jwgoethe@famousauth
 **Return TRUE if header exists**
 
 ``` php
-bool exists ( $key ) 
+bool exists ( string $key ) 
 ```
 
-This function returns `TRUE`     if a header exists as per the function set() above.
+This function returns `TRUE` if a header exists as per the function set() described above. 
 
 Example:
 
@@ -77,10 +77,10 @@ $has_date_header = $smtp->exists('Date'); // returns TRUE
 **Remove header**
 
 ``` php
-clear ( string $key ) 
+NULL clear ( string $key ) 
 ```
 
-This function allows you to remove a header 
+This function allows you to remove a header. 
 
 Example:
 
@@ -94,7 +94,7 @@ $smtp->clear('In-Reply-To');
 **Add e-mail attachment**
 
 ``` php
-attach ( $filename ) 
+NULL attach ( $filename ) 
 ```
 
 This function allows you to add an e-mail attachment given by its filename.
@@ -116,14 +116,19 @@ $smtp->attach( './pictures/'.$screenshot ); // you can attach as many attachment
 bool send ( string $message ) 
 ```
 
-This function allows you to transmit a message. `send` opens a socket connection using the settings provided when instanciating the class. (see [__construct](smtp#&#95;&#95;construct) below for details)
+This function allows you to transmit a message. `send` opens a socket connection using the settings provided when instanciating the class. (see [__construct](smtp#&#95;&#95;construct) below for details). 
 
 The `'From'`, `'To'` & `'Subject'` headers are mandatory, and the `$message` as well; otherwise an `user_error` is raised. 
+
+Returns `TRUE` on success or `FALSE` when 
+
++ Failed to establish a socket connection with the host. 
++ SSL is unavailable on the server while the SMTP object has been instanciated with `$scheme` == 'ssl'. 
 
 Example:
 
 ``` php
-$smtp->send($message); // returns FALSE if SSL is unavailable on the server or the socket connection with the host
+$smtp->send($message); // returns TRUE or FALSE
 ```
 
 ### log
@@ -177,12 +182,26 @@ $smtp_tls = new SMTP ( $host, $port, 'tls', $user, $pw );
 
 ```
 
+### fixheader
+
+**Fix header**
+
+``` php
+protected string fixheader ( string $key ) 
+```
+
+This function allows to fix a header 
+
+This _protected_ function is used internally by the `get`, `set`, `exists` & `clear` functions and check and ensure a given header value is well-formed (basically remove forbidden characters). 
+
+
+
 ### dialog
 
 **Send SMTP command and record server response**
 
 ``` php
-protected dialog ( [ string $cmd = NULL, bool $log = NULL ] ] ) 
+protected dialog ( [ string $cmd = NULL [, bool $log = NULL ]] ) 
 ```
 
 This _protected_ function is used internally by the `send` function and allows to send SMTP command and record server response. 

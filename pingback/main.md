@@ -7,6 +7,9 @@ File location: `lib/web/pingback.php`
 
 ---
 
+<div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
+<p>This class is partially documented; argument list and a couple of examples are available.</p></div>
+
 ## Instantiation
 
 **Return class instance**
@@ -16,7 +19,7 @@ File location: `lib/web/pingback.php`
 $pingback = Web\Pingback::instance();
 ```
 
-The Pingback class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code.
+The Pingback class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code. 
 
 
 ## Methods
@@ -27,16 +30,15 @@ The Pingback class uses the [Prefab](prefab-registry) factory wrapper, so you ca
 **Load local page contents, parse HTML anchor tags, find permalinks, and send XML-RPC calls to corresponding pingback servers**
 
 ``` php
-inspect ( string $source ) 
+NULL inspect ( string $source ) 
 ```
 
-This function loads local page contents, parse the HTML anchor tags, look for permalinks inside the page, and then send XML-RPC calls to corresponding pingback servers 
+This function loads local page contents, parse the HTML anchor tags, look for permalinks inside the page, and then send XML-RPC calls to corresponding pingback servers. 
 
 Example:
 
 ``` php
 $pingback->inspect($source);
-
 ```
 
 ### listen
@@ -47,11 +49,11 @@ $pingback->inspect($source);
 string listen ( callback $func [ , string $path = NULL ] ) 
 ```
 
-This function allows you to receive ping, check if local page is pingback-enabled, verify source contents, and use a given callback function to return a XML-RPC response 
+This function allows you to receive ping, check if local page is pingback-enabled, verify source contents, and use a given callback function to return a XML-RPC response. 
 
-If `$path` is not provided, the [BASE](quick-reference#base) system variable is used.
+If `$path` is not provided, the [BASE](quick-reference#base) system variable is used. 
 
-On error, `die` with the related [xmlrpc_encode_request](http://php.net/manual/en/function.xmlrpc-encode-request.php "php.net :: xmlrpc_encode_request") message.
+On error, `die` with the related [xmlrpc_encode_request](http://php.net/manual/en/function.xmlrpc-encode-request.php "php.net :: xmlrpc_encode_request") message. 
 
 Example:
 
@@ -67,7 +69,7 @@ echo $pingback->listen($func, $path);
 string log (  ) 
 ```
 
-This function returns the transaction history containing the list of the permalinks in the page, if the permalink was found or not, and the associated request body.
+This function returns the transaction history containing the list of the permalinks in the page, if the permalink was found or not, and the associated request body. 
 
 Example:
 
@@ -103,8 +105,8 @@ $pingback = new Pingback (  )
 protected bool enabled ( $url ) 
 ```
 
-This is a _protected_ function used internally by inspect() and listen() or by child classes.
+This function returns TRUE if the given URL points to a pingback-enabled resource. 
 
-This function returns TRUE if the given URL points to a pingback-enabled resource 
+This is a protected function used internally by inspect() and listen() or by child classes.
 
 

@@ -53,7 +53,7 @@ the behaviour of these functions are the same. So assume you have this set of da
 **Map to first record that matches criteria**
 
 ```php
-array|false load ( [ string|array $filter = NULL [, array $options = NULL ]] )
+array|FALSE load ( [ string|array $filter = NULL [, array $options = NULL ]] )
 ```
 
 The `load` method hydrates the mapper object with records. You can define a `$filter` to load only records that matches your criteria.
@@ -109,7 +109,7 @@ mixed prev ( )
 
 ### first
 
-**Move pointer to first record in cursor**
+**Map to first record in cursor**
 
 ```php
 mixed first ( )
@@ -117,7 +117,7 @@ mixed first ( )
 
 ### last
 
-**Move pointer to last record in cursor**
+**Map to last record in cursor**
 
 ```php
 mixed last ( )
@@ -224,7 +224,39 @@ This method saves data to the database. The `Cursor` class automatically determi
 **Delete current record**
 
 ```php
-erase ( )
+int|bool erase ( )
+```
+
+### onload
+
+**Define onload trigger**
+
+```php
+closure onload ( )
+```
+
+### oninsert
+
+**Define oninsert trigger**
+
+```php
+closure oninsert ( )
+```
+
+### onupdate
+
+**Define onupdate trigger**
+
+```php
+closure onupdate ( )
+```
+
+### onerase
+
+**Define onerase trigger**
+
+```php
+closure onerase ( )
 ```
 
 ### reset
@@ -232,7 +264,7 @@ erase ( )
 **Reset/dehydrate the cursor**
 
 ```php
-reset ( )
+NULL reset ( )
 ```
 
 

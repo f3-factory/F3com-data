@@ -8,7 +8,7 @@ File location: `lib/./lib/audit.php.php`
 ---
 
 <div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
-<p>This function is currently not documented; only its argument list is available.</p></div>
+<p>This class is currently not documented; only its argument list is available.</p></div>
 
 ## Instantiation
 
@@ -19,7 +19,7 @@ File location: `lib/./lib/audit.php.php`
 $audit = \Audit::instance();
 ```
 
-The Audit class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code.
+The Audit class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code. 
 
 
 ## Methods
@@ -33,7 +33,7 @@ The Audit class uses the [Prefab](prefab-registry) factory wrapper, so you can g
 bool url ( string $str ) 
 ```
 
-This function allows you to return TRUE if string is a valid URL
+This function allows you to check if a given string is a valid URL. 
 
 Example:
 
@@ -49,7 +49,9 @@ $audit->url($str); // returns TRUE or FALSE
 bool email ( string $str [ , boolean $mx = FALSE ] ) 
 ```
 
-This function allows you to return TRUE if string is a valid e-mail address; Check DNS MX records if specified
+This function allows you to check if a given string is a valid e-mail address. 
+
+If `$mx` is set to `TRUE` and the e-mail address is valid, this function will check the DNS MX records as well. 
 
 Example:
 
@@ -65,7 +67,7 @@ $audit->email($str, $mx); // returns TRUE or FALSE
 bool ipv4 ( string $addr ) 
 ```
 
-This function allows you to return TRUE if string is a valid IPV4 address
+This function allows you to check if a given IP is a valid IPV4 address. 
 
 Example:
 
@@ -81,7 +83,7 @@ $audit->ipv4($addr); // returns TRUE or FALSE
 bool ipv6 ( string $addr ) 
 ```
 
-This function allows you to return TRUE if string is a valid IPV6 address
+This function allows you to check if a given IP is a valid IPV6 address. 
 
 Example:
 
@@ -97,7 +99,7 @@ $audit->ipv6($addr); // returns TRUE or FALSE
 bool isprivate ( string $addr ) 
 ```
 
-This function allows you to return TRUE if IP address is within private range
+This function allows you to check if a given IP address is within a private range of addresses. 
 
 Example:
 
@@ -113,7 +115,7 @@ $audit->isprivate($addr); // returns TRUE or FALSE
 bool isreserved ( string $addr ) 
 ```
 
-This function allows you to return TRUE if IP address is within reserved range
+This function allows you to check if a given IP address is within a reserved range of addresses. 
 
 Example:
 
@@ -129,7 +131,7 @@ $audit->isreserved($addr); // returns TRUE or FALSE
 bool ispublic ( string $addr ) 
 ```
 
-This function allows you to return TRUE if IP address is neither private nor reserved
+This function allows you to check if a given IP address is neither private nor reserved. 
 
 Example:
 
@@ -145,7 +147,7 @@ $audit->ispublic($addr); // returns TRUE or FALSE
 bool isdesktop (  ) 
 ```
 
-This function allows you to return TRUE if user agent is a desktop browser
+This function allows you to check if a given user agent is a desktop browser. 
 
 Example:
 
@@ -161,7 +163,7 @@ $audit->isdesktop(); // returns TRUE or FALSE
 bool ismobile (  ) 
 ```
 
-This function allows you to return TRUE if user agent is a mobile device
+This function allows you to check if a given user agent is a mobile device. 
 
 Example:
 
@@ -177,7 +179,7 @@ $audit->ismobile(); // returns TRUE or FALSE
 bool isbot (  ) 
 ```
 
-This function allows you to return TRUE if user agent is a Web bot
+This function allows you to check if a given user agent is a Web bot. 
 
 Example:
 
@@ -193,7 +195,7 @@ $audit->isbot(); // returns TRUE or FALSE
 bool mod10 ( string $id ) 
 ```
 
-This function allows you to return TRUE if specified ID has a valid (Luhn) Mod-10 check digit
+This function allows you to check if a specified ID has a valid (Luhn) Mod-10 check digit. 
 
 Example:
 
@@ -227,7 +229,7 @@ echo $audit->card($customer_card_id); // displays e.g. 'Discover'
 int|float entropy ( string $str ) 
 ```
 
-This function allows you to retrieve the entropy estimate of a given password as per [NIST Special Publication 800-63](http://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63 "Wikipedia :: NIST Special Publication 800-63") 
+This function allows you to retrieve the entropy estimate of a given password as per [NIST Special Publication 800-63](http://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63 "Wikipedia :: NIST Special Publication 800-63") . 
 
 Example:
 

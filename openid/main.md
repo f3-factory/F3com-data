@@ -8,7 +8,7 @@ File location: `lib/web/openid.php`
 ---
 
 <div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
-<p>This function is currently not documented; only its argument list is available.</p></div>
+<p>This class is currently not documented; only its argument list is available.</p></div>
 
 ## Instantiation
 
@@ -106,7 +106,7 @@ This function allows you to bind a value to an OpenID request parameter.
 Example:
 
 ``` php
-$value_set = $openid->set('openid.mode', 'checkid_setup'); // returns 'checkid_setup
+echo $openid->set('openid.mode', 'checkid_setup'); // displays 'checkid_setup'
 ```
 
 ### get
@@ -130,7 +130,7 @@ $is_valid = $openid->get('is_valid'); // returns TRUE or FALSE
 **Remove OpenID request parameter**
 
 ``` php
-clear ( $key ) 
+NULL clear ( string $key ) 
 ```
 
 This function allows you to remove OpenID request parameter 
