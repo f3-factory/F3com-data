@@ -1,6 +1,6 @@
 # Magic
 
-The Magic class is a PHP magic wrapper and implements the [ArrayAccess Interface](http://www.php.net/manual/en/class.arrayaccess.php "php.net ArrayAccess Reference").
+The Magic class is a PHP magic wrapper and implements the [ArrayAccess interface](http://www.php.net/manual/en/class.arrayaccess.php "php.net ArrayAccess Reference").
 
 Namespace: `\` <br>
 File location: `lib/magic.php`
@@ -12,7 +12,7 @@ File location: `lib/magic.php`
 
 The Magic class is an [abstract class](http://www.php.net/manual/en/language.oop5.abstract.php "php.net Class Abstraction Manual"), which means that you need to extend it with another class, that then can take advantage of the magic wrapper.
 
-It implements the ArrayAccess Interfaces and wraps some [magic methods](http://www.php.net/manual/en/language.oop5.magic.php "php.net Magic Methods Manual") towards them. This way you can use an underlying object as same why like a normal array.
+It implements the ArrayAccess interface and wraps some [magic methods](http://www.php.net/manual/en/language.oop5.magic.php "php.net Magic Methods Manual") towards them. This way you can use an underlying object the same way you do it with any standard array.
 Let's have a look at this example:
 
 ```php
@@ -54,7 +54,7 @@ echo $user->mail; // john@email.com
 
 ## Abstract Methods
 
-When creating a new descendant class you need to implement these functions in your new class.
+The Magic class being abstract, your new descendant class using Magic need to implement all these functions:
 
 ### exists
 
@@ -64,7 +64,7 @@ When creating a new descendant class you need to implement these functions in yo
 bool exists ( string $key ) 
 ```
 
-This function allows you to return TRUE if key is not empty
+This function returns TRUE if key is not empty
 
 ### set
 
@@ -74,7 +74,7 @@ This function allows you to return TRUE if key is not empty
 mixed set ( string $key, mixed $val ) 
 ```
 
-This function allows you to bind value to key
+This function allows you to bind a value to a key
 
 
 ### get
@@ -85,7 +85,7 @@ This function allows you to bind value to key
 mixed get ( string $key ) 
 ```
 
-This function allows you to retrieve contents of key
+This function allows you to retrieve the contents of a key
 
 
 
@@ -94,10 +94,10 @@ This function allows you to retrieve contents of key
 **Unset key**
 
 ``` php
-NULL clear ( string $key ) 
+clear ( string $key ) 
 ```
 
-This function allows you to unset key
+This function allows you to unset a key
 
 
 ## Parent Methods
@@ -112,17 +112,18 @@ The following methods are needed for internal implementation. You don't need the
 private bool visible ( string $key ) 
 ```
 
-This function returns TRUE if property has public visibility. This is important to know to decide if we call the magic setter/getter or just bypass the public property.
+This function returns TRUE if property has public visibility. This is important to decide if we call the magic setter/getter or just bypass the public property.
 
 
 ### offsetexists
 
-**Convenience method for checking property value**
+**Convenient method for checking property value**
 
 ``` php
 mixed offsetexists ( string $key ) 
 ```
 
+This function is a convenient method for retrieving the value of a property
 
 ### __isset
 
@@ -132,15 +133,17 @@ mixed offsetexists ( string $key )
 mixed __isset ( string $key ) 
 ```
 
+This function is an alias for the offsetexists() function above
 
 ### offsetset
 
-**Convenience method for assigning property value**
+**Convenient method for assigning property value**
 
 ``` php
 mixed offsetset ( string $key, scalar $val ) 
 ```
 
+This function is a convenient method for setting the value of a property
 
 ### __set
 
@@ -150,15 +153,17 @@ mixed offsetset ( string $key, scalar $val )
 mixed __set ( string $key, scalar $val ) 
 ```
 
+This function is an alias for the offsetset() function above
 
 ### offsetget
 
-**Convenience method for retrieving property value**
+**Convenient method for retrieving property value**
 
 ``` php
 mixed offsetget ( string $key ) 
 ```
 
+This function is a convenient method for getting the value of a property
 
 ### __get
 
@@ -168,16 +173,17 @@ mixed offsetget ( string $key )
 mixed __get ( string $key ) 
 ```
 
+This function is an alias for the offsetget() function above
 
 ### offsetunset
 
-**Convenience method for checking property value**
+**Convenient method for checking property value**
 
 ``` php
-NULL offsetunset ( string $key ) 
+offsetunset ( string $key ) 
 ```
 
-This function allows you to convenience method for checking property value
+This function is a convenient method for checking the value of a property
 
 
 ### __unset
@@ -185,5 +191,7 @@ This function allows you to convenience method for checking property value
 **Alias for offsetunset()**
 
 ``` php
-NULL __unset ( string $key ) 
+__unset ( string $key ) 
 ```
+
+This function is an alias for the offsetunset() function above

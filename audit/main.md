@@ -2,13 +2,13 @@
 
 The Audit class is a data validator.
 
----
-
 Namespace: `\` <br>
 File location: `lib/./lib/audit.php.php`
 
+---
+
 <div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
-<p>This function is currently not documented; only its argument list is available.</p></div>
+<p>This class is currently not documented; only its argument list is available.</p></div>
 
 ## Instantiation
 
@@ -19,7 +19,7 @@ File location: `lib/./lib/audit.php.php`
 $audit = \Audit::instance();
 ```
 
-The Audit class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code.
+The Audit class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code. 
 
 
 ## Methods
@@ -33,12 +33,12 @@ The Audit class uses the [Prefab](prefab-registry) factory wrapper, so you can g
 bool url ( string $str ) 
 ```
 
-This function allows you to return TRUE if string is a valid URL
+This function allows you to check if a given string is a valid URL. 
 
 Example:
 
 ``` php
-echo $audit->url($str) // displays '@TODO' 
+$audit->url($str); // returns TRUE or FALSE
 ```
 
 ### email
@@ -49,12 +49,14 @@ echo $audit->url($str) // displays '@TODO'
 bool email ( string $str [ , boolean $mx = FALSE ] ) 
 ```
 
-This function allows you to return TRUE if string is a valid e-mail address; Check DNS MX records if specified
+This function allows you to check if a given string is a valid e-mail address. 
+
+If `$mx` is set to `TRUE` and the e-mail address is valid, this function will check the DNS MX records as well. 
 
 Example:
 
 ``` php
-echo $audit->email($str, $mx) // displays '@TODO' 
+$audit->email($str, $mx); // returns TRUE or FALSE
 ```
 
 ### ipv4
@@ -65,12 +67,12 @@ echo $audit->email($str, $mx) // displays '@TODO'
 bool ipv4 ( string $addr ) 
 ```
 
-This function allows you to return TRUE if string is a valid IPV4 address
+This function allows you to check if a given IP is a valid IPV4 address. 
 
 Example:
 
 ``` php
-echo $audit->ipv4($addr) // displays '@TODO' 
+$audit->ipv4($addr); // returns TRUE or FALSE
 ```
 
 ### ipv6
@@ -81,12 +83,12 @@ echo $audit->ipv4($addr) // displays '@TODO'
 bool ipv6 ( string $addr ) 
 ```
 
-This function allows you to return TRUE if string is a valid IPV6 address
+This function allows you to check if a given IP is a valid IPV6 address. 
 
 Example:
 
 ``` php
-echo $audit->ipv6($addr) // displays '@TODO' 
+$audit->ipv6($addr); // returns TRUE or FALSE
 ```
 
 ### isprivate
@@ -97,12 +99,12 @@ echo $audit->ipv6($addr) // displays '@TODO'
 bool isprivate ( string $addr ) 
 ```
 
-This function allows you to return TRUE if IP address is within private range
+This function allows you to check if a given IP address is within a private range of addresses. 
 
 Example:
 
 ``` php
-echo $audit->isprivate($addr) // displays '@TODO' 
+$audit->isprivate($addr); // returns TRUE or FALSE
 ```
 
 ### isreserved
@@ -113,12 +115,12 @@ echo $audit->isprivate($addr) // displays '@TODO'
 bool isreserved ( string $addr ) 
 ```
 
-This function allows you to return TRUE if IP address is within reserved range
+This function allows you to check if a given IP address is within a reserved range of addresses. 
 
 Example:
 
 ``` php
-echo $audit->isreserved($addr) // displays '@TODO' 
+$audit->isreserved($addr); // returns TRUE or FALSE
 ```
 
 ### ispublic
@@ -129,12 +131,12 @@ echo $audit->isreserved($addr) // displays '@TODO'
 bool ispublic ( string $addr ) 
 ```
 
-This function allows you to return TRUE if IP address is neither private nor reserved
+This function allows you to check if a given IP address is neither private nor reserved. 
 
 Example:
 
 ``` php
-echo $audit->ispublic($addr) // displays '@TODO' 
+$audit->ispublic($addr); // returns TRUE or FALSE
 ```
 
 ### isdesktop
@@ -145,12 +147,12 @@ echo $audit->ispublic($addr) // displays '@TODO'
 bool isdesktop (  ) 
 ```
 
-This function allows you to return TRUE if user agent is a desktop browser
+This function allows you to check if a given user agent is a desktop browser. 
 
 Example:
 
 ``` php
-echo $audit->isdesktop() // displays '@TODO' 
+$audit->isdesktop(); // returns TRUE or FALSE
 ```
 
 ### ismobile
@@ -161,12 +163,12 @@ echo $audit->isdesktop() // displays '@TODO'
 bool ismobile (  ) 
 ```
 
-This function allows you to return TRUE if user agent is a mobile device
+This function allows you to check if a given user agent is a mobile device. 
 
 Example:
 
 ``` php
-echo $audit->ismobile() // displays '@TODO' 
+$audit->ismobile(); // returns TRUE or FALSE
 ```
 
 ### isbot
@@ -177,12 +179,12 @@ echo $audit->ismobile() // displays '@TODO'
 bool isbot (  ) 
 ```
 
-This function allows you to return TRUE if user agent is a Web bot
+This function allows you to check if a given user agent is a Web bot. 
 
 Example:
 
 ``` php
-echo $audit->isbot() // displays '@TODO' 
+$audit->isbot(); // returns TRUE or FALSE
 ```
 
 ### mod10
@@ -193,12 +195,12 @@ echo $audit->isbot() // displays '@TODO'
 bool mod10 ( string $id ) 
 ```
 
-This function allows you to return TRUE if specified ID has a valid (Luhn) Mod-10 check digit
+This function allows you to check if a specified ID has a valid (Luhn) Mod-10 check digit. 
 
 Example:
 
 ``` php
-echo $audit->mod10($id) // displays '@TODO' 
+$audit->mod10($id); // returns TRUE or FALSE
 ```
 
 ### card
@@ -209,12 +211,14 @@ echo $audit->mod10($id) // displays '@TODO'
 string|FALSE card ( string $id ) 
 ```
 
-This function allows you to return credit card type if number is valid
+This function allows you to retrieve the type of a credit card if the given number is valid. Returns `FALSE` otherwise.
+
+Returned values for possible credit card types are: `'American Express'`, `'Diners Club'`, `'Discover'`, `'JCB'`, `'MasterCard'` & `'Visa'`
 
 Example:
 
 ``` php
-echo $audit->card($id) // displays '@TODO' 
+echo $audit->card($customer_card_id); // displays e.g. 'Discover'
 ```
 
 ### entropy
@@ -222,13 +226,13 @@ echo $audit->card($id) // displays '@TODO'
 **Return entropy estimate of a password (NIST 800-63)**
 
 ``` php
-int entropy ( string $str ) 
+int|float entropy ( string $str ) 
 ```
 
-This function allows you to return entropy estimate of a password (NIST 800-63)
+This function allows you to retrieve the entropy estimate of a given password as per [NIST Special Publication 800-63](http://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63 "Wikipedia :: NIST Special Publication 800-63") . 
 
 Example:
 
 ``` php
-echo $audit->entropy($str) // displays '@TODO' 
+echo $audit->entropy($pretty_good_customer_password); // displays e.g. '28.5' 
 ```

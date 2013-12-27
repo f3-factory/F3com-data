@@ -8,7 +8,7 @@ File location: `lib/auth.php`
 
 ## Instantiation
 ```php
-$auth = new \Auth(string $storage [, array $args = NULL ]);
+$auth = new \Auth (string $storage [, array $args = NULL ]);
 ```
 
 You can map the class internal keys `id` and `pw` with your data table field names (i.e. 'username' , 'password'). Given an example for F3's Jig (simple file-based db):

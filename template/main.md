@@ -28,7 +28,7 @@ The Template class uses the [Prefab](prefab-registry) factory wrapper, so you ca
 void extend ( string $tag, callback $func )
 ```
 
-The `extend` function allows you to create your own custom template tag. It can be seen as a hook to the F3 template engine. 
+The `extend` function allows you to create your own custom template tag. It can be seen as a hook to the F3 template engine.
 
 `$tag` is the name of your custom tag <small>(without the `<` and `>` indeed)</small>. Don't name your tag after an existing [F3 template directive](quick-reference#include) as your tag handler won't be called. <small>(Read: To date, you can't use `extend` to override an existing F3 template directive)</small>
 
@@ -40,7 +40,7 @@ So, to define a new custom tag & register/hook its custom handler, it gives:
 \Template::instance()->extend('my_new_special_tag','MyImageViewHelper::my_tag_renderer');
 ```
 
-But let's have a look at a functionnal example to see how it basically works:
+But let's have a look at a functional example to see how it basically works:
 
 The idea is to create a new HTML `<image>` tag that would have the ability to resize images on the fly according to the `width` and `height` attributes found in the markup.
 
@@ -49,32 +49,32 @@ Let's do that now:
 ```php
 class ImageViewHelper {
 
-    static public function render($args) {
-        // retrieve the attributes of the template tag, as found in the template
-        // in our case, we expect 'src', 'width' and 'height', and optionally 'crop'
-        $attr = $args['@attrib']; // provided by the F3 template engine
-        // retrieve the inner html, as found in the template
-        $html = (isset($args[0])) ? $args[0] : '';
+	static public function render($args) {
+		// retrieve the attributes of the template tag, as found in the template
+		// in our case, we expect 'src', 'width' and 'height', and optionally 'crop'
+		$attr = $args['@attrib']; // provided by the F3 template engine
+		// retrieve the inner html, as found in the template
+		$html = (isset($args[0])) ? $args[0] : '';
 
-        $imagepath = $attr['src'];
-        $imgObj = new \Image($imagepath);
-        $imgObj->resize(
-            $attr['width'],
-            $attr['height'],
-            ((isset($attr['crop']) && $attr['crop']=='true') ? true : false)
-        );
-        $f3 = \Base::instance();
-        // to avoid clash, build an unique name for the new generated image
-        $file_name = $f3->hash($imagepath.$attr['width'].$attr['height']).'.png';
-        // save it for example in TEMP
-        $imagepath = $f3->get('TEMP').$file_name;
-        // convert it to PNG and save it to a file
-        $f3->write($imagepath, $imgObj->dump('png'));
-        // done! return the HTML markup
-        return 
-            sprintf ('<img src="/%s" width="%u" height="%u" />', 
-                        $imagepath,$attr['width'],$attr['height']);
-    }
+		$imagepath = $attr['src'];
+		$imgObj = new \Image($imagepath);
+		$imgObj->resize(
+			$attr['width'],
+			$attr['height'],
+			((isset($attr['crop']) && $attr['crop']=='true') ? true : false)
+		);
+		$f3 = \Base::instance();
+		// to avoid clash, build an unique name for the new generated image
+		$file_name = $f3->hash($imagepath.$attr['width'].$attr['height']).'.png';
+		// save it for example in TEMP
+		$imagepath = $f3->get('TEMP').$file_name;
+		// convert it to PNG and save it to a file
+		$f3->write($imagepath, $imgObj->dump('png'));
+		// done! return the HTML markup
+		return
+			sprintf ('<img src="/%s" width="%u" height="%u" />',
+						$imagepath,$attr['width'],$attr['height']);
+	}
 }
 
 // register the tag renderer either in index.php or in your view controller
@@ -109,12 +109,12 @@ In example:
 
 ```html
 <div>
-    <h1>My favorite books</h1>
-    <ul>
-    <F3:repeat group="{{ @books }}" value="{{ @book }}">
-        <li>{{ @book.title }}</li>
-    </F3:repeat>
-    </ul>
+	<h1>My favorite books</h1>
+	<ul>
+	<F3:repeat group="{{ @books }}" value="{{ @book }}">
+		<li>{{ @book.title }}</li>
+	</F3:repeat>
+	</ul>
 </div>
 ```
 
@@ -123,18 +123,18 @@ returns:
 ```php
 array (size=3)
   0 => string '<div>
-    <h1>My favorite books</h1>
-    <ul>
-    ' (length=53)
+	<h1>My favorite books</h1>
+	<ul>
+	' (length=53)
   1 =>
-    array (size=1)
-      'repeat' =>
-        array (size=2)
-          '@attrib' =>
-            array (size=2)
-              'group' => string '{{ @books }}' (length=12)
-              'value' => string '{{ @book }}' (length=11)
-          0 => string '<li>{{ @book.title }}</li>' (length=38)
+	array (size=1)
+	  'repeat' =>
+		array (size=2)
+		  '@attrib' =>
+			array (size=2)
+			  'group' => string '{{ @books }}' (length=12)
+			  'value' => string '{{ @book }}' (length=11)
+		  0 => string '<li>{{ @book.title }}</li>' (length=38)
   2 => string '</ul>
   </div>' (length=19)
 ```

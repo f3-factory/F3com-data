@@ -30,6 +30,7 @@ The 4th parameter is an array of options you can use to set additional PDO attri
 ```php
 $options = array(
     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, // generic attribute
+    \PDO::ATTR_PERSISTENT => TRUE,  // we want to use persistent connections
     \PDO::MYSQL_ATTR_COMPRESS => TRUE, // MySQL-specific attribute
 );
 $db = new \DB\SQL('mysql:host=localhost;port=3306;dbname=mysqldb','username','password', $options);
@@ -76,49 +77,68 @@ echo $db->name(); // mysqldb
 **Retrieve schema of SQL table**
 
 ```php
-array schema ( string $table [, int $ttl=0 ] )
+array|FALSE schema ( string $table [, array|string $fields = NULL [, int $ttl = 0 ]] )
 ```
+
+This function allows you to retrieve the schema of a given SQL table.
+
+`$fields` is either an array or a list (according to the F3 function [split](base#split)) of the names of columns to include in the returned schema. Defaulted to all fields. 
+
+When specified, `$ttl` will trigger a cache check for previous schema results and if not found or expired, will save the actual result to cache backend, provided the [CACHE](quick-reference#cache) system variable is set to `TRUE`.
 
 Example of use:
 
 ```php
-// CREATE TABLE mytable (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, name varchar(256) NULL DEFAULT 'none')
-$columns=$db->schema('mytable');
+$db->exec("CREATE TABLE IF NOT EXISTS mytable 
+          (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+           name varchar(128) NULL DEFAULT 'anonymous',
+           age SMALLINT UNSIGNED NOT NULL,
+           birth DATE NULL
+          )"
+);
+$columns = $db->schema('mytable', 'name;age'); // only interested in these 2 columns
 var_dump($columns);
 // outputs
-array(2) {
-  ["id"]=>array(5) {
-    ["type"]=>string(7) "INTEGER"
-    ["pdo_type"]=>int(1) // \PDO::PARAM_INT
-    ["default"]=>NULL
-    ["nullable"]=>bool(false)
-    ["pkey"]=>bool(true)
-  }
-  ["name"]=>array(5) {
-    ["type"]=>string(12) "varchar(256)"
-    ["pdo_type"]=>int(2) // \PDO::PARAM_STR
-    ["default"]=>string(6) "'none'"
-    ["nullable"]=>bool(true)
-    ["pkey"]=>bool(false)
-  }
-}
+array (size=2)
+  'name' => 
+    array (size=5)
+      'type' => string 'varchar(128)' (length=12)
+      'pdo_type' => int 2
+      'default' => string 'anonymous' (length=9)
+      'nullable' => boolean true
+      'pkey' => boolean false
+  'age' => 
+    array (size=5)
+      'type' => string 'SMALLINT UNSIGNED' (length=17)
+      'pdo_type' => int 1
+      'default' => null
+      'nullable' => boolean false
+      'pkey' => boolean false
 ```
+
+<div class="alert alert-info"><strong>MySQL Hint:</strong><br>You can improve InnoDB performance on MySQL with `SET GLOBAL innodb_stats_on_metadata=0;` <em>! This requires SUPER privilege! </em></div>
 
 ### exec
 
 **Execute a SQL command**
 
 ```php
-mixed exec ( string|array $commands [, array $args = NULL [, int $ttl = 0 ]] )
+array|int|FALSE exec ( string|array $commands [, string|array $args = NULL [, int $ttl = 0 [, bool $log=TRUE ]]] )
 ```
 
-This method execute one or more SQL statements and returns either the resulting rows (for SELECT, CALL, EXPLAIN, PRAGMA, SHOW statements) or the number of affected rows (for INSERT, DELETE, UPDATE statements).
+This method allows you to execute one or more given `$commands` SQL statements and returns either the resulting rows (for SELECT, CALL, EXPLAIN, PRAGMA & SHOW statements) or the number of affected rows (for INSERT, DELETE & UPDATE statements) or `FALSE` on failure.
+
+When specified, `$args` allows you to apply specific arguments to the SQL commands.
+
+The `$ttl` argument, when specified, will trigger a cache check for previous command and if not found or expired, will save the actual result to the cache backend, provided the [CACHE](quick-reference#cache) system variable is set to `TRUE`.
+
+The `$log` is a toggle switch for suppressing or enabling the log of executed commands. You can use it as a profiler as the processing time, in milliseconds, of every SQL command is logged as well.
 
 For example, consider the following table `mytable`:
 
 <table class="table table-bordered table-condensed table-striped">
   <thead>
-    <tr><th>id</th><th>name</th></tr>
+    <tr><th width="60">id</th><th>name</th></tr>
   </thead>
   <tbody>
     <tr><td>1</td><td>Joe</td></tr>
@@ -146,7 +166,7 @@ echo $db->exec('UPDATE mytable SET id=id+10'); // outputs 4
 
 #### Parameterized queries
 
-The `exec()` method's 2nd argument is there to pass arguments safely (cf. [here](databases#parameterized-queries)).
+The `exec()` method's 2nd argument is there to pass arguments safely (cf. [Parameterized Queries](databases#parameterized-queries)).
 
 For example, instead of writing:
 
@@ -176,6 +196,8 @@ $db->exec('INSERT INTO mytable(name) VALUES(?)','Jim');
 
 The 3rd argument `$ttl` is used to enable query caching. Set it to your desired time-to-live in seconds and make sure [CACHE](quick-reference#cache) system var is configured.
 This way you can speed up your application when processing data that does not change very frequently.
+
+The 4th argument `$log` is a toggle switch for suppressing or enabling the log of executed commands. You can use it as a profiler as the processing time, in milliseconds, of every SQL command is logged as well.
 
 #### Transaction
 
@@ -244,9 +266,9 @@ $db->exec('INSERT INTO mytable(name) VALUES(?)','Elliott');
 echo $db->log();
 
 // outputs:
-Mon, 27 May 2013 00:59:57 +0200 (0.1ms) INSERT INTO mytable(name) VALUES('Clyde')
-Mon, 27 May 2013 00:59:57 +0200 (0.3ms) INSERT INTO mytable(name) VALUES('Don')
-Mon, 27 May 2013 00:59:57 +0200 (0.2ms) INSERT INTO mytable(name) VALUES('Elliott')
+Mon, 27 Dec 2013 12:26:05 +0100 (2.0ms) INSERT INTO mytable(name) VALUES('Clyde')
+Mon, 27 Dec 2013 12:26:05 +0100 (3.6ms) INSERT INTO mytable(name) VALUES('Don')
+Mon, 27 Dec 2013 12:26:05 +0100 (1.3ms) INSERT INTO mytable(name) VALUES('Elliott')
 ```
 
 ### uuid
@@ -257,13 +279,21 @@ Mon, 27 May 2013 00:59:57 +0200 (0.2ms) INSERT INTO mytable(name) VALUES('Elliot
 string uuid ( )
 ```
 
+This function returns the [hash](base#hash) of the `$dsn` DSN passed to the [__constructor](sql#constructor)
+
 ### type
 
-**Map data type of argument to a PDO constant**
+**Map the data type of an argument to its reciprocal PDO constant**
 
 ```php
 int type ( scalar $val )
 ```
+This function allows you to retrieve the PDO constant corresponding to the php type of the provided `$val` as follow:
+
++ the `NULL` php type will returns `\PDO::PARAM_NULL`
++ the `boolean` php type will returns `\PDO::PARAM_BOOL` (int 5)
++ the `integer` php type will returns `\PDO::PARAM_INT` (int 1)
++ and any other php type will returns `\PDO::PARAM_STR` (int 2)
 
 ### quote
 
@@ -281,4 +311,4 @@ string quote ( string $val [, int $type = \PDO::PARAM_STR ] )
 string quotekey ( string $key )
 ```
 
-This quotes a table or column key name, based on the current database engine. E.g in quotes `page` to `"page"` in sqlite.
+This function quotes a table or column key name according to the requirements and syntax of the current database engine. E.g will quote `page` to `"page"` for SQLite and Oracle; while it will quote `page` to `&#96;page&#96;` for a MySQL based request.

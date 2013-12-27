@@ -1,14 +1,11 @@
 # SMTP : SMTP plug-in
 
-The SMTP class is a SMTP plug-in.
-
----
+The SMTP class is a SMTP plug-in to prepare e-mail messages (headers & attachments) and send them through a socket connection.
 
 Namespace: `\` <br>
 File location: `lib/smtp.php`
 
-<div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
-<p>This function is currently not documented; only its argument list is available.</p></div>
+---
 
 ## Instantiation
 
@@ -18,51 +15,11 @@ File location: `lib/smtp.php`
 $smtp = new SMTP ( $host, $port, $scheme, $user, $pw );
 
 ```
-The SMTP class extends the [Magic](magic) class.
 Please refer to the [__construct](smtp#&#95;&#95;construct) method for details.
 
-
+The SMTP class extends the [Magic](magic) class.
 
 ## Methods
-
-
-### fixheader
-
-**Fix header**
-
-``` php
-protected string fixheader ( string $key ) 
-```
-
-This function allows you to fix header 
-
-Example:
-
-``` php
-
-echo $smtp->fixheader($key) // displays '@TODO'
-
-
-```
-
-### exists
-
-**Return TRUE if header exists**
-
-``` php
-bool exists ( $key ) 
-```
-
-This function allows you to return TRUE if header exists 
-
-Example:
-
-``` php
-
-echo $smtp->exists($key) // displays '@TODO'
-
-
-```
 
 ### set
 
@@ -72,15 +29,15 @@ echo $smtp->exists($key) // displays '@TODO'
 string set ( string $key, string $val ) 
 ```
 
-This function allows you to bind value to e-mail header 
+This function allows you to bind a value to an e-mail header. 
+(Returns the `$val` value.)
 
 Example:
 
 ``` php
-
-echo $smtp->set($key, $val) // displays '@TODO'
-
-
+echo $smtp->set('Errors-to', '<bluehole@fatfreeframework.com>');
+echo $smtp->set('Sender', '<smtp-plug-in@fatfreeframework.com');
+echo $smtp->set('Subject', 'Sent with the F3 SMTP plug-in');
 ```
 
 ### get
@@ -91,15 +48,28 @@ echo $smtp->set($key, $val) // displays '@TODO'
 string|NULL get ( string $key ) 
 ```
 
-This function allows you to return value of e-mail header 
+This function allows you to return the value of an e-mail header. 
 
 Example:
 
 ``` php
+echo $smtp->get('From'); // displays e.g. 'J. W. von Goethe <jwgoethe@famousauthors.org>'
+```
 
-echo $smtp->get($key) // displays '@TODO'
+### exists
 
+**Return TRUE if header exists**
 
+``` php
+bool exists ( string $key ) 
+```
+
+This function returns `TRUE` if a header exists as per the function set() described above. 
+
+Example:
+
+``` php
+$has_date_header = $smtp->exists('Date'); // returns TRUE
 ```
 
 ### clear
@@ -110,52 +80,12 @@ echo $smtp->get($key) // displays '@TODO'
 NULL clear ( string $key ) 
 ```
 
-This function allows you to remove header 
+This function allows you to remove a header. 
 
 Example:
 
 ``` php
-
-echo $smtp->clear($key) // displays '@TODO'
-
-
-```
-
-### log
-
-**Return client-server conversation history**
-
-``` php
-string log (  ) 
-```
-
-This function allows you to return client-server conversation history 
-
-Example:
-
-``` php
-
-echo $smtp->log() // displays '@TODO'
-
-
-```
-
-### dialog
-
-**Send SMTP command and record server response**
-
-``` php
-protected NULL dialog ( [ string $cmd = NULL, bool $log = NULL ] ] ) 
-```
-
-This function allows you to send SMTP command and record server response 
-
-Example:
-
-``` php
-
-echo $smtp->dialog($cmd, $log) // displays '@TODO'
-
+$smtp->clear('In-Reply-To');
 
 ```
 
@@ -164,18 +94,18 @@ echo $smtp->dialog($cmd, $log) // displays '@TODO'
 **Add e-mail attachment**
 
 ``` php
-NULL attach ( $file ) 
+NULL attach ( $filename ) 
 ```
 
-This function allows you to add e-mail attachment 
+This function allows you to add an e-mail attachment given by its filename.
+
+`attach` checks whether the filename is a regular file or not (as per the PHP function [is_file](http://www.php.net/is_file "php.net :: ")), otherwise an `user_error` is raised.
 
 Example:
 
 ``` php
-
-echo $smtp->attach($file) // displays '@TODO'
-
-
+$smtp->attach( './files/pdf/'.$pdf );
+$smtp->attach( './pictures/'.$screenshot ); // you can attach as many attachments you need to the same e-mail
 ```
 
 ### send
@@ -186,15 +116,47 @@ echo $smtp->attach($file) // displays '@TODO'
 bool send ( string $message ) 
 ```
 
-This function allows you to transmit message 
+This function allows you to transmit a message. `send` opens a socket connection using the settings provided when instanciating the class. (see [__construct](smtp#&#95;&#95;construct) below for details). 
+
+The `'From'`, `'To'` & `'Subject'` headers are mandatory, and the `$message` as well; otherwise an `user_error` is raised. 
+
+Returns `TRUE` on success or `FALSE` when 
+
++ Failed to establish a socket connection with the host. 
++ SSL is unavailable on the server while the SMTP object has been instanciated with `$scheme` == 'ssl'. 
 
 Example:
 
 ``` php
+$smtp->send($message); // returns TRUE or FALSE
+```
 
-echo $smtp->send($message) // displays '@TODO'
+### log
 
+**Return client-server conversation history**
 
+``` php
+string log (  ) 
+```
+
+This function allows you to retrieve the client-server conversation history under the form of a command-reply log.
+
+Example:
+
+``` php
+echo '<pre>'.$smtp->log().'</pre>';
+```
+```
+// Outputs:
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH XOAUTH2 PLAIN-CLIENTTOKEN
+250 CHUNKING
+AUTH LOGIN
+235 2.7.0 Accepted
+MAIL FROM: 
+(...)
+QUIT
+502
 ```
 
 ### __construct
@@ -205,11 +167,41 @@ echo $smtp->send($message) // displays '@TODO'
 __construct ( string $host, int $port, string $scheme, string $user, string $pw ) 
 ```
 
-This function allows you to instantiate class 
+The constructor allows you to instantiate the class and specify the settings that will be used by the `send` function. 
+
++ `$host` & `$port` of the SMTP server you want to use to send your e-mail messages.
++ `$scheme` allows you to use a SSL connection (provided you have the [openssl extension](http://www.php.net/openssl "php.net :: OpenSSL") loaded on the server).
++ `$scheme` allows you to use a TLS connection as well. It will turn encryption on and use the `STREAM_CRYPTO_METHOD_TLS_CLIENT` method as per the PHP function [stream_socket_enable_crypto](http://www.php.net/manual/en/function.stream-socket-enable-crypto.php "php.net :: stream_socket_enable_crypto").
++ `$user` & `$pw` are used to authenticate with the `AUTH LOGIN` SMTP command.
 
 Example:
 
 ``` php
-$smtp = new SMTP ( $host, $port, $scheme, $user, $pw )
+$smtp_ssl = new SMTP ( $host, $port, 'ssl', $user, $pw );
+$smtp_tls = new SMTP ( $host, $port, 'tls', $user, $pw );
 
 ```
+
+### fixheader
+
+**Fix header**
+
+``` php
+protected string fixheader ( string $key ) 
+```
+
+This function allows to fix a header 
+
+This _protected_ function is used internally by the `get`, `set`, `exists` & `clear` functions and check and ensure a given header value is well-formed (basically remove forbidden characters). 
+
+
+
+### dialog
+
+**Send SMTP command and record server response**
+
+``` php
+protected dialog ( [ string $cmd = NULL [, bool $log = NULL ]] ) 
+```
+
+This _protected_ function is used internally by the `send` function and allows to send SMTP command and record server response. 
