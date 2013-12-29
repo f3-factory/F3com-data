@@ -13,8 +13,8 @@ File location: `lib/basket.php`
 This is how you create a new Basket mapper:
 
 ```php
-$basket = new \Basket()
-
+$basket = new \Basket();
+$basket_named = new \Basket( 'discounted-items' );
 ```
 Please refer to the [__construct](basket#&#95;&#95;construct) method for details.
 
@@ -30,13 +30,13 @@ Please refer to the [__construct](basket#&#95;&#95;construct) method for details
 bool exists ( string $key ) 
 ```
 
-This function allows you to return TRUE if field is defined 
+This function allows you to check if a named field is defined. 
 
 Example:
 
 ```php
 $basket->set('cherry',5);
-echo $basket->exists('cherry'); // TRUE
+$basket->exists('cherry'); // TRUE
 ```
 
 ### set
@@ -47,14 +47,17 @@ echo $basket->exists('cherry'); // TRUE
 scalar|FALSE set ( string $key, scalar $val ) 
 ```
 
-This function allows you to assign a value to field. 
+This function allows you to assign a value to a field. 
 
-The $key == '_id' is a reserved key and would result in `set()` returning FALSE and not saving the key/value pair.
+**Notice**: The $key '`_id`' is a reserved key and would result in `set()` returning FALSE and not saving the key/value pair.
+
+Returns the assigned value $val on success or FALSE if $key equals the reserved key '`_id`'.
 
 Example:
 
 ```php
-$val = $basket->set($key, $val);
+$val = $basket->set('product_code', 2764);
+$val = $basket->set('product_discount', TRUE);
 ```
 
 ### get
@@ -65,7 +68,7 @@ $val = $basket->set($key, $val);
 scalar|FALSE get ( string $key ) 
 ```
 
-This function allows you to retrieve value of field 
+This function allows you to retrieve the value of a field. 
 
 Example:
 
@@ -81,7 +84,7 @@ echo $basket->get('cherry'); // displays '5'
 NULL clear ( string $key ) 
 ```
 
-This function allows you to delete field 
+This function allows you to delete a field. The field won't exist anymore for this basket. 
 
 Example:
 
@@ -97,7 +100,7 @@ $basket->clear('cherry');
 array|FALSE find ( string $key, mixed $val ) 
 ```
 
-This function allows you to find items that match key/value pair. It returns an array of basket mapper objects.
+This function allows you to find items that match key/value pair. It returns an array of basket mapper objects. 
 
 Example:
 
@@ -115,7 +118,8 @@ $basket->reset();
 
 $result = $basket->find('name','cherry');
 
-$result[0]->get('amount'); // returns '5'
+echo $result[0]->get('amount'); // displays '5' (int)
+echo $result[0]->get('name'); // displays 'cherry'
 
 ```
 
@@ -127,14 +131,13 @@ $result[0]->get('amount'); // returns '5'
 object|FALSE findone ( string $key, mixed $val ) 
 ```
 
-This function allows you to return first item that matches key/value pair 
+This function allows you to get the first item that matches the given key/value pair. 
 
 Example:
 
 ```php
-$result = $basket->findone('name','cherry');
-
-$result->get('amount'); // returns '5'
+$result = $basket->findone('amount','10');
+echo $result->get('name'); // displays 'peach'
 ```
 
 ### load
@@ -145,14 +148,14 @@ $result->get('amount'); // returns '5'
 array load ( string $key, mixed $val ) 
 ```
 
-This function allows you to map current item to matching key/value pair 
+This function allows you to map current item to the matching key/value pair. 
 
 Example:
 
 ```php
 
 $basket->load('name','peach');
-echo $basket->get('amount'); // displays '10'
+echo $basket->get('amount'); // displays '10' (int)
 
 
 ```
@@ -165,7 +168,7 @@ echo $basket->get('amount'); // displays '10'
 bool dry (  ) 
 ```
 
-This function allows you to return TRUE if current item is empty/undefined 
+This function allows you to check if the current item is empty/undefined. 
 
 Example:
 
@@ -188,12 +191,12 @@ $basket->dry(); // FALSE, this mapper is hydrated
 int count (  ) 
 ```
 
-This function allows you to return number of items in basket 
+This function allows you to return the number of items in the basket. 
 
 Example:
 
 ```php
-echo $basket->count() // displays '2' 
+echo $basket->count(); // displays '2' (int)
 ```
 
 ### save
@@ -204,7 +207,7 @@ echo $basket->count() // displays '2'
 array save (  ) 
 ```
 
-This function allows you to save current item 
+This function allows you to save the current basket item. 
 
 Example:
 
@@ -222,7 +225,7 @@ $basket->save();
 bool erase ( string $key, mixed $val ) 
 ```
 
-This function allows you to erase item matching key/value pair 
+This function allows you to erase the basket item matching the given key/value pair. 
 
 Example:
 
@@ -238,7 +241,7 @@ $basket->erase('name','peach'); // returns TRUE
 NULL reset (  ) 
 ```
 
-This function allows you to reset the cursor 
+This function allows you to reset the cursor. 
 
 Example:
 
@@ -257,7 +260,7 @@ $basket->dry();	// true, mapper is empty again
 NULL drop (  ) 
 ```
 
-This function allows you to empty basket 
+This function allows you to completely empty the basket contents. The basket is removed from the SESSION as well. 
 
 Example:
 
@@ -273,7 +276,7 @@ $basket->drop();
 NULL copyfrom ( string $key ) 
 ```
 
-This function allows you to hydrate item using hive array variable 
+This function allows you to hydrate the basket using a hive array variable. 
 
 Example:
 
@@ -291,7 +294,7 @@ $basket->get('name'); // banana
 NULL copyto ( string $key ) 
 ```
 
-This function allows you to populate hive array variable with item contents 
+This function allows you to populate a hive array variable with basket contents. 
 
 Example:
 
@@ -307,12 +310,12 @@ $basket->copyto($key);
 array checkout (  ) 
 ```
 
-This function allows you to check out basket contents, which means it returns all items and clears the whole basket.
+This function allows you to check out basket contents, which means it returns all items and clears the whole basket. 
 
 Example:
 
 ```php
-$basket->checkout();
+$basket_items = $basket->checkout();
 ```
 
 ### __construct
@@ -320,15 +323,16 @@ $basket->checkout();
 **Instantiate class**
 
 ```php
-void __construct ( [ string $key = basket ] ) 
+void __construct ( [ string $key = 'basket' ] ) 
 ```
 
-This function allows you to instantiate class 
+The constructor allows you to instantiate the class. 
+
+The `$key` parameter is an equivalent to a database table name. 
 
 Example:
 
 ```php
-$basket = new Basket('shoppingcart');
+$basket = new Basket( 'puppy-cart' );
 ```
 
-The optional `$key` parameter is an equivalent to a database table name.

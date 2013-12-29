@@ -138,5 +138,6 @@ There are many more Plug-Ins available for F3. Have a look into their API Refere
 * [Geo](geo)
 * [OpenID](openid)
 * [PingBack](pingback)
+* [Google Static Maps API v2](google-static-maps)
 
 Still haven't found what you're looking for? Maybe you'll find it in the [User Contributed Plug-Ins](development#user-plugins) section.

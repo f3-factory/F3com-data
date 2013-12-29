@@ -595,7 +595,28 @@ Array
 string stringify ( mixed $arg [, $detail = TRUE ] )
 ```
 
+This function allows you to convert any PHP expression, value, array or any object to a compressed and exportable string.
+
 The `$detail` parameter controls whether to walk recursively into nested objects or not.
+
+Example with a simple 2D array:
+
+```php
+$elements = array('water','earth','wind','fire');
+$fireworks = array($elements, shuffle($elements), array_flip($elements));
+echo $f3->csv($fireworks);
+// Outputs e.g.:
+'array('water','earth','wind','fire'),true,array('earth'=>0,'fire'=>1,'water'=>2,'wind'=>3)'
+```
+
+```php
+$car = new stdClass();
+$car->color = 'green';
+$car->location = array('35.360496','138.727798');
+echo $f3->stringify($car);
+// Outputs e.g.:
+'stdClass::__set_state('color'=>'green','location'=>array('35.360496','138.727798'))'
+```
 
 ### csv
 
@@ -609,7 +630,7 @@ Usage:
 
 ```php
 $elements = array('water','earth','wind','fire');
-echo $f3->csv($elements); // displays "'water','earth','wind','fire'" (string, length 29)
+echo $f3->csv($elements); // displays 'water','earth','wind','fire' // including single quotes
 ```
 
 ### camelcase
@@ -624,7 +645,7 @@ Usage:
 
 ```php
 $str_s_c = 'user_name';
-$f3->camelcase($str_s_c); // returns: "userName"
+$f3->camelcase($str_s_c); // returns 'userName'
 ```
 ### snakecase
 
@@ -638,7 +659,7 @@ Usage:
 
 ```php
 $str_CC = 'userName';
-$f3->snakecase($str_CC); // returns: "user_name"
+$f3->snakecase($str_CC); // returns 'user_name'
 ```
 
 ### sign
@@ -657,10 +678,12 @@ int sign ( mixed $num )
 string hash ( string $str )
 ```
 
+Generates a 11-characters length hash for a given string
+
 Example:
 
 ```php
-var_dump($f3->hash('foobar')); // string '0i43fmgps1r' (length=11)
+$f3->hash('foobar'); // returns '0i43fmgps1r' (length=11)
 ```
 
 ### base64
@@ -790,7 +813,7 @@ See [serialize](base#serialize) for further description.
 
 ## Localisation
 
-<div class="alert alert-info"><strong>Note:</strong> F3 follows ICU formatting rules but does not require PHP's <tt>intl</tt> module.</div>
+<div class="alert alert-info"><strong>Note:</strong> F3 follows ICU formatting rules without requiring the PHP's <tt>intl</tt> module.</div>
 
 ### format
 
@@ -807,7 +830,8 @@ The placeholders are replaced by the values of the provided arguments.
 echo $f3->format('Name: {0} - Age: {1}','John',23); //outputs the string 'Name: John - Age: 23'
 ```
 
-The formatting can get preciser if the expected type is provided within placeholders.
+The formatting can get more precise if the expected type is provided within placeholders.
+
 Current supported types are:
 
 * date
@@ -831,14 +855,46 @@ echo $f3->format('Decimal Number: {0,number,decimal,2}', 0.171231235);
 //outputs the string 'Decimal Number: 0,17'
 ```
 
-The **plural** type syntax is a bit more complex since it allows you to relate the output to the input quantity. The accepted keywords are *zero*, *one*, *two* and *other*.
+The **plural** type syntax is a little bit less straightforward since it allows you to associate a different output depending on the input quantity. 
+
+The plural type syntax must start with `0, plural,` followed by a list of plural keywords associated with the desired output. The accepted keywords are '*zero*', '*one*', '*two*' and '*other*'. 
+
+Furthermore, you can insert the matching numeral in your output strings thanks to the `#` sign that will be automatically replaced by the matching number, as illustrated in the example below: 
 
 ```php
-$string='{0,plural,zero {Your cart is empty.},one {One item in your cart.},two {A pair of items in your cart.},other {There are # items in your cart.}}';
-echo $f3->format($string,0);//outputs the string 'Your cart is empty.'
-echo $f3->format($string,1);//outputs the string 'One item in your cart.'
-echo $f3->format($string,2);//outputs the string 'A pair of items in your cart.'
-echo $f3->format($string,3);//outputs the string 'There are 3 items in your cart.'
+$cart_dialogs= '{0, plural,'.
+	'zero	{Your cart is empty.},'.
+	'one	{One (#) item in your cart.},'.
+	'two	{A pair of items in your cart.},'.
+	'other	{There are # items in your cart.}
+}';
+
+echo $f3->format($cart_dialogs,0); // displays 'Your cart is empty.'
+echo $f3->format($cart_dialogs,1); // displays 'One (1) item in your cart.'
+echo $f3->format($cart_dialogs,2); // displays 'A pair of items in your cart.'
+echo $f3->format($cart_dialogs,3); // displays 'There are 3 items in your cart.'
+```
+Each plural keyword is optional and you can for example omit the plural keyword 'two' if the 'other' one fits that case. Of course, if you omit'em all, only the numerals will be displayed. As a general rule, keep at least the 'other' plural keyword as a fallback.
+
+**Automatic Pluralization of Hive variables**
+
+<div class="alert alert-info"><strong>Nice to Remember:</strong> F3, for your convenience, and to tremendously ease the use of pluralization in your templates, automatically formats variables from the Hive as long as they have a valid plural formatted string attached to them when they have been `set`.</div>
+
+Example:
+
+```php
+$f3->set('a_books_story', 
+	'{0, plural,'. 
+		'zero	{There is n#thing on the table.},'. 
+		'one	{A book is on the table.},'. 
+		'two	{Two (#) books are on this table.},'. 
+		'other	{There are # books on the table.}'. 
+	'}' 
+); 
+echo $f3->get('a_books_story',0); // displays 'There is n0thing on the table.'
+echo $f3->get('a_books_story',1); // displays 'A book is on the table.'
+echo $f3->get('a_books_story',2); // displays 'Two (2) books are on this table.'
+echo $f3->get('a_books_story',7); // displays 'There are 7 books on the table.'
 ```
 
 ### language
@@ -1306,7 +1362,6 @@ null dump ( mixed $expr )
 
 <i class="icon-thumbs-up"></i> _NOTICE: The syntax highlighting depends on the [DEBUG level](quick-reference#debug "The DEBUG system variable")_.
 
-
 ### error
 
 **Execute error handler**
@@ -1340,6 +1395,21 @@ $f3->expire(0); // sends 'Cache-Control: no-cache, no-store, must-revalidate'
 string highlight ( string $text )
 ```
 
+Applies syntax highlighting to a given string and returns the highlighed string.
+
+Example:
+
+```php
+$highlighted_code = $f3->highlight( '$fatfree->rocks(\'FAST\' AND $light)' );
+```
+Returns:
+
+```html
+<code><span class="variable">$fatfree</span><span class="object_operator">-&gt;</span><span class="string">rocks</span><span>(</span><span class="constant_encapsed_string">'FAST'</span><span class="whitespace"> </span><span class="logical_and">AND</span><span class="whitespace"> </span><span class="variable">$light</span><span>)</span></code>
+```
+<div class="alert alert-warning">Keep in mind you need the `code.css` stylesheet to see correctly see the syntax highlighting in your browser pages. You can include it in your pages with &lt;link href="code.css" rel="stylesheet"&gt;&lt;/code&gt; (code.css is bundled into the framework 'lib/' folder)</div>
+
+
 ### instance
 
 **Return class instance**
@@ -1350,6 +1420,7 @@ $f3 = \Base::instance();
 
 This is used to grab the framework instance at any point of your code.
 
+
 ### status
 
 **Send HTTP/1.1 status header; Return text equivalent of status code**
@@ -1358,11 +1429,12 @@ This is used to grab the framework instance at any point of your code.
 string status ( int $code )
 ```
 
-Use this method for sending various HTTP status messages to the client, e.g.
+Use this method for sending various [HTTP status messages](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html "w3.org :: Status Code Definitions") to the client, e.g.
 
 ```php
-$f3->status(403); // Sends 403 Forbidden header
-$f3->status(415); // Sends 415 Unsupported media type
+$f3->status(404); // Sends a '404 Not Found' client error
+$f3->status(407); // Sends a '407 Proxy Authentication Required' client error
+$f3->status(503); // Sends a '503 Service Unavailable' server error
 ```
 
 ### unload
@@ -1370,10 +1442,10 @@ $f3->status(415); // Sends 415 Unsupported media type
 **Execute framework/application shutdown sequence**
 
 ```php
-NULL unload ( $cwd )
+null unload ( $cwd )
 ```
-First, changes PHP's current directory to directory `$cwd`, and write session data and end session by calling the `session_commit()` <small>PHP function</small>.
+First, changes PHP's current directory to directory `$cwd`, writes session data and ends the session by calling the `session_commit()` <small>PHP function</small>.
 
-Then shutdown the application and calls the shutdown handler defined in [UNLOAD](quick-reference#unload).
+Then it shutdowns the application and calls the shutdown handler defined in [UNLOAD](quick-reference#unload).
 
 As a final fallback, an HTTP error `500` is raised if one of the following `E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR` is detected and not handled by the shutdown handler.

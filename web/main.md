@@ -75,22 +75,45 @@ $web->acceptable(array('application/xml','application/xhtml+xml')); // returns a
 **Transmits a file to the client and returns the file size on success**
 
 ```php
-int | false send ( string $file [, string $mime = NULL [, int $kbps = 0 [, bool $force = TRUE ]]] )
+int|false send ( string $file [, string $mime = NULL [, int $kbps = 0 [, bool $force = TRUE ]]] )
 ```
 
-The 2nd argument `$kbps` defines the throttle speed, measured in Kilobits per second, if you like to limit the download bandwidth for the user.
+The `$file` is a filename that must validate against the PHP function `is_file($file)`.
 
-In `$mime` argument you can explicitly set a mime type. Leave it to `NULL` to let the framework detect the type.
+With the `$mime` argument you can explicitly set a mime type. Leave it to `NULL` to let the framework detect the MIME type using the `$file` file extension.
 
-Use `$force` to force the "save file..." download dialog, otherwise it would just display the file in some cases, because an image or a .pdf or .mp3 file can be displayed by the browser directly and will not prompt you to download it.
+The 3rd argument `$kbps` specify the throttle speed, measured in Kilobits per second. It allows you to actively limit users' download rates, to avoid overloading your server when you send big multimedia files for example. 
 
-Example:
+Use `$force` to add a `Content-Disposition: attachment;` HTTP header that will force the browser to open a "save file..." download dialog, otherwise it would just display the raw file in some cases, as images, .pdf or .mp3 files can be displayed directly by the browser and will not prompt the browser to display a download dialog.
+
+Usage example:
 
 ```php
-$throttle = 32; // throttle the download to 32Kbps
-$mime = NULL; // let the framework detect the type
+$throttle = 2048; // throttle to around 256 KB /s
+$sent = $web->send('data/documents.zip', NULL, $throttle);
+if ( !$sent)  { /*error*/ }
+```
+Send/Receive example:
 
-$web->send('data/documents.zip', $mime, $throttle);
+```php
+$file=$f3->get('UI').'images/wallpaper.jpg';
+ob_start();
+// send the file without any download dialog
+$web->send($file,NULL,512,FALSE);
+$out=ob_get_clean();
+
+// setup a route and its associated handler
+$f3->set('UPLOADS',$f3->get('TEMP'));
+$f3->route('PUT /upload/@filename',
+	function() use($web) { $web->receive(); }
+);
+// mock a request that will actually upload the file
+$f3->mock('PUT /upload/'.basename($file),NULL,NULL,$f3->read($file));
+
+if (is_file($target=$f3->get('UPLOADS').basename($file))) 
+	echo 'Uploaded file done via PUT';
+
+@unlink($target);
 ```
 
 ### receive
@@ -252,7 +275,6 @@ It's easy as that!
 Let's move on to some more advanced examples.
 
 
-
 #### GET
 
 Perform a GET request with URL parameters:
@@ -268,8 +290,6 @@ $url .= '?'.http_build_query($params);
 
 $result = \Web::instance()->request($url, $options);
 ```
-
-
 
 #### POST
 
@@ -288,8 +308,6 @@ $options = array(
 );
 $result = \Web::instance()->request($url, $options);
 ```
-
-
 
 #### PUT
 
@@ -311,13 +329,12 @@ $options = array(
 $result = $web->request($url, $options);
 ```
 
-
 ### minify
 
 **Minify CSS and Javascript files by stripping whitespaces and comments. Returns a combined output as a string.**
 
 ```php
-$web->minify( string|array $files,[ string $mime = NULL ], [ bool $header = TRUE ]); string
+string minify ( string|array $files [, string $mime = NULL [, bool $header = TRUE ]] )
 ```
 
 Example:
@@ -328,10 +345,9 @@ $minified = Web::instance()->minify('style.css,framework.css,null.css');
 
 Notice that the files processed by this function must be located in one of the directories specified in [UI](quick-reference#ui) system var.
 
-To get maximum performance, enable the system caching. Have a look a the [CACHE](quick-reference#cache) var.
+To get maximum performance, you can enable the F3 system caching and F3 will use it to save/retrieve file(s) to minify as well as the combined output. Have a look at the [CACHE](quick-reference#cache) system var for more details.
 
-To learn more about `minify`, check the [User Guide](http://fatfreeframework.com/optimization#keeping-javascript-and-css-on-a-healthy-diet).
-
+To see an example of how `minify` can be used in your templates, check the [Keeping Javascript and CSS on a Healthy Diet](optimization#keeping-javascript-and-css-on-a-healthy-diet) section of the User Guide.
 
 
 ### rss
@@ -339,7 +355,7 @@ To learn more about `minify`, check the [User Guide](http://fatfreeframework.com
 **Parse RSS feed and optionally return an array of all tags.**
 
 ```php
-$web->rss( string $url, [ int $max = 10], [ string $tags = NULL ]); array | false
+array|false rss ( string $url [, int $max = 10 [, string $tags = NULL ]] )
 ```
 
 Example:
@@ -356,7 +372,7 @@ Web::instance()->rss('http://example.org/feed.rss', $count, $tags);
 **Retrieve information from whois server**
 
 ```php
-$web->whois( string $addr, [ string $server = 'whois.internic.net']); string | false
+string|false whois ( string $addr [, string $server = 'whois.internic.net'] )
 ```
 
 example:
@@ -382,13 +398,12 @@ for detailed information.
 */
 ```
 
-
 ### slug
 
 **Method to return a URL- and filesystem-friendly string.**
 
 ```php
-$web->slug( string $text); string
+string slug ( string $text )
 ```
 
 The purpose of this function is to convert foreign characters to their approximate English keyboard character equivalents.
@@ -396,23 +411,23 @@ Therefor it uses ISO-9 transliteration with a lookup table array that can be ext
 Furthermore, it is designed to remove all non-alphanumeric characters and convert them to dashes.
 
 ```php
-echo Web::instance()->slug('ĤÈĹĹŌ'); // returns: HELLO
-echo Web::instance()->slug('Ein schöner Artikel über Max & John'); // returns: ein-schoner-artikel-uber-max-john
+echo Web::instance()->slug('ĤÈĹĹŌ'); // displays 'HELLO'
+echo Web::instance()->slug('Ein schöner Artikel über Max & John!'); // displays 'ein-schoener-artikel-ueber-max-john'
 ```
 
 ### filler
 
-**Return chunk of text from standard Lorem Ipsum passage**
+**Return a chunk of text from the standard Lorem Ipsum passage**
 
 ```php
-$web->filler([ int $count = 1], [ int $max = 20], [ bool $std = TRUE ]); string
+string filler ( [ int $count = 1 [, int $max = 20 [, bool $std = TRUE ]]] )
 ```
 
-This function might be useful to fill your empty layout with some placeholder text. Therefore `$count` controls the number of sentences being created with a randomly amount of words between 3 and `$max`. The `$std` var triggers if the first sentence will always be a fixed default text with a length of 124 chars.
+This function might be useful to fill your empty layout with some placeholder text. Therefore `$count` controls the number of sentences being created with a randomly amount of words between 3 and `$max`. By default, the `$std` var specifies if the returned text will start with a default `Lorem ipsum dolor`... filler made of 124 chars of length.
 
 ```php
-echo $web->filler(3,5,false);
-/* returns 3 random sentences, with a maximum of 5 words, like this:
-Iste corporis aut. Exercitationem corporis rem harum repellat. Cupiditate eligendi debitis.'
+echo $web->filler(3, 5, FALSE);
+/* returns 3 random sentences, with a maximum of 5 words, similar to this:
+'Iste corporis aut. Exercitationem corporis rem harum repellat. Cupiditate eligendi debitis.'
 */
 ```
