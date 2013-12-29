@@ -31,11 +31,12 @@ You can also find extensive working examples in the [source code of the framewor
         <a class="label" href="template" title="F3's own lightning fast and extendable template engine gives you all the flexibility you need for modern and clean templating">Template</a>
 
         <h3>Web Services</h3>
+        <a class="label" href="web" title="The Web class and its descendants Geo and Pingback, contain several helpers to interact with HTTP clients and servers">Web</a>
         <a class="label" href="geo" title="The Geo plugin gives you a handful of location-based features">Geo</a>
         <a class="label" href="openid" title="The OpenID class is a OpenID consumer">OpenID</a>
         <a class="label" href="pingback" title="Pingback 1.0 protocol (client and server) implementation">PingBack</a>
         <a class="label" href="smtp" title="The SMTP class is a SMTP plug-in">SMTP</a>
-        <a class="label" href="web" title="The Web class and its descendants Geo and Pingback, contain several helpers to interact with HTTP clients and servers">Web</a>
+        <a class="label" href="google-static-maps" title="Google Static Maps API v2 plug-in">Google Static Maps</a>
 
         <h3>Misc</h3>
         <a class="label" href="audit" title="The Audit class is a data validator">Audit</a>
