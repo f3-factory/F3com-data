@@ -13,18 +13,22 @@ File location: `lib/db/sql/mapper.php`
 To use the SQL ORM, [create a valid SQL DB Connection](sql#constructor) and follow this example:
 
 ```php
-$mapper = new \DB\SQL\Mapper(\DB\SQL $db, string $table, [ int $ttl = 60 ])
+$mapper = new \DB\SQL\Mapper(\DB\SQL $db, string $table [, array|string $fields = NULL [, int $ttl = 60 ]] )
 ```
 
-If you like to create a model class, you might like to wrap it up:
+The `$fields` argument allows you to specify only the fields you need to map. `$fields` is either an array or a list (according to the F3 function [split](base#split)) of the names of columns to include in the returned schema. Defaulted to all fields.
+
+The 4th argument `$ttl` is a TTL to give the schema detector a hint about how often a SHOW COLUMNS call is issued by the mapper. When `$ttl` != 0, a cache check for previous schema is triggered and if expired or not found, the actual result is saved to the cache backend, provided the [CACHE](quick-reference#cache) system variable is set to `TRUE`.
+
+Now, if you'd like to create a model class, you might like to wrap it up:
 
 ```php
 $f3->set('DB',new DB\SQL('sqlite:db/database.sqlite'));
 
 class User extends \DB\SQL\Mapper {
-    public function __construct() {
-        parent::__construct( \Base::instance()->get('DB'), 'users' );
-    }
+	public function __construct() {
+		parent::__construct( \Base::instance()->get('DB'), 'users' );
+	}
 }
 
 $user = new User();
@@ -42,29 +46,34 @@ The `$filter` argument for SQL accepts the following structure:
 // string value for simple where strings
 string $whereClause
 // array value for parameterized queries
-array( string $whereClause, [ string $bindValue1 ], [ string $bindValue2 ], [...] )
+array ( string $whereClause [, string $bindValue1 [, string $bindValue2 [, ... ]] )
 ```
 
 #### Parameterized Queries
 
-It is recommended to use parameterized queries for all where conditions that may include user input data.
-In example with positional parameters:
+It is recommended to use parameterized queries for all `where` conditions that may include user input data.
+
+An example with question mark positional parameters:
 
 ```php
 array('username = ? and password = ? and deleted = 0','John','acbd18db4cc2f85cedef654fccc4a4d8')
 ```
 
-Or with named parameters:
+And with named parameters (recommended):
 
 ```php
 array(
-    'username = :user and password = :pass and deleted = 0',
-    ':user'=>'John',':pass'=>'acbd18db4cc2f85cedef654fccc4a4d8'
-    )
+	'username = :user and password = :pass and deleted = 0',
+	':user'=>'John',':pass'=>'acbd18db4cc2f85cedef654fccc4a4d8'
+	)
 ```
 
+<div class="alert alert-warning">
+Workaround: Due to a PDO limitation, you cannot use a named parameter more than once in a query. You need to create e.g. 2 parameters <code>:user1</code> and <code>:user2</code> and pass them  the same value.
+</div>
+
 <div class="alert alert-info">
-Notice: You cannot use a named parameter more than once in a query. Due to a PDO limitation you need to create <code>:user1</code> and <code>:user2</code> with same value.
+Make Your Choice: You cannot use both named and question mark positional parameter markers within the same SQL statement; pick one or the other parameter style but don't mix.
 </div>
 
 ##### User-specified data type
@@ -73,15 +82,15 @@ To force a bind value to be a specific PDO type, use the following syntax:
 
 ```php
 array(
-    'prize > :prize and active = 1',
-    ':prize' => array(123, \PDO::PARAM_INT)
-    )
+	'prize > :prize and active = 1',
+	':prize' => array(123, \PDO::PARAM_INT)
+	)
 ```
 
 
 #### Search
 
-When you use a `LIKE` operator in your where condition, notice that the `%` wildcards do not belong into the where criteria, but goes into the bind parameter like this:
+When you use a `LIKE` operator in your `where` condition, notice that the `%` wildcards do not belong into the `where` criteria, but goes into the bind parameter like this:
 
 ```php
 $user->find(array('email LIKE ?','%gmail%')); // returns all users with an email address at GMAIL
@@ -93,22 +102,22 @@ The `$option` argument for SQL accepts the following structure:
 
 ```php
 array(
-    'order' => string $orderClause,
-    'group' => string $groupClause,
-    'limit' => integer $limit,
-    'offset' => integer $offset
-    )
+	'order' => string $orderClause,
+	'group' => string $groupClause,
+	'limit' => integer $limit,
+	'offset' => integer $offset
+	)
 ```
 
 i.e:
 
 ```php
 array(
-    'order' => 'score DESC, team_name ASC',
-    'group' => 'score, player',
-    'limit' => 20,
-    'offset' => 0
-    )
+	'order' => 'score DESC, team_name ASC',
+	'group' => 'score, player',
+	'limit' => 20,
+	'offset' => 0
+	)
 ```
 
 
@@ -116,10 +125,10 @@ array(
 
 ### exists
 
-**Return TRUE if field is defined**
+**Return TRUE if a given field is defined**
 
 ```php
-$mapper->exists( string $key ); bool
+bool exists( string $key )
 ```
 
 
@@ -128,7 +137,7 @@ $mapper->exists( string $key ); bool
 **Assign value to field**
 
 ```php
-$mapper->set( string $key, scalar $val ); scalar
+scalar set( string $key, scalar $val )
 ```
 
 This class also takes advantage from the Magic and ArrayAccess class implementation.
@@ -157,7 +166,7 @@ echo $scores->avg_score; // returns the avarage score of that player
 **Retrieve value of field**
 
 ```php
-$mapper->get( string $key ); scalar
+scalar get( string $key )
 ```
 
 
@@ -166,7 +175,7 @@ $mapper->get( string $key ); scalar
 **Clear value of field**
 
 ```php
-$mapper->clear( string $key ); NULL
+NULL clear( string $key )
 ```
 
 
@@ -175,7 +184,7 @@ $mapper->clear( string $key ); NULL
 **Get PHP type equivalent of PDO constant**
 
 ```php
-$mapper->type( string $pdo ); string
+string type( string $pdo )
 ```
 
 
@@ -184,7 +193,7 @@ $mapper->type( string $pdo ); string
 **Cast value to PHP type**
 
 ```php
-$mapper->value( string $type, scalar $val ); scalar
+scalar value( string $type, scalar $val );
 ```
 
 
@@ -193,7 +202,7 @@ $mapper->value( string $type, scalar $val ); scalar
 **Return fields of mapper object as an associative array**
 
 ```php
-$mapper->cast([ object $obj = NULL ]); bool
+bool cast( [ object $obj = NULL ] );
 ```
 
 
