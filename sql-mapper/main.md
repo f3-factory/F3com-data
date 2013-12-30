@@ -59,7 +59,7 @@ An example with question mark positional parameters:
 array('username = ? and password = ? and deleted = 0','John','acbd18db4cc2f85cedef654fccc4a4d8')
 ```
 
-And with named parameters (recommended):
+And with named parameters:
 
 ```php
 array(
