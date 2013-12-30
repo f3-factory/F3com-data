@@ -43,7 +43,6 @@ and [query-documents tutorial](http://docs.mongodb.org/manual/tutorial/query-doc
 array([ array $find ]);
 ```
 
-
 ### $option
 
 The `$option` argument for Mongo accepts the following structure:
@@ -70,118 +69,124 @@ And for more about `order`, and a look at the [cursor.sort reference](http://doc
 
 ### exists
 
-**Return TRUE if field is defined**
+**Return TRUE if the given field is defined**
 
 ```php
-$mapper->exists( string $key ); bool
+bool exists( string $key )
 ```
-
 
 ### set
 
-**Assign value to field**
+**Assign a value to a field**
 
 ```php
-$mapper->set( string $key, scalar $val ); scalar|FALSE
+scalar|FALSE set( string $key, scalar $val )
 ```
 
-This class also takes advantage from the Magic and ArrayAccess class implementation.
-This way you can also set and get variable with direct access like this:
+This class takes advantage of the [Magic class](magic "A PHP magic wrapper") and ArrayAccess interface.
+It means you can set and get variables with direct access like this:
 
 ```php
 $mapper->foo = 'bar';
 $mapper['foo'] = 'bar';
 ```
 
-
 ### get
 
-**Retrieve value of field**
+**Retrieve the value of a given field**
 
 ```php
-$mapper->get( string $key ); scalar|FALSE
+scalar|FALSE get( string $key )
 ```
-
 
 ### clear
 
-**Delete field**
+**Delete a field**
 
 ```php
-$mapper->clear( string $key ); NULL
+NULL clear( string $key )
 ```
-
 
 ### cast
 
-**Return fields of mapper object as an associative array**
+**Return the fields of a mapper object as an associative array**
 
 ```php
-$mapper->cast([ object $obj = NULL ]); array
+array cast( [ object $obj = NULL ] )
 ```
-
 
 ### select
 
 **Build query and execute**
 
 ```php
-$mapper->select( string $fields, [ array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
+array select( [ string $fields = NULL [, array $filter = NULL [, array $options = NULL [, int $ttl = 0 ]]]] )
 ```
-
 
 ### find
 
-**Return records that match criteria**
+**Return records that match a given criteria**
 
 ```php
-$mapper->find([ array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
+array find( [ array $filter = NULL [, array $options = NULL [, int $ttl = 0 ]]] )
 ```
-
 
 ### count
 
-**Count records that match criteria**
+**Count records that match a given criteria**
 
 ```php
-$mapper->count([ array $filter = NULL ],[ int $ttl = 0 ]); int
+int count( [ array $filter = NULL [, int $ttl = 0 ]] )
 ```
 
 ### insert
-**Insert new record**
+**Insert a new record**
 
 ```php
-$mapper->insert(); array
+array insert()
 ```
 
-
 ### update
-**Update current record**
+**Update the current record**
 
 ```php
-$mapper->update(); array
+array update()
 ```
 
 
 ### erase
-**Delete current record**
+**Delete the current record**
 
 ```php
-$mapper->erase([ array $filter = NULL ]); bool
+bool erase( [ array $filter = NULL ] )
 ```
 
 
 ### copyfrom
-**Hydrate mapper object using hive array variable**
+**Hydrate the mapper object using a hive array variable**
 
 ```php
-$mapper->copyfrom( string $key ); NULL
+NULL copyfrom( string $key [, callback $func = NULL ] )
 ```
 
+`$func` is the callback function to apply to the hive array variable:
+
+```php
+if ($func)  $var = $func($var);
+```
 
 ### copyto
 **Populate hive array variable with mapper fields**
 
 ```php
-$mapper->copyto( string $key ); NULL
+NULL copyto( string $key )
 ```
+
+### factory
+**Convert an array to a mapper object**
+
+```php
+protected object factory( array $row )
+```
+
+This _protected_ method is used internally by the `select` method.

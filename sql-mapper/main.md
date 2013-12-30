@@ -16,9 +16,9 @@ To use the SQL ORM, [create a valid SQL DB Connection](sql#constructor) and foll
 $mapper = new \DB\SQL\Mapper(\DB\SQL $db, string $table [, array|string $fields = NULL [, int $ttl = 60 ]] )
 ```
 
-The `$fields` argument allows you to specify only the fields you need to map. `$fields` is either an array or a list (according to the F3 function [split](base#split)) of the names of columns to include in the returned schema. Defaulted to all fields.
+The `$fields` argument allows you to specify only the fields you need to map. `$fields` is either an array or a list (according to the F3 function [split](base#split)) of the names of columns to include in the mapper. Defaulted to all columns.
 
-The 4th argument `$ttl` is a TTL to give the schema detector a hint about how often a SHOW COLUMNS call is issued by the mapper. When `$ttl` != 0, a cache check for previous schema is triggered and if expired or not found, the actual result is saved to the cache backend, provided the [CACHE](quick-reference#cache) system variable is set to `TRUE`.
+The 4th argument `$ttl` is a TTL to give the schema detector a hint about how often a SHOW COLUMNS call is issued by the mapper. When `$ttl` != 0, a cache check for previous schema is triggered and if expired or not found, the actual result is saved to the cache backend, provided a [CACHE](quick-reference#cache) system is activated.
 
 Now, if you'd like to create a model class, you might like to wrap it up:
 
@@ -87,7 +87,6 @@ array(
 	)
 ```
 
-
 #### Search
 
 When you use a `LIKE` operator in your `where` condition, notice that the `%` wildcards do not belong into the `where` criteria, but goes into the bind parameter like this:
@@ -120,7 +119,6 @@ array(
 	)
 ```
 
-
 ## Methods
 
 ### exists
@@ -131,17 +129,16 @@ array(
 bool exists( string $key )
 ```
 
-
 ### set
 
-**Assign value to field**
+**Assign a given value to a field**
 
 ```php
 scalar set( string $key, scalar $val )
 ```
 
-This class also takes advantage from the Magic and ArrayAccess class implementation.
-This way you can also set and get variable with direct access like this:
+This class takes advantage of the [Magic class](magic "A PHP magic wrapper") and ArrayAccess interface.
+It means you can set and get variables with direct access like this:
 
 ```php
 $mapper->foo = 'bar';
@@ -163,120 +160,175 @@ echo $scores->avg_score; // returns the avarage score of that player
 
 ### get
 
-**Retrieve value of field**
+**Retrieve value of a field**
 
 ```php
 scalar get( string $key )
 ```
 
+To get the ID of the last inserted row or the last value from a sequence object, you must use the reserved `$key` value = `'_id'`:
+
+```php
+$lastInsertedID = $mapper->get('_id'); // get the ID of the last inserted row or the last value from a sequence object
+```
 
 ### clear
 
-**Clear value of field**
+**Clear value of a field**
 
 ```php
 NULL clear( string $key )
 ```
 
-
 ### type
 
-**Get PHP type equivalent of PDO constant**
+**Get the name of the PHP type equivalent of a PDO constant**
 
 ```php
 string type( string $pdo )
 ```
 
+Basically, this method converts a given PDO types constants to the equivalent named PHP types as follow:
+
+```php
+switch ($pdo) {
+	case \PDO::PARAM_NULL:
+		return 'unset';
+	case \PDO::PARAM_INT:
+		return 'int';
+	case \PDO::PARAM_BOOL:
+		return 'bool';
+	case \PDO::PARAM_STR:
+		return 'string';
+}
+```
 
 ### value
 
-**Cast value to PHP type**
+**Cast value to a PHP type**
 
 ```php
 scalar value( string $type, scalar $val );
 ```
 
+This method allows you to cast the value from a DB to a PHP type. Basically, this method converts PDO types to equivalent PHP types as follow:
+
+```php
+switch ($type) {
+	case \PDO::PARAM_NULL:
+		return (unset)$val;
+	case \PDO::PARAM_INT:
+		return (int)$val;
+	case \PDO::PARAM_BOOL:
+		return (bool)$val;
+	case \PDO::PARAM_STR:
+		return (string)$val
+```
 
 ### cast
 
-**Return fields of mapper object as an associative array**
+**Return the fields of the mapper object as an associative array**
 
 ```php
-bool cast( [ object $obj = NULL ] );
+array cast( [ object $obj = NULL ] );
 ```
-
 
 ### select
 
-**Build query string and execute**
+**Build a query string and execute it**
 
 ```php
-$mapper->select( string $fields, [ string|array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
+array select( string $fields [, string|array $filter = NULL [, array $options = NULL [, int $ttl = 0 ]]] );
 ```
-
 
 ### find
 
-**Return records that match criteria**
+**Return records that match a given criteria**
 
 ```php
-$mapper->find([ string|array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ]); array
+array find( [ string|array $filter = NULL [, array $options = NULL [, int $ttl = 0 ]]] );
 ```
-
 
 ### count
 
-**Count records that match criteria**
+**Count records that match a given criteria**
 
 ```php
-$mapper->count([ string|array $filter = NULL ]); int
+int count( [ string|array $filter = NULL [, $ttl=0 ]] )
 ```
 
 ### insert
-**Insert new record**
+**Insert a new record**
 
 ```php
-$mapper->insert(); array
+object insert()
 ```
-
 
 ### update
-**Update current record**
+**Update the current record**
 
 ```php
-$mapper->update(); array
+object update()
 ```
 
+### skip
+**Return the record at the specified offset using the same criteria as previous load() call and make it active**
+
+```php
+array skip( [ int $ofs = 1 ] )
+```
 
 ### erase
-**Delete current record**
+**Delete the current record**
 
 ```php
-$mapper->erase([ string|array $filter = NULL ]); int
+int erase( [ string|array $filter = NULL ] )
 ```
 
+Perform a SQL `DELETE FROM $this->table WHERE $filter` on the table specified when instanciating the mapper.
+
+### reset
+**Reset the cursor**
+
+```php
+NULL reset( )
+```
+All underlying values are set to `NULL`.
 
 ### copyfrom
-**Hydrate mapper object using hive array variable**
+**Hydrate the mapper object using a hive array variable**
 
 ```php
-$mapper->copyfrom( string $key ); NULL
+NULL copyfrom( string $key [, callback $func = NULL ] )
 ```
 
+`$func` is the callback function to apply to the hive array variable:
+
+```php
+if ($func)  $var = $func($var);
+```
 
 ### copyto
 **Populate hive array variable with mapper fields**
 
 ```php
-$mapper->copyto( string $key ); NULL
+NULL copyto( string $key )
 ```
-
 
 ### schema
 **Returns the table schema**
 
 ```php
-$mapper->schema();
+array schema()
 ```
 
-See [SQL#Schema](sql#schema) for additional information.
+See [Retrieve schema of SQL table](sql#schema) for additional information.
+
+### factory
+**Convert an array to a mapper object**
+
+```php
+protected object factory( array $row )
+```
+
+This _protected_ method is used internally by the `select` method.
