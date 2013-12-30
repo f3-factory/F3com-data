@@ -2,7 +2,6 @@
 
 The Jig Object-Document-Mapper is an implementation of the abstract [Active Record Cursor class](cursor). Have a look into it for additional method descriptions.
 
-
 Namespace: `\DB\Jig` <br>
 File location: `lib/db/jig/mapper.php`
 
@@ -13,10 +12,10 @@ File location: `lib/db/jig/mapper.php`
 To use the Jig ODM, [create a valid Jig DB Connection](jig#constructor) and follow this example:
 
 ```php
-$mapper = new \DB\Jig\Mapper(\DB\Jig $db, string $file)
+$mapper = new \DB\Jig\Mapper(\DB\Jig $db, string $file);
 ```
 
-If you like to create a model class, you might like to wrap it up:
+If you'd like to create a model class, you might like to wrap it up:
 
 ```php
 $f3->set('DB',new DB\Jig('data/'));
@@ -33,9 +32,8 @@ $user->load(array('@_id = ?','515c570f28de6'));
 ```
 
 <div class="alert alert-info">
-Notice: The primary key of Jig documents is named <code>_id</code>.
+<strong>Definition</strong>: The primary key of Jig documents is named <code>_id</code>.
 </div>
-
 
 ## Syntax
 
@@ -58,8 +56,6 @@ array('@username = ? and @password = ?','John','acbd18db4cc2f85cedef654fccc4a4d8
 array('@username = :user and @password = :pw',':user'=>'John',':pw'=>'acbd18db4cc2f85cedef654fccc4a4d8')
 ```
 
-
-
 **Important:** Jig is a schema-less document mapper, so the fields of a document may vary from one record to another.
 To create a valid `$expr` string, keep in mind to add additional field existence checks to prevent running into weird undefined variable errors.
 Adding some checks for that can be achieved easiely by adding some `isset` conditions:
@@ -72,7 +68,7 @@ array(
 ```
 
 <div class="alert alert-info">
-Info: You can use all common comparision operators in your condition and a single <code>=</code> works too.
+Info: You can use all common comparison operators in your condition and a single <code>=</code> works too.
 </div>
 
 #### Search
@@ -125,119 +121,144 @@ array(
 
 ### exists
 
-**Return TRUE if field is defined**
+**Return TRUE if the given field is defined**
 
 ```php
-$mapper->exists( string $key ); bool
+bool exists( string $key )
 ```
-
 
 ### set
 
-**Assign value to field**
+**Assign a value to a field**
 
 ```php
-$mapper->set( string $key, scalar $val ); scalar|FALSE
+scalar|FALSE set( string $key, scalar $val )
 ```
 
-This class also takes advantage from the Magic and ArrayAccess class implementation.
-This way you can also set and get variable with direct access like this:
+This class takes advantage of the [Magic class](magic "A PHP magic wrapper") and ArrayAccess interface.
+It means you can set and get variables with direct access like this:
 
 ```php
 $mapper->foo = 'bar';
 $mapper['foo'] = 'bar';
 ```
 
-
 ### get
 
 **Retrieve value of field**
 
 ```php
-$mapper->get( string $key ); scalar|FALSE
+scalar|FALSE get( string $key )
 ```
-
 
 ### clear
 
 **Clear value of field**
 
 ```php
-$mapper->clear( string $key ); NULL
+NULL clear( string $key )
 ```
 
+### fields
+**Return field names of the mapper object**
+
+```php
+array fields( )
+```
 
 ### cast
 
-**Return fields of mapper object as an associative array**
+**Return fields of the mapper object as an associative array**
 
 ```php
-$mapper->cast([ object $obj = NULL ]); bool
+array cast( [ object $obj = NULL ] )
 ```
-
 
 ### token
 
 **Convert tokens in string expression to variable names**
 
 ```php
-$mapper->token( string $str ); string
+string token( string $str )
 ```
-
 
 ### find
 
-**Return records that match criteria**
+**Return records that match a given criteria**
 
 ```php
-$mapper->find([ string|array $filter = NULL ],[ array $options = NULL ],[ int $ttl = 0 ], [ bool $log=TRUE ]); array
+array|FALSE find( [ array $filter = NULL [, array $options = NULL [, int $ttl = 0 [, bool $log = TRUE ]]]] )
 ```
-
 
 ### count
 
-**Count records that match criteria**
+**Count records that match a given criteria**
 
 ```php
-$mapper->count([ string|array $filter = NULL ]); int
+int count( [ array $filter = NULL [, $ttl = 0 ]] )
 ```
 
 ### insert
-**Insert new record**
+**Insert a new record**
 
 ```php
-$mapper->insert(); array
+array insert( )
 ```
-
 
 ### update
-**Update current record**
+**Update the current record**
 
 ```php
-$mapper->update(); array
+array update( )
 ```
 
+### skip
+**Return the record at the specified offset using the same criteria as previous load() call and make it active**
+
+```php
+array skip( [ int $ofs = 1 ] )
+```
 
 ### erase
-**Delete current record**
+**Delete the current record**
 
 ```php
-$mapper->erase([ string|array $filter = NULL ]); int
+bool erase( [ array $filter = NULL ] )
 ```
 
+### reset
+**Reset the cursor**
+
+```php
+NULL reset( )
+```
+All underlying values are set to `NULL`.
 
 ### copyfrom
-**Hydrate mapper object using hive array variable**
+**Hydrate the mapper object using a hive array variable**
 
 ```php
-$mapper->copyfrom( string $key ); NULL
+NULL copyfrom( string $key [, callback $func = NULL ] )
 ```
 
+`$func` is the callback function to apply to the hive array variable:
+
+```php
+if ($func)  $var = $func($var);
+```
 
 ### copyto
 **Populate hive array variable with mapper fields**
 
 ```php
-$mapper->copyto( string $key ); NULL
+NULL copyto( string $key )
 ```
 
+### factory
+**Convert an array to a mapper object**
+
+```php
+protected object factory( string $id, array $row )
+```
+
+This _protected_ method is used internally by the `select` method.
