@@ -21,6 +21,10 @@ As stated above, with both the `center` parameter and the `markers` parameter, y
 
 `center` defines the center of the map, equidistant from all edges of the map. This parameter takes a location as either a comma-separated {latitude,longitude} pair (e.g. "24.582720, -78.056685") or a string address (e.g. "Turks and Caicos Islands") identifying a unique location on the face of the earth
 
+Note that addresses provided may reflect either precise locations, such as an accurate street address, polylines such as named routes, or polygonal areas such as cities, countries, or even national parks.
+
+If for example you specify `$map->center('Grand Canyon');` as address, the Static Map server will resolve the location and return a map image using the center point of the area as the address center.
+
 Examples:
 
 ```php
@@ -33,10 +37,6 @@ $map->center("D'Arblay Street, London"); // F3 will escape spaces, quotes, and s
 $map->center('35.360496,138.727798'); // for example retrieved from a DB
 ```
 
-Note that addresses provided may reflect either precise locations, such as an accurate street address, polylines such as named routes, or polygonal areas such as cities, countries, or even national parks. 
-
-If for example you specify `$map->center('Grand Canyon');` as address, the Static Map server will resolve the location and return a map image using the center point of the area as the address center.
-
 #### The `markers` parameter
 
 The `markers` parameter defines a set of one or more markers at a set of locations. Each marker descriptor must contain a set of one or more locations defining where to place the marker on the map. These locations are separated using the pipe character (|).
@@ -45,7 +45,7 @@ Example:
 
 ```php
 $map = new \Web\Google\StaticMap();
-$map->markers('color:blue%7Clabel:S%7C11211%7C11206%7C11222'); // 
+$map->markers('color:blue%7Clabel:S%7C11211%7C11206%7C11222'); //
 ```
 
 ### Images formats
@@ -67,7 +67,7 @@ $map->format('jpg'); // progressive "lossy" JPEG compression format
 
 ### Maps Zoom level
 
-Maps on Google Maps have an integer "zoom level" which defines the resolution of the current view. 
+Maps on Google Maps have an integer "zoom level" which defines the resolution of the current view.
 
 Zoom levels between `0` (the lowest zoom level, in which the entire world can be seen on one map) to `21+` (down to individual buildings) are possible within the default roadmap maps view.
 
@@ -83,10 +83,12 @@ $map = new \Web\Google\StaticMap();    $map->zoom(12); // resolution of the view
 
 The `size` parameter, in conjunction with `center`, defines the coverage area of a map. It also defines the output size of the map in pixels, when multiplied with the `scale` value (which is 1 by default).
 
+Unlike others, this parameter has no default value and you **must** specify it in your application otherwise the map server will reject your request and return an error message.
+
 Example:
 
 ```php
-$map = new \Web\Google\StaticMap();    $map->('640x480'); // in pixels and multiplied by scale
+$map = new \Web\Google\StaticMap();    $map->size('640x480'); // in pixels and multiplied by scale
 ```
 ### Scale Values
 
@@ -97,6 +99,9 @@ Example:
 ```php
 $map = new \Web\Google\StaticMap();    $map->scale(2); // size multiplier
 ```
+
+_Notice_: When targeting mobile devices, use the `scale` parameter to return higher-resolution map images that solve the issues of mobile devices high resolution screens (see the [Google API Scale Values documentation](https://developers.google.com/maps/documentation/staticmaps/#scale_values "Google Maps Image APIs :: Static Maps API V2 Developer Guide") for more details).
+
 ### Maps types
 
 The Google Static Maps API creates maps in several formats, listed below:
@@ -112,8 +117,19 @@ The Google Static Maps API creates maps in several formats, listed below:
 Example:
 
 ```php
-$map = new \Web\Google\StaticMap();
-$map->maptype('satellite'); // Note: not all satellite views appear at all locations on the earth. 
+$map->maptype( 'satellite' ); // Note: not all satellite views appear at all locations on the earth.
+```
+
+### Sensor
+
+Use of the Google Static Maps API requires that you indicate whether your application is using a "sensor" (such as a GPS locator) to determine the user's location. This is especially important for mobile devices and Google decided to make it a mandatory parameter when requesting a static map. It means there is no default value and you **must** specify if your application is using a sensor device, otherwise the map server will reject your request and return an error message.
+
+When set to `'true'`, on mobile devices, the Google Maps API will try to have a peek at the embedded GPS, while on a desktop browser, depending on the privacy settings, you might get a message saying the website try to determine your location.
+
+If you're not sure about this "sensor", set it to `'false'` (as a string, not a boolean!).
+
+```php
+$map->sensor( 'false' );
 ```
 
 ## Methods
@@ -151,28 +167,39 @@ There are a couple of drawbacks with this solution: you need to write a file to 
 Let's setup now an asynchronous solution. We need first to define a route for F3 to handle the request. Thus, the page can continue to be rendered while the browser send, in parallel, a request to this new route:
 
 ```php
-$f3->route('GET /minify/@type', // @type will make `PARAMS.type` variable base point to the correct path
-    function($f3, $args) {
-        $f3->set('UI',$args['type'].'/'); // make sure you organize your files in sub-folders, per type
-        echo Web::instance()->minify($_GET['files']);
-    },
-    3600*24 // Save minified file in F3 cache for 24 hours
+$f3->route('GET /static-map/@mapargs',
+	function($f3, $args) {
+
+	parse_str($args['mapargs']); // gets variables from the query string
+
+	$map = new \Web\Google\StaticMap();
+
+	$map->center(isset($center)?$center:'Center of the World');
+	$map->maptype(isset($maptype)?$maptype:'satellite'); // override default maptype 'roadmap'
+	$map->format(isset($format)?$format:'jpg');          // override default format 'png'
+	$map->size(isset($size)?$size:'320x200');            // size is mandatory! no default value. set default size '320x200'
+	$map->zoom(isset($zoom)?$zoom:'14');                 // override default zoom '12'
+	$map->scale(isset($scale)?$scale:'2');               // override default scale '1'
+	$map->sensor(isset($sensor)?$sensor:'false');        // sensor is mandatory! no default value. set sensor to 'false'
+
+	echo $map->dump(); // send raw image map to browser
+	},
+	3600*24*30 // Save result of the request in F3 cache for 30 days
 );
 ```
 
+We are ready to asynchronously retrieve a static map from the Google API:
 
 ```php
-$f3->route('GET /static-map/@type', // @type will setup `PARAMS.type` variable
-    function($f3, $args) {
-		$map_settings = $args['type'];
-		$map = new \Web\Google\StaticMap();
-		$map->maptype('satellite');
-        return $map->dump();
-    },
-    3600
-);
+echo '<img src="/static-map/size=640x480&scale=1&center=Mont%20Fuji" />';
 ```
-_Notice_: When targeting mobile devices, use the `scale` parameter to return higher-resolution map images that solve the issues of mobile devices high resolution screens (see the [Google API Scale Values documentation](https://developers.google.com/maps/documentation/staticmaps/#scale_values "Google Maps Image APIs :: Static Maps API V2 Developer Guide") for more details).
 
-Refer to the official [Google Static Maps API V2 Developer Guide](https://developers.google.com/maps/documentation/staticmaps/ "Google Static Maps API V2 Developer Guide") for more details.
+or, much probably, as you would do in a template:
 
+```html
+<img src="/static-map/maptype=hybrid&amp;center={{@MAP.center}}" alt="{{@MAP.title}}" />
+```
+
+<img src="http://s9.postimg.org/igsb67p8v/Pulau_Tomea_Indonesia.jpg" alt="Map of Pulau Tomea in Indonesia" title="Pulau Tomea in Lovely Indonesia" />
+
+You can do more with the Google Static Maps API, especially regarding [Markers](://developers.google.com/maps/documentation/staticmaps#Markers) and [Styled Maps](https://developers.google.com/maps/documentation/staticmaps#StyledMaps). Please refer to the official [Google Static Maps API V2 Developer Guide](https://developers.google.com/maps/documentation/staticmaps/ "Google Static Maps API V2 Developer Guide") for more details about advanced features.
