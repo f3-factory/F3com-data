@@ -4,7 +4,6 @@ This Cursor class is an abstract foundation of an [Active Record](http://en.wiki
 
 Have a look at the [SQL Mapper](sql-mapper), [Mongo Mapper](mongo-mapper) or [JIG Mapper](jig-mapper) page to get to know about how to create and use them with their own functions and the following described below.
 
-
 Namespace: `\DB` <br>
 File location: `lib/db/cursor.php`
 
@@ -17,34 +16,34 @@ the behaviour of these functions are the same. So assume you have this set of da
 
 <table class="table table-bordered table-condensed table-striped">
 <tr>
-    <th>ID</th>
-    <th>title</th>
-    <th>text</th>
-    <th>author</th>
+	<th>ID</th>
+	<th>title</th>
+	<th>text</th>
+	<th>author</th>
 </tr>
 <tr>
-    <td>1</td>
-    <td>F3 for the win</td>
-    <td>Use It Now!</td>
-    <td>49</td>
+	<td>1</td>
+	<td>F3 for the win</td>
+	<td>Use It Now!</td>
+	<td>49</td>
 </tr>
 <tr>
-    <td>2</td>
-    <td>Once upon a time</td>
-    <td>there was a dragon.</td>
-    <td>2</td>
+	<td>2</td>
+	<td>Once upon a time</td>
+	<td>there was a dragon.</td>
+	<td>2</td>
 </tr>
 <tr>
-    <td>3</td>
-    <td>Barbar the Foo</td>
-    <td>foo bar</td>
-    <td>25</td>
+	<td>3</td>
+	<td>Barbar the Foo</td>
+	<td>foo bar</td>
+	<td>25</td>
 </tr>
 <tr>
-    <td>4</td>
-    <td>untitled</td>
-    <td>lorem ipsum</td>
-    <td>8</td>
+	<td>4</td>
+	<td>untitled</td>
+	<td>lorem ipsum</td>
+	<td>8</td>
 </tr>
 </table>
 
@@ -53,11 +52,13 @@ the behaviour of these functions are the same. So assume you have this set of da
 **Map to first record that matches criteria**
 
 ```php
-array|FALSE load ( [ string|array $filter = NULL [, array $options = NULL ]] )
+array|FALSE load ( [ string|array $filter = NULL [, array $options = NULL [, int $ttl = 0 ]]] )
 ```
 
 The `load` method hydrates the mapper object with records. You can define a `$filter` to load only records that matches your criteria.
 You can find detailed descriptions about the `$filter` and `$option` syntax on the mapper specific pages: [Jig Mapper](jig-mapper#$filter), [Mongo Mapper](mongo-mapper#$filter) and [SQL Mapper](sql-mapper#$filter).
+
+The `$ttl` argument, when specified in seconds, allows you to cache the result of the mapper load, provided a [CACHE](quick-reference#cache) system is activated.
 
 Let's start with a simple example where we do not specify any filter, so the first record will be loaded:
 
@@ -67,12 +68,12 @@ echo $mapper->title; // displays 'F3 for the win'
 ```
 
 <div class="alert alert-warning">
-    <strong>Important:</strong><br>
-    Make sure there is enough memory for the result set returned by this function. Attempting to <code>load</code> (without filtering) from a huge database might go beyond PHP's <code>memory_limit</code>.
+	<strong>Important:</strong><br>
+	Make sure there is enough memory for the result set returned by this function. Attempting to <code>load</code> (without filtering) from a huge database might go beyond PHP's <code>memory_limit</code>.
 </div>
 
-The `Cursor` class extends the `Magic` class, which implements the [ArrayAccess interface](http://php.net/manual/en/class.arrayaccess.php "PHP Manual :: ArrayAccess").
-This way you are able to access your data fields like object properties and array keys:
+The Cursor class extends the [Magic class](magic "A PHP magic wrapper").
+This means you are able to access your data fields like you do it with any object properties and array keys:
 
 ```php
 echo $mapper->title; // 'F3 for the win'
@@ -82,7 +83,7 @@ echo $mapper->get('author'); // 49
 
 ### next
 
-**Map next record**
+**Map to next record**
 
 ```php
 mixed next ( )
@@ -101,7 +102,7 @@ Internally, the `Cursor` class fetches all records from the underlying database 
 
 ### prev
 
-**Map previous record**
+**Map to previous record**
 
 ```php
 mixed prev ( )
@@ -133,7 +134,7 @@ mixed skip ( [ int $ofs = 1 ] )
 
 ### dry
 
-**Return `TRUE` if current cursor position is not mapped to any record**
+**Return `TRUE` if the current cursor position is not mapped to any record**
 
 ```php
 bool dry ( )
@@ -147,9 +148,9 @@ The next example snippet loops through all loaded records and stops when the cur
 $mapper->load();  // by default, loads the 1st record
 
 while ( !$mapper->dry() ) {  // gets dry when we passed the last record
-    echo $mapper->title;
-    // moves forward even when the internal pointer is on last record
-    $mapper->next();
+	echo $mapper->title;
+	// moves forward even when the internal pointer is on last record
+	$mapper->next();
 }
 ```
 
@@ -158,10 +159,12 @@ while ( !$mapper->dry() ) {  // gets dry when we passed the last record
 **Return first record (mapper object) that matches criteria**
 
 ```php
-object|false findone ( [ string|array $filter = NULL [, array $options = NULL [, int $ttl = 0 ]]] )
+object|FALSE findone ( [ string|array $filter = NULL [, array $options = NULL [, int $ttl = 0 ]]] )
 ```
 
 Use this method if you only want to process a single entity in your business logic. It is helpful to only `load` that single record.
+
+See the [load() method](cursor#load) for details regarding the parameters.
 
 ### paginate
 
@@ -172,7 +175,7 @@ array paginate ( [ int $pos = 0 [, int $size = 10 [, string|array $filter = NULL
 ```
 
 This method returns an array containing a subset of records that are matching the `$filter` criterias,
-the total number of records in superset, the number of subsets available and actual subset position.
+the total number of records in superset, the specified limit `$size`, the number of subsets available and the actual subset position.
 
 For example:
 
@@ -181,11 +184,12 @@ $result = $mapper->paginate(0, 2);
 /*
 array(4) {
   ["subset"] => array(2) {
-        [0] => mapper object, #ID: 1, title: F3 for the win
-        [1] => mapper object, #ID: 2, title: Once upon a time
-        [2] => mapper object, #ID: 3, title: Barbar the Foo
-      }
+		[0] => mapper object, #ID: 1, title: F3 for the win
+		[1] => mapper object, #ID: 2, title: Once upon a time
+		[2] => mapper object, #ID: 3, title: Barbar the Foo
+	  }
   ["total"] => int(5)
+  ["limit"] => int(2)
   ["count"] => float(3)
   ["pos"] => int(0)
 }
@@ -195,10 +199,11 @@ $result = $mapper->paginate(1, 2);
 /*
 array(4) {
   ["subset"] => array(2) {
-        [0] => mapper object, #ID: 3, title: Barbar the Foo
-        [1] => mapper object, #ID: 4, title: untitled
-      }
+		[0] => mapper object, #ID: 3, title: Barbar the Foo
+		[1] => mapper object, #ID: 4, title: untitled
+	  }
   ["total"] => int(5)
+  ["limit"] => int(2)
   ["count"] => float(2)
   ["pos"] => int(1)
 }
@@ -207,7 +212,6 @@ array(4) {
 ```
 
 The `subset` key contains an array of mapper objects returned from find(), `total` is the sum of all records for all pages, `count` is the number of records for the current page and `pos` gives you the current subset cursor position ( it's the page number - 1).
-
 
 ### save
 
@@ -225,6 +229,30 @@ This method saves data to the database. The `Cursor` class automatically determi
 
 ```php
 int|bool erase ( )
+```
+
+### reset
+
+**Reset/dehydrate the cursor**
+
+```php
+NULL reset ( )
+```
+
+### xref
+
+**Returns cross-references to another mapper**
+
+```php
+array|FALSE xref ( object $mapper [ , string|array $filter = NULL [, array $options = NULL [, int $ttl = 0 ]]] )
+```
+
+### xrefone
+
+**Returns first cross-references to another mapper**
+
+```php
+array|FALSE xref ( object $mapper [ , string|array $filter = NULL [, array $options = NULL [, int $ttl = 0 ]]] )
 ```
 
 ### onload
@@ -259,15 +287,6 @@ closure onupdate ( )
 closure onerase ( )
 ```
 
-### reset
-
-**Reset/dehydrate the cursor**
-
-```php
-NULL reset ( )
-```
-
-
 ## Abstract Methods
 
 The following methods must be implemented by all extending mapper classes to work properly.
@@ -277,9 +296,10 @@ The following methods must be implemented by all extending mapper classes to wor
 **Return records (array of mapper objects) that match criteria**
 
 ```php
-array find ( [ string|array $filter = NULL [, array $options = NULL ]] )
+array find ( [ string|array $filter = NULL [, array $options = NULL [, $ttl = 0 ]]] )
 ```
 
+See the [load() method](cursor#load) for details regarding the parameters.
 
 ### insert
 
@@ -288,7 +308,6 @@ array find ( [ string|array $filter = NULL [, array $options = NULL ]] )
 ```php
 array insert ( )
 ```
-
 
 ### update
 
