@@ -21,7 +21,7 @@ $crypt = \Bcrypt::instance();
 **Generate bcrypt hash of string**
 
 ```php
-string|FALSE hash ( string $pw [, bool $salt = 0 [, int $cost = 10 ]] )
+string|FALSE hash ( string $pw [, string $salt [, int $cost = 10 ]] )
 ```
 
 The `$cost` parameter triggers the iteration count for the underlying Blowfish-based hashing algorithmeter and must be in range `04-31`.
