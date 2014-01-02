@@ -36,7 +36,7 @@ Lets have a look at a simple example:
 **Assemble markup**
 
 ``` php
-string build ( build $node )
+string build ( string $node )
 ```
 This method builds the php code out of the given markup, that is used later in the pre-rendered template.
 To know about this method becomes useful when you're creating new template extensions or custom tag handlers. 
