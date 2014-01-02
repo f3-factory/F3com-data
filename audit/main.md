@@ -71,7 +71,7 @@ This function allows you to check if a given IP is a valid IPV4 address.
 Example:
 
 ``` php
-$audit->ipv4('178.7.35.202'); // returns TRUE or FALSE
+$audit->ipv4('178.7.35.202'); // returns TRUE
 ```
 
 ### ipv6

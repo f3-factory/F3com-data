@@ -415,21 +415,24 @@ $f3->route('GET|POST /','Main\Home->show');
 
 will instantiate the `Home` class at runtime and call the `show()` method thereafter.
 
-## Event Handlers
+## Events Handlers
 
 F3 has a couple of routing event listeners that might help you improve the flow and structure of
-controller classes. Say you have a route defined as follows:
+controller classes. Say you have a route defined as follow:
 
 ```php
 $f3->route('GET /','Main->home');
 ```
 
-If the application receives an HTTP request matching the above route, F3 instantiates `Main`,
-but before executing the `home()` method, the framework looks for a method in this class named
-`beforeRoute()`. In case it's found, F3 runs the code contained in the `beforeRoute()` event
-handler before transferring control to the `home()` method. Once this is accomplished,
-the framework looks for an `afterRoute()` event handler. Like `beforeRoute()`,
-the method gets executed if it's defined.
+If the application receives an HTTP request matching the above route, F3 first instantiates `Main`,
+but _before_ executing the `home()` method, the framework looks for a method in this class named
+`beforeRoute()`. If present, F3 runs the code contained in the `beforeRoute()` event
+handler before transferring control to the method specified in the route, in our example the `home()` method.
+Once the method terminated, the framework then looks for an `afterRoute()` event handler that is called if present.
+The `beforeroute()` and `afterroute()` events handlers are common to a given class. 
+It means if you have defined differents routes using differents methods of a same class,
+e.g. `'GET /login','User->login'` and `'GET /logout','User->logout'`, both routes will share the same
+`beforeroute()` and `afterroute()` events handlers.
 
 ## Dynamic Route Handlers
 
@@ -441,7 +444,7 @@ $f3->route('GET /products/@action','Products->@action');
 
 If your application receives a request for, say, `/products/itemize`,
 F3 will extract the `'itemize'` string from the URL and pass it on to the `@action` token in the
-route handler. F3 will then look for a class named `Products` and execute the `itemize()` method.
+route handler. F3 will then look for a class named `Products` and execute its `itemize()` method.
 
 Dynamic route handlers may have various forms:
 
@@ -453,12 +456,12 @@ $f3->route('GET /public/@controller/@action','@controller->@action');
 ```
 
 F3 triggers an `HTTP 404 Not Found` error at runtime if it cannot transfer control to the class
-or method associated with the current route, i.e. an undefined class or method.
+or method associated with the current route, i.e. there is no defined class and/or method to match the requested route.
 
 ## AJAX and Synchronous Requests
 
-Routing patterns may contain modifiers that direct the framework to base its routing decision on
-the type of HTTP request:
+Routing patterns may contain _modifiers_ that instruct the framework to base its routing decision on
+the type of the HTTP request:
 
 ```php
 $f3->route('GET /example [ajax]','Page->getFragment');
@@ -473,4 +476,4 @@ pattern, and in this case it executes the `Page->getFull()` callback.
 If no modifiers are defined in a routing pattern, then both AJAX and synchronous request types
 are routed to the specified handler.
 
-Route pattern modifiers are also recognized by `$f3->map()`.
+Route pattern modifiers are also recognized by [`$f3->map()`](base#map).
