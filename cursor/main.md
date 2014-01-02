@@ -56,6 +56,9 @@ array|FALSE load ( [ string|array $filter = NULL [, array $options = NULL [, int
 ```
 
 The `load` method hydrates the mapper object with records. You can define a `$filter` to load only records that matches your criteria.
+
+It uses [find()](cursor#find) to load records and makes the first record (mapper object) that matches criteria the active record. Additional records that matches the same criteria can be made the active record by moving the cursor pointer (i.e. with [skip()](cursor#skip)).
+
 You can find detailed descriptions about the `$filter` and `$option` syntax on the mapper specific pages: [Jig Mapper](jig-mapper#$filter), [Mongo Mapper](mongo-mapper#$filter) and [SQL Mapper](sql-mapper#$filter).
 
 The `$ttl` argument, when specified in seconds, allows you to cache the result of the mapper load, provided a [CACHE](quick-reference#cache) system is activated.
