@@ -144,10 +144,10 @@ A sub-template may in turn contain any number of <include> directives. F3 allows
 
 You can specify filenames with something other than .htm or .html file extensions, but it's easier to preview them in your Web browser during the development and debugging phase. The template engine is not limited to rendering HTML files. In fact you can use the template engine to render other kinds of files.
 
-The `<include>` directive also has an optional `if` attribute so you can specify a condition that needs to be satisfied before the sub-template is inserted:
+The `<include>` directive has an optional `if` attribute to let you specify a condition that needs to be fullfiled for the sub-template to be inserted:
 
 ``` html
-<include if="{{ count(@items) }}" href="items.htm" />
+<include if="{{ count(@items) >= 2 }}" href="items.htm" />
 ```
 
 ## Exclusion of Segments
@@ -393,7 +393,12 @@ return array(
 );
 ```
 
-Dictionaries are nothing more than key-value pairs. F3 automatically instantiates framework variables based on the keys in the language files. As such, it's easy to embed these variables as tokens in your templates. Using the F3 template engine:
+Dictionaries are nothing more than key-value pairs. F3 automatically instantiates framework variables based on the keys in the language files. As such, it's easy to embed these variables as tokens in your templates.
+
+<div class="alert alert-warning"><strong>Notice:</strong> Dictionary key-value pairs become F3 variables once referenced. Make sure the keys do not conflict with any framework variable instantiated via `$f3->set()`, `$f3->mset()`, or `$f3->config()`.</div>
+
+
+Examples of multiple languages using the F3 template engine:
 
 ``` html
 <h1>{{ @love }}</h1>
@@ -404,7 +409,7 @@ Dictionaries are nothing more than key-value pairs. F3 automatically instantiate
 </p>
 ```
 
-And the longer version that utilizes PHP as a template engine:
+And the longer version using PHP as a template engine:
 
 ```php
 <?php $f3=Base::instance(); ?>
@@ -430,14 +435,23 @@ To override this behavior, you can trigger F3 to use a language specified by the
 $f3->set('LANGUAGE','de');
 ```
 
-**Note:** In the above example, the key pi exists only in the English dictionary. The framework will always use English (`en`) as a fallback to populate keys that are not present in the specified (or detected) language.
+**Main language of your website**
 
-You may also create dictionary files for language variants like `en-US`, `es-AR`, etc. In this case, F3 will use the language variant first (like `es-AR`). If there are keys that do not exist in the variant, the framework will look up the key in the root language (`es`), then use the `en` language file as the final fallback.
-Dictionary key-value pairs become F3 variables once referenced. Make sure the keys do not conflict with any framework variable instantiated via `$f3->set()`, `$f3->mset()`, or `$f3->config()`.
+In the above example, the key `pi` exists only in the English dictionary. The framework will always use a fallback language to populate keys that are not present in the specified or detected language(s). In our example, the key `pi` present in the English dictionary has been picked up because English is the default fallback language set by F3 at startup. Hence it's important to make sure **all** the multi-languages texts used on your website _are defined in the dictionary of the fallback language_, otherwise an error, or at least a warning or notice, will be triggered at runtime, when the undefined variable will be referenced.
+
+If the main language of your website is not English, and you haven't translated all the strings in the others languages, you must instruct F3 to use your native language reference dictionary as the fallback. You can easily do it thanks to the `FALLBACK` hive variable:
+
+```php
+$f3->set('FALLBACK','it');  // Italiano as default fallback language
+```
+
+**Language Variants**
+
+You can also create dictionary files for language variants like `en-US`, `es-AR`, etc. In this case, F3 will use the language variant first, e.g. `es-AR`. If there are keys that do not exist in the variant dictionary, the framework will look up the key in the root language, e.g. `es`, and, when still not found, use the defined fallback language file.
 
 Did you notice the peculiar `'Today is {0,date}'` pattern in our previous example? F3's multilingual capability hinges on string/message formatting rules of the ICU project. The framework uses its own subset of the ICU string formatting implementation. There is no need for PHP's `intl` extension to be activated on the server.
 
-One more thing: F3 can also load .ini-style formatted files as dictionaries:
+One more thing: F3 can also load **.ini**-style formatted files as dictionaries:
 
 ``` ini
 love="I love F3"

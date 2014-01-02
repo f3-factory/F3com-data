@@ -345,7 +345,7 @@ $minified = Web::instance()->minify('style.css,framework.css,null.css');
 
 Notice that the files processed by this function must be located in one of the directories specified in [UI](quick-reference#ui) system var.
 
-To get maximum performance, you can enable the F3 system caching and F3 will use it to save/retrieve file(s) to minify as well as the combined output. Have a look at the [CACHE](quick-reference#cache) system var for more details.
+To get maximum performance, you can [enable the F3 system caching](quick-reference#cache) and F3 will use it to save/retrieve file(s) to minify and to save the combined output as well. You can have a look at the [Cache Engine User Guide](optimization#cache-engine) for more details.
 
 To see an example of how `minify` can be used in your templates, check the [Keeping Javascript and CSS on a Healthy Diet](optimization#keeping-javascript-and-css-on-a-healthy-diet) section of the User Guide.
 

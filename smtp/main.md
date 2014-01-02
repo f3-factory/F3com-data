@@ -64,7 +64,7 @@ echo $smtp->get('From'); // displays e.g. 'J. W. von Goethe <jwgoethe@famousauth
 bool exists ( string $key ) 
 ```
 
-This function returns `TRUE` if a header exists as per the function set() described above. 
+This function returns `TRUE` if a header exists as per the function `set()` described above. 
 
 Example:
 
@@ -170,8 +170,8 @@ __construct ( string $host, int $port, string $scheme, string $user, string $pw 
 The constructor allows you to instantiate the class and specify the settings that will be used by the `send` function. 
 
 + `$host` & `$port` of the SMTP server you want to use to send your e-mail messages.
-+ `$scheme` allows you to use a SSL connection (provided you have the [openssl extension](http://www.php.net/openssl "php.net :: OpenSSL") loaded on the server).
-+ `$scheme` allows you to use a TLS connection as well. It will turn encryption on and use the `STREAM_CRYPTO_METHOD_TLS_CLIENT` method as per the PHP function [stream_socket_enable_crypto](http://www.php.net/manual/en/function.stream-socket-enable-crypto.php "php.net :: stream_socket_enable_crypto").
++ `$scheme` allows you to use a SSL connection, provided you have the [openssl extension](http://www.php.net/openssl "php.net :: OpenSSL") loaded on the server.
++ `$scheme` allows you to use a TLS connection. The encryption will be based on the `STREAM_CRYPTO_METHOD_TLS_CLIENT` method as per the PHP function [stream_socket_enable_crypto](http://www.php.net/manual/en/function.stream-socket-enable-crypto.php "php.net :: stream_socket_enable_crypto").
 + `$user` & `$pw` are used to authenticate with the `AUTH LOGIN` SMTP command.
 
 Example:
@@ -192,9 +192,7 @@ protected string fixheader ( string $key )
 
 This function allows to fix a header 
 
-This _protected_ function is used internally by the `get`, `set`, `exists` & `clear` functions and check and ensure a given header value is well-formed (basically remove forbidden characters). 
-
-
+This _protected_ method is used internally by the `get`, `set`, `exists` & `clear` methods to check and ensure a given header value is well-formed (basically it removes forbidden characters).
 
 ### dialog
 
@@ -204,4 +202,4 @@ This _protected_ function is used internally by the `get`, `set`, `exists` & `cl
 protected dialog ( [ string $cmd = NULL [, bool $log = NULL ]] ) 
 ```
 
-This _protected_ function is used internally by the `send` function and allows to send SMTP command and record server response. 
+This _protected_ method is used internally by the `send` method and allows to send SMTP command and record server response. 
