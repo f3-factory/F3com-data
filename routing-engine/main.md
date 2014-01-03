@@ -418,7 +418,7 @@ will instantiate the `Home` class at runtime and call the `show()` method therea
 ## Event Handlers
 
 F3 has a couple of routing event listeners that might help you improve the flow and structure of
-controller classes. Say you have a route defined as follow:
+controller classes. Say you have a route defined as follows:
 
 ```php
 $f3->route('GET /','Main->home');
@@ -432,7 +432,7 @@ Once the method is terminated, the framework then looks for an `afterRoute()` ev
 The `beforeroute()` and `afterroute()` event handlers are common to a given class. 
 It means if you have defined differents routes using differents methods of a same class,
 e.g. `'GET /login','User->login'` and `'GET /logout','User->logout'`, both routes will share the same
-`beforeroute()` and `afterroute()` events handlers.
+`beforeroute()` and `afterroute()` event handlers.
 
 ## Dynamic Route Handlers
 
