@@ -409,7 +409,7 @@ Examples of multiple languages using the F3 template engine:
 </p>
 ```
 
-And the longer version using PHP as a template engine:
+And the longer version that utilizes PHP as a template engine:
 
 ```php
 <?php $f3=Base::instance(); ?>
@@ -447,7 +447,7 @@ $f3->set('FALLBACK','it');  // Italiano as default fallback language
 
 **Language Variants**
 
-You can also create dictionary files for language variants like `en-US`, `es-AR`, etc. In this case, F3 will use the language variant first, e.g. `es-AR`. If there are keys that do not exist in the variant dictionary, the framework will look up the key in the root language, e.g. `es`, and, when still not found, use the defined fallback language file.
+You may also create dictionary files for language variants like `en-US`, `es-AR`, etc. In this case, F3 will use the language variant first, e.g. `es-AR`. If there are keys that do not exist in the variant dictionary, the framework will look up the key in the root language, e.g. `es`, and, when still not found, use the defined fallback language file.
 
 Did you notice the peculiar `'Today is {0,date}'` pattern in our previous example? F3's multilingual capability hinges on string/message formatting rules of the ICU project. The framework uses its own subset of the ICU string formatting implementation. There is no need for PHP's `intl` extension to be activated on the server.
 
