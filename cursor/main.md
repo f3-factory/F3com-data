@@ -183,7 +183,7 @@ the total number of records found, the specified limit `$size`, the number of su
 For example:
 
 ```php
-$result = $mapper->paginate(0, 2);
+$result = $mapper->paginate(0, 3);
 /*
 array(4) {
   ["subset"] => array(2) {
@@ -198,7 +198,7 @@ array(4) {
 }
 */
 
-$result = $mapper->paginate(1, 2);
+$result = $mapper->paginate(1, 3);
 /*
 array(4) {
   ["subset"] => array(2) {
