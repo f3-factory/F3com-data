@@ -178,7 +178,7 @@ array paginate ( [ int $pos = 0 [, int $size = 10 [, string|array $filter = NULL
 ```
 
 This method returns an array containing a subset of records that are matching the `$filter` criterias,
-the total number of records in superset, the specified limit `$size`, the number of subsets available and the actual subset position.
+the total number of records found, the specified limit `$size`, the number of subsets available and the actual subset position.
 
 For example:
 
@@ -192,7 +192,7 @@ array(4) {
 		[2] => mapper object, #ID: 3, title: Barbar the Foo
 	  }
   ["total"] => int(5)
-  ["limit"] => int(2)
+  ["limit"] => int(3)
   ["count"] => float(3)
   ["pos"] => int(0)
 }
@@ -206,7 +206,7 @@ array(4) {
 		[1] => mapper object, #ID: 4, title: untitled
 	  }
   ["total"] => int(5)
-  ["limit"] => int(2)
+  ["limit"] => int(3)
   ["count"] => float(2)
   ["pos"] => int(1)
 }
@@ -214,7 +214,7 @@ array(4) {
 
 ```
 
-The `subset` key contains an array of mapper objects returned from find(), `total` is the sum of all records for all pages, `count` is the number of records for the current page and `pos` gives you the current subset cursor position ( it's the page number - 1).
+The `subset` key contains an array of mapper objects returned from find(), `total` is the sum of all records for all pages, `limit` is a bypass of the given limit size, `count` is the number of records for the current page and `pos` gives you the current subset cursor position ( it's the page number - 1).
 
 ### save
 
