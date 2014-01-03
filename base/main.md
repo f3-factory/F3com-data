@@ -1071,13 +1071,7 @@ $f3->route(
     'GET /archive/@year/@month/@day'
   ),
   function($f3,$params){
-	$yesterday = time()-86400; // archives of yesterday if nothing else specified
-	$def_day   = isset($params['day'])   ? $params['day']   : date('j',$yesterday);
-	$def_month = isset($params['month']) ? $params['month'] : date('m',$yesterday);
-	$def_year  = isset($params['year'])  ? $params['year']  : date('y',$yesterday);
-	$params+=array('year'  => $def_year,
-				   'month' => $def_month,
-				   'day'   => $def_day);     //set default values
+	$params+=array('year'=>2013,'month'=>1,'day'=>1); //default values
     //etc..
   }
 );
@@ -1333,7 +1327,7 @@ echo $f3->rel( 'http://fatfreeframework.com/gui/img/supported_dbs.jpg' ); // 'gu
 
 ## Misc
 
-### Instantiation
+### instance
 
 **Return class instance**
 
@@ -1413,10 +1407,7 @@ This method is mainly used by the [Preview class](preview), the lightweight temp
 Example:
 
 ```php
-compile ('The sun was so {{@RAINBOW.cyan}} today');
-
-// returns:
-'The sun was so $RAINBOW['cyan'] today'
+$f3->compile('@RAINBOW.cyan'); // returns: $RAINBOW['cyan']
 ```
 
 ### status
