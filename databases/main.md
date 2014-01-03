@@ -268,6 +268,8 @@ $f3->get('user')->save();
 Notice that we can also use Fat-Free variables as containers for mapper objects.
 The `copyFrom()` method hydrates the mapper object with elements from a framework array variable, the array keys of which must have names identical to the mapper object properties, which in turn correspond to the record's field names. So, when a Web form is submitted (assuming the HTML name attribute is set to `userID`), the contents of that input field is transferred to `$_POST['userID']`, duplicated by F3 in its `POST.userID` variable, and saved to the mapped field `$user->userID` in the database. The process becomes very simple if they all have identically-named elements. Consistency in array keys, i.e. template token names, framework variable names and field names is key :)
 
+<div class="alert"><b>Danger:</b> By default, <code>copyfrom</code> takes the whole array provided. This may open a security leak if the user posts more fields than you expect. Use the 2nd parameter to setup a filter callback function to get rid of unwanted fields to copy from.</div>
+
 On the other hand, if we wanted to retrieve a record and copy the field values to a framework variable for later use, like template rendering:
 
 ```php

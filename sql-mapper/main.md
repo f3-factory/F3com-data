@@ -314,25 +314,20 @@ $f3->get('user')->copyFrom('POST'); // F3 synch the 'POST' hive array variable w
 <i class="icon-warning-sign"></i> **Danger** <i class="icon-warning-sign"></i> By default, `copyfrom` takes the whole array provided; in our example above, the whole `POST` from the &lt;form&gt;. So if somebody modifies or forges your form by adding some extra &lt;input&gt; fields in your DOM with tools like e.g. firebug, it's possible to overwrite e.g. the ID of the record, the permission role, or what ever... Pretty huge _security leak_.
 Fortunately, F3 offers you a versatile solution through a callback function you can use to apply any pre-processing on the hive _array_ variable, such as normalizing the values and/or filtering and limiting the fields to copy from. Your callback function will receive the hive _array_ variable and must similarly return an array of keys/values pairs: the fields to pass to the mapper object.
 
-Ok, let's do it. For example, let's define a callback filter function retaining only the fields 'name' & 'age':
-
-```php
-function filterPost($val) {
-    return array_intersect_key($val, array_flip(array('name','age')));  // fields are in the keys of 'POST'
-}
-```
-
-Now, simply pass it to the copyFrom method:
+Ok, let's do it. For example, let's use a callback filter function retaining only the fields 'name' & 'age':
 
 ```php
 $db = new DB\SQL('sqlite:db/ent.sqlite');
 $f3->set('user',new DB\SQL\Mapper($db,'users'));
-$f3->get('user')->copyFrom('POST','filterPost');  // the 'POST' array is passed to our callback function
+$f3->get('user')->copyFrom('POST',function($val) {
+	// the 'POST' array is passed to our callback function
+    return array_intersect_key($val, array_flip(array('name','age')));
+});
 $f3->get('user')->save();
 });
 ```
 
-That'it! As F3 sanitizes the values, with such an extra filtering, your DB is safe from injections.
+That's it! As F3 sanitizes the values, with such an extra filtering and your DB is safe from injections.
 
 ### copyto
 **Populate hive array variable with mapper fields**
