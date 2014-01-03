@@ -1071,7 +1071,13 @@ $f3->route(
     'GET /archive/@year/@month/@day'
   ),
   function($f3,$params){
-    $params+=array('year'=>2013,'month'=>1,'day'=>1); //default values
+	$yesterday = time()-86400; // archives of yesterday if nothing else specified
+	$def_day   = isset($params['day'])   ? $params['day']   : date('j',$yesterday);
+	$def_month = isset($params['month']) ? $params['month'] : date('m',$yesterday);
+	$def_year  = isset($params['year'])  ? $params['year']  : date('y',$yesterday);
+	$params+=array('year'  => $def_year,
+				   'month' => $def_month,
+				   'day'   => $def_day);     //set default values
     //etc..
   }
 );
@@ -1185,7 +1191,7 @@ After processing the incoming request URI, the routing pattern that matches that
 The `PARAMS` var will contains all tokens as named keys, and additionally all tokens and wildcards as numeric keys, depending on their order of appearance.
 
 <div class="alert alert-info">
-    <p><b>Notice:</b> If a static and dynamic route pattern both match the current URI, then the static route pattern has priority.</p>
+	<p><b>Notice:</b> If a static and dynamic route pattern both match the current URI, then the <em>static</em> route pattern has priority.</p>
 </div>
 
 
@@ -1206,7 +1212,7 @@ This method provides that facility to invoke callbacks and their arguments. F3 r
 
 `$args` if specified provides a means of executing the callback with parameters.
 
-`$hooks` is used by the `route()` method to specify pre- and post-execution functions, i.e. `beforeroute()` and `afterroute()`.
+`$hooks` is used by the `route()` method to specify pre- and post-execution functions, i.e. `beforeroute()` and `afterroute()`. (refer to the section [Event Handlers](routing-engine#event-handlers) for more explanations about `beforeroute()` and `afterroute()`)
 
 ### chain
 
@@ -1327,6 +1333,17 @@ echo $f3->rel( 'http://fatfreeframework.com/gui/img/supported_dbs.jpg' ); // 'gu
 
 ## Misc
 
+### Instantiation
+
+**Return class instance**
+
+```php
+$f3 = \Base::instance();
+```
+
+This is used to grab the framework instance at any point of your code.
+
+
 ### blacklisted
 
 **Lookup visitor's IP against common DNS blacklist services**
@@ -1362,6 +1379,62 @@ null dump ( mixed $expr )
 
 <i class="icon-thumbs-up"></i> _NOTICE: The syntax highlighting depends on the [DEBUG level](quick-reference#debug "The DEBUG system variable")_.
 
+### highlight
+
+**Apply syntax highlighting**
+
+```php
+string highlight ( string $text )
+```
+
+Applies syntax highlighting to a given string and returns the highlighted string.
+
+Example:
+
+```php
+$highlighted_code = $f3->highlight( '$fatfree->rocks(\'FAST\' AND $light)' );
+```
+Returns:
+
+```html
+<code><span class="variable">$fatfree</span><span class="object_operator">-&gt;</span><span class="string">rocks</span><span>(</span><span class="constant_encapsed_string">'FAST'</span><span class="whitespace"> </span><span class="logical_and">AND</span><span class="whitespace"> </span><span class="variable">$light</span><span>)</span></code>
+```
+<div class="alert alert-warning">Keep in mind you need the `code.css` stylesheet to correctly see the syntax highlighting in your browser pages. You can include it in your pages with &lt;link href="code.css" rel="stylesheet" /&gt; (code.css is bundled into the framework 'lib/' folder)</div>
+
+### compile
+
+**Convert JS-style token to PHP expression**
+
+```php
+string compile ( string $str )
+```
+This method is mainly used by the [Preview class](preview), the lightweight template engine, to convert tokens to variables.
+
+Example:
+
+```php
+compile ('The sun was so {{@RAINBOW.cyan}} today');
+
+// returns:
+'The sun was so $RAINBOW['cyan'] today'
+```
+
+### status
+
+**Send HTTP/1.1 status header; Return text equivalent of status code**
+
+```php
+string status ( int $code )
+```
+
+Use this method for sending various [HTTP status messages](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html "w3.org :: Status Code Definitions") to the client, e.g.
+
+```php
+$f3->status(404); // Sends a '404 Not Found' client error
+$f3->status(407); // Sends a '407 Proxy Authentication Required' client error
+$f3->status(503); // Sends a '503 Service Unavailable' server error
+```
+
 ### error
 
 **Execute error handler**
@@ -1385,56 +1458,6 @@ There is little need to call this method directly because it is automatically in
 
 ```php
 $f3->expire(0); // sends 'Cache-Control: no-cache, no-store, must-revalidate'
-```
-
-### highlight
-
-**Apply syntax highlighting**
-
-```php
-string highlight ( string $text )
-```
-
-Applies syntax highlighting to a given string and returns the highlighed string.
-
-Example:
-
-```php
-$highlighted_code = $f3->highlight( '$fatfree->rocks(\'FAST\' AND $light)' );
-```
-Returns:
-
-```html
-<code><span class="variable">$fatfree</span><span class="object_operator">-&gt;</span><span class="string">rocks</span><span>(</span><span class="constant_encapsed_string">'FAST'</span><span class="whitespace"> </span><span class="logical_and">AND</span><span class="whitespace"> </span><span class="variable">$light</span><span>)</span></code>
-```
-<div class="alert alert-warning">Keep in mind you need the `code.css` stylesheet to see correctly see the syntax highlighting in your browser pages. You can include it in your pages with &lt;link href="code.css" rel="stylesheet"&gt;&lt;/code&gt; (code.css is bundled into the framework 'lib/' folder)</div>
-
-
-### instance
-
-**Return class instance**
-
-```php
-$f3 = \Base::instance();
-```
-
-This is used to grab the framework instance at any point of your code.
-
-
-### status
-
-**Send HTTP/1.1 status header; Return text equivalent of status code**
-
-```php
-string status ( int $code )
-```
-
-Use this method for sending various [HTTP status messages](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html "w3.org :: Status Code Definitions") to the client, e.g.
-
-```php
-$f3->status(404); // Sends a '404 Not Found' client error
-$f3->status(407); // Sends a '407 Proxy Authentication Required' client error
-$f3->status(503); // Sends a '503 Service Unavailable' server error
 ```
 
 ### unload

@@ -3,7 +3,7 @@
 The Audit class is a data validator.
 
 Namespace: `\` <br>
-File location: `lib/./lib/audit.php.php`
+File location: `lib/audit.php`
 
 ---
 

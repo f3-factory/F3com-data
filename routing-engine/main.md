@@ -418,7 +418,7 @@ will instantiate the `Home` class at runtime and call the `show()` method therea
 ## Event Handlers
 
 F3 has a couple of routing event listeners that might help you improve the flow and structure of
-controller classes. Say you have a route defined as the following:
+controller classes. Say you have a route defined as follow:
 
 ```php
 $f3->route('GET /','Main->home');
@@ -428,11 +428,11 @@ If the application receives an HTTP request matching the above route, F3 first i
 but _before_ executing the `home()` method, the framework looks for a method in this class named
 `beforeRoute()`. If present, F3 runs the code contained in the `beforeRoute()` event
 handler before transferring control to the method specified in the route, in our example the `home()` method.
-Once the method is accomplished, the framework then looks for an `afterRoute()` event handler that is called if present.
+Once the method is terminated, the framework then looks for an `afterRoute()` event handler that is called if present.
 The `beforeroute()` and `afterroute()` event handlers are common to a given class. 
 It means if you have defined differents routes using differents methods of a same class,
 e.g. `'GET /login','User->login'` and `'GET /logout','User->logout'`, both routes will share the same
-`beforeroute()` and `afterroute()` event handlers.
+`beforeroute()` and `afterroute()` events handlers.
 
 ## Dynamic Route Handlers
 
@@ -461,7 +461,7 @@ or method associated with the current route, i.e. there is no defined class and/
 ## AJAX and Synchronous Requests
 
 Routing patterns may contain _modifiers_ that instruct the framework to base its routing decision on
-the type of HTTP request:
+the type of the HTTP request:
 
 ```php
 $f3->route('GET /example [ajax]','Page->getFragment');

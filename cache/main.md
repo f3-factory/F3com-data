@@ -3,7 +3,7 @@
 This class represents F3's multi protocol Cache engine. It supports [Memcache](http://memcached.org/), [WinCache](http://www.iis.net/downloads/microsoft/wincache-extension), [APC](http://php.net/manual/en/book.apc.php), [XCache](http://xcache.lighttpd.net/) and filesystem based caching.
 
 Caching is a powerful way to get more performance out of your application. It is seamlessly integrated to all core and plugin features
-like [setting hive keys](base#set), [HTTP responses](base#caching), DB queries and even to [JS/CSS minification](optimization#keeping-javascript-and-css-on-a-healthy-diet).
+like [setting hive keys](base#set), [HTTP responses](base#caching), DB mappers and queries and even to [JS/CSS minification](optimization#keeping-javascript-and-css-on-a-healthy-diet).
 
 There is a good [Cache Engine User Guide](optimization#cache-engine) that covers how the cache engine works and gives you tips to improve your application and your database queries, as they can be cached by F3 as well. You really should have read it.
 

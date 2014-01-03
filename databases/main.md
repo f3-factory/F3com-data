@@ -22,7 +22,7 @@ $db=new DB\SQL(
 
 ## Querying the Database
 
-OK. That was easy, wasn't it? That's pretty much how you would do the same thing in ordinary PHP. You just need to know the DSN format of the database you're connecting to. See the PDO section of the PHP manual.
+OK. That was easy, wasn't it? That's pretty much how you would do the same thing in ordinary PHP. You just need to know the DSN format of the database you're connecting to. See the [PDO section of the PHP manual](http://www.php.net/manual/en/pdo.connections.php "PHP Data Objects :: Connections").
 
 Let's continue our PHP code:
 
@@ -156,11 +156,11 @@ $user=new DB\SQL\Mapper($db,'users');
 $user->load(array('userID=?','tarzan'));
 ```
 
-The first line instantiates a data mapper object that interacts with the `users` table in our database. Behind the scene, F3 retrieves the structure of the `users` table and determines which field(s) are defined as primary key(s). At this point, the mapper object contains no data yet (dry state) so `$user` is nothing more than a structured object - but it contains the methods it needs to perform the basic CRUD operations and some extras. To retrieve a record from our users table with a `userID` field containing the string value `tarzan`, we use the `load() method`. This process is called "auto-hydrating" the data mapper object.
+The first line instantiates a data mapper object that interacts with the `users` table in our database. Behind the scene, F3 retrieves the structure of the `users` table and determines which field(s) are defined as primary key(s). At this point, the mapper object does not contains any data yet (it is called in "dry state") and the `$user` var is basically nothing more than a structured object - but containing the methods it needs to perform the basic CRUD operations plus some extras as you will see later. Now, to retrieve a record from our `users` table with, e.g., the field `userID` containing the string value `tarzan`, we use the `load()` method. This process is called "auto-hydrating" the data mapper object.
 
-Easy, wasn't it? F3 understands that a SQL table already has a structural definition existing within the database engine itself. Unlike other frameworks, F3 requires no extra class declarations (unless you want to extend the data mappers to fit complex objects), no redundant PHP array/object property-to-field mappings (duplication of efforts), no code generators (which require code regeneration if the database structure changes), no stupid XML/YAML files to configure your models, no superfluous commands just to retrieve a single record. With F3, a simple resizing of a `varchar` field in MySQL does not demand a change in your application code. Consistent with MVC and "separation of concerns", the database admin has as much control over the data (and the structures) as a template designer has over HTML/XML templates.
+Easy, wasn't it? F3 understands that a SQL table already has a structural definition existing within the database engine itself. Unlike other frameworks, F3 requires no extra class declarations (unless you want to extend the data mappers to fit complex objects), no redundant PHP array/object property-to-field mappings (duplication of efforts), no code generators (which require code regeneration when the database structure changes), no stupid XML/YAML files to configure your models, no superfluous commands just to retrieve a single record. With F3, a simple resizing of a `varchar` field in your MySQL table does not require a single change in your application code. Consistent with MVC and "separation of concerns", the database admin has as much control over the data and the structures as a template designer has over HTML/XML templates.
 
-If you prefer working with NoSQL databases, the similarities in query syntax are superficial. In the case of the MongoDB data mapper, the equivalent code would be:
+If you prefer working with NoSQL databases, the similarities in query syntax are immediate. In the case of the MongoDB data mapper, the equivalent code would be:
 
 ```php
 $db=new DB\Mongo('mongodb://localhost:27017','testdb');
@@ -180,13 +180,13 @@ $user->load(array('@userID=?','tarzan'));
 
 The framework automatically maps the field `visits` in our table to a data mapper property during object instantiation, i.e. `$user=new DB\SQL\Mapper($db,'users');`. Once the object is created, `$user->password` and `$user->userID` would map to the `password` and `userID` fields in our table, respectively.
 
-You can't add or delete a mapped field, or change a table's structure using the ORM. You must do this in MySQL, or whatever database engine you're using. After you make the changes in your database engine, Fat-Free will automatically synchronize the new table structure with your data mapper object when you run your application.
+You can't add or delete a mapped field, or change a table structure using the ORM. You must do this in MySQL, or whatever database engine you're using. After you've made the changes in your database engine, Fat-Free will automatically synchronize the new table structure with your data mapper object when you run your application.
 
 F3 derives the data mapper structure directly from the database schema. No guesswork involved. It understands the differences between MySQL, SQLite, MSSQL, Sybase, and PostgreSQL database engines.
 
-SQL identifiers should not use reserved words, and should be limited to alphanumeric characters `A-Z`, `0-9`, and the underscore symbol (`_`). Column names containing spaces (or special characters) and surrounded by quotes in the data definition are not compatible with the ORM. They cannot be represented properly as PHP object properties.
+<div class="alert alert-warning"><strong>Notice:</strong> SQL identifiers should not use reserved words, and should be limited to alphanumeric characters `A-Z`, `0-9`, and the underscore symbol (`_`). Column names containing spaces (or special characters) and surrounded by quotes in the data definition are not compatible with the ORM. They cannot be represented properly as PHP object properties.</div>
 
-Let's say we want to increment the user's number of visits and update the corresponding record in our users table, we can add the following code:
+Let's say now we want to increment the user's number of visits and update the corresponding record in our `users` table, we can add the following code:
 
 ```php
 $user->visits++;

@@ -46,7 +46,7 @@ The `$filter` argument for SQL accepts the following structure:
 // string value for simple where strings
 string $whereClause
 // array value for parameterized queries
-array ( string $whereClause [, string $bindValue1 [, string $bindValue2 [, ... ]] )
+array ( string $whereClause [, string $bindValue1 [, string $bindValue2 [, ... ]]] )
 ```
 
 #### Parameterized Queries
@@ -296,17 +296,43 @@ NULL reset( )
 All underlying values are set to `NULL`.
 
 ### copyfrom
-**Hydrate the mapper object using a hive array variable**
+**Hydrate the mapper object using a hive _array_ variable**
 
 ```php
 NULL copyfrom( string $key [, callback $func = NULL ] )
 ```
 
-`$func` is the callback function to apply to the hive array variable:
+This method hydrates the mapper object with elements from a framework _array_ variable. 
+
+`$key` is the name of the hive _array_ variable to use to hydrate the mapper.
+
+`$func` is a callback function you can apply to the hive _array_ variable. As explained in the [Databases User Guide](databases#beyond-crud), the array keys must have names identical to the mapper object properties. It allows for example to hydrate the mapper object with the fields of a POSTed form: 
 
 ```php
-if ($func)  $var = $func($var);
+$f3->get('user')->copyFrom('POST'); // F3 synch the 'POST' hive array variable with the $_POST array
 ```
+<i class="icon-warning-sign"></i> **Danger** <i class="icon-warning-sign"></i> By default, `copyfrom` takes the whole array provided; in our example above, the whole `POST` from the &lt;form&gt;. So if somebody modifies or forges your form by adding some extra &lt;input&gt; fields in your DOM with tools like e.g. firebug, it's possible to overwrite e.g. the ID of the record, the permission role, or what ever... Pretty huge _security leak_.
+Fortunately, F3 offers you a versatile solution through a callback function you can use to apply any pre-processing on the hive _array_ variable, such as normalizing the values and/or filtering and limiting the fields to copy from. Your callback function will receive the hive _array_ variable and must similarly return an array of keys/values pairs: the fields to pass to the mapper object.
+
+Ok, let's do it. For example, let's define a callback filter function retaining only the fields 'name' & 'age':
+
+```php
+function filterPost($val) {
+    return array_intersect_key($val, array_flip(array('name','age')));  // fields are in the keys of 'POST'
+}
+```
+
+Now, simply pass it to the copyFrom method:
+
+```php
+$db = new DB\SQL('sqlite:db/ent.sqlite');
+$f3->set('user',new DB\SQL\Mapper($db,'users'));
+$f3->get('user')->copyFrom('POST','filterPost');  // the 'POST' array is passed to our callback function
+$f3->get('user')->save();
+});
+```
+
+That'it! As F3 sanitizes the values, with such an extra filtering, your DB is safe from injections.
 
 ### copyto
 **Populate hive array variable with mapper fields**
