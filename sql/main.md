@@ -84,7 +84,7 @@ This function allows you to retrieve the schema of a given SQL table.
 
 `$fields` is either an array or a list (according to the F3 function [split](base#split)) of the names of columns to include in the returned schema. Defaulted to all fields. 
 
-When specified, `$ttl` will trigger a cache check for previous schema results and if not found or expired, will save the actual result to cache backend, provided the [CACHE](quick-reference#cache) system variable is set to `TRUE`.
+When specified, `$ttl` will trigger a cache check for previous schema results and if not found or expired, will save the actual result to the cache backend, provided a [CACHE](quick-reference#cache) system is activated.
 
 Example of use:
 
@@ -103,14 +103,14 @@ array (size=2)
   'name' => 
     array (size=5)
       'type' => string 'varchar(128)' (length=12)
-      'pdo_type' => int 2
+	  'pdo_type' => int 2  // \PDO::PARAM_STR
       'default' => string 'anonymous' (length=9)
       'nullable' => boolean true
       'pkey' => boolean false
   'age' => 
     array (size=5)
       'type' => string 'SMALLINT UNSIGNED' (length=17)
-      'pdo_type' => int 1
+	  'pdo_type' => int 1 // \PDO::PARAM_INT
       'default' => null
       'nullable' => boolean false
       'pkey' => boolean false
@@ -130,7 +130,7 @@ This method allows you to execute one or more given `$commands` SQL statements a
 
 When specified, `$args` allows you to apply specific arguments to the SQL commands.
 
-The `$ttl` argument, when specified, will trigger a cache check for previous command and if not found or expired, will save the actual result to the cache backend, provided the [CACHE](quick-reference#cache) system variable is set to `TRUE`.
+The `$ttl` argument, when specified, will trigger a cache check for previous command and if not found or expired, will save the actual result to the cache backend, provided a [CACHE](quick-reference#cache) system is activated.
 
 The `$log` is a toggle switch for suppressing or enabling the log of executed commands. You can use it as a profiler as the processing time, in milliseconds, of every SQL command is logged as well.
 
@@ -194,7 +194,7 @@ $db->exec('INSERT INTO mytable(name) VALUES(?)','Jim');
 
 #### Query caching
 
-The 3rd argument `$ttl` is used to enable query caching. Set it to your desired time-to-live in seconds and make sure [CACHE](quick-reference#cache) system var is configured.
+The 3rd argument `$ttl` is used to enable query caching. Set it to your desired time-to-live in seconds and make sure you have a [CACHE activated](quick-reference#cache).
 This way you can speed up your application when processing data that does not change very frequently.
 
 The 4th argument `$log` is a toggle switch for suppressing or enabling the log of executed commands. You can use it as a profiler as the processing time, in milliseconds, of every SQL command is logged as well.

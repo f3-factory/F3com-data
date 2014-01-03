@@ -149,6 +149,6 @@ $openid->clear('openid.sig');
 protected string|FALSE discover ( string $proxy ) 
 ```
 
-This _protected_ function is used internally and allows to determine the OpenID provider. 
+This _protected_ method is used internally and allows to determine the OpenID provider.
 
 

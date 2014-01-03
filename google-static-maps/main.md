@@ -129,7 +129,7 @@ When set to `'true'`, on mobile devices, the Google Maps API will try to have a 
 If you're not sure about this "sensor", set it to `'false'` (as a string, not a boolean!).
 
 ```php
-$map->sensor( 'false' );
+$map->sensor( 'false' ); // 'true' or 'false' as a string, not a boolean!
 ```
 
 ## Methods

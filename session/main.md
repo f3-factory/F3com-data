@@ -14,7 +14,7 @@ The Session class provides a lightweight [Cache](cache)-based session handler.
 Namespace: `\` <br/>
 File location: `lib/session.php`
 
-Ensure that you have enabled the [CACHE](quick-reference#cache) to make this work. Usage:
+Ensure that you have enabled the [cache](quick-reference#cache) to make this work. Usage:
 
 ```php
 // just create an object

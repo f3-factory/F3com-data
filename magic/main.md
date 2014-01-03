@@ -1,6 +1,6 @@
 # Magic
 
-The Magic class is a PHP magic wrapper and implements the [ArrayAccess interface](http://www.php.net/manual/en/class.arrayaccess.php "php.net ArrayAccess Reference").
+The Magic class is a PHP magic wrapper and implements the [ArrayAccess interface](http://php.net/manual/en/class.arrayaccess.php "php.net :: The ArrayAccess interface").
 
 Namespace: `\` <br>
 File location: `lib/magic.php`
@@ -76,7 +76,6 @@ mixed set ( string $key, mixed $val )
 
 This function allows you to bind a value to a key
 
-
 ### get
 
 **Retrieve contents of key**
@@ -86,8 +85,6 @@ mixed get ( string $key )
 ```
 
 This function allows you to retrieve the contents of a key
-
-
 
 ### clear
 
@@ -113,7 +110,6 @@ private bool visible ( string $key )
 ```
 
 This function returns TRUE if property has public visibility. This is important to decide if we call the magic setter/getter or just bypass the public property.
-
 
 ### offsetexists
 
@@ -184,7 +180,6 @@ NULL offsetunset ( string $key )
 ```
 
 This function is a convenient method for checking the value of a property
-
 
 ### __unset
 
