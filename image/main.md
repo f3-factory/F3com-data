@@ -136,7 +136,7 @@ $img->crop( int $x1, int $y1, int $x2, int $y2);
 **Resize image (Maintain aspect ratio)**
 
 ```php
-$img->resize( int $width, int $height, [ bool $crop = TRUE ], [ bool $enlarge = TRUE ]);
+$img->resize( int $width, int $height [, bool $crop = TRUE [, bool $enlarge = TRUE ]] );
 ```
 
 If `$crop` is `TRUE` the image will be resized to fit with its smallest side into the resize box.
@@ -155,7 +155,7 @@ $img->rotate( int $angle );
 **Apply an image overlay**
 
 ```php
-$img->overlay( Image $img, [ bool|int $align = NULL ]);
+$img->overlay( Image $img [, bool|int $align = NULL ] );
 ```
 
 This is used to merge to images, i.e. for watermarks. You need to provide another Image object and can align that by the bitwise `$align` argument.
@@ -191,7 +191,7 @@ y - align:
 **Generate identicon**
 
 ```php
-$img->identicon( string $str, [ int $size = 64 ], [ int $blocks = 4 ]);
+$img->identicon( string $str [, int $size = 64 [, int $blocks = 4 ]] );
 ```
 
 This method renders a unique [identicon](http://en.wikipedia.org/wiki/Identicon) based on the given `$str`.
@@ -201,7 +201,7 @@ The `$size` argument defines the width and height of the resulting image. `$bloc
 **Generate CAPTCHA image**
 
 ```php
-$img->captcha( string $font, [ int $size = 24 ], [ int $len = 5 ], [ string|bool $key = NULL], [ string $path='' ], [ $foregroundcolor=0xFFF ], [ $backgroundcolor=0x000 ] );
+$img->captcha( string $font [, int $size = 24 [, int $len = 5 [, string|bool $key = NULL [, string $path='' [, $foregroundcolor=0xFFF [, $backgroundcolor=0x000 ]]]]]] );
 ```
 
 This renders a captcha image. Please have a look to this [user guide section about rendering captcha images](plug-ins#captcha-images), to see a little example.
@@ -277,7 +277,7 @@ This will create a new temporary image of the current state.
 **Revert to specified state**
 
 ```php
-$img->restore([ int $state = 1 ]);
+$img->restore( [ int $state = 1 ] );
 ```
 
 This fetches the original image state from the temp folder.

@@ -290,10 +290,10 @@ int type ( scalar $val )
 ```
 This function allows you to retrieve the PDO constant corresponding to the php type of the provided `$val` as follow:
 
-+ the `NULL` php type will returns `\PDO::PARAM_NULL`
-+ the `boolean` php type will returns `\PDO::PARAM_BOOL` (int 5)
-+ the `integer` php type will returns `\PDO::PARAM_INT` (int 1)
-+ and any other php type will returns `\PDO::PARAM_STR` (int 2)
++ the `NULL` php type will return `\PDO::PARAM_NULL`
++ the `boolean` php type will return `\PDO::PARAM_BOOL` (int 5)
++ the `integer` php type will return `\PDO::PARAM_INT` (int 1)
++ and any other php type will return `\PDO::PARAM_STR` (int 2)
 
 ### quote
 

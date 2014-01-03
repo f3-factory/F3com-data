@@ -43,7 +43,7 @@ The `$filter` argument for Jig accepts the following structure:
 
 ```php
 // array value for parameterized queries
-array( string $expr, [ string $bindValue1 ], [ string $bindValue2 ], [...] )
+array( string $expr [, string $bindValue1 [, string $bindValue2 [, ...]]] )
 ```
 
 The `$expr` part must contain a valid code expression, where all mapper fields are prefixed by a `@`-char. You can bind values to them with positional or named tokens.

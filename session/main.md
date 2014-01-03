@@ -3,7 +3,9 @@
 The framework contains some SESSION handlers as well.
 To use them, just create a new instance of the certain class once. The plugins will register a new [session_set_save_handler](http://php.net/manual/en/function.session-set-save-handler.php "php.net :: function session_set_save_handler")
 which syncs the frameworks [SESSION](quick-reference#cookie,-get,-post,-request,-session,-files,-server,-env) hive keys to the corresponding new session handler class.
-to the corresponding new session handler class.
+
+Namespace: `\` <br>
+File location: `lib/session.php`
 
 ---
 
@@ -11,10 +13,7 @@ to the corresponding new session handler class.
 
 The Session class provides a lightweight [Cache](cache)-based session handler.
 
-Namespace: `\` <br/>
-File location: `lib/session.php`
-
-Ensure that you have enabled the [cache](quick-reference#cache) to make this work. Usage:
+Make sure you have [enabled the cache](quick-reference#cache) to make this work. Usage:
 
 ```php
 // just create an object
