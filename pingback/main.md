@@ -1,4 +1,4 @@
-# Pingback : Pingback 1.0 protocol (client and server) implementation
+# Pingback
 
 The Pingback class is a [pingback 1.0 protocol](http://www.hixie.ch/specs/pingback/pingback "Pingback 1.0 specifications") (client and server) implementation.
 
