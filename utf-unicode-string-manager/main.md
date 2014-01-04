@@ -7,13 +7,9 @@ File location: `lib/utf.php`
 
 ---
 
-<div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
-<p>This class is currently not documented; only its argument list is available.</p></div>
-
 ## Instantiation
 
 **Return class instance**
-
 
 ```php
 $utf = \UTF::instance();
@@ -21,25 +17,9 @@ $utf = \UTF::instance();
 
 The UTF class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code.
 
-
 ## Methods
 
-
-### stripos
-
-**Find position of first occurrence of a string (case-insensitive)**
-
-``` php
-int|FALSE stripos ( string $stack, string $needle [ , int $ofs = 0 ] ) 
-```
-
-This function allows you to find the position of the first occurrence of a string (case-insensitive)
-
-Example:
-
-``` php
-int|FALSE stripos ( string $stack, string $needle [, int $ofs = 0 ]] )
-```
+Similarly to the standard PHP strings methods, all the methods of the UTF class return zero-based offsets.
 
 ### strlen
 
@@ -49,44 +29,74 @@ int|FALSE stripos ( string $stack, string $needle [, int $ofs = 0 ]] )
 int strlen ( string $str ) 
 ```
 
-This function allows you to retrieve the length of a string
+This function returns the length of a given string
 
 Example:
 
 ``` php
-echo $utf->strlen($str); // displays 8 (int)
+$utf->strlen('나는 유리를 먹을 수 있어요. 그래도'); // returns 20  (while php strlen returns 48)
+```
+
+### stripos
+
+**Find position of first occurrence of a string, case-insensitive**
+
+``` php
+int|FALSE stripos ( string $stack, string $needle [, int $ofs = 0 ] ) 
+```
+
+This function returns the position of the first occurrence of the `$needle` string in the `$stack` string. Case-insensitive search. Returns `FALSE` if `$needle` not found.
+
+If `$ofs` is specified, search will start this number of characters counted from the beginning of the string. The `$ofs` offset cannot be negative.
+
+Examples:
+
+``` php
+$utf->stripos('Les Naïfs ægithales hâtifs', 'naïfs');     // returns 4
+$utf->stripos('Les Naïfs ægithales hâtifs', 'NAÏFS');     // returns 4
+$utf->stripos('Les Naïfs ægithales hâtifs', 'NAÏFS', 10); // returns FALSE
 ```
 
 ### strpos
 
-**Find position of first occurrence of a string**
+**Find position of first occurrence of a string, case-sensitive**
 
 ``` php
-int|FALSE strpos ( string $stack, string $needle [ , int $ofs = 0, bool $case = FALSE ] ] ) 
+int|FALSE strpos ( string $stack, string $needle [, int $ofs = 0 [, bool $case = FALSE ]] ) 
 ```
 
-This function allows you to find the position of the first occurrence of a string (case-sensitive)
+This function returns the position of the first occurrence of the `$needle` string in the `$stack` string. Returns `FALSE` if `$needle` not found.
 
-Example:
+If `$ofs` is specified, search will start this number of characters counted from the beginning of the string. The `$ofs` offset cannot be negative.
+
+If `$case` is set to `TRUE`, the search is case-insensitive and the function behaves like [`stripos()`](utf-unicode-string-manager#stripos).
+
+Examples:
 
 ``` php
-echo $utf->strpos($stack, $needle, $ofs, $case); // displays '@TODO' 
+$utf->strpos('Góa ē-tàng Chia̍h Po-lê', 'Góa' );     // returns 0
+$utf->strpos('Góa ē-tàng Chia̍h Po-lê', 'Góa', 4 );  // returns FALSE
+$utf->strpos('Góa ē-tàng Chia̍h Po-lê', 'chia̍h', 0 );       // returns FALSE  (case-sensitive)
+$utf->strpos('Góa ē-tàng Chia̍h Po-lê', 'chia̍h', 0, TRUE ); // returns 11     (case-insensitive)
 ```
 
 ### strripos
 
-**Finds position of last occurrence of a string (case-insensitive)**
+**Finds position of last occurrence of a string, case-insensitive**
 
 ``` php
-int|FALSE strripos ( string $stack, string $needle [ , int $ofs = 0 ] ) 
+int|FALSE strripos ( string $stack, string $needle [, int $ofs = 0 ] ) 
 ```
 
-This function allows you to finds the position of the last occurrence of a string (case-insensitive)
+This function returns the position of the last occurrence of the `$needle` string in the `$stack` string. Case-insensitive search. Returns `FALSE` if `$needle` not found.
 
-Example:
+If `$ofs` is specified, search will start this number of characters counted from the beginning of the string. If the value is negative, search will instead start from that many characters from the end of the string, searching backwards.
+
+Examples:
 
 ``` php
-echo $utf->strripos($stack, $needle, $ofs); // displays '@TODO' 
+$utf->strripos('Mayia Kata-chà Góa Chàyia̍h Lêh-Pok', 'CHÀ' );     // returns 19
+$utf->strripos('Mayia Kata-chà Góa Chàyia̍h Lêh-Pok', 'CHÀ', 20 ); // returns FALSE
 ```
 
 ### strrpos
@@ -94,31 +104,40 @@ echo $utf->strripos($stack, $needle, $ofs); // displays '@TODO'
 **Find position of last occurrence of a string**
 
 ``` php
-int|FALSE strrpos ( string $stack, string $needle [ , int $ofs = 0, bool $case = FALSE ] ] ) 
+int|FALSE strrpos ( string $stack, string $needle [, int $ofs = 0 [, bool $case = FALSE ]] ) 
 ```
 
-This function allows you to find the position of the last occurrence of a string
+This function returns the position of the last occurrence of the `$needle` string in the `$stack` string. Returns `FALSE` if `$needle`  not found.
 
-Example:
+If `$ofs` is specified, search will start this number of characters counted from the beginning of the string. If the value is negative, search will instead start from that many characters from the end of the string, searching backwards.
+
+If `$case` is set to `TRUE`, the search is case-insensitive and the function behaves like [`strripos()`](utf-unicode-string-manager#strripos).
+
+Examples:
 
 ``` php
-echo $utf->strrpos($stack, $needle, $ofs, $case); // displays '@TODO' 
+$utf->strrpos('Можам да јадам стакло', 'да');          // returns 11
+$utf->strrpos('Можам да јадам стакло', 'ДА' );         // returns FALSE  (uppercase)
+$utf->strrpos('Можам да јадам стакло', 'ДА', 0, TRUE); // returns 11     (case-insensitive)
 ```
 
 ### stristr
 
-**Returns part of haystack string from the first occurrence of the needle to the end of haystack (case-insensitive)**
+**Returns part of haystack string from the first occurrence of the needle to the end of haystack, case-insensitive**
 
 ``` php
-string|FALSE stristr ( string $stack, string $needle [ , bool $before = FALSE ] ) 
+string|FALSE stristr ( string $stack, string $needle [, bool $before = FALSE ] ) 
 ```
 
-This function allows you to returns part of haystack string from the first occurrence of the needle to the end of the haystack (case-insensitive)
+This function returns part of `$stack` string starting from and including the first occurrence of `$needle` to the end of `$stack`. Case-insensitive. Returns `FALSE` if `$needle` not found.
 
-Example:
+If `$before` is set to `TRUE`, stristr() returns the part of the `$stack` before the first occurrence of the `$needle` (excluding the needle).
+
+Examples:
 
 ``` php
-echo $utf->stristr($stack, $needle, $before); // displays '@TODO' 
+$utf->stristr('Mayia Góa Chàyia̍h Lêh-Pok', 'CHÀYIA̍H' );   // returns 'Chàyia̍h Lêh-Pok'
+$utf->stristr('Mayia Góa Chàyia̍h Lêh-Pok', 'GóA', TRUE ); // returns 'Mayia '
 ```
 
 ### strstr
@@ -126,15 +145,21 @@ echo $utf->stristr($stack, $needle, $before); // displays '@TODO'
 **Returns part of haystack string from the first occurrence of the needle to the end of the haystack**
 
 ``` php
-string|FALSE strstr ( string $stack, string $needle [ , bool $before = FALSE, bool $case = FALSE ] ] ) 
+string|FALSE strstr ( string $stack, string $needle [, bool $before = FALSE [, bool $case = FALSE ]] ) 
 ```
+This function returns part of `$stack` string starting from and including the first occurrence of `$needle` to the end of `$stack`. Returns `FALSE` if `$needle` not found.
 
-This function allows you to returns part of haystack string from the first occurrence of needle to the end of haystack (case-sensitive)
+If `$before` is set to `TRUE`, strstr() returns the part of the `$stack` before the first occurrence of the `$needle` (excluding the needle).
+
+If `$case` is set to `TRUE`, the search is case-insensitive and the function behaves like [`stristr()`](utf-unicode-string-manager#stristr).
 
 Example:
 
 ``` php
-echo $utf->strstr($stack, $needle, $before, $case); // displays '@TODO' 
+$email  = 'Mïchaño@example.com';
+$domain = $utf->strstr($email, '@');  // returns '@example.com'
+
+$user   = $utf->strstr($email, '@', TRUE);  // returns 'Mïchaño'
 ```
 
 ### substr
@@ -142,15 +167,19 @@ echo $utf->strstr($stack, $needle, $before, $case); // displays '@TODO'
 **Return part of a string**
 
 ``` php
-string|FALSE substr ( string $str, int $start [ , int $len = 0 ] ) 
+string|FALSE substr ( string $str, int $start [, int $length = 0 ] ) 
 ```
 
-This function allows you to return part of a string
+This function returns the portion of string `$str` specified by the `$start` and `$length` parameters. If `$length` is omitted, the substring starting from `$start` until the end of the string will be returned.
 
-Example:
+If `$start` is negative, the returned string will `$start` at the start'th character from the end of string `$str`.
+If string `$str` is less than or equal to `$start` characters long, `FALSE` will be returned.
+
+Examples:
 
 ``` php
-echo $utf->substr($str, $start, $len); // displays '@TODO' 
+$utf->substr('El pingüino Wenceslao hizo kilómetros',  3,8); // returns 'pingüino'
+$utf->substr('El pingüino Wenceslao hizo kilómetros',-10,4); // returns 'kiló'
 ```
 
 ### substr_count
@@ -161,12 +190,15 @@ echo $utf->substr($str, $start, $len); // displays '@TODO'
 int substr_count ( string $stack, string $needle ) 
 ```
 
-This function allows you to retrieve the number of occurrences of a given substring
+This function counts and returns the number of times the `$needle` substring occurs in the `$stack` string. Note that `$needle` is case sensitive.
 
-Example:
+Examples:
 
 ``` php
-echo $utf->substr_count($stack, $needle); // displays '@TODO' 
+$utf->substr_count('This is an example as it is', 'is'); // returns 3
+$utf->substr_count(implode(array('This','example','as','it')), 'is'); // returns 1 ! PHP BUG !
+$arr = array('This','example','as','it');
+$utf->substr_count(implode($arr,'is'), 'is'); // returns 4
 ```
 
 ### ltrim
@@ -177,12 +209,13 @@ echo $utf->substr_count($stack, $needle); // displays '@TODO'
 string ltrim ( string $str ) 
 ```
 
-This function allows you to strip the whitespaces from the beginning of a string
+This function strips whitespaces and other characters (according to the regexp `/[\pZ\pC]+/u`) from the beginning of a given string. 
 
-Example:
+Examples:
 
 ``` php
-echo $utf->ltrim($str); // displays '@TODO' 
+$utf->ltrim("\xe2\x80\x83\x20  WhatAMana!\xc2\xa0\xe1\x9a\x80"); // returns "WhatAMana!\xc2\xa0\xe1\x9a\x80"
+$utf->ltrim('   invisible leading spaces...   '); // returns 'invisible leading spaces...   '
 ```
 
 ### rtrim
@@ -193,12 +226,13 @@ echo $utf->ltrim($str); // displays '@TODO'
 string rtrim ( string $str ) 
 ```
 
-This function allows you to strip the whitespaces from the end of a string
+This function strips whitespaces and other characters (according to the regexp `/[\pZ\pC]+$/u`) from the end of a given string.
 
-Example:
+Examples:
 
 ``` php
-echo $utf->rtrim($str); // displays '@TODO' 
+$utf->rtrim("\xe2\x80\x83\x20  WhatAMana!   \xc2\xa0\xe1\x9a\x80"); // returns "\xe2\x80\x83\x20  WhatAMana!"
+$utf->rtrim('   invisible trailing spaces...      '); // returns '   invisible trailing spaces...'
 ```
 
 ### trim
@@ -209,12 +243,13 @@ echo $utf->rtrim($str); // displays '@TODO'
 string trim ( string $str ) 
 ```
 
-This function allows you to strip the whitespaces from the beginning and from the end of a string
+This function strips whitespaces and other characters (according to the regexp `/^[\pZ\pC]+|[\pZ\pC]+$/u`) from the beginning and end of a given string.
 
-Example:
+Examples:
 
 ``` php
-echo $utf->trim($str); // displays '@TODO' 
+$utf->trim("\xe2\x80\x83\x20  WhatAMana!  \xc2\xa0\xe1\x9a\x80"); // returns "WhatAMana!"
+$utf->trim('   invisible spaces...      '); // returns 'invisible spaces...'
 ```
 
 ### bom
