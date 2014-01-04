@@ -113,17 +113,19 @@ $smtp->attach( './pictures/'.$screenshot ); // you can attach as many attachment
 **Transmit message**
 
 ``` php
-bool send ( string $message ) 
+bool send ( string $message [, bool $log = TRUE ] )
 ```
 
 This function allows you to transmit a message. `send` opens a socket connection using the settings provided when instanciating the class. (see [__construct](smtp#&#95;&#95;construct) below for details). 
 
 The `'From'`, `'To'` & `'Subject'` headers are mandatory, and the `$message` as well; otherwise an `user_error` is raised. 
 
-Returns `TRUE` on success or `FALSE` when 
+The `$log` flag is a toggle switch for suppressing or enabling the log of the client-server conversation history you can retrieve with the [log() method](smtp#log). 
 
-+ Failed to establish a socket connection with the host. 
-+ SSL is unavailable on the server while the SMTP object has been instanciated with `$scheme` == 'ssl'. 
+Returns `TRUE` on success or `FALSE` when:
+
++ Failed to establish a socket connection with the host.
++ SSL is unavailable on the server while the SMTP object has been instanciated with `$scheme` == 'ssl'.
 
 Example:
 
@@ -136,7 +138,7 @@ $smtp->send($message); // returns TRUE or FALSE
 **Return client-server conversation history**
 
 ``` php
-string log (  ) 
+string log ( )
 ```
 
 This function allows you to retrieve the client-server conversation history under the form of a command-reply log.
