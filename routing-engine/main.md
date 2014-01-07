@@ -56,11 +56,7 @@ callback function retrieves the value of a framework variable. You can certainly
 method in your code as part of the presentation or business logic. But we'll discuss that in
 greater detail later.
 
-Notice that Fat-Free understands array dot-notation. You can certainly use `@PARAMS['count']`
-regular notation, which is prone to typo errors and unbalanced braces. The framework also
-permits `@PARAMS.count` which is somehow similar to Javascript. This feature is limited to
-arrays in F3 templates. Take note that `@foo.@bar` is a string concatenation,
-whereas `@foo.bar` translates to `@foo['bar']`.
+Notice that Fat-Free understands array dot-notation. You can use `PARAMS['count']` regular notation instead in code, which is prone to typo errors and unbalanced braces. In views and templates, the framework permits `@PARAMS.count` notation which is somewhat similar to Javascript. (We'll cover views and templates later.)
 
 Here's another way to access tokens in a request pattern:
 
@@ -178,7 +174,7 @@ drive. A typical configuration is:
 ``` apache
 DocumentRoot "/var/www/html"
 <Directory "/var/www/html">
-    Options -Indexes FollowSymLinks Includes
+    Options -Indexes +FollowSymLinks +Includes
     AllowOverride All
     Order allow,deny
     Allow from All
@@ -194,7 +190,7 @@ NameVirtualHost *
     ServerName site1.com
     DocumentRoot "/var/www/site1"
     <Directory "/var/www/site1">
-        Options -Indexes FollowSymLinks Includes
+        Options -Indexes +FollowSymLinks +Includes
         AllowOverride All
         Order allow,deny
         Allow from All
@@ -204,7 +200,7 @@ NameVirtualHost *
     ServerName site2.com
     DocumentRoot "/var/www/site2"
     <Directory "/var/www/site2">
-        Options -Indexes FollowSymLinks Includes
+        Options -Indexes +FollowSymLinks +Includes
         AllowOverride All
         Order allow,deny
         Allow from All
