@@ -79,7 +79,7 @@ If you need a PHP 5.3+ hosting service provider, try one of these services:
 Time to start writing our first application:-
 
 ```php
-$f3=require('path/to/base.php');
+$f3 = require('path/to/base.php');
 $f3->route('GET /',
     function() {
         echo 'Hello, world!';
@@ -117,3 +117,5 @@ we issue the `$f3->run()` command.
 **Can't Get the Example Running?** If you're having trouble getting this simple program to run
 on your server, you may have to tweak your Web server settings a bit. Take a look at the
 [sample Apache configuration](routing-engine#sample-apache-configuration) in the following section (along with the Nginx and Lighttpd equivalents).
+
+**Still having trouble?** Make sure the `$f3 = require('path/to/base.php');` assignment comes before any output in your script. `base.php` modifies the HTTP headers, so any character that is output to the browser before this assignment will cause errors.
