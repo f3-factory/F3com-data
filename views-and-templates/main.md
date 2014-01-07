@@ -101,6 +101,8 @@ F3 allows you to embed expressions in templates. These expressions may take on v
 {{ @obj->property }}
 ```
 
+**An additional note about array expressions:** Take note that `@foo.@bar` is a string concatenation (`$foo.$bar`), whereas `@foo.bar` translates to `$foo['bar']`. If `$foo[$bar]` is what you intended, use the `@foo[@bar]` regular notation.
+
 Framework variables may also contain anonymous functions:
 
 ```php
