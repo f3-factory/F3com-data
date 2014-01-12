@@ -1077,6 +1077,17 @@ $f3->route(
 );
 ```
 
+##### Named Routes
+
+Since `F3 v3.2.0` you may also assign a name to your routes. Therefore follow this pattern:
+
+```php
+$f3->route('GET @beer_list: /beer', 'Beer->list');
+```
+
+Names are inserted after the route VERB and preceded by an @ symbol. All named route can be accessed by the [ALIASES](quick-reference#aliases) for further processing in templates or for rerouting.
+Check out the User Guide about [creating named routes](routing-engine#named-routes) for additional information.
+
 #### Route Handler
 
 Can be a callable class method like 'Foo->bar' or 'Foo::bar', a function name, or an anonymous function.
@@ -1120,7 +1131,7 @@ Examples of usage:
 ```php
 // an old page is moved permanently
 $f3->route('GET|HEAD /obsoletepage', function($f3) {
-        $f3->reroute('/newpage', true);
+    $f3->reroute('/newpage', true);
 });
 
 // whereas a Post/Redirect/Get pattern would just redirect temporarily
@@ -1134,7 +1145,19 @@ $f3->route('POST /login', function($f3) {
 
 // we can also reroute to external URLs
 $f3->route('GET /partners', function($f3) {
-        $f3->reroute('http://externaldomain.com');
+    $f3->reroute('http://externaldomain.com');
+});
+
+// it's also possible to reroute to named routes
+$f3->route('GET @beer_list: /beer', 'Beer->list');
+$f3->route('GET /old-beer-page', function($f3) {
+    $f3->reroute('@beer_list');
+});
+
+// even with dynamic parameter in your named route
+$f3->route('GET @beer_list: /beer/@country/@village', 'Beer->byvillage');
+$f3->route('GET /old-beer-page', function($f3) {
+    $f3->reroute('@beer_list(@country=Germany,@village=Rhine)');
 });
 ```
 

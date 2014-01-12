@@ -15,6 +15,12 @@ A string containing the auto-detected HTTP user agent, e.g. `'Mozilla/5.0 (Linux
 `TRUE` if an XML HTTP request is detected, `FALSE` otherwise. Default value: Result of the expression `$headers['X-Requested-With']=='XMLHttpRequest'`
 
 
+### ALIASES
+**Type:** `array`
+
+This array contains all [named routes](routing-engine#named-routes) which can be used to render the appropriate link urls in your templates.
+
+
 ### AUTOLOAD
 **Type:** `string` &nbsp; &nbsp; **Default:** `'./'`
 
