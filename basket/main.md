@@ -94,13 +94,16 @@ $basket->clear('cherry');
 
 ### find
 
-**Return items that match key/value pair**
+**Return items that match key/value pair or all items when no key/value pair is specified**
 
 ```php
-array|FALSE find ( string $key, mixed $val ) 
+array|FALSE find ( [ string $key = NULL , mixed $val = NULL ] ) 
 ```
 
 This function allows you to find items that match key/value pair. It returns an array of basket mapper objects. 
+
+If no key/value pair is specified, returns all the items of the basket.
+It gives you the ability to loop through the entire basket.
 
 Example:
 
@@ -120,6 +123,37 @@ $result = $basket->find('name','cherry');
 
 echo $result[0]->get('amount'); // displays '5' (int)
 echo $result[0]->get('name'); // displays 'cherry'
+
+$result = $basket->find();  // array of basket items, if any
+
+// results, e.g.:
+array(2) {
+  [0]=>
+  object(Basket)#7 (3) {
+    ["key":protected]=>
+    string(5) "sunny"
+    ["id":protected]=>
+    string(23) "52db5405a64047.97371123"
+    ["item":protected]=>
+    array(2) {
+      ["name"]   =>		string(6) "cherry"
+      ["amount"] =>		int(5)
+    }
+  }
+  [1]=>
+  object(Basket)#8 (3) {
+    ["key":protected]=>
+    string(5) "sunny"
+    ["id":protected]=>
+    string(23) "52db5405a64143.07049859"
+    ["item":protected]=>
+    array(2) {
+      ["name"]   =>		string(5) "peach"
+      ["amount"] =>		int(10)
+    }
+  }
+}
+
 
 ```
 
