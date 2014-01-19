@@ -42,7 +42,15 @@ HTTP request body for ReSTful post-processing. Contains the `php://input` stream
 ### CACHE
 **Type:** `bool|string` &nbsp; &nbsp; **Default:** `FALSE`
 
-Cache backend. When set to `TRUE`, and unless you assign a configuration value like `'memcache=localhost'` (and the [PHP memcache module](http://www.php.net/manual/en/intro.memcache.php "Information on the Memcache module") is available), F3 auto-detects the presence of APC, WinCache and XCache and then uses the first available PHP module. If none of these PHP modules is available, a filesystem-based backend is used (default directory: `tmp/cache`). The framework doesn't use any cache engine when a `FALSE` value is assigned.
+Cache backend. F3 can handle Memcache module, APC, WinCache, XCache and a filesystem-based cache.
+
+To use the Memcache module, a configuration string is required, e.g. `$f3->set('CACHE','memcache=localhost')` (port 11211 by default) or `$f3->set('CACHE','memcache=192.168.72.72:11212')`.
+
+When set to `TRUE`, or when the connection with the specified memcache served above failed, F3 will auto-detect, in that order, the presence of APC, WinCache, XCache and use the first available of these PHP module.
+
+If none of these shared memory engine has been detected or is available, a filesystem-based backend is used as a fallback (default directory: `tmp/cache` or you can specify a folder outside the scope of the website, e.g. `$f3->set('CACHE','folder=/var/tmp/f3filescache')`.
+
+The framework doesn't use any cache engine when a `FALSE` value is specified.
 
 
 ### CASELESS
@@ -178,7 +186,8 @@ You can refer to [session_set_cookie_params() in the PHP Manual](http://www.php.
 **Type:** `string` &nbsp; &nbsp; **Default:** auto-detected
 
 Current active language(s). Value is used to load the appropriate language(s) translation file(s) in the folder pointed to by `LOCALES`. Default: auto-detected from the HTTP `Accept-Language` request header, e.g. `'en-US,en,es'`.
-If set to `NULL`, language is auto-detected from the HTTP `Accept-Language` request header.
+
+See the [Localisation section](base#language) in `Base` for more details and an example.
 
 ### LOCALES
 **Type:** `string` &nbsp; &nbsp; **Default:** `'./'`
