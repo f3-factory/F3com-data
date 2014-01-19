@@ -906,14 +906,16 @@ string language ( string $code )
 ```
 
 This function is used while booting the framework to auto-detect the possible user language, by looking at the HTTP request headers, specifically the Accept-Language header sent by the browser.
-Use the [LANGUAGE](quick-reference#language "Definition and usage of the LANGUAGE system variable") system variable to get and set languages, since it also handles some dependencies like changing dictionary files.
+
+Use the [LANGUAGE](quick-reference#language "Definition and usage of the LANGUAGE system variable") system variable to get and set languages, since it also handles dependencies like setting the locales using [php setlocale(LC_ALL,...)](http://php.net/manual/en/function.setlocale.php) and changing dictionary files.
 The  [FALLBACK](quick-reference#fallback "Definition and usage of the FALLBACK system variable") system variable defines a default language, that will be used, if none of the detected languages are available as a dictionary file.
 
 Example:
 
 ```php
-$f3->get('LANGUAGE'); // 'de_DE,de,en_US,en'
-$f3->set('LANGUAGE', 'en_UK,en_US,en');
+$f3->get('LANGUAGE'); // 'de-DE,de,en-US,en'
+$f3->set('LANGUAGE', 'es-BR,es');
+$f3->get('LANGUAGE'); // 'es-BR,es,en' the fallback language is added at the end of the list
 ```
 
 ### lexicon
@@ -1060,7 +1062,7 @@ Any further wildcards can only contain exactly one part between the slashes (`/`
 
 ##### Groups
 
-Since `F3 v3.0.7` it is possible to assign multiple routes to the same route handler, using an array of routes in `$pattern`. It would look like this:
+It's possible to assign multiple routes to the same route handler, using an array of routes in `$pattern`. It would look like this:
 
 ```php
 $f3->route(
@@ -1155,9 +1157,9 @@ $f3->route('GET /old-beer-page', function($f3) {
 });
 
 // even with dynamic parameter in your named route
-$f3->route('GET @beer_list: /beer/@country/@village', 'Beer->byvillage');
+$f3->route('GET @beer_producers: /beer/@country/@village', 'Beer->byproducer');
 $f3->route('GET /old-beer-page', function($f3) {
-    $f3->reroute('@beer_list(@country=Germany,@village=Rhine)');
+    $f3->reroute('@beer_producers(@country=Germany,@village=Rhine)');
 });
 ```
 
