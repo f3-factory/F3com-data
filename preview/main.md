@@ -20,8 +20,8 @@ Lets have a look at a simple example:
     <h1>My favorite books</h1>
     <ul>
         {~ foreach (@books as @id=>@book): ~}
-        <li>{~ if (@book.starred): ~}<i class="icon-star"></i>{~ else: ~}<i class="icon-normal">{~ endif ~}
-            <a href="{{ @BASE.@book[slug] }}">{{ @book.title }}</a>
+        <li>{~ if (@book.starred): ~}<i class="icon-star"></i>{~ else: ~}<i class="icon-normal"></i>{~ endif ~}
+            <a href="{{ @book['slug'] }}">{{ @book.title }}</a>
         </li>
         {~ endforeach ~}
     </ul>
