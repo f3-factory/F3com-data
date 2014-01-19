@@ -1209,6 +1209,8 @@ $f3->run();
 After processing the incoming request URI, the routing pattern that matches that URI is saved in the `PATTERN` var, the current HTTP request URI in the `URI` var and the request method in the `VERB` var.
 The `PARAMS` var will contains all tokens as named keys, and additionally all tokens and wildcards as numeric keys, depending on their order of appearance.
 
+Generate a 404 error when a tokenized class doesn't exist.
+
 <div class="alert alert-info">
 	<p><b>Notice:</b> If a static and dynamic route pattern both match the current URI, then the <em>static</em> route pattern has priority.</p>
 </div>
