@@ -75,18 +75,13 @@ die(xmlrpc_encode_request(NULL,$source,$options));
 On error, this function will `die` returning the XML response consisting of one of the following error code as follow:
 
 ```php
-// No link to local page
-die(xmlrpc_encode_request(NULL,0x11,$options));
+die(xmlrpc_encode_request(NULL,0x11,$options));  // No link to local page found in request body
 
-// Source failure
-die(xmlrpc_encode_request(NULL,0x10,$options));
+die(xmlrpc_encode_request(NULL,0x10,$options));  // Source failure: web request failed or received doc malformed
 
-// Doesn't exist (or not pingback-enabled)
-die(xmlrpc_encode_request(NULL,0x21,$options));
+die(xmlrpc_encode_request(NULL,0x21,$options));  // Local page doesn't exist or is not pingback-enabled
 
-// Access denied
-die(xmlrpc_encode_request(NULL,0x31,$options));
-<?xml version="1.0" encoding="UTF-8"?>
+die(xmlrpc_encode_request(NULL,0x31,$options));  // Access denied: request method is not 'pingback.ping' or request malformed
 ```
 
 Now, let's setup a basic example of a XML-RPC ping handler:
@@ -106,7 +101,7 @@ function pingCallBackHandler($sourceURL, $reqBody) {
 // a route as an example, e.g.
 $f3->route('GET /listener','PingListener');
 
-// the function bind to the listener:
+// the function to bind to the listener:
 function PingListener($f3, $params) {
 
 	$pingback = new \Web\Pingback;
@@ -136,7 +131,7 @@ echo $pingback->log();
 Mon, 06 Jan 2014 10:23:00 +0100 /comments-feed?page=pingback/cf [permalink:/pingback]
    /pingback2?page=pingback/client
 
-Sat, 06 Jan 2014 10:23:01 +0100 /rss2-feed?page=pingback/rss2 [permalink:/rss2-ping]
+Mon, 06 Jan 2014 10:23:01 +0100 /rss2-feed?page=pingback/rss2 [permalink:/rss2-ping]
   
  /pingback2?page=rss2-ping/client
  ```
@@ -169,6 +164,5 @@ protected bool enabled ( $url )
 
 This function returns TRUE if the given URL points to a pingback-enabled resource. 
 
-This is a _protected_ function used internally by `inspect()` and `listen()` to make use a given URL points to a pingback-enabled resource, i.e. it looks for a valid pingback header and scan the page to make sure it contains pingback link tag(s).
-
+This is a _protected_ function used internally by `inspect()` and `listen()` to make sure a given URL points to a pingback-enabled resource, i.e. it looks for a valid pingback header and scan the page to make sure it contains pingback link tag(s).
 
