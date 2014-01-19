@@ -592,7 +592,7 @@ Array
 **Convert PHP expression/value to compressed exportable string**
 
 ```php
-string stringify ( mixed $arg [, $detail = TRUE ] )
+string stringify ( mixed $arg )
 ```
 
 This function allows you to convert any PHP expression, value, array or any object to a compressed and exportable string.
