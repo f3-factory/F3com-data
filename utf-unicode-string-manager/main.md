@@ -80,47 +80,6 @@ $utf->strpos('Góa ē-tàng Chia̍h Po-lê', 'chia̍h', 0 );       // returns FA
 $utf->strpos('Góa ē-tàng Chia̍h Po-lê', 'chia̍h', 0, TRUE ); // returns 11     (case-insensitive)
 ```
 
-### strripos
-
-**Finds position of last occurrence of a string, case-insensitive**
-
-``` php
-int|FALSE strripos ( string $stack, string $needle [, int $ofs = 0 ] ) 
-```
-
-This function returns the position of the last occurrence of the `$needle` string in the `$stack` string. Case-insensitive search. Returns `FALSE` if `$needle` not found.
-
-If `$ofs` is specified, search will start this number of characters counted from the beginning of the string. If the value is negative, search will instead start from that many characters from the end of the string, searching backwards.
-
-Examples:
-
-``` php
-$utf->strripos('Mayia Kata-chà Góa Chàyia̍h Lêh-Pok', 'CHÀ' );     // returns 19
-$utf->strripos('Mayia Kata-chà Góa Chàyia̍h Lêh-Pok', 'CHÀ', 20 ); // returns FALSE
-```
-
-### strrpos
-
-**Find position of last occurrence of a string**
-
-``` php
-int|FALSE strrpos ( string $stack, string $needle [, int $ofs = 0 [, bool $case = FALSE ]] ) 
-```
-
-This function returns the position of the last occurrence of the `$needle` string in the `$stack` string. Returns `FALSE` if `$needle`  not found.
-
-If `$ofs` is specified, search will start this number of characters counted from the beginning of the string. If the value is negative, search will instead start from that many characters from the end of the string, searching backwards.
-
-If `$case` is set to `TRUE`, the search is case-insensitive and the function behaves like [`strripos()`](utf-unicode-string-manager#strripos).
-
-Examples:
-
-``` php
-$utf->strrpos('Можам да јадам стакло', 'да');          // returns 11
-$utf->strrpos('Можам да јадам стакло', 'ДА' );         // returns FALSE  (uppercase)
-$utf->strrpos('Можам да јадам стакло', 'ДА', 0, TRUE); // returns 11     (case-insensitive)
-```
-
 ### stristr
 
 **Returns part of haystack string from the first occurrence of the needle to the end of haystack, case-insensitive**

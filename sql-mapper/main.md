@@ -309,7 +309,7 @@ This method hydrates the mapper object with elements from a framework _array_ va
 `$func` is a callback function you can apply to the hive _array_ variable. As explained in the [Databases User Guide](databases#beyond-crud), the array keys must have names identical to the mapper object properties. It allows for example to hydrate the mapper object with the fields of a POSTed form: 
 
 ```php
-$f3->get('user')->copyFrom('POST'); // F3 synch the 'POST' hive array variable with the $_POST array
+$f3->get('user')->copyfrom('POST'); // F3 synch the 'POST' hive array variable with the $_POST array
 ```
 <i class="icon-warning-sign"></i> **Danger** <i class="icon-warning-sign"></i> By default, `copyfrom` takes the whole array provided; in our example above, the whole `POST` from the &lt;form&gt;. So if somebody modifies or forges your form by adding some extra &lt;input&gt; fields in your DOM with tools like e.g. firebug, it's possible to overwrite e.g. the ID of the record, the permission role, or what ever... Pretty huge _security leak_.
 Fortunately, F3 offers you a versatile solution through a callback function you can use to apply any pre-processing on the hive _array_ variable, such as normalizing the values and/or filtering and limiting the fields to copy from. Your callback function will receive the hive _array_ variable and must similarly return an array of keys/values pairs: the fields to pass to the mapper object.
@@ -319,7 +319,7 @@ Ok, let's do it. For example, let's use a callback filter function retaining onl
 ```php
 $db = new DB\SQL('sqlite:db/ent.sqlite');
 $f3->set('user',new DB\SQL\Mapper($db,'users'));
-$f3->get('user')->copyFrom('POST',function($val) {
+$f3->get('user')->copyfrom('POST',function($val) {
 	// the 'POST' array is passed to our callback function
     return array_intersect_key($val, array_flip(array('name','age')));
 });
@@ -327,7 +327,7 @@ $f3->get('user')->save();
 });
 ```
 
-That's it! As F3 sanitizes the values, with such an extra filtering and your DB is safe from injections.
+That's it! As F3 sanitizes the values, with such an extra filtering, your DB is safe from injections.
 
 ### copyto
 **Populate hive array variable with mapper fields**

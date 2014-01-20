@@ -158,7 +158,7 @@ $user->load(array('userID=?','tarzan'));
 
 The first line instantiates a data mapper object that interacts with the `users` table in our database. Behind the scene, F3 retrieves the structure of the `users` table and determines which field(s) are defined as primary key(s). At this point, the mapper object does not contain any data yet (it is called "dry state") and the `$user` var is basically nothing more than a structured object - but it contains the methods it needs to perform the basic CRUD operations plus some extras as you will see later. Now, to retrieve a record from our `users` table with, e.g., the field `userID` containing the string value `tarzan`, we use the `load()` method. This process is called "auto-hydrating" the data mapper object.
 
-Easy, wasn't it? F3 understands that a SQL table already has a structural definition existing within the database engine itself. Unlike other frameworks, F3 requires no extra class declarations (unless you want to extend the data mappers to fit complex objects), no redundant PHP array/object property-to-field mappings (duplication of efforts), no code generators (which require code regeneration if the database structure changes), no stupid XML/YAML files to configure your models, no superfluous commands just to retrieve a single record. With F3, a simple resizing of a `varchar` field in your MySQL table does not demand a single change in your application code. Consistent with MVC and "separation of concerns", the database admin has as much control over the data and the structures as a template designer has over HTML/XML templates.
+Easy, wasn't it? F3 understands that a SQL table already has a structural definition existing within the database engine itself. Unlike other frameworks, F3 requires no extra class declarations (unless you want to extend the data mappers to fit complex objects), no redundant PHP array/object property-to-field mappings (duplication of efforts), no code generators (which require code regeneration if the database structure changes), no stupid XML/YAML files to configure your models, no superfluous commands just to retrieve a single record. With F3, a simple resizing of a `varchar` field in your MySQL table does not require a single change in your application code. Consistent with MVC and "separation of concerns", the database admin has as much control over the data and the structures as a template designer has over HTML/XML templates.
 
 If you prefer working with NoSQL databases, the similarities in query syntax are superficial. In the case of the MongoDB data mapper, the equivalent code would be:
 
@@ -519,7 +519,7 @@ class Vendor extends DB\SQL\Mapper {
         return $this->select(
             'vendorID,name,city',array('order'=>'city DESC'));
         /*
-            We could have done the the same thing with plain vanilla SQL:
+			We could have done the same thing with plain vanilla SQL:
             return $this->db->exec(
                 'SELECT vendorID,name,city FROM vendors '.
                 'ORDER BY city DESC;'

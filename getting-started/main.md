@@ -118,4 +118,4 @@ we issue the `$f3->run()` command.
 on your server, you may have to tweak your Web server settings a bit. Take a look at the
 [sample Apache configuration](routing-engine#sample-apache-configuration) in the following section (along with the Nginx and Lighttpd equivalents).
 
-**Still having trouble?** Make sure the `$f3 = require('path/to/base.php');` assignment comes before any output in your script. `base.php` modifies the HTTP headers, so any character that is output to the browser before this assignment will cause errors.
+**Still having trouble?** Make sure the `$f3 = require('path/to/base.php');` assignment comes before any output in your script. `base.php` modifies the HTTP headers, so any output that has been sent to the browser before this assignment will cause errors.

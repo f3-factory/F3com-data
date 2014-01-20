@@ -592,7 +592,7 @@ Array
 **Convert PHP expression/value to compressed exportable string**
 
 ```php
-string stringify ( mixed $arg [, $detail = TRUE ] )
+string stringify ( mixed $arg [, array $stack = NULL ] )
 ```
 
 This function allows you to convert any PHP expression, value, array or any object to a compressed and exportable string.
@@ -906,14 +906,16 @@ string language ( string $code )
 ```
 
 This function is used while booting the framework to auto-detect the possible user language, by looking at the HTTP request headers, specifically the Accept-Language header sent by the browser.
-Use the [LANGUAGE](quick-reference#language "Definition and usage of the LANGUAGE system variable") system variable to get and set languages, since it also handles some dependencies like changing dictionary files.
+
+Use the [LANGUAGE](quick-reference#language "Definition and usage of the LANGUAGE system variable") system variable to get and set languages, since it also handles dependencies like setting the locales using [php setlocale(LC_ALL,...)](http://php.net/manual/en/function.setlocale.php) and changing dictionary files.
 The  [FALLBACK](quick-reference#fallback "Definition and usage of the FALLBACK system variable") system variable defines a default language, that will be used, if none of the detected languages are available as a dictionary file.
 
 Example:
 
 ```php
-$f3->get('LANGUAGE'); // 'de_DE,de,en_US,en'
-$f3->set('LANGUAGE', 'en_UK,en_US,en');
+$f3->get('LANGUAGE'); // 'de-DE,de,en-US,en'
+$f3->set('LANGUAGE', 'es-BR,es');
+$f3->get('LANGUAGE'); // 'es-BR,es,en' the fallback language is added at the end of the list
 ```
 
 ### lexicon
@@ -1060,7 +1062,7 @@ Any further wildcards can only contain exactly one part between the slashes (`/`
 
 ##### Groups
 
-Since `F3 v3.0.7` it is possible to assign multiple routes to the same route handler, using an array of routes in `$pattern`. It would look like this:
+It's possible to assign multiple routes to the same route handler, using an array of routes in `$pattern`. It would look like this:
 
 ```php
 $f3->route(
@@ -1155,9 +1157,9 @@ $f3->route('GET /old-beer-page', function($f3) {
 });
 
 // even with dynamic parameter in your named route
-$f3->route('GET @beer_list: /beer/@country/@village', 'Beer->byvillage');
+$f3->route('GET @beer_producers: /beer/@country/@village', 'Beer->byproducer');
 $f3->route('GET /old-beer-page', function($f3) {
-    $f3->reroute('@beer_list(@country=Germany,@village=Rhine)');
+    $f3->reroute('@beer_producers(@country=Germany,@village=Rhine)');
 });
 ```
 
@@ -1206,6 +1208,8 @@ $f3->run();
 
 After processing the incoming request URI, the routing pattern that matches that URI is saved in the `PATTERN` var, the current HTTP request URI in the `URI` var and the request method in the `VERB` var.
 The `PARAMS` var will contains all tokens as named keys, and additionally all tokens and wildcards as numeric keys, depending on their order of appearance.
+
+Generate a 404 error when a tokenized class doesn't exist.
 
 <div class="alert alert-info">
 	<p><b>Notice:</b> If a static and dynamic route pattern both match the current URI, then the <em>static</em> route pattern has priority.</p>
