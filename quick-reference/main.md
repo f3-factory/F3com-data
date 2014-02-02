@@ -387,7 +387,7 @@ Get contents of `subtemplate` and insert at current position in template [ if op
 Exclude `text-block` at runtime. Used for embedding comments in templates. An Alias for this is:
 
 ```
-{{* text-block *}}
+{* text-block *}
 ```
 
 ### Ignore
