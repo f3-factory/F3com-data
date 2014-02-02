@@ -368,6 +368,11 @@ A string containing the version of the Framework.
 
     Render the expression `expr` in ICU-format and pass the comma-separated arguments, where `arg1, ..., argn` is one of: `'date'`, `'time'`, `'number, integer'`, `'number, currency'`, `'number, percent'`, or `'number, decimal'`. Have a look at the [format](base#format) method for additional usage examples. (<small>More information about [ICU formatting of Numbers, Currencies, Dates and Times](http://userguide.icu-project.org/formatparse "International Components for Unicode Formatting and Parsing")</small>).
 
+*   `{~ string expr ~}`
+
+    Evaluate expression `expr`, similar to `{{expr}}` but does not echo the result.
+
+
 ### Include
 
 ```html
