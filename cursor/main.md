@@ -183,6 +183,7 @@ the total number of records found, the specified limit `$size`, the number of su
 For example:
 
 ```php
+// page 1
 $result = $mapper->paginate(0, 3);
 /*
 array(4) {
@@ -193,11 +194,12 @@ array(4) {
 	  }
   ["total"] => int(5)
   ["limit"] => int(3)
-  ["count"] => float(3)
+  ["count"] => float(2)
   ["pos"] => int(0)
 }
 */
 
+// page 2
 $result = $mapper->paginate(1, 3);
 /*
 array(4) {
@@ -214,7 +216,7 @@ array(4) {
 
 ```
 
-The `subset` key contains an array of mapper objects returned from find(), `total` is the sum of all records for all pages, `limit` is a bypass of the given limit size, `count` is the number of records for the current page and `pos` gives you the current subset cursor position ( it's the page number - 1).
+The `subset` key contains an array of mapper objects returned from find(), `total` is the sum of all records for all pages, `limit` is a bypass of the given limit size, `count` is the number of subsets/pages available and `pos` gives you the current subset cursor position ( it's the page number - 1).
 
 ### save
 
