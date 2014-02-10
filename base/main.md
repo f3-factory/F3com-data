@@ -813,7 +813,7 @@ See [serialize](base#serialize) for further description.
 
 ## Localisation
 
-<div class="alert alert-info"><strong>Note:</strong> F3 follows ICU formatting rules without requiring the PHP's <tt>intl</tt> module.</div>
+<div class="alert alert-info"><strong>Note:</strong> F3 follows <a href="http://userguide.icu-project.org/formatparse " target="_blank">ICU formatting rules</a> <b>without</b> requiring the PHP's <tt>intl</tt> module.</div>
 
 ### format
 
