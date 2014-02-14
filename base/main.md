@@ -65,6 +65,9 @@ $f3->set('fruits',array(
 ), 3600);
 // cache objects
 $f3->set('myClass1', new myClass('arg1'), 3600);
+// change expire time for a single cookie var
+$f3->set('COOKIE.foo', 123, 3600);  // 1 hour
+$f3->set('COOKIE.bar', 456, 86400); // 1 day
 ```
 
 #### System variables
