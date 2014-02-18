@@ -89,20 +89,26 @@ And do the same with your Javascript files:
 Of course we need to set up a route to handle the necessary call to the Fat-Free CSS/Javascript compressor:
 
 ```php
-$f3->route('GET /minify/@type', // @type will make `PARAMS.type` variable base point to the correct path
+$f3->route('GET /minify/@type', 
     function($f3, $args) {
-        $f3->set('UI',$args['type'].'/'); // make sure you organize your files in sub-folders, per type
+        $f3->set('UI',$f3->get('UI').$args['type'].'/'); 
         echo Web::instance()->minify($_GET['files']);
     },
-    3600*24 // Save minified file in F3 cache for 24 hours
+    3600*24 
 );
+
+// @type will make `PARAMS.type` variable base point to the correct path
+// make sure you organize your files to be minified into sub-folders, per type, i.e. /ui/css/ /ui/js
+// minify will grab each file specified in the querystring var named 'files' and combine into 1 output
+// Save the minified file in F3 cache for 24 hours. future requests for this route will use cached version
+
 ```
 
-And that's all there is to it! `minify()` reads each file (`typo.css` and `grid.css` in our CSS example, `dialog.js` and `main.js` in our Javascript example), strips off all unnecessary whitespaces and comments, combines all of the related items as a single Web page component, and attaches a far-future expiry date so the user's Web browser can cache the data. It's important that the `PARAMS.type` variable base points to the correct path. Otherwise, the URL rewriting mechanism inside the compressor won't find the CSS/Javascript files.
+And that's all there is to it! `minify()` reads each file (`typo.css` and `grid.css` in our CSS example, `dialog.js` and `main.js` in our Javascript example), strips off all unnecessary whitespaces and comments, combines all of the related items as a single Web page component, and attaches a future expiry date so the user's Web browser will cache the data and not hit the server for every url request. It's important that the `PARAMS.type` variable base points to the correct path. Otherwise, the URL rewriting mechanism inside the compressor won't find the CSS/Javascript files.
 
 ## Client-Side Caching
 
-In our examples, the framework sends a far-future expiry date to the client's Web browser so any request for the same CSS or Javascript block will come from the user's hard drive. On the server side, F3 will check each request and see if the CSS or Javascript blocks have already been cached. The route we specified has a cache refresh period of `3600` seconds. Additionally, if the Web browser sends an `If-Modified-Since` request header and the framework sees the cache hasn't changed, F3 just sends an `HTTP 304 Not Modified` response so no content is actually delivered. Without the `If-Modified-Since` header, Fat-Free renders the output from the cached file if available. Otherwise, the relevant code is executed.
+In our examples, the framework sends a future expiry date to the client's Web browser so any request for the same CSS or Javascript file will use the cached version from the user's local computer file storage. When a file request is made to the webserver, F3 will check if the route (in this example, CSS or Javascript files) has already been cached. In the minify example above, the route we specified has a cache refresh period of `3600` seconds (1 hour) times 24, equaling 24 hours. Additionally, if the Web browser sends an `If-Modified-Since` request header and the framework sees the cache hasn't changed, F3 just sends an `HTTP 304 Not Modified` response so no bandwidth is wasted and the content loads faster. Without the `If-Modified-Since` header, Fat-Free sends the cached file if available. Otherwise, the route's code is executed with each request.
 
 Tip: If you're not modifying your Javascript/CSS files frequently (as it would be if you're using a Javascript library like jQuery, MooTools, Dojo, etc.), consider adding a cache timer to the route leading to your Javascript/CSS minify handler (3rd argument of F3::route()) so Fat-Free doesn't have to compress and combine these files each time the request is received.
 
