@@ -76,7 +76,8 @@ Note:  Zoom levels vary depending on location and not all zoom levels appear at 
 Example:
 
 ```php
-$map = new \Web\Google\StaticMap();    $map->zoom(12); // resolution of the view
+$map = new \Web\Google\StaticMap();
+$map->zoom(12); // resolution of the view
 ```
 
 ### Images sizes
@@ -88,7 +89,8 @@ Unlike others, this parameter has no default value and you **must** specify it i
 Example:
 
 ```php
-$map = new \Web\Google\StaticMap();    $map->size('640x480'); // in pixels and multiplied by scale
+$map = new \Web\Google\StaticMap();
+$map->size('640x480'); // in pixels and multiplied by scale
 ```
 ### Scale Values
 
@@ -97,7 +99,8 @@ The `scale` value is multiplied with the `size` to determine the actual output s
 Example:
 
 ```php
-$map = new \Web\Google\StaticMap();    $map->scale(2); // size multiplier
+$map = new \Web\Google\StaticMap();
+$map->scale(2); // size multiplier
 ```
 
 _Notice_: When targeting mobile devices, use the `scale` parameter to return higher-resolution map images that solve the issues of mobile devices high resolution screens (see the [Google API Scale Values documentation](https://developers.google.com/maps/documentation/staticmaps/#scale_values "Google Maps Image APIs :: Static Maps API V2 Developer Guide") for more details).
@@ -167,22 +170,28 @@ There are a couple of drawbacks with this solution: you need to write a file to 
 Let's setup now an asynchronous solution. We need first to define a route for F3 to handle the request. Thus, the page can continue to be rendered while the browser send, in parallel, a request to this new route:
 
 ```php
-$f3->route('GET /static-map/@mapargs',
-	function($f3, $args) {
+$f3->route('GET /static-map/@mapargs', function($f3, $args) {
 
 	parse_str($args['mapargs']); // gets variables from the query string
 
 	$map = new \Web\Google\StaticMap();
 
 	$map->center(isset($center)?$center:'Center of the World');
-	$map->maptype(isset($maptype)?$maptype:'satellite'); // override default maptype 'roadmap'
-	$map->format(isset($format)?$format:'jpg');          // override default format 'png'
-	$map->size(isset($size)?$size:'320x200');            // size is mandatory! no default value. set default size '320x200'
-	$map->zoom(isset($zoom)?$zoom:'14');                 // override default zoom '12'
-	$map->scale(isset($scale)?$scale:'2');               // override default scale '1'
-	$map->sensor(isset($sensor)?$sensor:'false');        // sensor is mandatory! no default value. set sensor to 'false'
-
-	echo $map->dump(); // send raw image map to browser
+	// override default maptype 'roadmap'
+	$map->maptype(isset($maptype)?$maptype:'satellite'); 
+	// override default format 'png'
+	$map->format(isset($format)?$format:'jpg');  
+	// size is mandatory! no default value. set default size '320x200'
+	$map->size(isset($size)?$size:'320x200');            
+	// override default zoom '12'
+	$map->zoom(isset($zoom)?$zoom:'14');                 
+	// override default scale '1'
+	$map->scale(isset($scale)?$scale:'2');               
+	// sensor is mandatory! no default value. set sensor to 'false'
+	$map->sensor(isset($sensor)?$sensor:'false');        
+	
+	// send raw image map to browser
+	echo $map->dump(); 
 	},
 	3600*24*30 // Save result of the request in F3 cache for 30 days
 );
