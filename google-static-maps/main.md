@@ -17,7 +17,7 @@ To specify these locations, you can use either the `center` parameter and/or pla
 
 As stated above, with both the `center` parameter and the `markers` parameter, you can use either Addresses or Latitudes and Longitudes to identify the location as shown in the examples below.
 
-#### The `center` parameter
+#### The **center** parameter
 
 `center` defines the center of the map, equidistant from all edges of the map. This parameter takes a location as either a comma-separated {latitude,longitude} pair (e.g. "24.582720, -78.056685") or a string address (e.g. "Turks and Caicos Islands") identifying a unique location on the face of the earth
 
@@ -37,7 +37,7 @@ $map->center("D'Arblay Street, London"); // F3 will escape spaces, quotes, and s
 $map->center('35.360496,138.727798'); // for example retrieved from a DB
 ```
 
-#### The `markers` parameter
+#### The **markers** parameter
 
 The `markers` parameter defines a set of one or more markers at a set of locations. Each marker descriptor must contain a set of one or more locations defining where to place the marker on the map. These locations are separated using the pipe character (|).
 
