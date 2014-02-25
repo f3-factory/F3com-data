@@ -264,6 +264,7 @@ The Fat-Free Framework is community-driven software. It can't be what it is toda
 * Christian Knuth
 * Sascha Ohms
 * Jermaine Maree
+* Lars Brandi Jensen
 * Sergey Zaretsky
 * Daniel Kloke
 * Brian Nelson
@@ -322,13 +323,12 @@ The Fat-Free Framework is community-driven software. It can't be what it is toda
 * Philipp Hirsch
 * Aurélien Botermans
 * Christian Treptow
-* Кубарев Дмитрий
+* Кубарев Дмитрий (Dmitry Kubarev)
 * Alexandru Catalin Trandafir
 * Leigh Harrison
-* Дмитриев Иван
+* Дмитриев Иван (Ivan Dmitriev)
 * IT_GAP
 * Sergeev Andrey
-* Lars Brandi Jensen
 * Steven J Mixon
 * Roland Fath
 * Justin Parker
@@ -337,5 +337,8 @@ The Fat-Free Framework is community-driven software. It can't be what it is toda
 * Ryan McKillop
 * Chris Clarke
 * Ngan Ting On
+* Eli Argon
+* Seregin Andrew
+* Marek Toman
 
 Special thanks to the selfless others who expressed their desire to remain anonymous, yet share their time, contribute code, send donations, promote the framework to a wider audience, as well as provide encouragement and regular financial assistance. Their generosity is F3's prime motivation.
