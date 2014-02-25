@@ -42,7 +42,7 @@ $f3->set('SESSION.test',123);
 echo $f3->get('SESSION.test');
 ```
 
-It will automatically create the required table, if the `session` table does not exist. The table name can be controlled by the 2nd `$table` parameter of the constructor.
+It will automatically create the required table, if the `session` table does not exist. The table name can be controlled by the 2nd `$table` parameter of the constructor. A 3rd parameter is used to `$force` the table creation, if it's not existing.
 
 
 ### Mongo
