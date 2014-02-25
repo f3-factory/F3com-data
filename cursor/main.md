@@ -174,7 +174,7 @@ See the [load() method](cursor#load) for details regarding the parameters.
 **Return a subset of records with additional pagination information**
 
 ```php
-array paginate ( [ int $pos = 0 [, int $size = 10 [, string|array $filter = NULL [, array $options = NULL ]]]] )
+array paginate ( [ int $pos = 0 [, int $size = 10 [, string|array $filter = NULL [, array $options = NULL [, int $ttl = 0]]]]] )
 ```
 
 This method returns an array containing a subset of records that are matching the `$filter` criterias,
