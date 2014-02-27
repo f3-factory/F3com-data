@@ -36,7 +36,7 @@ Example:
 
 ``` php
 echo $smtp->set('Errors-to', '<bluehole@fatfreeframework.com>');
-echo $smtp->set('Sender', '<smtp-plug-in@fatfreeframework.com');
+echo $smtp->set('To', '"Contact Name" <smtp-plug-in@fatfreeframework.com>');
 echo $smtp->set('Subject', 'Sent with the F3 SMTP plug-in');
 ```
 
