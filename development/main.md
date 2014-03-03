@@ -79,6 +79,12 @@ See what other users have made with F3:
             <td><a class="btn btn-info" href="https://github.com/vijinho/f3-boilerplate" target="_blank">view</a></td>
         </tr>
         <tr>
+            <td>fabulog</td>
+            <td>a little example MVC blog with backend</td>
+            <td><a href="https://github.com/ikkez" target="_blank">ikkez</a></td>
+            <td><a class="btn btn-info" href="https://github.com/ikkez/fabulog" target="_blank">view</a></td>
+        </tr>
+        <tr>
             <td>fatfree-blog</td>
             <td>A simple blog demo, build with fatfree framework version 3+</td>
             <td><a href="https://github.com/blo4r" target="_blank">blo4r</a></td>
@@ -145,6 +151,12 @@ See what other users have made with F3:
         <tr>
     </thead>
     <tbody>
+        <tr>
+            <td>Cortex</td>
+            <td>A general purpose ORM with support for relations and more</td>
+            <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
+            <td><a class="btn btn-info" href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Cortex" target="_blank">view</a></td>
+        </tr>
         <tr>
             <td>Currency</td>
             <td>A currency rates converter, supports +90 currencies and Bitcoin</td>
