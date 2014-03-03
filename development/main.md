@@ -153,7 +153,7 @@ See what other users have made with F3:
     <tbody>
         <tr>
             <td>Burgers</td>
-            <td>Burgers make the Fat-Free Framework fat. Includes ORM/Validation, User/Groups/ALC, Forms</td>
+            <td>Burgers make the Fat-Free Framework fat. Includes ORM/Validation, User/Groups/ACL, Forms</td>
             <td><a href="https://github.com/hanspolo" target="_blank">Philipp Hirsch</a></td>
             <td><a class="btn btn-info" href="https://github.com/hanspolo/burgers" target="_blank">view</a></td>
         </tr>
