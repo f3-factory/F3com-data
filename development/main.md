@@ -152,6 +152,12 @@ See what other users have made with F3:
     </thead>
     <tbody>
         <tr>
+            <td>Burgers</td>
+            <td>Burgers make the Fat-Free Framework fat. Includes ORM/Validation, User/Groups/ALC, Forms</td>
+            <td><a href="https://github.com/hanspolo" target="_blank">Philipp Hirsch</a></td>
+            <td><a class="btn btn-info" href="https://github.com/hanspolo/burgers" target="_blank">view</a></td>
+        </tr>
+        <tr>
             <td>Cortex</td>
             <td>A general purpose ORM with support for relations and more</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
