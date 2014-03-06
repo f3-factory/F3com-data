@@ -530,15 +530,15 @@ Array
 array merge ( string $key, array $src )
 ```
 
-Return the resulting array of the merge.
+Return the resulting array of the merge. (Does not touch the value of the hive key)
 
 Example:
 
 ``` php
 $f3->set('foo', array('blue','green'));
-$f3->merge('foo', array('red', 'yellow'));
+$bar = $f3->merge('foo', array('red', 'yellow'));
 
-/* 'foo' now is:
+/* $bar now is:
 array (size=4)
   [0] => string 'blue' (length=4)
   [1] => string 'green' (length=5)
