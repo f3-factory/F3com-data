@@ -1,6 +1,6 @@
 # Cache
 
-This class represents F3's multi protocol Cache engine. It supports [Memcache](http://memcached.org/), [WinCache](http://www.iis.net/downloads/microsoft/wincache-extension), [APC](http://php.net/manual/en/book.apc.php), [XCache](http://xcache.lighttpd.net/) and filesystem based caching.
+This class represents F3's multi protocol Cache engine. It supports [Memcache](http://memcached.org/), [WinCache](http://www.iis.net/downloads/microsoft/wincache-extension), [APC](http://php.net/manual/en/book.apc.php), [XCache](http://xcache.lighttpd.net/), [Redis](http://redis.io/) and filesystem based caching.
 
 Caching is a powerful way to get more performance out of your application. It is seamlessly integrated to all core and plugin features
 like [setting hive keys](base#set), [HTTP responses](base#caching), DB mappers and queries and even to [JS/CSS minification](optimization#keeping-javascript-and-css-on-a-healthy-diet).
@@ -111,6 +111,7 @@ Possible configurations for `$dsn` are:
 * `wincache`
 * `xcache`
 * `memcache=localhost:11211`
+* `redis=localhost`
 * `folder=tmp/cache/`
 
 You can set `$dsn` to `TRUE` to trigger the auto-detection feature, using the filesystem as a fallback when no shared memory engine has been detected or is available.
