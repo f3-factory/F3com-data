@@ -61,12 +61,6 @@ Or just load a single user by its ID:
 $user->load(array('_id'=> new \MongoId('507c35dd8fada716c89d0013')));
 ```
 
-The equivalent of a SQL `IN` operator goes like this:
-
-```php
-$user->find(array('in_array('_id',array(1,2,3))'));
-```
-
 ### $option
 
 The `$option` argument for Mongo accepts the following structure:
