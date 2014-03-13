@@ -94,7 +94,6 @@ Here's a simple mock request:
 ```php
 $f3->set('QUIET',TRUE);  // do not show output of the active route
 $f3->mock('GET /test');  // set the route that f3 will run
-$f3->run();  // run the route
 // run tests using expect() as shown above
 // ...
 $f3->set('QUIET',FALSE); // allow test results to be shown later
@@ -105,7 +104,6 @@ $f3->clear('ERROR');  // clear any errors
 
 ```php
 $f3->mock('GET /test/steve'); 
-$f3->run();
 $name = $f3->get('PARAMS["name"]');
 $test->expect(
     $name =="steve",
