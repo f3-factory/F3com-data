@@ -121,10 +121,14 @@ if (is_file($target=$f3->get('UPLOADS').basename($file)))
 **Receive and process files from a client sent via PUT or POST.**
 
 ```php
-array|false receive ( [ callback $func = NULL [, bool $overwrite = FALSE [, callback|bool $slug = TRUE ]]] )
+array|bool receive ( [ callback $func = NULL [, bool $overwrite = FALSE [, callback|bool $slug = TRUE ]]] )
 ```
 
-This function fetches the user uploaded file(s) and move it into a directory, specified in [UPLOADS](quick-reference#uploads) system var. It returns `true` on success.
+This function has two behaviours:
+
+1. on a POST request, it fetches files uploaded via HTML file inputs and move them into the directory specified in [UPLOADS](quick-reference#uploads) system var. The returned value is an array containing the upload status for each uploaded file.
+
+2. on a PUT request, it writes the contents of the request body into a target file located in the directory specified in [UPLOADS](quick-reference#uploads) system var.
 
 You can set an optional upload handler function to validate uploaded files, before moving them to their desired location. Lets have a look at this:
 
@@ -157,6 +161,16 @@ $files = $web->receive(function($file){
     $overwrite,
     $slug
 );
+
+var_dump($files);
+/* looks like:
+  array(3) {
+      ["uploads/csshat_quittung.png"] => bool(true)
+      ["uploads/foo.pdf"] => bool(false)
+      ["uploads/my.pdf"] => bool(true)
+    }
+  foo.pdf was not uploaded...
+*/
 ```
 <div class="alert alert-info">
     <b>Notice:</b> Having trouble to get this working? Don't forget to set the <b>enctype="multipart/form-data"</b> attribute in your <b>&lt;form&gt;</b> tag.
