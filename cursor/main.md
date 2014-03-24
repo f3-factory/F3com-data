@@ -245,35 +245,98 @@ NULL reset ( )
 
 ### onload
 
-**Define onload trigger**
+**Define a hook to the `onload` event**
+
+The hook will be executed everytime the mapper is loaded. For example, it will be executed once after a call to `load()`, `next()` or `prev()`, but also will be executed for every mapper returned by `find()`.
 
 ```php
-closure onload ( )
+callable onload ( callable $func )
 ```
 
-### oninsert
-
-**Define oninsert trigger**
+The hook function takes 1 argument : the mapper object. E.g:
 
 ```php
-closure oninsert ( )
+$mapper->onload(function($self){
+  //do something
+});
 ```
 
-### onupdate
+### beforeinsert, afterinsert
 
-**Define onupdate trigger**
+**Define hooks to the `beforeinsert` and `afterinsert` events**
+
+The `beforeinsert` hook will be executed just before any INSERT statement.
+
+The `afterinsert` hook will be executed right after any issued INSERT statement.
 
 ```php
-closure onupdate ( )
+callable beforeinsert ( callable $func )
+callable afterinsert ( callable $func )
 ```
 
-### onerase
-
-**Define onerase trigger**
+Each hook function takes 2 arguments : the mapper object and the primary key(s) value(s). E.g:
 
 ```php
-closure onerase ( )
+$mapper->beforeinsert(function($self,$pkeys){
+  //do something before inserting
+});
+$mapper->afterinsert(function($self,$pkeys){
+  //do something after inserting
+});
 ```
+
+### beforeupdate, afterupdate
+
+**Define hooks to the `beforeupdate` and `afterupdate` events**
+
+The `beforeupdate` hook will be executed just before any UPDATE statement.
+
+The `afterupdate` hook will be executed right after any issued UPDATE statement.
+
+```php
+callable beforeupdate ( callable $func )
+callable afterupdate ( callable $func )
+```
+
+Each hook function takes 2 arguments : the mapper object and the primary key(s) value(s). E.g:
+
+```php
+$mapper->beforeupdate(function($self,$pkeys){
+  //do something before updating
+});
+$mapper->afterupdate(function($self,$pkeys){
+  //do something after updating
+});
+```
+
+### beforeerase, aftererase
+
+**Define hooks to the `beforeerase` and `aftererase` events**
+
+The `beforerase` hook will be executed just before any DELETE statement.
+
+The `aftererase` hook will be executed right after any issued DELETE statement.
+
+```php
+callable beforeerase ( callable $func )
+callable aftererase ( callable $func )
+```
+
+Each hook function takes 2 arguments : the mapper object and the primary key(s) value(s). E.g:
+
+```php
+$mapper->beforeerase(function($self,$pkeys){
+  //do something before deleting
+});
+$mapper->aftererase(function($self,$pkeys){
+  //do something after deleting
+  echo 'the id of the deleted row was '.$pkeys['id'];
+});
+```
+
+### oninsert, onupdate, onerase
+
+Provided for backwards compatibility, they are aliases to respectively `afterinsert()`, `afterupdate()` and `aftererase()`.
 
 ## Abstract Methods
 
