@@ -180,7 +180,7 @@ $f3->route('GET /static-map/@mapargs', function($f3, $args) {
 	// override default maptype 'roadmap'
 	$map->maptype(isset($maptype)?$maptype:'satellite'); 
 	// override default format 'png'
-	$map->format(isset($format)?$format:'jpg');  
+	$map->format($format=(isset($format)?$format:'jpg'));
 	// size is mandatory! no default value. set default size '320x200'
 	$map->size(isset($size)?$size:'320x200');            
 	// override default zoom '12'
@@ -191,6 +191,7 @@ $f3->route('GET /static-map/@mapargs', function($f3, $args) {
 	$map->sensor(isset($sensor)?$sensor:'false');        
 	
 	// send raw image map to browser
+	header('Content-type: image/'.$format);
 	echo $map->dump(); 
 	},
 	3600*24*30 // Save result of the request in F3 cache for 30 days
