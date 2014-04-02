@@ -364,18 +364,20 @@ Fat-Free has a way of loading classes only at the time you need them,
 so they don't gobble up more memory than a particular segment of your application needs. And
 you don't have to write a long list of `include` or `require` statements just to load PHP
 classes saved in different files and different locations. The framework can do this
-automatically for you. Just save your files (one class per file) in a folder and tell the
-framework to automatically load the appropriate file once you invoke a method in the class:
+automatically for you. Just save your files (one class per file) in a folder (for example "myclassfiles") and tell the
+framework to automatically load the appropriate file from that folder once you invoke a method in the class:
 
 ```php
-$f3->set('AUTOLOAD','autoload/');
+$f3->set('AUTOLOAD','myclassfiles/');
 ```
+
+The `AUTOLOAD` path is searched from the location of your index.php file being called by the web browser. You can set your `AUTOLOAD` variable using an absolute path i.e. `/var/www/mywebsite.com/myclassfiles/` or using a relative path as viewed from the location of your index.php file `../myclassfiles/`, when index.php is located in `/var/www/mywebsite.com/`.
 
 You can assign a different location for your autoloaded classes by changing the value of the
 `AUTOLOAD` global variable. You can also have multiple autoload paths. If you have your classes
-organized and in different folders, you can instruct the framework to autoload the appropriate
+divided into different folders, you can instruct the framework to autoload the appropriate
 class when a static method is called or when an object is instantiated. Modify the `AUTOLOAD`
-variable this way:
+variable to point to multiple folders:
 
 ```php
 $f3->set('AUTOLOAD','admin/autoload/; user/autoload/; default/');
