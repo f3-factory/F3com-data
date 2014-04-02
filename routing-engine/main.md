@@ -364,29 +364,25 @@ Fat-Free has a way of loading classes only at the time you need them,
 so they don't gobble up more memory than a particular segment of your application needs. And
 you don't have to write a long list of `include` or `require` statements just to load PHP
 classes saved in different files and different locations. The framework can do this
-automatically for you. Just save your files (one class per file) in a folder (for example "myclassfiles") and tell the
-framework to automatically load the appropriate file from that folder once you invoke a method in the class:
+automatically for you. Just save your class files (one class per file) in a folder (for example "myclassfiles") and set the autoload variable to point to that folder:
 
 ```php
 $f3->set('AUTOLOAD','myclassfiles/');
 ```
 
-The `AUTOLOAD` path is searched from the location of your index.php file being called by the web browser. You can set your `AUTOLOAD` variable using an absolute path i.e. `/var/www/mywebsite.com/myclassfiles/` or using a relative path as viewed from the location of your index.php file `../myclassfiles/`, when index.php is located in `/var/www/mywebsite.com/`.
+**Important:** The class name and file name must be identical so the framework can autoload your class. If your class is named `BarBaz`, your file must be named `barbaz.php` (case does not matter).
 
-You can assign a different location for your autoloaded classes by changing the value of the
-`AUTOLOAD` global variable. You can also have multiple autoload paths. If you have your classes
-divided into different folders, you can instruct the framework to autoload the appropriate
-class when a static method is called or when an object is instantiated. Modify the `AUTOLOAD`
-variable to point to multiple folders:
+When you call your class or method using `$obj=new Barbaz;`, Fat-Free Framework will search for the file barbaz.php in the path(s) specified in the autoloader variable. Once it finds the file, it will include in using PHP's `require` command. This is how autoloading works.
+
+The `AUTOLOAD` path is searched from the location of your index.php file. You can set your `AUTOLOAD` variable using an absolute path i.e. `/var/www/mywebsite.com/myclassfiles/` or using a relative path as viewed from the location of your index.php file `../myclassfiles/`, when index.php is located in `/var/www/mywebsite.com/`.
+
+You can also have multiple autoload paths. If you have your classes divided into different folders, you can instruct the framework to autoload the appropriate class when a static method is called or when an object is instantiated. Modify the `AUTOLOAD` variable to point to multiple folders:
 
 ```php
 $f3->set('AUTOLOAD','admin/autoload/; user/autoload/; default/');
 ```
 
-**Important:** Except for the .php extension, the class name and file name must be identical,
-for the framework to autoload your class properly. The basename of this file must be identical
-to your class invocation, e.g. F3 will look for either `Foo/BarBaz.php` or `foo/barbaz.php` when
-it detects a `new Foo\BarBaz` statement in your application.
+
 
 ## Working with Namespaces
 
