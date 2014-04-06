@@ -51,3 +51,9 @@ You can download these working examples to get an idea of how easy all component
 * [**Blog Example**, (F3 version 2.1)](https://github.com/bcosca/fatfree/blob/archive/f3-2.1.0-blog.example.zip)
 * [**URL Shortening App**, (F3 version 2.1)](https://github.com/bcosca/fatfree/blob/archive/f3-2.1.0-url.shortening.zip)
 
+
+### 12. Extending the arsenal
+
+Once you are familiar with all the basic techniques and components of the framework, you can have a look into the following articles, that tell you how to extend some of the build-in functionality.
+
+* [all about extending the template engine](extended-templating)
