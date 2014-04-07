@@ -7,9 +7,6 @@ File location: `lib/web/openid.php`
 
 ---
 
-<div class="alert alert-error"><h4 style="text-align:center">Warning</h4>
-<p>This class is currently not documented; only its argument list is available.</p></div>
-
 ## Instantiation
 
 **Return class instance**
