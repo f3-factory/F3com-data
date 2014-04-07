@@ -160,6 +160,20 @@ F3 maintains a global variable containing the details of the latest error that o
 `ERROR.trace` - stack trace stored in an `array()`
 ```
 
+If your project uses templates, you may wish to handle potential template errors by clearing any existing output buffer and display a fresh page instead:
+
+```php
+$f3->set('ONERROR',
+    function($f3) {
+	// recursively clear existing output buffers:
+        while (ob_get_level())
+            ob_end_clean();
+        // your fresh page here:
+        echo $f3->get('ERROR.title');
+    }
+);
+```
+
 While developing your application, it's best to set the debug level to maximum so you can trace all errors to their root cause:
 
 ```php
