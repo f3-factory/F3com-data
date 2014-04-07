@@ -2,7 +2,7 @@
 
 This guide tells you all about the F3 Template engine, how it technically works and how to extend it for highly flexible HTML templating, so you can get an idea of all the possibilities it offers to you.
 
-The template engine of Fat-Free is basically contained of 3 different components - your template, the rendering process, which builds the pre-compiled cached template, and the sandbox. Many parts are extensible, which gives us the opportunity to create even more flexibility for our **HTML** templates. We will have a deep introspect to the [View](view), [Preview](preview) and [Template](template) classes to make you understand the magic behind the scene.
+The template engine of Fat-Free basically contains 3 different components - your template, the rendering process, which builds the pre-compiled cached template, and the sandbox. Many parts are extensible, which gives us the opportunity to create even more flexibility for our **HTML** templates. We will have a deep introspect to the [View](view), [Preview](preview) and [Template](template) classes to make you understand the magic behind the scene.
 
 ## Layers of templating
 
@@ -245,7 +245,7 @@ This is just another layer of your original template file. Using the template cl
 
 This View class is used to create a sandbox where the PHP templates are rendered in. Sandbox means that it takes all hive variables and sanitizes its data, so all dynamic data that get included into your template won't echo any bad or insecure content like HTML tags or scripts that might break your layout or lead to XSS attacks (controlled by [ESCAPE](quick-reference#escape) var).
 
-Executing dynamic code from extensions or filters in the sandbox also means that changing variables in the real F3 hive (using [set](base#set) method) will not effect the variables that are in the current sandbox scope. That mean if you change the hive var `title` from a custom function that was called from the inside of the view-template (i.e. using `\Base::instance()->set`), any token like `{{@title}}` will still contain the original value that was passed into the sandbox.
+Executing dynamic code from extensions or filters in the sandbox also means that changing variables in the real F3 hive (using [set](base#set) method) will not effect the variables that are in the current sandbox scope. That means, if you change the hive var `title` from a custom function that was called from the inside of the view-template (i.e. using `\Base::instance()->set`), any token like `{{@title}}` will still contain the original value that was passed into the sandbox.
 
 
 ### 6. Final HTML
