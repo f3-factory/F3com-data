@@ -36,7 +36,7 @@ Path to the `index.php` main/front controller.
 ### BODY
 **Type:** `string`, `Read-only`
 
-HTTP request body for ReSTful post-processing. Contains the `php://input` stream used by PUT requests, if RAW is `false`.
+HTTP request body for ReSTful post-processing. Contains the `php://input` stream used by PUT requests, if [RAW](quick-reference#raw) is `false`.
 
 
 ### CACHE
@@ -253,6 +253,11 @@ Prefix to use with LANGUAGE and LOCALES.
 
 Toggle switch for suppressing or enabling standard output and error messages. Particularly useful in [unit testing](unit-testing).
 
+
+### RAW
+**Type:** `bool` &nbsp; &nbsp; **Default:** `FALSE`
+
+RAW should be TRUE when processing large data coming from `php://input` which will not fit in memory (cf. [BODY](quick-reference#body)).
 
 ### REALM
 **Type:** `string`, `Read-Only`
