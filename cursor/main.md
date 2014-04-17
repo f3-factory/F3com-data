@@ -217,6 +217,14 @@ array(4) {
 
 The `subset` key contains an array of mapper objects returned from find(), `total` is the sum of all records for all pages, `limit` is a bypass of the given limit size, `count` is the number of subsets/pages available and `pos` gives you the current subset cursor position ( it's the page number - 1).
 
+### loaded
+
+**Return the count of records loaded**
+
+```php
+int loaded ( )
+```
+
 ### save
 
 **Save mapped record**
