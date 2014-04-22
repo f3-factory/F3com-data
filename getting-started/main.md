@@ -36,9 +36,9 @@ total Web development framework - with a lot of muscle!
 
 <div class="well">
     <p>
-        <em>Any intelligent fool can make things bigger and more complex... It takes a touch of genius - and a lot of               courage to move in the opposite direction. - E. F. Schumacher</em>
+        <em>Any intelligent fool can make things bigger and more complex... It takes a touch of genius - and a lot of courage to move in the opposite direction. - E. F. Schumacher</em>
     </p>
-</div<
+</div>
 
 ## Enough Said - See For Yourself
 
