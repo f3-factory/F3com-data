@@ -138,7 +138,7 @@ $f3->set('UPLOADS','uploads/'); // don't forget to set an Upload directory, and 
 $overwrite = false; // set to true, to overwrite an existing file; Default: false
 $slug = true; // rename file to filesystem-friendly version
 
-$files = $web->receive(function($file){
+$files = $web->receive(function($file,$formFieldName){
         var_dump($file);
         /* looks like:
           array(5) {
