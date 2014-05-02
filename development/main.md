@@ -91,16 +91,22 @@ See what other users have made with F3:
             <td><a class="btn btn-info" href="https://github.com/blo4r/fatfree-blog" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>README</td>
-            <td>a blog platform for developers</td>
-            <td><a href="https://github.com/codevinsky" target="_blank">Jeremy Dowell</a></td>
-            <td><a class="btn btn-info" href="https://github.com/codevinsky/README" target="_blank">view</a></td>
+            <td>Phproject</td>
+            <td>A lightweight project management system</td>
+            <td><a href="https://github.com/Alanaktion" target="_blank">Alan Hardman </a></td>
+            <td><a class="btn btn-info" href="http://www.phproject.org/" target="_blank">view</a></td>
         </tr>
         <tr>
             <td>selfoss</td>
             <td>selfoss: The new multipurpose rss reader, live stream, mashup, aggregation web application</td>
             <td><a href="https://github.com/SSilence" target="_blank">Tobias Zeising</a></td>
             <td><a class="btn btn-info" href="http://selfoss.aditu.de/" target="_blank" title="selfoss the web based open source rss reader and multi source mashup aggregator">view</a></td>
+        </tr>
+        <tr>
+            <td>TaskShare</td>
+            <td>TaskShare is a really simple todo/task/list web app</td>
+            <td><a href="https://github.com/timbotron" target="_blank">Tim Habersack</a></td>
+            <td><a class="btn btn-info" href="http://taskshare.org/" target="_blank" title="A web-based, responsive todo list tool. No logins required.">view</a></td>
         </tr>
         <tr>
             <td>ToothPaste-F3</td>
@@ -134,6 +140,12 @@ See what other users have made with F3:
                 <td>F3 Ajax application with timers to monitor performance</td>
                 <td><a href="https://github.com/WilliamStam" target="_blank">William Stam</a></td>
                 <td><a class="btn btn-info" href="https://github.com/WilliamStam/FatFree-Ajax-Boilerplate" target="_blank">view</a></td>
+            </tr>
+            <tr>
+                <td>README</td>
+                <td>a blog platform for developers</td>
+                <td><a href="https://github.com/codevinsky" target="_blank">Jeremy Dowell</a></td>
+                <td><a class="btn btn-info" href="https://github.com/codevinsky/README" target="_blank">view</a></td>
             </tr>
         </tbody>
     </table>
