@@ -491,6 +491,13 @@ select(
 
 Much like the `find()` method, `select()` does not alter the mapper object's contents. It only serves as a convenience method for querying a mapped table. The return value of both methods is an array of mapper objects. Using `dry()` to determine whether a record was found by an of these methods is inappropriate. If no records match the `find()` or `select()` criteria, the return value is an empty array.
 
+
+<div class="alert alert-warning">
+    <strong>Keep in mind:</strong><br>
+    <code>load()</code> hydrates the current mapper object, <code>findone</strong> returns a new hydrated mapper object, and <code>find</strong> returns an array of hydrated mapper objects.
+</div>
+
+
 ## Profiling
 
 If you ever want to find out which SQL statements issued directly by your application (or indirectly thru mapper objects) are causing performance bottlenecks, you can do so with a simple:
