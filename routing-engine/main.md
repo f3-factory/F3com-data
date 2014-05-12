@@ -114,13 +114,13 @@ If you use tokens in your route, F3 will replace those tokens with their current
 
 ```php
 $f3->route('GET @beer_list: /beer/@country', 'Beer->bycountry');
-$f3->route('GET @beer_list: /beer/@country/@village', 'Beer->byvillage');
 
 // a set of key-value pairs is passed as argument to named route
 $f3->reroute('@beer_list(@country=Germany)');
 
-// if more than one token needed
-$f3->reroute('@beer_list(@country=Germany,@village=Rhine)');
+// if more than one token in your route is needed
+$f3->route('GET @beer_village_list: /beer/@country/@village', 'Beer->byvillage');
+$f3->reroute('@beer_village_list(@country=Germany,@village=Rhine)');
 ```
 
 Remember to `urlencode()` your arguments if you have characters that do not comply with RFC 1738 guidelines for well-formed URLs.
