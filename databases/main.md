@@ -494,7 +494,7 @@ Much like the `find()` method, `select()` does not alter the mapper object's con
 
 <div class="alert alert-warning">
     <strong>Keep in mind:</strong><br>
-    <code>load()</code> hydrates the current mapper object, <code>findone</strong> returns a new hydrated mapper object, and <code>find</strong> returns an array of hydrated mapper objects.
+    <code>load()</code> hydrates the current mapper object, <code>findone</code> returns a new hydrated mapper object, and <code>find</code> returns an array of hydrated mapper objects.
 </div>
 
 
