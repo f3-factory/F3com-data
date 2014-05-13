@@ -64,7 +64,7 @@ class ImageViewHelper {
 			((isset($attr['crop']) && $attr['crop']=='true') ? true : false)
 		);
 		$f3 = \Base::instance();
-		// to avoid clash, build an unique name for the new generated image
+		// to avoid clash, build a unique name for the new generated image
 		$file_name = $f3->hash($imagepath.$attr['width'].$attr['height']).'.png';
 		// save it for example in TEMP
 		$imagepath = $f3->get('TEMP').$file_name;
@@ -91,7 +91,7 @@ and scales the image given by the `src` attribute to the specified `width="60" h
 
 Knowing that F3 templates are all pre-rendered and cached. This way our Image Tag Renderer will only process the file once and not on every request.
 
-Combine your tag processing by using the [token](preview#token) method to add some support for dynamic values in your tag attributes and write some php calls to the result to generate fully flexible view helper.
+Combine your tag processing by using the [token](preview#token) method to add some support for dynamic values in your tag attributes and write some php calls to the result to generate a fully flexible view helper.
 
 
 ### parse
