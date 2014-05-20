@@ -252,7 +252,7 @@ F3 also gives you the ability to define HTTP routes in configuration files:
 [routes]
 GET /=home
 GET /404=App->page404
-GET /page/@num=Page->@controller
+GET /page/@num=Page->controller
 ```
 
 Route maps can be defined in configuration files too:
