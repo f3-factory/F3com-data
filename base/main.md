@@ -94,12 +94,21 @@ It is also possible to set the PHP globals through F3's [COOKIE, GET, POST, REQU
 mixed get ( string $key [, string|array $args = NULL ] )
 ```
 
-to get a previously saved framework var, use:
+To get the value of a previously saved framework var, use:
 
 ```php
 $f3->set('myVar','hello world');
 echo $f3->get('myVar'); // outputs the string 'hello world'
 $local_var = $f3->get('myVar'); // $local_var holds the string 'hello world'
+```
+
+If the returned value is a string containing one or more [format placeholders](base#format), arguments can be passed directly after the key's name:
+
+```php
+$f3->set('var1','Current date: {0,date} - Current time: {0,time}');
+$f3->set('var2','Departure: {0,date} - Arrival: {1,date}');
+echo $f3->get('var1',time());//shorthand for $f3->format($f3->get('var1'),time());
+echo $f3->get('var2',array($timestamp1,$timestamp2));//shorthand for $f3->format($f3->get('var2'),$timestamp1,$timestamp2);
 ```
 
 <div class="alert alert-info"><strong>Notice:</strong> When caching is enabled and the var hasn't been defined at runtime before, F3 tries to load the var from Cache when using get().</div>
@@ -884,9 +893,10 @@ echo $f3->format($cart_dialogs,3); // displays 'There are 3 items in your cart.'
 ```
 Each plural keyword is optional and you can for example omit the plural keyword 'two' if the 'other' one fits that case. Of course, if you omit'em all, only the numerals will be displayed. As a general rule, keep at least the 'other' plural keyword as a fallback.
 
-**Automatic Pluralization of Hive variables**
+**Automatic formatting of hive variables**
 
-<div class="alert alert-info"><strong>Nice to Remember:</strong> F3, for your convenience, and to tremendously ease the use of pluralization in your templates, automatically formats variables from the Hive as long as they have a valid plural formatted string attached to them when they have been `set`.</div>
+<div class="alert alert-info"><strong>Nice to Remember:</strong> F3, for your convenience, and to tremendously ease the use of formatting in your templates, you can fetch and format variables from the hive in a single command:
+</div>
 
 Example:
 
