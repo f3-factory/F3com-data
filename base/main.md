@@ -199,7 +199,7 @@ If the 2nd argument `$add` is `false`, it just returns the read-only hive key co
 
 ### exists
 
-**Return TRUE if the hive key is not set (or return timestamp and TTL if cached)**
+**Return TRUE if the hive key is set (or return timestamp and TTL if cached)**
 
 ```php
 bool exists ( string $key [, mixed &$val=NULL] )
@@ -228,6 +228,14 @@ $f3->exists('POST.submit');
 ```
 
 <div class="alert alert-warning"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
+
+You can use the `$val` argument to fetch the hive key content as well. This could save an additional `get` call. 
+
+```php
+if ($f3->exists('foo',$value)) {
+    echo $value; // bar
+}
+```
 
 ### devoid
 
