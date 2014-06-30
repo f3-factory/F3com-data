@@ -427,7 +427,7 @@ Therefor it uses ISO-9 transliteration with a lookup table array that can be ext
 Furthermore, it is designed to remove all non-alphanumeric characters and convert them to dashes.
 
 ```php
-echo Web::instance()->slug('ĤÈĹĹŌ'); // displays 'HELLO'
+echo Web::instance()->slug('ĤÈĹĹŌ'); // displays 'hello'
 echo Web::instance()->slug('Ein schöner Artikel über Max & John!'); // displays 'ein-schoener-artikel-ueber-max-john'
 ```
 
