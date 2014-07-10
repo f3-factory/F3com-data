@@ -435,6 +435,15 @@ Evaluate `condition`. If `TRUE`, the `true-block` is rendered; else the `false-b
 ```
 Evaluate `from` statement once. Check if the expression in the `to` attribute is `TRUE`, render `text-block` and evaluate `step` statement. Repeat iteration until `to` expression is `FALSE`.
 
+Example:
+
+```html
+<loop from="{{ @i=0 }}" to="{{ @i < count(@bar) }}" step="{{ @i++ }}">
+
+</loop>
+```
+
+
 ### Repeat
 
 ```html
