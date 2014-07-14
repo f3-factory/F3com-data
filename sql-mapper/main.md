@@ -42,12 +42,17 @@ $user->load('id = 1');
 
 The `$filter` argument for SQL accepts the following structure:
 
-```php
-// string value for simple where strings
-string $whereClause
-// array value for parameterized queries
-array ( string $whereClause [, string $bindValue1 [, string $bindValue2 [, ... ]]] )
-```
+*  string value for simple where strings
+
+	```php
+	string $whereClause
+	```
+
+*  array value for parameterized queries
+
+	```php
+	array ( string $whereClause [, string $bindValue1 [, string $bindValue2 [, ... ]]] )
+	```
 
 #### Parameterized Queries
 
@@ -56,16 +61,16 @@ It is recommended to use parameterized queries for all `where` conditions that m
 An example with question mark positional parameters:
 
 ```php
-array('username = ? and password = ? and deleted = 0','John','acbd18db4cc2f85cedef654fccc4a4d8')
+$mapper->load(array('username = ? and password = ? and deleted = 0','John','acbd18db4cc2f85cedef654fccc4a4d8'));
 ```
 
 And with named parameters:
 
 ```php
-array(
+$mapper->load(array(
 	'username = :user and password = :pass and deleted = 0',
 	':user'=>'John',':pass'=>'acbd18db4cc2f85cedef654fccc4a4d8'
-	)
+));
 ```
 
 <div class="alert alert-warning">
@@ -78,7 +83,7 @@ Make Your Choice: You cannot use both named and question mark positional paramet
 
 ##### User-specified data type
 
-To force a bind value to be a specific PDO type, use the following syntax:
+Usually the data type is auto-detected, but to force a bind value to be a specific PDO type, use the following syntax:
 
 ```php
 array(
