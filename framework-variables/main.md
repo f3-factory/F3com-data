@@ -253,6 +253,8 @@ F3 also gives you the ability to define HTTP routes in configuration files:
 GET /=home
 GET /404=App->page404
 GET /page/@num=Page->controller
+; Cache the route for 10 minutes
+GET /contact=App->contact, 600
 ```
 
 Route maps can be defined in configuration files too:
