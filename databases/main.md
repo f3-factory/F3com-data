@@ -84,7 +84,7 @@ Passing string arguments to SQL statements is fraught with danger. Consider this
 ```php
 $db->exec(
     'SELECT * FROM users '.
-    'WHERE username="'.$f3->get('POST.userID'.'"')
+    'WHERE username="'.$f3->get('POST.userID').'"'
 );
 ```
 
