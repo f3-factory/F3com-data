@@ -47,7 +47,7 @@ echo $f3->get('a')->hello; // world
 
 #### Caching properties
 
-If the `$ttl` parameter is > 0, and the [framework cache engine](cache) is enabled, the specified variable will be cached for `$ttl` seconds. Already cached vars will be updated and get the new expiration `$ttl`.
+If the `$ttl` parameter is >= 0, and the [framework cache engine](cache) is enabled, the specified variable will be cached for `$ttl` seconds or for an infinite time if `$ttl` is 0. Already cached vars will be updated and get the new expiration `$ttl`.
 If the key was already cached before and `$ttl` is 0, then the key value will also be updated in cache, by reusing the old expiration time.
 
 You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from the cache.
