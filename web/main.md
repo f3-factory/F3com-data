@@ -221,15 +221,15 @@ Returns an array containing the content and the header.
 **Specify the HTTP request engine to use**
 
 ```php
-string engine ( [ string $arg = 'socket' ] )
+string engine ( [ string $arg = 'curl' ] )
 ```
 
 Sets the engine to be used by `Web->request()`. If the selected engine is not available, it falls back to an applicable substitute.
 Possible values are:
 
-* curl
+* curl (default)
 * stream
-* socket (default)
+* socket
 
 <div class="alert alert-info">
     <b>Notice:</b> The cURL and stream wrapper engines need their appropriate php extension to be installed and activated to work properly. Otherwise, sockets are used.
