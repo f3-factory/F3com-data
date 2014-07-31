@@ -155,10 +155,10 @@ $img->rotate( int $angle );
 **Apply an image overlay**
 
 ```php
-$img->overlay( Image $img [, bool|int $align = NULL ] );
+$img->overlay( Image $img [, int|array $align = NULL [, int $alpha = 100 ]] );
 ```
 
-This is used to merge to images, i.e. for watermarks. You need to provide another Image object and can align that by the bitwise `$align` argument.
+This is used to merge to images, i.e. for watermarks. You need to provide another Image object and can align that by the `$align` argument in a bitwise way or provide an (x,y) array.
 
 Example:
 
@@ -170,6 +170,8 @@ $overlay = new \Image('images/watermark.png');
 $overlay->resize(100,38)->rotate(90);
 
 $img->overlay( $overlay, \Image::POS_Right | \Image::POS_Middle );
+// or
+$img->overlay( $overlay, array(200,100), 60);
 ```
 
 Possible values for `$align` can be combined using this options:
@@ -185,6 +187,10 @@ y - align:
 *   POS_Top
 *	POS_Middle
 *	POS_Bottom
+
+or just use an array containing the x and y values.
+
+Use the `$alpha` argument to control the transparency of the overlay (0-100).
 
 ## Rendering
 ### identicon
