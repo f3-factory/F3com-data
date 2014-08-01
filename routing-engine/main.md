@@ -358,6 +358,10 @@ it generates an `HTTP 405 Method Not Allowed` error. F3 automatically responds w
 appropriate headers to HTTP `OPTIONS` method requests. The framework will not map this request
 to a class.
 
+<div class="alert alert-info"><strong>Notice:</strong> In case you plan to build a whole ReST API, you probably need to get around the possibility of fetching single items, whole collections of items and saving and updating records, which does not always fit into a single class or the given HTTP methods. It's always best to plan your API before you start coding. Here is a very good and <strong>free</strong> <a href="https://pages.apigee.com/ebook-web-api-design-registration.html?utm_source=hpc&utm_medium=website&utm_campaign=ebook
+" target="_blank">eBook about Web API Design</a> from apigee that could be useful. 
+</div>
+
 ## The F3 Autoloader
 
 Fat-Free has a way of loading classes only at the time you need them,
