@@ -109,8 +109,7 @@ Information about the last HTTP error that occurred:
 
 * `ERROR.code` is the [HTTP status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html "List of the HTTP Status Code Definitions"). e.g. `307`
 * `ERROR.status` is a brief description of the HTTP status code. e.g. `'Temporary Redirect'`
-* `ERROR.title` contains a brief description of the error.
-* `ERROR.text` provides greater detail.
+* `ERROR.text` contains a brief description of the error.
 * `ERROR.trace` is used for HTTP 500 errors, to retrieve the stack trace. `array()`
 
 
