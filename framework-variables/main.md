@@ -145,7 +145,7 @@ $f3->set('ONERROR',
         // custom error handler code goes here
         // use this if you want to display errors in a
         // format consistent with your site's theme
-        echo $f3->get('ERROR.title');
+        echo $f3->get('ERROR.text');
     }
 );
 ```
@@ -155,7 +155,6 @@ F3 maintains a global variable containing the details of the latest error that o
 ```
 `ERROR.code` - the HTTP status error code (`404`, `500`, etc.)
 `ERROR.status` - a brief description of the HTTP status code. e.g. `'Not Found'`
-`ERROR.title` - header and page title
 `ERROR.text` - error context
 `ERROR.trace` - stack trace stored in an `array()`
 ```
@@ -169,7 +168,7 @@ $f3->set('ONERROR',
         while (ob_get_level())
             ob_end_clean();
         // your fresh page here:
-        echo $f3->get('ERROR.title');
+        echo $f3->get('ERROR.text');
     }
 );
 ```
