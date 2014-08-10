@@ -12,6 +12,7 @@ $f3->route('GET /about',
     }
 );
 ```
+Note: When you get 404 error then look at server configuration to fallback request to index.php
 
 You don't want to clutter the global namespace with function names? Fat-Free recognizes
 different ways of mapping route handlers to OOP classes and methods:
