@@ -2,7 +2,7 @@
 
 ## Overview
 
-Our first example wasn't too hard to swallow, was it? If you like a little more flavor in your
+Our [first example](getting-started) wasn't too hard to swallow, was it? If you like a little more flavor in your
 Fat-Free soup, insert another route before the `$f3->run()` command:
 
 ```php
@@ -31,6 +31,8 @@ HTTP requests can also be routed to static class methods:
 ```php
 $f3->route('GET /login','Auth::login');
 ```
+
+<div class="alert alert-info">Stuck with a <strong>404 Not Found</strong> error? Check your <a href="routing-engine#sample-apache-configuration">server configuration</a>.</div>
 
 ## Routes and Tokens
 
