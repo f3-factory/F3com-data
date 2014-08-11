@@ -472,13 +472,13 @@ By default, both view handler and template engine escapes all rendered variables
 $f3->set('ESCAPE',FALSE);
 ```
 
-This may have undesirable effects. You might not want all variables to pass through unescaped. Fat-Free allows you to unescape variables individually. For F3 templates:
+This may have undesirable effects. You might not want all variables to pass through unescaped. Fat-Free allows you to unescape variables individually. For F3 templates use the `raw` filter:
 
 ``` html
 {{ @html_content | raw }}
 ```
 
-In the case of PHP templates:
+In the case of PHP templates, use the raw method directly:
 
 ```php
 <?php echo Base::instance()->raw($html_content); ?>
@@ -491,3 +491,7 @@ $f3->scrub($_GET,'p; br; span; div; a');
 ```
 
 This command will strip all tags (except those specified in the second argument) and unsafe characters from the specified variable. If the variable contains an array, each element in the array is sanitized recursively. If an asterisk (*) is passed as the second argument, `$f3->scrub()` permits all HTML tags to pass through untouched and simply remove unsafe control characters.
+
+## Extending filters and custom tags 
+
+With the F3 template engine you can also setup own expression filters like `{{ @desc,100 | crop }}` and also combine them like `{{ @desc,100 | crop,raw }}`. For this you just need to extend the Template class and add a method of your choice. For own html tag / element handlers that could render anything you want, check out the [template->extend](template#extend) method. For more detailed descriptions about custom filters and how the whole templating system works, see the [extended templating](extended-templating) part of the user guide.
