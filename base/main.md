@@ -869,7 +869,7 @@ Current supported types are:
 ```php
 echo $f3->format('Current date: {0,date} - Current time: {0,time}',time());
 //outputs the string 'Current date: 04/12/2013 - Current time: 11:49:57'
-echo $f3->format('Created on: {0,date,custom,%A, week: %V });
+echo $f3->format('Created on: {0,date,custom,%A, week: %V }');
 //outputs the string 'Created on: Monday, week 45'
 echo $f3->format('{0} is displayed as a decimal number while {0,number,integer} is rounded',12.54);
 //outputs the string '12.54 is displayed as a decimal number while 13 is rounded'
