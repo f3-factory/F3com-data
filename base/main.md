@@ -1362,6 +1362,39 @@ Uses the [`file_put_contents()`](http://www.php.net/file_put_contents "PHP Manua
 
 If `$append` is `TRUE` and the `$file` already exits, the `$data` is appended to the file content instead of overwriting it.
 
+### copy
+
+**Native PHP Function**
+
+```php
+bool copy ( string $source , string $dest [, resource $context ] )
+```
+
+To copy a file, use the native [`copy()`](http://php.net/manual/en/function.copy.php "PHP Manual :: copy") <small>PHP function</small>. Shown here for convenience.
+
+
+### rename
+
+**Native PHP Function**
+
+```php
+bool rename ( string $oldname , string $newname [, resource $context ] )
+```
+
+To rename a file, use the native [`rename()`](http://php.net/manual/en/function.rename.php "PHP Manual :: rename") <small>PHP function</small>. Shown here for convenience.
+
+
+### delete (unlink)
+
+**Native PHP Function**
+
+```php
+bool unlink ( string $filename [, resource $context ] )
+```
+
+To delete a file, use the native [`unlink()`](http://php.net/manual/en/function.unlink.php "PHP Manual :: unlink") <small>PHP function</small>. Shown here for convenience.
+
+
 ### rel
 
 **Return path relative to the base directory**
