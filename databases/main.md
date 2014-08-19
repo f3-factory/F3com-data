@@ -523,10 +523,9 @@ class Vendor extends DB\SQL\Mapper {
 
     // Specialized query
     function listByCity() {
-        return $this->select(
-            'vendorID,name,city',array('order'=>'city DESC'));
+        return $this->select('vendorID,name,city',null,array('order'=>'city DESC'));
         /*
-			We could have done the same thing with plain vanilla SQL:
+	    We could have done the same thing with plain vanilla SQL:
             return $this->db->exec(
                 'SELECT vendorID,name,city FROM vendors '.
                 'ORDER BY city DESC;'
