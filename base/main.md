@@ -1317,6 +1317,36 @@ function c($n) {
 ---
 ## File System
 
+### copy
+
+**Native PHP Function**
+
+```php
+bool copy ( string $source , string $dest [, resource $context ] )
+```
+
+To copy a file, use the native [`copy()`](http://php.net/manual/en/function.copy.php "PHP Manual :: copy") <small>PHP function</small>. Shown here for convenience.
+
+### delete (unlink)
+
+**Native PHP Function**
+
+```php
+bool unlink ( string $filename [, resource $context ] )
+```
+
+To delete a file, use the native [`unlink()`](http://php.net/manual/en/function.unlink.php "PHP Manual :: unlink") <small>PHP function</small>. Shown here for convenience.
+
+### move (rename using diff path)
+
+**Native PHP Function**
+
+```php
+bool rename ( string $oldname , string $newname [, resource $context ] )
+```
+
+To move a file, use the native [`rename()`](http://php.net/manual/en/function.rename.php "PHP Manual :: rename") <small>PHP function</small> changing the path in the second argument. Shown here for convenience.
+
 
 ### mutex
 
@@ -1350,51 +1380,6 @@ Uses the [`file_get_contents()`](http://www.php.net/file_get_contents "PHP Manua
 
 IF `$lf` is `TRUE`, an EOL conversion to UNIX LF format is performed on all the lines ending.
 
-### write
-
-**Exclusive file write**
-
-```php
-int|FALSE write ( string $file, mixed $data [, bool $append = FALSE ] )
-```
-
-Uses the [`file_put_contents()`](http://www.php.net/file_put_contents "PHP Manual :: file_put_contents") <small>PHP function</small> with the `LOCK_EX` <small>PHP</small> flag to acquire an exclusive lock on the file while proceeding to the writing.
-
-If `$append` is `TRUE` and the `$file` already exits, the `$data` is appended to the file content instead of overwriting it.
-
-### copy
-
-**Native PHP Function**
-
-```php
-bool copy ( string $source , string $dest [, resource $context ] )
-```
-
-To copy a file, use the native [`copy()`](http://php.net/manual/en/function.copy.php "PHP Manual :: copy") <small>PHP function</small>. Shown here for convenience.
-
-
-### rename
-
-**Native PHP Function**
-
-```php
-bool rename ( string $oldname , string $newname [, resource $context ] )
-```
-
-To rename a file, use the native [`rename()`](http://php.net/manual/en/function.rename.php "PHP Manual :: rename") <small>PHP function</small>. Shown here for convenience.
-
-
-### delete (unlink)
-
-**Native PHP Function**
-
-```php
-bool unlink ( string $filename [, resource $context ] )
-```
-
-To delete a file, use the native [`unlink()`](http://php.net/manual/en/function.unlink.php "PHP Manual :: unlink") <small>PHP function</small>. Shown here for convenience.
-
-
 ### rel
 
 **Return path relative to the base directory**
@@ -1409,6 +1394,30 @@ Example:
 $f3->set('BASE','http://fatfreeframework.com/');
 echo $f3->rel( 'http://fatfreeframework.com/gui/img/supported_dbs.jpg' ); // 'gui/img/supported_dbs.jpg'
 ```
+
+### rename
+
+**Native PHP Function**
+
+```php
+bool rename ( string $oldname , string $newname [, resource $context ] )
+```
+
+To rename a file, use the native [`rename()`](http://php.net/manual/en/function.rename.php "PHP Manual :: rename") <small>PHP function</small>. Shown here for convenience.
+
+### write
+
+**Exclusive file write**
+
+```php
+int|FALSE write ( string $file, mixed $data [, bool $append = FALSE ] )
+```
+
+Uses the [`file_put_contents()`](http://www.php.net/file_put_contents "PHP Manual :: file_put_contents") <small>PHP function</small> with the `LOCK_EX` <small>PHP</small> flag to acquire an exclusive lock on the file while proceeding to the writing.
+
+If `$append` is `TRUE` and the `$file` already exits, the `$data` is appended to the file content instead of overwriting it.
+
+
 
 ---
 
