@@ -119,6 +119,17 @@ The F3 template engine will interpret the token as expected, if you specify the 
 {{ @func('hello','world') }}
 ```
 
+<div class="alert alert-warning">
+<strong>Notice:</strong> 
+If you have an error of `UNDEFINED VARIABLE` or `UNDEFINED INDEX` during the rendering of your F3 Templates, it means the variable or array index was not previously declared in your function that is calling the template render() action. Two solutions: 
+<ul>
+<li>Define all variables in your code, even if NULL: $f3->set('myVar',NULL)   $f3->set('myArray.myIndex', 'First Item')</li>
+<li>Use an extra AT symbol `@` in front of the token: `{{@@myArray.myIndex}} to suppress the error message.
+</ul>
+Refer to the [FatFree GitHub Issue #201](https://github.com/bcosca/fatfree/issues/201) for more details.
+</div>
+
+
 ## Templates Within Templates
 
 Simple variable substitution is one thing all template engines have. Fat-Free has more up its sleeves:
