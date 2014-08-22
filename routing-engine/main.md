@@ -490,6 +490,9 @@ the type of the HTTP request:
 ```php
 $f3->route('GET /example [ajax]','Page->getFragment');
 $f3->route('GET /example [sync]','Page->getFull');
+
+; routes.ini style
+POST /formsubmit [ajax] = Form->process_post_via_ajax
 ```
 
 The first statement will route the HTTP request to the `Page->getFragment()` callback only if an
