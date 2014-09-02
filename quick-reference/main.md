@@ -153,7 +153,7 @@ array (
 ### HIGHLIGHT
 **Type:** `bool` &nbsp; &nbsp; **Default:** `TRUE`
 
-Enable/disable syntax highlighting of stack traces. When enabled, requires `code.css` stylesheet.
+Enable/disable syntax highlighting of stack traces and [Markdown](markdown) code blocks. When enabled, requires `code.css` stylesheet.
 
 
 ### HOST

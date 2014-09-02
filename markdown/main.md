@@ -37,5 +37,16 @@ $file = F3::instance()->read('my_file_full_of_markdown.md');
 $html = Markdown::instance()->convert($file);
 ```
 
+### Syntax highlighting
 
+Code blocks can be highlighted using language hinting as follows:
 
+```
+&#96;&#96;&#96;php
+your PHP code
+&#96;&#96;&#96;
+```
+
+Available languages are `php`, `apache`, `html`, `ini`.
+
+NB: requires [HIGHLIGHT](quick-reference#highlight) to be enabled.
