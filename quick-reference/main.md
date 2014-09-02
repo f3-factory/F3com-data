@@ -383,10 +383,13 @@ A string containing the version of the Framework.
 <include
     [ if="{{ bool condition }}" ]
     href="{{ string subtemplate }}"
-/>
+    [ with="{{ string additional_variables }}" ]
+ />
 ```
 
-Get contents of `subtemplate` and insert at current position in template [ if optional condition is `TRUE` ].
+Get contents of `subtemplate` and insert at current position in template [ if optional `condition` is true ].
+
+The current data hive is passed to the subtemplate, enriched with `additional_variables` if provided (see [here](views-and-templates#templates-within-templates) for examples).
 
 ### Exclude
 

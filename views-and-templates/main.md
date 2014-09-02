@@ -175,6 +175,21 @@ The `<include>` directive has an optional `if` attribute to let you specify a co
 <include if="{{ count(@items) >= 2 }}" href="items.htm" />
 ```
 
+The current data hive is passed to the sub-template. You can however pass new variables or overwrite existing variables using the `with` attribute:
+
+```html
+<!-- pass $a=2 to sub.htm -->
+<include href="sub.htm" with="a=2"/>
+
+<!-- pass $b='something' and $c='something quoted' to sub.htm -->
+<include href="sub.htm" with="b=something,c='something quoted'"/>
+
+<!-- pass uppercased value of $d to sub.htm -->
+<set d="abc"/> 
+<include href="sub.htm" with="d={{strtoupper($d)}}"/> // $d='ABC'
+{{@d}} // $d='abc'
+```
+
 ## Exclusion of Segments
 
 During the course of writing/debugging F3-powered programs and designing templates, there may be instances when disabling the display of a block of HTML may be handy. You can use the `<exclude>` directive for this purpose:
