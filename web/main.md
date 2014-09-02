@@ -177,17 +177,7 @@ var_dump($files);
     <b>Notice:</b> Having trouble to get this working? Don't forget to set the <b>enctype="multipart/form-data"</b> attribute in your <b>&lt;form&gt;</b> tag.
 </div>
 
-A callback can also be another function or class method. Have a look at the [call()](base#call) function description to see all possibilities. For instance, you can also generate a custom file name for the uploaded files using a callback function in the `slug` parameter:
-
-```php
-$files = $web->receive(function($file,$formFieldName){
-        // ...
-    },true,function($fileBaseName, $formFieldName){
-    	// build new file name from base name or input field name
-    	return "custom_filename.jpg";
-    }
-);
-```
+A callback can also be another function or class method. Have a look at the [call()](base#call) function description to see all possibilities.
 
 
 ```php
@@ -201,6 +191,19 @@ Web::instance()->receive('callback', false, true);
 <div class="alert alert-info">
     <b>Notice:</b> The callback function will be called for every successful upload if specified.
 </div>
+
+You can also generate a custom file name for the uploaded files using a callback function in the `slug` parameter:
+
+```php
+$files = $web->receive(function($file,$formFieldName){
+        // ...
+    },true,function($fileBaseName, $formFieldName){
+    	// build new file name from base name or input field name
+    	return "custom_filename.jpg";
+    }
+);
+```
+
 
 ### progress
 
