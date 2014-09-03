@@ -375,6 +375,10 @@ A string containing the version of the Framework.
 *   `{~ string expr ~}`
 
     Evaluate expression `expr`, similar to `{{expr}}` but does not echo the result.
+    
+*   `{* text-block *}`
+
+    Exclude a segment of your template. Alias to `<exclude>`
 
 
 ### Include
