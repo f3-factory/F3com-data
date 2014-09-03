@@ -281,12 +281,13 @@ The Fat-Free Framework is community-driven software. It can't be what it is toda
 
 <div class="multicolumn three"></div>
 
+
 * GitHub
 * Square Lines, LLC
-* Talis Group, Ltd.
 * Mirosystems
-* Tecnilógica
 * Stehlik & Company
+* Talis Group, Ltd.
+* Tecnilógica
 * G Holdings, LLC
 * S2 Development, Ltd.
 * Store Machine
@@ -295,12 +296,12 @@ The Fat-Free Framework is community-driven software. It can't be what it is toda
 * Sascha Ohms
 * Jermaine Maree
 * Lars Brandi Jensen
+* Eyðun Lamhauge
 * Sergey Zaretsky
 * Daniel Kloke
 * Brian Nelson
 * Roberts Lapins
 * Boris Gurevich
-* Eyðun Lamhauge
 * Jose Maria Garrido Diaz
 * Dawn Comfort
 * Johan Viberg
@@ -339,6 +340,7 @@ The Fat-Free Framework is community-driven software. It can't be what it is toda
 * FocusHeart
 * Philip Lawrence
 * Peter Beverwyk
+* Judith Grass
 * Randal Hintz
 * Franz Josef
 * Biswajit Nayak
@@ -370,5 +372,12 @@ The Fat-Free Framework is community-driven software. It can't be what it is toda
 * Eli Argon
 * Seregin Andrew
 * Marek Toman
+* Diji Enterprises
+* uonick
+* Kamil Kiblis
+* Mars Yau
+* Martin Latinov
+* Malikov Evgene
+* Andres Espinoza Arce
 
 Special thanks to the selfless others who expressed their desire to remain anonymous, yet share their time, contribute code, send donations, promote the framework to a wider audience, as well as provide encouragement and regular financial assistance. Their generosity is F3's prime motivation.
