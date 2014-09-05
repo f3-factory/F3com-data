@@ -18,9 +18,9 @@ $mapper = new \DB\Mongo\Mapper(\DB\Mongo $db, string $collection);
 If you like to create a model class, you might like to wrap it up:
 
 ```php
-$f3->set('DB', new \DB\Mongo('mongodb://localhost:27017','fatfree');
+$f3->set('DB', new \DB\Mongo('mongodb://localhost:27017','fatfree'));
 
-class User extends \DB\SQL\Mongo {
+class User extends \DB\Mongo\Mapper {
     public function __construct() {
         parent::__construct( \Base::instance()->get('DB'), 'users' );
     }
