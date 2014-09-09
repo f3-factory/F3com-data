@@ -247,6 +247,12 @@ TCP/IP listening port used by the Web server. Default value: `$_SERVER['SERVER_P
 Prefix to use with LANGUAGE and LOCALES.
 
 
+### QUERY
+**Type:** `string`, `Read-Only`
+
+Contains the request URI query string (all after the question mark `?`).
+
+
 ### QUIET
 **Type:** `bool` &nbsp; &nbsp; **Default:** `FALSE`
 
