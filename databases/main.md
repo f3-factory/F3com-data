@@ -156,7 +156,7 @@ $user=new DB\SQL\Mapper($db,'users');
 $user->load(array('userID=?','tarzan'));
 ```
 
-The first line instantiates a data mapper object that interacts with the `users` table in our database. Behind the scene, F3 retrieves the structure of the `users` table and determines which field(s) are defined as primary key(s). At this point, the mapper object does not contain any data yet (it is called "dry state") and the `$user` var is basically nothing more than a structured object - but it contains the methods it needs to perform the basic CRUD operations plus some extras as you will see later. Now, to retrieve a record from our `users` table with, e.g., the field `userID` containing the string value `tarzan`, we use the `load()` method. This process is called "auto-hydrating" the data mapper object.
+The first line instantiates a data mapper object that interacts with the `users` table in our database. Behind the scene, F3 retrieves the structure of the `users` table and determines which field(s) are defined as primary key(s). At this point, the mapper object does not contain any data yet (it is called **"dry state"**) and the `$user` var is basically nothing more than a structured object - but it contains the methods it needs to perform the basic CRUD operations plus some extras as you will see later. Now, to retrieve a record from our `users` table with, e.g., the field `userID` containing the string value `tarzan`, we use the `load()` method. This process is called "auto-hydrating" the data mapper object.
 
 Easy, wasn't it? F3 understands that a SQL table already has a structural definition existing within the database engine itself. Unlike other frameworks, F3 requires no extra class declarations (unless you want to extend the data mappers to fit complex objects), no redundant PHP array/object property-to-field mappings (duplication of efforts), no code generators (which require code regeneration if the database structure changes), no stupid XML/YAML files to configure your models, no superfluous commands just to retrieve a single record. With F3, a simple resizing of a `varchar` field in your MySQL table does not require a single change in your application code. Consistent with MVC and "separation of concerns", the database admin has as much control over the data and the structures as a template designer has over HTML/XML templates.
 
@@ -207,7 +207,7 @@ $user->save();
 
 We still use the same `save()` method. But how does F3 know when a record should be inserted or updated? At the time a data mapper object is auto-hydrated by a record retrieval, the framework keeps track of the record's primary keys (or `_id`, in the case of MongoDB and Jig) - so it knows which record should be updated or deleted - even when the values of the primary keys are changed. A programmatically-hydrated data mapper - the values of which were not retrieved from the database, but populated by the application - will not have any memory of previous values in its primary keys. The same applies to MongoDB and Jig, but using object `_id` as reference. So, when we instantiated the `$user` object above and populated its properties with values from our program - without at all retrieving a record from the user table, F3 knows that it should insert this record.
 
-A mapper object will not be empty after a `save()`. If you wish to add a new record to your database, you must first dehydrate the mapper:
+A mapper object will not be empty after a `save()`. If you wish to add a new record to your database, you must first flush the mapper using the `reset` method:
 
 ```php
 $user->reset();
@@ -246,9 +246,9 @@ $user->load(array('userID'=>'cheetah','password'=>'chimp'));
 $user->erase();
 ```
 
-## The Weather Report
+## Mapper Data Status
 
-To find out whether our data mapper was hydrated or not:
+To find out whether our data mapper was loaded with a valid data record or not, use the `dry` method:
 
 ```php
 if ($user->dry())
