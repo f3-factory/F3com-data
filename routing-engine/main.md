@@ -417,6 +417,12 @@ for the autoloader as follows:
 $f3->set('AUTOLOAD','main/;aux/');
 ```
 
+<div class="alert alert-info">
+<strong>NB:</strong> Namespaces are here to help you organize your code. If you use them, you can decide to do it with F3 autoloader or not.
+If you use the autoloader, you have to create a folder for each namespace.
+If you don't use the autoloader, you can store your files however you like, keeping in mind that you will need to include each of them manually. 
+</div>
+
 ## Routing to a Namespaced Class
 
 F3, being a namespace-aware framework, allows you to use a method in namespaced class as a route
