@@ -494,10 +494,10 @@ Did you notice the peculiar `'Today is {0,date}'` pattern in our previous exampl
 One more thing: F3 can also load **.ini**-style formatted files as dictionaries:
 
 ``` ini
-love="I love F3"
-today="Today is {0,date}"
-pi="{0,number}"
-money="Amount remaining: {0,number,currency}"
+love = I love F3
+today = Today is {0,date}
+pi = {0,number}
+money = Amount remaining: {0,number,currency}
 ```
 
 Save it as `dict/en.ini` so the framework can load it automatically.
