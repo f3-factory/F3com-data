@@ -502,6 +502,14 @@ money = Amount remaining: {0,number,currency}
 
 Save it as `dict/en.ini` so the framework can load it automatically.
 
+<div class="alert alert-info">
+The LANGUAGE variable accepts the same kind of string as the HTTP Accept-Language header,
+which is a comma separated list of 2-letter language codes optionally followed by <strong>a hypen</strong> and a 2-letter country code.
+<br><br>
+<strong>NB:</strong> Even though POSIX locales use an underscore as a separator (es_BR.UTF-8), you should define the LANGUAGE variable with a hyphen (es-BR).
+Dictionary files follow the same rule (es-BR.php / es-BR.ini).
+</div>
+
 ## Data Sanitation
 
 By default, both view handler and template engine escapes all rendered variables, i.e. converted to HTML entities to protect you from possible XSS and code injection attacks. On the other hand, if you wish to pass valid HTML fragments from your application code to your template:

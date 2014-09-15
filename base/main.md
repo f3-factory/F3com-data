@@ -945,6 +945,14 @@ $f3->set('LANGUAGE', 'es-BR,es');
 $f3->get('LANGUAGE'); // 'es-BR,es,en' the fallback language is added at the end of the list
 ```
 
+<div class="alert alert-info">
+The LANGUAGE variable accepts the same kind of string as the HTTP Accept-Language header,
+which is a comma separated list of 2-letter language codes optionally followed by <strong>a hypen</strong> and a 2-letter country code.
+<br><br>
+<strong>NB:</strong> Even though POSIX locales use an underscore as a separator (es_BR.UTF-8), you should define the LANGUAGE variable with a hyphen (es-BR).
+Dictionary files follow the same rule (es-BR.php / es-BR.ini).
+</div>
+
 ### lexicon
 
 **Transfer lexicon entries to hive**
