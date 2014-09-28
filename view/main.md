@@ -128,7 +128,7 @@ echo $view->render('myview.csv','text/csv',array('urls'=>$urls));
 object dupe ( object $arg )
 ```
 
-The View is rendered within a sandbox that contains a copy of the whole hive data. The each hive key gets encoded by [esc()](view#esc) to ensure a clean and secure way of rendering your data into the view.
+The View is rendered within a sandbox that contains a copy of the whole hive data. Each hive key gets encoded by [esc()](view#esc) to ensure a clean and secure way of rendering your data into the view.
 Therefore the dupe method tries to clone any object in the hive and encode the copy instead. This way the object data retains consistently in the hive for any further processing after rendering a view. Otherwise the original object becomes encodes too, because PHP always passes references of objects.
 This attempt of cloning objects only works for PHP >= 5.4.0.
 
