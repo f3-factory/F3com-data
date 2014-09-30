@@ -22,10 +22,16 @@ This array contains all [named routes](routing-engine#named-routes) which can be
 
 
 ### AUTOLOAD
-**Type:** `string` &nbsp; &nbsp; **Default:** `'./'`
+**Type:** `string|array` &nbsp; &nbsp; **Default:** `'./'`
 
-Search path(**s**) for user-defined PHP classes that the framework will attempt to autoload at runtime. When specifying multiple paths, you can use a pipe (`|`), comma (`,`), or semi-colon (`;`) as path separator. Remember paths must end with a `'/'`. e.g. `$f3->set('AUTOLOAD', 'app/;inc/,./');`
+Search path(**s**) for user-defined PHP classes that the framework will attempt to autoload at runtime. When specifying multiple paths,
+you can use a pipe (`|`), comma (`,`), or semi-colon (`;`) as path separator.
 
+<div class="alert alert-info">
+<strong>REMEMBER:</strong> paths must end with a slash. E.g: <code>$f3->set('AUTOLOAD', 'app/;inc/,./');</code>
+</div>
+
+[See here](routing-engine#the-f3-autoloader) for more details.
 
 ### BASE
 **Type:** `string`, `Read-only` &nbsp; &nbsp; **Default:** auto-detected

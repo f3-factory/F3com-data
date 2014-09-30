@@ -376,7 +376,8 @@ automatically for you. Just save your class files (one class per file) in a fold
 $f3->set('AUTOLOAD','myclassfiles/');
 ```
 
-**Important:** The class name and file name must be identical so the framework can autoload your class. If your class is named `BarBaz`, your file must be named `barbaz.php` (case does not matter).
+**Important:** The class name and file name must be identical so the framework can autoload your class. If your class is named `BarBaz`, your file must be named `BarBaz.php`.
+Lowercase `barbaz.php` will also work. (see [below](routing-engine#autoloader-case-handling) for details).
 
 When you call your class or method using `$obj=new Barbaz;`, Fat-Free Framework will search for the file barbaz.php in the path(s) specified in the autoloader variable. Once it finds the file, it will include in using PHP's `require` command. This is how autoloading works.
 
@@ -444,6 +445,25 @@ $f3->route('GET|POST /','Main\Home->show');
 ```
 
 will instantiate the `Home` class at runtime and call the `show()` method thereafter.
+
+## Autoloader case handling
+
+On case-sensitive systems like UNIX the class gets auto-loaded only if the class file and path have the same case as the namespaced class
+**or** if they are lowercase. E.g:
+
+If the autoloaded class is `Main\Home`, possible filenames are `Main/Home.php` or `main/home.php`.
+
+&rArr; `main\Home.php`, `Main\hoME.php` or `MAIN\HOME.php` will not load! 
+
+If you need to define a custom case handling, you can set the `AUTOLOAD` variable as an array of a path and a custom function.
+
+Let's say that all your filenames are uppercase. Then instead of defining `$f3->set('AUTOLOAD','classes/'`, you should define:
+
+```php
+$f3->set('AUTOLOAD',array('classes/',function($class){
+  return strtoupper($class);
+}));
+```
 
 ## Event Handlers
 
