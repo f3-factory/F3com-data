@@ -36,27 +36,6 @@ $user->load('id = 1');
 // etc.
 ```
 
-<div class="alert alert-warning">
-<strong>Notice:</strong> 
-If you extend the mapper and you are trying to read or modify protected properties of the parent class, you will run into errors due to the lack of visibility from within the child class.
-
-Solution: 
-Use the `get` or `set` methods from within the child class. These will take advantage of the magic methods that override protected properties.
-
-```php
-class Model extends \DB\SQL\Mapper {
-    function __construct(){
-        parent::__construct(\Base::instance()->get('DB'),'test_model');
-        $this->beforeinsert(function($self){
-            $self->source='bar'; // fails due to protected property named 'source'
-            $self->set('source','bar'); // works using built-in magic setter method
-        });
-}}
-```
-
-Refer to the [FatFree GitHub Issue #697](https://github.com/bcosca/fatfree/issues/697) for more details.
-</div>
-
 ## Syntax
 
 ### $filter
