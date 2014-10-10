@@ -251,6 +251,30 @@ int|bool erase ( )
 NULL reset ( )
 ```
 
+## Event handlers
+
+All Cursor derivatives offer the possibility to intercept the processing on certain events through custom functions.
+This gives you the opportunity to add some validation, sanitation or more complex business logic. See the following described methods to get an overview of possible events you may hook into.
+
+**Notice:**
+If you extend the mapper and try to read or modify mapper fields (especially those that also exist as class property) with magic getter/setter within those event handlers, you will get unpredictable behaviours or run into errors.
+
+The simple solution to this is to stick to the usage of the `get` or `set` methods from within the child class. These are safe to use and won't override protected properties.
+
+```php
+class Model extends \DB\SQL\Mapper {
+    function __construct(){
+        parent::__construct(\Base::instance()->get('DB'),'test_model');
+        $this->beforeinsert(function($self){
+            $self->source='bar'; // fails due to protected property named 'source'
+            $self->set('source','bar'); // works - just use the setter directly
+        });
+}}
+```
+
+Refer to the [FatFree GitHub Issue #697](https://github.com/bcosca/fatfree/issues/697) for more details.
+
+
 ### onload
 
 **Define a hook to the `onload` event**
