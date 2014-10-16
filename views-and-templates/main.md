@@ -179,14 +179,14 @@ The current data hive is passed to the sub-template. You can however pass new va
 
 ```html
 <!-- pass $a=2 to sub.htm -->
-<include href="sub.htm" with="a=2"/>
+<include href="sub.htm" with="a=2" />
 
 <!-- pass $b='something' and $c='something quoted' to sub.htm -->
-<include href="sub.htm" with="b=something,c='something quoted'"/>
+<include href="sub.htm" with="b=something,c='something quoted'" />
 
 <!-- pass uppercased value of $d to sub.htm -->
-<set d="abc"/> 
-<include href="sub.htm" with="d={{strtoupper($d)}}"/> // $d='ABC'
+<set d="abc" /> 
+<include href="sub.htm" with="d={{strtoupper($d)}}" /> // $d='ABC'
 {{@d}} // $d='abc'
 ```
 
