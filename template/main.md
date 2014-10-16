@@ -4,6 +4,10 @@ F3's own lightning fast and extendable template engine gives you all the flexibi
 This Template plugin extends the [Preview](preview) class and is especially made for XML-style templates.
 Make sure you have read the user guide section about [templating](views-and-templates#a-quick-look-at-the-f3-template-language).
 
+<div class="alert alert-info">
+If you are looking for a summarizing overview of the available template directives and its syntax, see the <a href="quick-reference#template-directives">Quick Reference</a>
+</div>
+
 Namespace: `\` <br>
 File location: `lib/template.php`
 
