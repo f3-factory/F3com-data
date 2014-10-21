@@ -215,7 +215,7 @@ array(4) {
 
 ```
 
-The `subset` key contains an array of mapper objects returned from find(), `total` is the sum of all records for all pages, `limit` is a bypass of the given limit size, `count` is the number of subsets/pages available and `pos` gives you the current subset cursor position ( it's the page number - 1).
+The `subset` key contains an array of mapper objects returned from find(). `total` is the sum of all records for all pages. `limit` holds the same value as the `size` input parameter to the call. `count` is the number of subsets/pages available. `pos` gives you the current subset cursor position ( it's the page number - 1).
 
 ### loaded
 
