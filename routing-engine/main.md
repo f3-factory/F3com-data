@@ -226,7 +226,7 @@ server {
     root /var/www/html;
     location / {
         index index.php index.html index.htm;
-        try_files $uri /index.php;
+        try_files $uri /index.php?$query_string;
     }
     location ~ \.php$ {
         fastcgi_pass ip_address:port;
