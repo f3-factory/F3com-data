@@ -136,7 +136,7 @@ The `$log` is a toggle switch for suppressing or enabling the log of executed co
 
 For example, consider the following table `mytable`:
 
-<table class="table table-bordered table-condensed table-striped">
+<table class="table table-condensed table-striped">
   <thead>
     <tr><th width="60">id</th><th>name</th></tr>
   </thead>

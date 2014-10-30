@@ -14,7 +14,7 @@ File location: `lib/db/cursor.php`
 The following methods are available to all Data Mappers. Even if the filter and option syntax may differ from one mapper to another,
 the behaviour of these functions are the same. So assume you have this set of data in your DB table when you'll be reading the examples below.
 
-<table class="table table-bordered table-condensed table-striped">
+<table class="table table-condensed table-striped">
 <tr>
 	<th>ID</th>
 	<th>title</th>

@@ -26,9 +26,9 @@ If you feel that this software is one great weapon to have in your programming a
 
 ## Support
 
-Technical support is available at the official discussion forum: [`https://groups.google.com/forum/#!forum/f3-framework`](https://groups.google.com/forum/#!forum/f3-framework).
+Technical support is available at the official discussion forum: [https://groups.google.com/forum/#!forum/f3-framework](https://groups.google.com/forum/#!forum/f3-framework).
 
-If you need live support, you can talk to the development team and other members of the F3 community via IRC. We're on the FreeNode `#fatfree` channel (`chat.freenode.net`). Visit [`http://webchat.freenode.net/`](http://webchat.freenode.net/?channels=fatfree) to join the conversation. You can also download the [Firefox Chatzilla](https://addons.mozilla.org/en-US/firefox/addon/chatzilla/) add-on or [Pidgin](http://www.pidgin.im/) if you don't have an IRC client so you can participate in the live chat.
+If you need live support, you can talk to the development team and other members of the F3 community via IRC. We're on the FreeNode `#fatfree` channel (`chat.freenode.net`). Visit [http://webchat.freenode.net/](http://webchat.freenode.net/?channels=fatfree) to join the conversation. You can also download the [Firefox Chatzilla](https://addons.mozilla.org/en-US/firefox/addon/chatzilla/) add-on or [Pidgin](http://www.pidgin.im/) if you don't have an IRC client so you can participate in the live chat.
 
 
 
@@ -47,7 +47,7 @@ git clone git://git@github.com:bcosca/Fat-Free-Framework.git
 
 If all you want is a zipball, grab it [**here**](https://github.com/bcosca/fatfree/archive/dev.zip).
 
-To file a bug report, visit [`https://github.com/bcosca/fatfree/issues`](https://github.com/bcosca/fatfree/issues).
+To file a bug report, visit [https://github.com/bcosca/fatfree/issues](https://github.com/bcosca/fatfree/issues).
 
 
 ## Community
@@ -56,7 +56,7 @@ See what other users have made with F3:
 
 ### Projects Around F3
 
-<table class="table table-bordered">
+<table class="table table-striped">
     <thead>
         <tr>
             <th class="span2">Plugin Name</th>
@@ -119,7 +119,7 @@ See what other users have made with F3:
 
 <button type="button" class="btn btn-small" data-toggle="collapse" data-target="#projects-archive">view projects archive</button>
 <div id="projects-archive" class="collapse">
-    <table class="table table-bordered">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th class="span2">Plugin Name</th>
@@ -153,7 +153,7 @@ See what other users have made with F3:
 
 ### User Plugins
 
-<table class="table table-bordered">
+<table class="table table-striped">
     <thead>
         <tr>
             <th class="span2">Plugin Name</th>
@@ -210,7 +210,7 @@ See what other users have made with F3:
 
 <button type="button" class="btn btn-small" data-toggle="collapse" data-target="#plugin-archive">view Plugin archive for older F3 versions</button>
 <div id="plugin-archive" class="collapse">
-    <table class="table table-bordered">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th class="span2">Plugin Name</th>
@@ -251,7 +251,7 @@ See what other users have made with F3:
 
 ### Some more Goodies
 
-<table class="table table-bordered">
+<table class="table table-striped">
     <thead>
         <tr>
             <th class="span10">Name</th>
