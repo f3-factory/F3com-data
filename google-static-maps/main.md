@@ -45,8 +45,10 @@ Example:
 
 ```php
 $map = new \Web\Google\StaticMap();
-$map->markers('color:blue%7Clabel:S%7C11211%7C11206%7C11222'); //
+$map->markers('color:blue|label:S|San Francisco,CA'); // you can use an address or lat,long coordinates
 ```
+
+The plugin will automatically urlencode your settings, so don't worry about that. Check out the [Google Static Maps API V2 docs](https://developers.google.com/maps/documentation/staticmaps/?hl=en#Markers) to see the full documentation about markers.
 
 ### Images formats
 
