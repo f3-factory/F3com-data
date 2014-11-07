@@ -82,14 +82,14 @@ array|FALSE schema ( string $table [, array|string $fields = NULL [, int $ttl = 
 
 This function allows you to retrieve the schema of a given SQL table.
 
-`$fields` is either an array or a list (according to the F3 function [split](base#split)) of the names of columns to include in the returned schema. Defaulted to all fields. 
+`$fields` is either an array or a list (according to the F3 function [split](base#split)) of the names of columns to include in the returned schema. Defaulted to all fields.
 
 When specified, `$ttl` will trigger a cache check for previous schema results and if not found or expired, will save the actual result to the cache backend, provided a [CACHE](quick-reference#cache) system is activated.
 
 Example of use:
 
 ```php
-$db->exec("CREATE TABLE IF NOT EXISTS mytable 
+$db->exec("CREATE TABLE IF NOT EXISTS mytable
           (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
            name varchar(128) NULL DEFAULT 'anonymous',
            age SMALLINT UNSIGNED NOT NULL,
@@ -100,20 +100,18 @@ $columns = $db->schema('mytable', 'name;age'); // only interested in these 2 col
 var_dump($columns);
 // outputs
 array (size=2)
-  'name' => 
-    array (size=5)
-      'type' => string 'varchar(128)' (length=12)
-	  'pdo_type' => int 2  // \PDO::PARAM_STR
-      'default' => string 'anonymous' (length=9)
-      'nullable' => boolean true
-      'pkey' => boolean false
-  'age' => 
-    array (size=5)
-      'type' => string 'SMALLINT UNSIGNED' (length=17)
-	  'pdo_type' => int 1 // \PDO::PARAM_INT
-      'default' => null
-      'nullable' => boolean false
-      'pkey' => boolean false
+	'name' =>	array (size=5)
+		'type' => string 'varchar(128)' (length=12)
+		'pdo_type' => int 2  // \PDO::PARAM_STR
+		'default' => string 'anonymous' (length=9)
+		'nullable' => boolean true
+		'pkey' => boolean false
+		'age' => array (size=5)
+			'type' => string 'SMALLINT UNSIGNED' (length=17)
+			'pdo_type' => int 1 // \PDO::PARAM_INT
+			'default' => null
+			'nullable' => boolean false
+			'pkey' => boolean false
 ```
 
 <div class="alert alert-info"><strong>MySQL Hint:</strong><br>You can improve InnoDB performance on MySQL with `SET GLOBAL innodb_stats_on_metadata=0;` <em>! This requires SUPER privilege! </em></div>

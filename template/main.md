@@ -126,19 +126,17 @@ returns:
 
 ```php
 array (size=3)
-  0 => string '<div>
-	<h1>My favorite books</h1>
-	<ul>
-	' (length=53)
-  1 =>
-	array (size=1)
-	  'repeat' =>
-		array (size=2)
-		  '@attrib' =>
-			array (size=2)
-			  'group' => string '{{ @books }}' (length=12)
-			  'value' => string '{{ @book }}' (length=11)
-		  0 => string '<li>{{ @book.title }}</li>' (length=38)
-  2 => string '</ul>
+	0 => string '<div>
+		<h1>My favorite books</h1>
+		<ul>
+		' (length=53)
+	1 =>
+		array (size=1)
+			'repeat' => array (size=2)
+				'@attrib' => array (size=2)
+					'group' => string '{{ @books }}' (length=12)
+					'value' => string '{{ @book }}' (length=11)
+		0 => string '<li>{{ @book.title }}</li>' (length=38)
+		2 => string '</ul>
   </div>' (length=19)
 ```

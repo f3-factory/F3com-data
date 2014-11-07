@@ -15,9 +15,9 @@ A template file contains of HTML markup, inline tokens `{{@title}}` and special 
 ```html
 <h1>News</h1>
 <repeat group="{{@articles}}" value="{{@article}}">
-    <h2>{{@article.title}}</h2>
-    <p>{{@article.text}}</p>
-    <img src="{{'ui/images/'.@article.image}}" />    
+	<h2>{{@article.title}}</h2>
+	<p>{{@article.text}}</p>
+	<img src="{{'ui/images/'.@article.image}}" />
 </repeat>
 ```
 
@@ -62,17 +62,17 @@ Let's have a look at how to create a node handler:
 ```php
 \Template::instance()->extend('img',function($node){
 	var_dump($node);
-	/* array(1) {
-	  ["@attrib"]=>
-	  array(1) {
-		["src"]=>
-		string(25) "{{'ui/images/'.@article.image}}"
-	  }
-	} */
+	/*
+	array(1) {
+		["@attrib"]=> array(1) {
+			["src"]=> string(25) "{{'ui/images/'.@article.image}}"
+		}
+	}
+	*/
 });
 ```
 
-Our node handler receives the full tag description in the `$node` array. The `@attrib` array key contains all tag attributes that are present. All other keys in `$node` would represent some inner content within our tag. Well, `<img>` elements usually have no inner content, but in case of a `<h1>` it would include all content and nodes between the starting and closing tag. 
+Our node handler receives the full tag description in the `$node` array. The `@attrib` array key contains all tag attributes that are present. All other keys in `$node` would represent some inner content within our tag. Well, `<img>` elements usually have no inner content, but in case of a `<h1>` it would include all content and nodes between the starting and closing tag.
 
 Okay, so imagine you would like to resize all image files used by the `<img>` elements.
 What we need to do is to get the real image path, render it with a smaller size and put the new image link into the HTML tag. Well that sounds easy, but as you can see - trying to get the real image link is already the first problem. Since we used a token in the `src` attribute, we will never know the real image path at the time we are rendering this template tag. But this rendering process will result in a pre-compiled and cached PHP / HTML template. So what we are going to do is to create some PHP code, rather than the final image tag. This code get executed when the pre-compiled template is called and builds the final HTML. So in general we differ **static tag handlers** that just creates final static HTML code and **dynamic tag handlers** which creates dynamic code, that may execute additional other code to render the final HTML at runtime.
@@ -104,7 +104,7 @@ class ImageViewHelper extends \Prefab {
 }
 ```
 
-We will register this new tag handler with 
+We will register this new tag handler with
 
 ```php
 \Template::instance()->extend('img','ImageViewHelper::render');
@@ -159,7 +159,7 @@ protected function resolveAttr(array $attr) {
 	}
 	return $out;
 }
-``` 
+```
 
 We should now use this function in our render method and use the new computed attributes to inject them in our final HTML element:
 
@@ -170,7 +170,7 @@ static public function render($node) {
 	unset($attr['src']); // remove existing src key, we'll handle this on our own
 	$attr = self::instance()->resolveAttr($attr); // assemble all remaining attributes
 	$out='<?php $imgPath = \ImageViewHelper::instance()->build('.$path.'); ?>'
-	    .'<img src="<?php echo $imgPath;?>"'.$attr.' />';
+		.'<img src="<?php echo $imgPath;?>"'.$attr.' />';
 	return $out;
 }
 ```
@@ -190,7 +190,7 @@ it would be rendered as `<img src="tmp/0fs02ehlcd7.jpg"  class="big" rel="lightb
 ### 3. Preview
 
 The Preview class mainly takes care about converting your tempplate and its expressions to PHP code - the so called pre-compiled template. So any tokens that are echo'd `{{ }}` or just executed `{~  ~}` can be used for dynamic templating, not just with HTML markup, but also with non-XML compatible template system like HAML, YAML, markdown or simple text files.
- 
+
 So it takes all those little tokens and renders them into PHP code that is cached in the next step. So if you have a token like `{{@title}}` it'll become `<?php echo $title?>`. Rendering tokens can also be extended with filters (or also called modifiers). Some filters that are already included are [esc](/view#esc), [raw](/view#raw) and [format](/base#format). Filters can be applied to any expression using a pipe char, i.e. `{{ @text | raw }}` .
 
 This would render the token as the following:

@@ -70,7 +70,7 @@ $f3->set('var','I want this value saved',90);
 
 ## Keeping Javascript and CSS on a Healthy Diet
 
-Fat-Free also has a Javascript and CSS compressor available in the [Web plug-in](web#minify). It can combine all your CSS files into one stylesheet and all your Javascript files into one single script in order to drastically reduce the number of HTTP requests needed by a Web page. Reducing the number of HTTP requests to your Web server results in faster page loading and a better UX. 
+Fat-Free also has a Javascript and CSS compressor available in the [Web plug-in](web#minify). It can combine all your CSS files into one stylesheet and all your Javascript files into one single script in order to drastically reduce the number of HTTP requests needed by a Web page. Reducing the number of HTTP requests to your Web server results in faster page loading and a better UX.
 
 To put this easy improvement in place, you first need to prepare your HTML templates to take advantage of this feature.
 
@@ -89,12 +89,12 @@ And do the same with your Javascript files:
 Of course we need to set up a route to handle the necessary call to the Fat-Free CSS/Javascript compressor:
 
 ```php
-$f3->route('GET /minify/@type', 
-    function($f3, $args) {
-        $f3->set('UI',$f3->get('UI').$args['type'].'/'); 
-        echo Web::instance()->minify($_GET['files']);
-    },
-    3600*24 
+$f3->route('GET /minify/@type',
+	function($f3, $args) {
+		$f3->set('UI',$f3->get('UI').$args['type'].'/');
+		echo Web::instance()->minify($_GET['files']);
+	},
+	3600*24
 );
 
 // @type will make `PARAMS.type` variable base point to the correct path

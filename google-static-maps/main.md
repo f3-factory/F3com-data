@@ -178,22 +178,22 @@ $f3->route('GET /static-map/@mapargs', function($f3, $args) {
 
 	$map->center(isset($center)?$center:'Center of the World');
 	// override default maptype 'roadmap'
-	$map->maptype(isset($maptype)?$maptype:'satellite'); 
+	$map->maptype(isset($maptype)?$maptype:'satellite');
 	// override default format 'png'
 	$map->format($format=(isset($format)?$format:'jpg'));
 	// size is mandatory! no default value. set default size '320x200'
-	$map->size(isset($size)?$size:'320x200');            
+	$map->size(isset($size)?$size:'320x200');
 	// override default zoom '12'
-	$map->zoom(isset($zoom)?$zoom:'14');                 
+	$map->zoom(isset($zoom)?$zoom:'14');
 	// override default scale '1'
-	$map->scale(isset($scale)?$scale:'2');               
+	$map->scale(isset($scale)?$scale:'2');
 	// sensor is mandatory! no default value. set sensor to 'false'
-	$map->sensor(isset($sensor)?$sensor:'false');        
-	
+	$map->sensor(isset($sensor)?$sensor:'false');
+
 	// send raw image map to browser
 	header('Content-type: image/'.$format);
-	echo $map->dump(); 
-	},
+	echo $map->dump();
+},
 	3600*24*30 // Save result of the request in F3 cache for 30 days
 );
 ```

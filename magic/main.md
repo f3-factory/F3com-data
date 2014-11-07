@@ -61,7 +61,7 @@ The Magic class being abstract, your new descendant class using Magic need to im
 **Return TRUE if key is not empty**
 
 ``` php
-bool exists ( string $key ) 
+bool exists ( string $key )
 ```
 
 This function returns TRUE if key is not empty
@@ -71,7 +71,7 @@ This function returns TRUE if key is not empty
 **Bind value to key**
 
 ``` php
-mixed set ( string $key, mixed $val ) 
+mixed set ( string $key, mixed $val )
 ```
 
 This function allows you to bind a value to a key
@@ -81,7 +81,7 @@ This function allows you to bind a value to a key
 **Retrieve contents of key**
 
 ``` php
-mixed get ( string $key ) 
+mixed get ( string $key )
 ```
 
 This function allows you to retrieve the contents of a key
@@ -91,7 +91,7 @@ This function allows you to retrieve the contents of a key
 **Unset key**
 
 ``` php
-NULL clear ( string $key ) 
+NULL clear ( string $key )
 ```
 
 This function allows you to unset a key
@@ -106,7 +106,7 @@ The following methods are needed for internal implementation. You don't need the
 **Return TRUE if property has public visibility**
 
 ``` php
-private bool visible ( string $key ) 
+private bool visible ( string $key )
 ```
 
 This function returns TRUE if property has public visibility. This is important to decide if we call the magic setter/getter or just bypass the public property.
@@ -116,7 +116,7 @@ This function returns TRUE if property has public visibility. This is important 
 **Convenient method for checking property value**
 
 ``` php
-mixed offsetexists ( string $key ) 
+mixed offsetexists ( string $key )
 ```
 
 This function is a convenient method for retrieving the value of a property
@@ -126,7 +126,7 @@ This function is a convenient method for retrieving the value of a property
 **Alias for offsetexists()**
 
 ``` php
-mixed __isset ( string $key ) 
+mixed __isset ( string $key )
 ```
 
 This function is an alias for the offsetexists() function above
@@ -136,7 +136,7 @@ This function is an alias for the offsetexists() function above
 **Convenient method for assigning property value**
 
 ``` php
-mixed offsetset ( string $key, scalar $val ) 
+mixed offsetset ( string $key, scalar $val )
 ```
 
 This function is a convenient method for setting the value of a property
@@ -146,7 +146,7 @@ This function is a convenient method for setting the value of a property
 **Alias for offsetset()**
 
 ``` php
-mixed __set ( string $key, scalar $val ) 
+mixed __set ( string $key, scalar $val )
 ```
 
 This function is an alias for the offsetset() function above
@@ -156,7 +156,7 @@ This function is an alias for the offsetset() function above
 **Convenient method for retrieving property value**
 
 ``` php
-mixed offsetget ( string $key ) 
+mixed offsetget ( string $key )
 ```
 
 This function is a convenient method for getting the value of a property
@@ -166,7 +166,7 @@ This function is a convenient method for getting the value of a property
 **Alias for offsetget()**
 
 ``` php
-mixed __get ( string $key ) 
+mixed __get ( string $key )
 ```
 
 This function is an alias for the offsetget() function above
@@ -176,7 +176,7 @@ This function is an alias for the offsetget() function above
 **Convenient method for checking property value**
 
 ``` php
-NULL offsetunset ( string $key ) 
+NULL offsetunset ( string $key )
 ```
 
 This function is a convenient method for checking the value of a property
@@ -186,7 +186,7 @@ This function is a convenient method for checking the value of a property
 **Alias for offsetunset()**
 
 ``` php
-NULL __unset ( string $key ) 
+NULL __unset ( string $key )
 ```
 
 This function is an alias for the offsetunset() function above

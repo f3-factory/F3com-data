@@ -24,7 +24,7 @@ $isPingbackAvailable = extension_loaded('xmlrpc');  // returns TRUE or FALSE
 $pingback = Web\Pingback::instance();
 ```
 
-The Pingback class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code. 
+The Pingback class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code.
 
 ## Methods
 
@@ -33,7 +33,7 @@ The Pingback class uses the [Prefab](prefab-registry) factory wrapper, so you ca
 **Load local page contents, parse HTML anchor tags, find permalinks, and send XML-RPC calls to corresponding pingback servers**
 
 ``` php
-NULL inspect ( string $source ) 
+NULL inspect ( string $source )
 ```
 
 This function performs a web request to load the local page contents given by the `$source` URL. Then the retrieved response is parsed, looking for HTML anchor tags. For every permalink found (`<link rel="pingback" />` typically) inside the page, a XML-RPC call is send to the corresponding pingback server (`METHOD POST`). (Every XML-RPC call is logged. See function `log()` below to retrieve transactions history.)
@@ -49,21 +49,21 @@ $pingback->inspect($source);
 **Receive ping, check if local page is pingback-enabled, verify source contents, and return XML-RPC response**
 
 ``` php
-string listen ( callback $func [ , string $path = NULL ] ) 
+string listen ( callback $func [ , string $path = NULL ] )
 ```
 
-This function allows you to setup a XML-RPC listener. You need to define a F3 route and bind it to this function. 
+This function allows you to setup a XML-RPC listener. You need to define a F3 route and bind it to this function.
 
-The function basically 'listen', once bound to a F3 route, to receive a ping, checks then if the local page is pingback-enabled, verifies the source contents, and for each link found in the source contents, use a given `$func` callback function to return a XML-RPC response. 
+The function basically 'listen', once bound to a F3 route, to receive a ping, checks then if the local page is pingback-enabled, verifies the source contents, and for each link found in the source contents, use a given `$func` callback function to return a XML-RPC response.
 
 The `$func` parameter is the name of your callback function to use to handle the request/ping. It will be called like this:
 
 ```php
 call_user_func_array($func, array($source,$req['body']));
 ```
-with `$source` being the URL of the source, and `$req['body']` the body part returned 
+with `$source` being the URL of the source, and `$req['body']` the body part returned
 
-If `$path` is not provided, the value of the [BASE](quick-reference#base) system variable is used. 
+If `$path` is not provided, the value of the [BASE](quick-reference#base) system variable is used.
 
 On success, this function will `die` returning the XML response content as per the [xmlrpc_encode_request](http://php.net/manual/en/function.xmlrpc-encode-request.php "php.net :: xmlrpc_encode_request") php function:
 
@@ -116,10 +116,10 @@ function PingListener($f3, $params) {
 **Return transaction history**
 
 ``` php
-string log ( ) 
+string log ( )
 ```
 
-This function returns the transaction history as logged by the `inspect()` function. The transaction history consists of a list of the permalinks URLs found in every inspected page, and this for every request response. 
+This function returns the transaction history as logged by the `inspect()` function. The transaction history consists of a list of the permalinks URLs found in every inspected page, and this for every request response.
 
 Example:
 
@@ -132,7 +132,6 @@ Mon, 06 Jan 2014 10:23:00 +0100 /comments-feed?page=pingback/cf [permalink:/ping
    /pingback2?page=pingback/client
 
 Mon, 06 Jan 2014 10:23:01 +0100 /rss2-feed?page=pingback/rss2 [permalink:/rss2-ping]
-  
  /pingback2?page=rss2-ping/client
  ```
 
@@ -141,10 +140,10 @@ Mon, 06 Jan 2014 10:23:01 +0100 /rss2-feed?page=pingback/rss2 [permalink:/rss2-p
 **Instantiate class**
 
 ``` php
-object __construct ( ) 
+object __construct ( )
 ```
 
-The constructor allows you to instantiate the class. 
+The constructor allows you to instantiate the class.
 
 Example:
 
@@ -159,10 +158,10 @@ $pingback = new Pingback (  )
 **Return TRUE if URL points to a pingback-enabled resource**
 
 ``` php
-protected bool enabled ( $url ) 
+protected bool enabled ( $url )
 ```
 
-This function returns TRUE if the given URL points to a pingback-enabled resource. 
+This function returns TRUE if the given URL points to a pingback-enabled resource.
 
 This is a _protected_ function used internally by `inspect()` and `listen()` to make sure a given URL points to a pingback-enabled resource, i.e. it looks for a valid pingback header and scan the page to make sure it contains pingback link tag(s).
 

@@ -82,7 +82,7 @@ The `$file` is a filename that must validate against the PHP function `is_file($
 
 With the `$mime` argument you can explicitly set a mime type. Leave it to `NULL` to let the framework detect the MIME type using the `$file` file extension.
 
-The 3rd argument `$kbps` specify the throttle speed, measured in Kilobits per second. It allows you to actively limit users' download rates, to avoid overloading your server when you send big multimedia files for example. 
+The 3rd argument `$kbps` specify the throttle speed, measured in Kilobits per second. It allows you to actively limit users' download rates, to avoid overloading your server when you send big multimedia files for example.
 
 Use `$force` to add a `Content-Disposition: attachment;` HTTP header that will force the browser to open a "save file..." download dialog, otherwise it would just display the raw file in some cases, as images, .pdf or .mp3 files can be displayed directly by the browser and will not prompt the browser to display a download dialog.
 
@@ -110,7 +110,7 @@ $f3->route('PUT /upload/@filename',
 // mock a request that will actually upload the file
 $f3->mock('PUT /upload/'.basename($file),NULL,NULL,$f3->read($file));
 
-if (is_file($target=$f3->get('UPLOADS').basename($file))) 
+if (is_file($target=$f3->get('UPLOADS').basename($file)))
 	echo 'Uploaded file done via PUT';
 
 @unlink($target);
@@ -196,11 +196,11 @@ You can also generate a custom file name for the uploaded files using a callback
 
 ```php
 $files = $web->receive(function($file,$formFieldName){
-        // ...
-    },true,function($fileBaseName, $formFieldName){
-    	// build new file name from base name or input field name
-    	return "custom_filename.jpg";
-    }
+		// ...
+	},true,function($fileBaseName, $formFieldName){
+		// build new file name from base name or input field name
+		return "custom_filename.jpg";
+	}
 );
 ```
 
@@ -278,7 +278,7 @@ var_dump( \Web::instance()->request('http://www.golem.de/1303/98339-55766-i_rc.j
 
 array(4) {
     'body' => string " IMAGE BINARY DATA " (length=7761)
-    'headers' => 
+    'headers' =>
         array (size=14)
         0 => string 'HTTP/1.1 200 OK' (length=15)
         1 => string 'Server: nginx' (length=13)
@@ -372,7 +372,7 @@ Example:
 $minified = Web::instance()->minify('style.css,framework.css,null.css');
 ```
 
-This method will also auto-detect the mime-type of the files that are going to be minified and send as header Content-Type to the browser. You can overwrite the used mime-type with the `$mime` parameter, and stop sending the header data entirely by setting the `$header` parameter to `FALSE`. 
+This method will also auto-detect the mime-type of the files that are going to be minified and send as header Content-Type to the browser. You can overwrite the used mime-type with the `$mime` parameter, and stop sending the header data entirely by setting the `$header` parameter to `FALSE`.
 
 Notice that the files processed by this function must be located in one of the directories specified in [UI](quick-reference#ui) system var or you specify a new directory with the `$path` parameter.
 

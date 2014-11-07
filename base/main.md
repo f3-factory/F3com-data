@@ -230,7 +230,7 @@ $f3->exists('POST.submit');
 
 <div class="alert alert-warning"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
 
-You can use the `$val` argument to fetch the hive key content as well. This could save an additional `get` call. 
+You can use the `$val` argument to fetch the hive key content as well. This could save an additional `get` call.
 
 ```php
 if ($f3->exists('foo',$value)) {
@@ -513,7 +513,7 @@ Array
 array|NULL shift ( string $key )
 ```
 
-Return the left-shifted hive array variable, or `NULL` if the hive array variable is empty or is not an array. 
+Return the left-shifted hive array variable, or `NULL` if the hive array variable is empty or is not an array.
 
 <div class="alert alert-warning">
 <b>Notice</b>: <code>shift</code> use the PHP function <code>array_shift()</code>. It means that all numerical array keys of the hive array variable will be modified to start counting from zero while literal keys won't be touched
@@ -881,11 +881,11 @@ echo $f3->format('Decimal Number: {0,number,decimal,2}', 0.171231235);
 //outputs the string 'Decimal Number: 0,17'
 ```
 
-The **plural** type syntax is a little bit less straightforward since it allows you to associate a different output depending on the input quantity. 
+The **plural** type syntax is a little bit less straightforward since it allows you to associate a different output depending on the input quantity.
 
-The plural type syntax must start with `0, plural,` followed by a list of plural keywords associated with the desired output. The accepted keywords are '*zero*', '*one*', '*two*' and '*other*'. 
+The plural type syntax must start with `0, plural,` followed by a list of plural keywords associated with the desired output. The accepted keywords are '*zero*', '*one*', '*two*' and '*other*'.
 
-Furthermore, you can insert the matching numeral in your output strings thanks to the `#` sign that will be automatically replaced by the matching number, as illustrated in the example below: 
+Furthermore, you can insert the matching numeral in your output strings thanks to the `#` sign that will be automatically replaced by the matching number, as illustrated in the example below:
 
 ```php
 $cart_dialogs= '{0, plural,'.
@@ -910,14 +910,14 @@ Each plural keyword is optional and you can for example omit the plural keyword 
 Example:
 
 ```php
-$f3->set('a_books_story', 
-	'{0, plural,'. 
-		'zero	{There is n#thing on the table.},'. 
-		'one	{A book is on the table.},'. 
-		'two	{Two (#) books are on this table.},'. 
-		'other	{There are # books on the table.}'. 
-	'}' 
-); 
+$f3->set('a_books_story',
+	'{0, plural,'.
+		'zero	{There is n#thing on the table.},'.
+		'one	{A book is on the table.},'.
+		'two	{Two (#) books are on this table.},'.
+		'other	{There are # books on the table.}'.
+	'}'
+);
 echo $f3->get('a_books_story',0); // displays 'There is n0thing on the table.'
 echo $f3->get('a_books_story',1); // displays 'A book is on the table.'
 echo $f3->get('a_books_story',2); // displays 'Two (2) books are on this table.'
@@ -1062,7 +1062,7 @@ After processing the incoming request URI (initiated by [run](base#run)), you'll
 
 <div class="alert alert-info">
     <b>Notice:</b> Routes and their according verbs are grouped by their URL pattern. Static routes _precede_ routes with dynamic tokens or wildcards.
-    This means that having a static route, which overloads a matching dynamic route, requires you to define separately all required VERB patterns to this specific route. 
+    This means that having a static route, which overloads a matching dynamic route, requires you to define separately all required VERB patterns to this specific route.
 </div>
 
 ##### Wildcards

@@ -1,10 +1,8 @@
+#Getting Started
 <div class="well">
-    <h1>Getting Started</h1>
-    <p>
-        <em>A designer knows he has achieved perfection not when there is nothing
-            left to add, but when there is nothing left to take away. - Antoine de
-            Saint-Exupéry</em>
-    </p>
+	<p>
+		<em>A designer knows he has achieved perfection not when there is nothing left to add, but when there is nothing left to take away. <br><br/>– Antoine de Saint-Exupéry</em>
+	</p>
 </div>
 
 Fat-Free Framework makes it easy to build entire Web sites in a jiffy.
@@ -13,7 +11,7 @@ F3 helps you write better-looking and more reliable PHP programs. One glance
 at your PHP source code and anyone will find it easy to understand, how
 much you can accomplish in so few lines of code, and how powerful the results
 are.
-  
+
 F3 is one of the best documented frameworks around. Learning it costs
 next to nothing. No strict set of difficult-to-navigate directory structures
 and obtrusive programming steps. No truck load of configuration options
@@ -36,7 +34,7 @@ total Web development framework - with a lot of muscle!
 
 <div class="well">
     <p>
-        <em>Any intelligent fool can make things bigger and more complex... It takes a touch of genius - and a lot of courage to move in the opposite direction. - E. F. Schumacher</em>
+        <em>Any intelligent fool can make things bigger and more complex... It takes a touch of genius - and a lot of courage to move in the opposite direction. <br><br>– E. F. Schumacher</em>
     </p>
 </div>
 
@@ -49,9 +47,9 @@ You may move the default folders to a path that's not Web-accessible for
 better security. Delete the plug-ins that you don't need. You can always
 restore them later and F3 will detect their presence automatically.
 
-<div class="alert">
+<div class="alert alert-warning">
 <strong>Important:</strong> If your application uses APC, Memcached, WinCache, XCache, or a filesystem cache,
- clear all cache entries first before overwriting an older version of the framework with a new one. This can also be done (except XCache) by calling <b>$f3->clear('CACHE')</b>.
+ clear all cache entries first before overwriting an older version of the framework with a new one. This can also be done (except XCache) by calling <code>$f3->clear('CACHE')</code>.
 </div>
 
 Make sure you're running the right version of PHP. F3 does not support versions earlier than PHP

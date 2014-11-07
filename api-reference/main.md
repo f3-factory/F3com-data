@@ -3,8 +3,8 @@
 Welcome to the API documentation. It's intended as a feature reference to give you more detailed information about working with F3.
 You can also find extensive working examples in the [source code of the framework unit tests](https://github.com/bcosca/fatfree/tree/dev/app).
 
-<div class="row-fluid pb25 ref">
-    <div class="span6">
+<div class="row pb25 ref">
+    <div class="col-sm-6">
         <h3>Framework Core</h3>
         <ul class="reference">
             <li><a class="label" href="base" title="The Base class represents the framework core">Base</a></li>
@@ -31,7 +31,7 @@ You can also find extensive working examples in the [source code of the framewor
             <li><a class="label" href="sql-mapper" title="The SQL Object-Relational-Mapper is an implementation of the abstract Active Record Cursor class">SQL Mapper</a></li>
         </ul>
     </div>
-    <div class="span6">
+    <div class="col-sm-6">
         <h3>Templating</h3>
         <ul class="reference">
             <li><a class="label" href="markdown" title="This is F3's own implementation of Markdown">Markdown</a></li>
@@ -62,6 +62,5 @@ You can also find extensive working examples in the [source code of the framewor
         </ul>
     </div>
 </div>
-
 
 The framework API documentation is also contained in the distribution package, at `lib/api/index.html` . F3 uses [Doxygen](http://www.stack.nl/~dimitri/doxygen/ "Doxygen is a tool for generating documentation from annotated source code") to create basic reference documentation in HTML format from comments in the F3 source files.

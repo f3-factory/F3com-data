@@ -27,14 +27,14 @@ The OpenID class extends the [Magic](magic) class.
 **Initiate OpenID authentication sequence; Return FALSE on failure or redirect to OpenID provider URL**
 
 ``` php
-bool auth ( [ string $proxy = NULL [ , array $attr = array() [ , string|array $reqd = NULL ] ] ] ) 
+bool auth ( [ string $proxy = NULL [ , array $attr = array() [ , string|array $reqd = NULL ] ] ] )
 ```
 
-This function allows you to initiate an OpenID authentication sequence; Returns `FALSE` on failure or redirect to the OpenID provider URL. 
+This function allows you to initiate an OpenID authentication sequence; Returns `FALSE` on failure or redirect to the OpenID provider URL.
 
-+ `$proxy` 
++ `$proxy`
 + `$attr`
-+ `$reqd` OpenID required fields can be declared as comma-separated string or array. 
++ `$reqd` OpenID required fields can be declared as comma-separated string or array.
 
 Example:
 
@@ -47,10 +47,10 @@ $openid->auth($proxy, $attr, $reqd); // returns TRUE or FALSE
 **Return TRUE if OpenID verification was successful**
 
 ``` php
-bool verified ( [ string $proxy = NULL ] ) 
+bool verified ( [ string $proxy = NULL ] )
 ```
 
-This function allows you check if the OpenID verification was successful. 
+This function allows you check if the OpenID verification was successful.
 
 Example:
 
@@ -63,10 +63,10 @@ $openid->verified($proxy); // returns TRUE or FALSE
 **Return OpenID response fields**
 
 ``` php
-array response (  ) 
+array response (  )
 ```
 
-This function allows you to return the OpenID response fields. 
+This function allows you to return the OpenID response fields.
 
 Example:
 
@@ -79,10 +79,10 @@ $openid_response = $openid->response();
 **Return TRUE if OpenID request parameter exists**
 
 ``` php
-bool exists ( string $key ) 
+bool exists ( string $key )
 ```
 
-This function allows you to check if an OpenID request parameter exists. 
+This function allows you to check if an OpenID request parameter exists.
 
 Example:
 
@@ -95,10 +95,10 @@ $exists = $openid->exists($key); // returns TRUE or FALSE
 **Bind value to OpenID request parameter**
 
 ``` php
-string set ( string $key, string $val ) 
+string set ( string $key, string $val )
 ```
 
-This function allows you to bind a value to an OpenID request parameter. 
+This function allows you to bind a value to an OpenID request parameter.
 
 Example:
 
@@ -111,10 +111,10 @@ echo $openid->set('openid.mode', 'checkid_setup'); // displays 'checkid_setup'
 **Return value of OpenID request parameter**
 
 ``` php
-mixed get ( string $key ) 
+mixed get ( string $key )
 ```
 
-This function allows you to retrieve the value of an OpenID request parameter. 
+This function allows you to retrieve the value of an OpenID request parameter.
 
 Example:
 
@@ -127,10 +127,10 @@ $is_valid = $openid->get('is_valid'); // returns TRUE or FALSE
 **Remove OpenID request parameter**
 
 ``` php
-NULL clear ( string $key ) 
+NULL clear ( string $key )
 ```
 
-This function allows you to remove OpenID request parameter 
+This function allows you to remove OpenID request parameter
 
 Example:
 
@@ -143,7 +143,7 @@ $openid->clear('openid.sig');
 **Determine OpenID provider**
 
 ``` php
-protected string|FALSE discover ( string $proxy ) 
+protected string|FALSE discover ( string $proxy )
 ```
 
 This _protected_ method is used internally and allows to determine the OpenID provider.

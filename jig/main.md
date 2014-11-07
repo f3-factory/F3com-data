@@ -53,7 +53,7 @@ echo $data['Robert']['birth']; // 82 (see below)
 int|FALSE write ( string $file, array $data )
 ```
 
-This method writes data to a Jig database file and returns the number of bytes that were written to the file, or `FALSE` on failure. 
+This method writes data to a Jig database file and returns the number of bytes that were written to the file, or `FALSE` on failure.
 
 For example:
 

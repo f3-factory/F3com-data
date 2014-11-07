@@ -89,7 +89,7 @@ The equivalent of a SQL `IN` operator goes like this:
 $user->find(array('in_array('_id',array(1,2,3))'));
 ```
 
-If your document uses an array field, i.e. tags, you can find all posts by tag with just switching the in_array parameters: 
+If your document uses an array field, i.e. tags, you can find all posts by tag with just switching the in_array parameters:
 
 ```php
 $post->find(array('isset(@tags) && in_array("fat-free",@tags)'));
@@ -101,20 +101,20 @@ The `$option` argument for Jig accepts the following structure:
 
 ```php
 array(
-    'order' => string $orderClause,
-    'limit' => integer $limit,
-    'offset' => integer $offset
-    )
+	'order' => string $orderClause,
+	'limit' => integer $limit,
+	'offset' => integer $offset
+)
 ```
 
 i.e:
 
 ```php
 array(
-    'order' => 'score SORT_DESC, team_name SORT_ASC',
-    'limit' => 20,
-    'offset' => 0
-    )
+	'order' => 'score SORT_DESC, team_name SORT_ASC',
+	'limit' => 20,
+	'offset' => 0
+)
 ```
 
 ## Methods

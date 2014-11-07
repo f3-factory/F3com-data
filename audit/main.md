@@ -17,7 +17,7 @@ File location: `lib/audit.php`
 $audit = \Audit::instance();
 ```
 
-The Audit class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code. 
+The Audit class uses the [Prefab](prefab-registry) factory wrapper, so you can grab the same instance of that class at any point of your code.
 
 
 ## Methods
@@ -28,10 +28,10 @@ The Audit class uses the [Prefab](prefab-registry) factory wrapper, so you can g
 **Return TRUE if string is a valid URL**
 
 ``` php
-bool url ( string $str ) 
+bool url ( string $str )
 ```
 
-This function allows you to check if a given string is a valid URL. 
+This function allows you to check if a given string is a valid URL.
 
 Example:
 
@@ -44,12 +44,12 @@ $audit->url('http://fatfreeframework.com'); // returns TRUE
 **Return TRUE if string is a valid e-mail address; Check DNS MX records if specified**
 
 ``` php
-bool email ( string $str [ , boolean $mx = FALSE ] ) 
+bool email ( string $str [ , boolean $mx = FALSE ] )
 ```
 
-This function allows you to check if a given string is a valid e-mail address. 
+This function allows you to check if a given string is a valid e-mail address.
 
-If `$mx` is set to `TRUE` and the e-mail address is valid, this function will check the DNS MX records as well. 
+If `$mx` is set to `TRUE` and the e-mail address is valid, this function will check the DNS MX records as well.
 
 Example:
 
@@ -63,10 +63,10 @@ $audit->email('example@example.com', TRUE); // returns FALSE
 **Return TRUE if string is a valid IPV4 address**
 
 ``` php
-bool ipv4 ( string $addr ) 
+bool ipv4 ( string $addr )
 ```
 
-This function allows you to check if a given IP is a valid IPV4 address. 
+This function allows you to check if a given IP is a valid IPV4 address.
 
 Example:
 
@@ -79,10 +79,10 @@ $audit->ipv4('178.7.35.202'); // returns TRUE
 **Return TRUE if string is a valid IPV6 address**
 
 ``` php
-bool ipv6 ( string $addr ) 
+bool ipv6 ( string $addr )
 ```
 
-This function allows you to check if a given IP is a valid IPV6 address. 
+This function allows you to check if a given IP is a valid IPV6 address.
 
 Example:
 
@@ -95,10 +95,10 @@ $audit->ipv6('2001:db8::1428:57ab'); // returns TRUE
 **Return TRUE if IP address is within private range**
 
 ``` php
-bool isprivate ( string $addr ) 
+bool isprivate ( string $addr )
 ```
 
-This function allows you to check if a given IP address is within a private range of addresses. 
+This function allows you to check if a given IP address is within a private range of addresses.
 
 Example:
 
@@ -112,10 +112,10 @@ $audit->isprivate('178.7.35.202'); // returns FALSE
 **Return TRUE if IP address is within reserved range**
 
 ``` php
-bool isreserved ( string $addr ) 
+bool isreserved ( string $addr )
 ```
 
-This function allows you to check if a given IP address is within a reserved range of addresses. 
+This function allows you to check if a given IP address is within a reserved range of addresses.
 
 Example:
 
@@ -129,10 +129,10 @@ $audit->isreserved('178.7.35.202'); // returns FALSE
 **Return TRUE if IP address is neither private nor reserved**
 
 ``` php
-bool ispublic ( string $addr ) 
+bool ispublic ( string $addr )
 ```
 
-This function allows you to check if a given IP address is neither private nor reserved. 
+This function allows you to check if a given IP address is neither private nor reserved.
 
 Example:
 
@@ -146,10 +146,10 @@ $audit->ispublic('178.7.35.202'); // return TRUE
 **Return TRUE if user agent is a desktop browser**
 
 ``` php
-bool isdesktop (  ) 
+bool isdesktop (  )
 ```
 
-This function allows you to check if a given user agent is a desktop browser. 
+This function allows you to check if a given user agent is a desktop browser.
 
 Example:
 
@@ -162,10 +162,10 @@ $audit->isdesktop(); // returns TRUE or FALSE
 **Return TRUE if user agent is a mobile device**
 
 ``` php
-bool ismobile (  ) 
+bool ismobile (  )
 ```
 
-This function allows you to check if a given user agent is a mobile device. 
+This function allows you to check if a given user agent is a mobile device.
 
 Example:
 
@@ -178,10 +178,10 @@ $audit->ismobile(); // returns TRUE or FALSE
 **Return TRUE if user agent is a Web bot**
 
 ``` php
-bool isbot (  ) 
+bool isbot (  )
 ```
 
-This function allows you to check if a given user agent is a Web bot. 
+This function allows you to check if a given user agent is a Web bot.
 
 Example:
 
@@ -194,10 +194,10 @@ $audit->isbot(); // returns TRUE or FALSE
 **Return TRUE if specified ID has a valid (Luhn) Mod-10 check digit**
 
 ``` php
-bool mod10 ( string $id ) 
+bool mod10 ( string $id )
 ```
 
-This function allows you to check if a specified ID has a valid ([Luhn](http://en.wikipedia.org/wiki/Luhn_algorithm "Luhn algorithm on Wikipedia")) Mod-10 check digit. 
+This function allows you to check if a specified ID has a valid ([Luhn](http://en.wikipedia.org/wiki/Luhn_algorithm "Luhn algorithm on Wikipedia")) Mod-10 check digit.
 
 Example:
 
@@ -211,7 +211,7 @@ $audit->mod10('123123123'); // returns FALSE
 **Return credit card type if number is valid**
 
 ``` php
-string|FALSE card ( string $id ) 
+string|FALSE card ( string $id )
 ```
 
 This function allows you to retrieve the type of a credit card if the given number is valid. Returns `FALSE` otherwise.
@@ -229,10 +229,10 @@ echo $audit->card('343760667618602'); // displays 'American Express'
 **Return entropy estimate of a password (NIST 800-63)**
 
 ``` php
-int|float entropy ( string $str ) 
+int|float entropy ( string $str )
 ```
 
-This function allows you to retrieve the entropy estimate of a given password as per [NIST Special Publication 800-63](http://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63 "Wikipedia :: NIST Special Publication 800-63") . 
+This function allows you to retrieve the entropy estimate of a given password as per [NIST Special Publication 800-63](http://en.wikipedia.org/wiki/Password_strength#NIST_Special_Publication_800-63 "Wikipedia :: NIST Special Publication 800-63").
 
 Example:
 

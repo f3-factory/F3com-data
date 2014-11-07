@@ -2,9 +2,8 @@
 
 There's no better time to start developing Web applications the easy way than right now!
 
-<a class="btn btn-warning mb10" href="https://github.com/bcosca/fatfree/archive/master.zip">
-	<i class="icon-download icon-white"></i>
-	Download the latest release
+<a class="btn btn-success" href="https://github.com/bcosca/fatfree/archive/master.zip">
+	<i class="fa fa-download"></i> Download <span class="hidden-sm">the latest release</span>
 </a>
 
 Or grab the [nightly build](https://github.com/bcosca/fatfree/archive/dev.zip "dev package @ GitHub"). See the version

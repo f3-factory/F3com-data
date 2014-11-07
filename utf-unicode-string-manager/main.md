@@ -26,7 +26,7 @@ Similarly to the standard PHP strings methods, all the methods of the UTF class 
 **Get string length**
 
 ``` php
-int strlen ( string $str ) 
+int strlen ( string $str )
 ```
 
 This function returns the length of a given string
@@ -42,7 +42,7 @@ $utf->strlen('나는 유리를 먹을 수 있어요. 그래도'); // returns 20 
 **Find position of first occurrence of a string, case-insensitive**
 
 ``` php
-int|FALSE stripos ( string $stack, string $needle [, int $ofs = 0 ] ) 
+int|FALSE stripos ( string $stack, string $needle [, int $ofs = 0 ] )
 ```
 
 This function returns the position of the first occurrence of the `$needle` string in the `$stack` string. Case-insensitive search. Returns `FALSE` if `$needle` not found.
@@ -62,7 +62,7 @@ $utf->stripos('Les Naïfs ægithales hâtifs', 'NAÏFS', 10); // returns FALSE
 **Find position of first occurrence of a string, case-sensitive**
 
 ``` php
-int|FALSE strpos ( string $stack, string $needle [, int $ofs = 0 [, bool $case = FALSE ]] ) 
+int|FALSE strpos ( string $stack, string $needle [, int $ofs = 0 [, bool $case = FALSE ]] )
 ```
 
 This function returns the position of the first occurrence of the `$needle` string in the `$stack` string. Returns `FALSE` if `$needle` not found.
@@ -85,7 +85,7 @@ $utf->strpos('Góa ē-tàng Chia̍h Po-lê', 'chia̍h', 0, TRUE ); // returns 11
 **Returns part of haystack string from the first occurrence of the needle to the end of haystack, case-insensitive**
 
 ``` php
-string|FALSE stristr ( string $stack, string $needle [, bool $before = FALSE ] ) 
+string|FALSE stristr ( string $stack, string $needle [, bool $before = FALSE ] )
 ```
 
 This function returns part of `$stack` string starting from and including the first occurrence of `$needle` to the end of `$stack`. Case-insensitive. Returns `FALSE` if `$needle` not found.
@@ -104,7 +104,7 @@ $utf->stristr('Mayia Góa Chàyia̍h Lêh-Pok', 'GóA', TRUE ); // returns 'Mayi
 **Returns part of haystack string from the first occurrence of the needle to the end of the haystack**
 
 ``` php
-string|FALSE strstr ( string $stack, string $needle [, bool $before = FALSE [, bool $case = FALSE ]] ) 
+string|FALSE strstr ( string $stack, string $needle [, bool $before = FALSE [, bool $case = FALSE ]] )
 ```
 This function returns part of `$stack` string starting from and including the first occurrence of `$needle` to the end of `$stack`. Returns `FALSE` if `$needle` not found.
 
@@ -126,7 +126,7 @@ $user   = $utf->strstr($email, '@', TRUE);  // returns 'Mïchaño'
 **Return part of a string**
 
 ``` php
-string|FALSE substr ( string $str, int $start [, int $length = 0 ] ) 
+string|FALSE substr ( string $str, int $start [, int $length = 0 ] )
 ```
 
 This function returns the portion of string `$str` specified by the `$start` and `$length` parameters. If `$length` is omitted, the substring starting from `$start` until the end of the string will be returned.
@@ -146,7 +146,7 @@ $utf->substr('El pingüino Wenceslao hizo kilómetros',-10,4); // returns 'kiló
 **Count the number of occurrences of a substring**
 
 ``` php
-int substr_count ( string $stack, string $needle ) 
+int substr_count ( string $stack, string $needle )
 ```
 
 This function counts and returns the number of times the `$needle` substring occurs in the `$stack` string. Note that `$needle` is case sensitive.
@@ -165,10 +165,10 @@ $utf->substr_count(implode($arr,'is'), 'is'); // returns 4
 **Strip whitespaces from the beginning of a string**
 
 ``` php
-string ltrim ( string $str ) 
+string ltrim ( string $str )
 ```
 
-This function strips whitespaces and other characters (according to the regexp `/[\pZ\pC]+/u`) from the beginning of a given string. 
+This function strips whitespaces and other characters (according to the regexp `/[\pZ\pC]+/u`) from the beginning of a given string.
 
 Examples:
 
@@ -182,7 +182,7 @@ $utf->ltrim('   invisible leading spaces...   '); // returns 'invisible leading 
 **Strip whitespaces from the end of a string**
 
 ``` php
-string rtrim ( string $str ) 
+string rtrim ( string $str )
 ```
 
 This function strips whitespaces and other characters (according to the regexp `/[\pZ\pC]+$/u`) from the end of a given string.
@@ -199,7 +199,7 @@ $utf->rtrim('   invisible trailing spaces...      '); // returns '   invisible t
 **Strip whitespaces from the beginning and end of a string**
 
 ``` php
-string trim ( string $str ) 
+string trim ( string $str )
 ```
 
 This function strips whitespaces and other characters (according to the regexp `/^[\pZ\pC]+|[\pZ\pC]+$/u`) from the beginning and end of a given string.
@@ -216,7 +216,7 @@ $utf->trim('   invisible spaces...      '); // returns 'invisible spaces...'
 **Return UTF-8 byte order mark ([BOM](http://en.wikipedia.org/wiki/Byte_order_mark "Wikipedia :: Byte order mark"))**
 
 ``` php
-string bom (  ) 
+string bom (  )
 ```
 
 Return the byte order mark ([BOM](http://en.wikipedia.org/wiki/Byte_order_mark "Wikipedia :: Byte order mark")) Unicode character used to signal the byte order of a text file or a stream. The BOM character may also indicate which of the several Unicode representations the text is encoded in. BOM use is optional, and, if used, must appear at the start of the text stream.
@@ -236,7 +236,7 @@ $f3->write( $filename, $bom . $f3->read($filename) );
 **Convert code points to Unicode symbols**
 
 ``` php
-string translate ( string $str ) 
+string translate ( string $str )
 ```
 
 Converts and returns [code points](http://en.wikipedia.org/wiki/Code_point "Wikipedia :: Code point") (e.g. U+0E8D U+053D) to the equivalent Unicode symbols (e.g. ຍ Խ)
@@ -246,14 +246,14 @@ Converts and returns [code points](http://en.wikipedia.org/wiki/Code_point "Wiki
 **Translate emoji tokens to Unicode font-supported symbols**
 
 ``` php
-string emojify ( string $str ) 
+string emojify ( string $str )
 ```
 
-Converts and returns the Unicode font-supported symbols equivalent of emoji tokens. 
+Converts and returns the Unicode font-supported symbols equivalent of emoji tokens.
 
-emoji tokens translated by default are: 
+emoji tokens translated by default are:
 
-```php 
+```php
 ':(' => '\u2639', // frown
 ':)' => '\u263a', // smile
 '<3' => '\u2665', // heart
@@ -281,7 +281,7 @@ Examples:
 ``` php
 $f3->set('EMOJI', array('(c)' => '&#169;', '?' => '&#191') );
 echo \UTF::instance()->emojify( 'Do you like (c)opyrights ??');  //  displays 'Do you like ©opyrights ¿¿'
-// 
+//
 $f3->set('EMOJI', array('@om' => '\U0F00', '&oooooom' => '\U0F02', '%om' => '\U0F00') );
 echo \UTF::instance()->emojify( '@om Greets &oooooom from Tibet %om');  //  displays 'ༀ Greets ༂ from Tibet ༀ'
 ```

@@ -187,15 +187,15 @@ For example:
 $result = $mapper->paginate(0, 3);
 /*
 array(4) {
-  ["subset"] => array(3) {
+	["subset"] => array(3) {
 		[0] => mapper object, #ID: 1, title: F3 for the win
 		[1] => mapper object, #ID: 2, title: Once upon a time
 		[2] => mapper object, #ID: 3, title: Barbar the Foo
-	  }
-  ["total"] => int(4)
-  ["limit"] => int(3)
-  ["count"] => float(2)
-  ["pos"] => int(0)
+	}
+	["total"] => int(4)
+	["limit"] => int(3)
+	["count"] => float(2)
+	["pos"] => int(0)
 }
 */
 
@@ -203,13 +203,13 @@ array(4) {
 $result = $mapper->paginate(1, 3);
 /*
 array(4) {
-  ["subset"] => array(1) {
+	["subset"] => array(1) {
 		[0] => mapper object, #ID: 4, title: untitled
-	  }
-  ["total"] => int(4)
-  ["limit"] => int(3)
-  ["count"] => float(2)
-  ["pos"] => int(1)
+	}
+	["total"] => int(4)
+	["limit"] => int(3)
+	["count"] => float(2)
+	["pos"] => int(1)
 }
 */
 

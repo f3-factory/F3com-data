@@ -26,10 +26,10 @@ The SMTP class extends the [Magic](magic) class.
 **Bind value to e-mail header**
 
 ``` php
-string set ( string $key, string $val ) 
+string set ( string $key, string $val )
 ```
 
-This function allows you to bind a value to an e-mail header. 
+This function allows you to bind a value to an e-mail header.
 (Returns the `$val` value.)
 
 Example:
@@ -45,10 +45,10 @@ echo $smtp->set('Subject', 'Sent with the F3 SMTP plug-in');
 **Return value of e-mail header**
 
 ``` php
-string|NULL get ( string $key ) 
+string|NULL get ( string $key )
 ```
 
-This function allows you to return the value of an e-mail header. 
+This function allows you to return the value of an e-mail header.
 
 Example:
 
@@ -61,10 +61,10 @@ echo $smtp->get('From'); // displays e.g. 'J. W. von Goethe <jwgoethe@famousauth
 **Return TRUE if header exists**
 
 ``` php
-bool exists ( string $key ) 
+bool exists ( string $key )
 ```
 
-This function returns `TRUE` if a header exists as per the function `set()` described above. 
+This function returns `TRUE` if a header exists as per the function `set()` described above.
 
 Example:
 
@@ -77,10 +77,10 @@ $has_date_header = $smtp->exists('Date'); // returns TRUE
 **Remove header**
 
 ``` php
-NULL clear ( string $key ) 
+NULL clear ( string $key )
 ```
 
-This function allows you to remove a header. 
+This function allows you to remove a header.
 
 Example:
 
@@ -94,7 +94,7 @@ $smtp->clear('In-Reply-To');
 **Add e-mail attachment**
 
 ``` php
-NULL attach ( $filename ) 
+NULL attach ( $filename )
 ```
 
 This function allows you to add an e-mail attachment given by its filename.
@@ -116,11 +116,11 @@ $smtp->attach( './pictures/'.$screenshot ); // you can attach as many attachment
 bool send ( string $message [, bool $log = TRUE ] )
 ```
 
-This function allows you to transmit a message. `send` opens a socket connection using the settings provided when instanciating the class. (see [__construct](smtp#&#95;&#95;construct) below for details). 
+This function allows you to transmit a message. `send` opens a socket connection using the settings provided when instanciating the class. (see [__construct](smtp#&#95;&#95;construct) below for details).
 
-The `'From'`, `'To'` & `'Subject'` headers are mandatory, and the `$message` as well; otherwise an `user_error` is raised. 
+The `'From'`, `'To'` & `'Subject'` headers are mandatory, and the `$message` as well; otherwise an `user_error` is raised.
 
-The `$log` flag is a toggle switch for suppressing or enabling the log of the client-server conversation history you can retrieve with the [log() method](smtp#log). 
+The `$log` flag is a toggle switch for suppressing or enabling the log of the client-server conversation history you can retrieve with the [log() method](smtp#log).
 
 Returns `TRUE` on success or `FALSE` when:
 
@@ -155,7 +155,7 @@ echo '<pre>'.$smtp->log().'</pre>';
 250 CHUNKING
 AUTH LOGIN
 235 2.7.0 Accepted
-MAIL FROM: 
+MAIL FROM:
 (...)
 QUIT
 502
@@ -166,10 +166,10 @@ QUIT
 **Instantiate class**
 
 ``` php
-__construct ( string $host, int $port, string $scheme, string $user, string $pw ) 
+__construct ( string $host, int $port, string $scheme, string $user, string $pw )
 ```
 
-The constructor allows you to instantiate the class and specify the settings that will be used by the `send` function. 
+The constructor allows you to instantiate the class and specify the settings that will be used by the `send` function.
 
 + `$host` & `$port` of the SMTP server you want to use to send your e-mail messages.
 + `$scheme` allows you to use a SSL connection, provided you have the [openssl extension](http://www.php.net/openssl "php.net :: OpenSSL") loaded on the server.
@@ -189,10 +189,10 @@ $smtp_tls = new SMTP ( $host, $port, 'tls', $user, $pw );
 **Fix header**
 
 ``` php
-protected string fixheader ( string $key ) 
+protected string fixheader ( string $key )
 ```
 
-This function allows to fix a header 
+This function allows to fix a header
 
 This _protected_ method is used internally by the `get`, `set`, `exists` & `clear` methods to check and ensure a given header value is well-formed (basically it removes forbidden characters).
 
@@ -201,7 +201,7 @@ This _protected_ method is used internally by the `get`, `set`, `exists` & `clea
 **Send SMTP command and record server response**
 
 ``` php
-protected dialog ( [ string $cmd = NULL [, bool $log = NULL ]] ) 
+protected dialog ( [ string $cmd = NULL [, bool $log = NULL ]] )
 ```
 
-This _protected_ method is used internally by the `send` method and allows to send SMTP command and record server response. 
+This _protected_ method is used internally by the `send` method and allows to send SMTP command and record server response.

@@ -514,25 +514,23 @@ In most cases, you can live by the comforts given by the data mapper methods we'
 
 ```php
 class Vendor extends DB\SQL\Mapper {
+	// Instantiate mapper
+	function __construct(DB\SQL $db) {
+		// This is where the mapper and DB structure synchronization occurs
+		parent::__construct($db,'vendors');
+	}
 
-    // Instantiate mapper
-    function __construct(DB\SQL $db) {
-        // This is where the mapper and DB structure synchronization occurs
-        parent::__construct($db,'vendors');
-    }
-
-    // Specialized query
-    function listByCity() {
-        return $this->select('vendorID,name,city',null,array('order'=>'city DESC'));
-        /*
-	    We could have done the same thing with plain vanilla SQL:
-            return $this->db->exec(
-                'SELECT vendorID,name,city FROM vendors '.
-                'ORDER BY city DESC;'
-            );
-        */
-    }
-
+	// Specialized query
+	function listByCity() {
+		return $this->select('vendorID,name,city',null,array('order'=>'city DESC'));
+		/*
+		We could have done the same thing with plain vanilla SQL:
+		return $this->db->exec(
+			'SELECT vendorID,name,city FROM vendors '.
+			'ORDER BY city DESC;'
+		);
+		*/
+	}
 }
 
 $vendor=new Vendor;

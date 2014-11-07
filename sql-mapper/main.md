@@ -307,11 +307,11 @@ All underlying values are set to `NULL`.
 NULL copyfrom( string $key [, callback $func = NULL ] )
 ```
 
-This method hydrates the mapper object with elements from a framework _array_ variable. 
+This method hydrates the mapper object with elements from a framework _array_ variable.
 
 `$key` is the name of the hive _array_ variable to use to hydrate the mapper.
 
-`$func` is a callback function you can apply to the hive _array_ variable. As explained in the [Databases User Guide](databases#beyond-crud), the array keys must have names identical to the mapper object properties. It allows for example to hydrate the mapper object with the fields of a POSTed form: 
+`$func` is a callback function you can apply to the hive _array_ variable. As explained in the [Databases User Guide](databases#beyond-crud), the array keys must have names identical to the mapper object properties. It allows for example to hydrate the mapper object with the fields of a POSTed form:
 
 ```php
 $f3->get('user')->copyfrom('POST'); // F3 synch the 'POST' hive array variable with the $_POST array

@@ -324,9 +324,9 @@ $f3->error(404);
 Fat-Free's architecture is based on the concept that HTTP URIs represent abstract Web resources
 (not limited to HTML) and each resource can move from one application state to another. For this
 reason, F3 does not have any restrictions on the way you structure your application. If you
-prefer to use the [Model-View-Controller](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) 
+prefer to use the [Model-View-Controller](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 pattern, F3 can help you compartmentalize your application components to stick to this paradigm.
-On the other hand, the framework also supports the 
+On the other hand, the framework also supports the
 [Resource-Method-Representation](http://www.peej.co.uk/articles/rmr-architecture.html) pattern,
 and implementing it is more straightforward.
 
@@ -361,7 +361,7 @@ appropriate headers to HTTP `OPTIONS` method requests. The framework will not ma
 to a class.
 
 <div class="alert alert-info"><strong>Notice:</strong> In case you plan to build a whole ReST API, you probably need to get around the possibility of fetching single items, whole collections of items and saving and updating records, which does not always fit into a single class or the given HTTP methods. It's always best to plan your API before you start coding. Here is a very good and <strong>free</strong> <a href="https://pages.apigee.com/ebook-web-api-design-registration.html?utm_source=hpc&utm_medium=website&utm_campaign=ebook
-" target="_blank">eBook about Web API Design</a> from apigee that could be useful. 
+" target="_blank">eBook about Web API Design</a> from apigee that could be useful.
 </div>
 
 ## The F3 Autoloader
@@ -421,7 +421,7 @@ $f3->set('AUTOLOAD','main/;aux/');
 <div class="alert alert-info">
 <strong>NB:</strong> Namespaces are here to help you organize your code. If you use them, you can decide to do it with F3 autoloader or not.
 If you use the autoloader, you have to create a folder for each namespace.
-If you don't use the autoloader, you can store your files however you like, keeping in mind that you will need to include each of them manually. 
+If you don't use the autoloader, you can store your files however you like, keeping in mind that you will need to include each of them manually.
 </div>
 
 ## Routing to a Namespaced Class
@@ -453,7 +453,7 @@ On case-sensitive systems like UNIX the class gets auto-loaded only if the class
 
 If the autoloaded class is `Main\Home`, possible filenames are `Main/Home.php` or `main/home.php`.
 
-&rArr; `main\Home.php`, `Main\hoME.php` or `MAIN\HOME.php` will not load! 
+&rArr; `main\Home.php`, `Main\hoME.php` or `MAIN\HOME.php` will not load!
 
 If you need to define a custom case handling, you can set the `AUTOLOAD` variable as an array of a path and a custom function.
 
@@ -479,7 +479,7 @@ but _before_ executing the `home()` method, the framework looks for a method in 
 `beforeRoute()`. If present, F3 runs the code contained in the `beforeRoute()` event
 handler before transferring control to the method specified in the route, in our example the `home()` method.
 Once the method is terminated, the framework then looks for an `afterRoute()` event handler that is called if present.
-The `beforeroute()` and `afterroute()` event handlers are common to a given class. 
+The `beforeroute()` and `afterroute()` event handlers are common to a given class.
 It means if you have defined differents routes using differents methods of a same class,
 e.g. `'GET /login','User->login'` and `'GET /logout','User->logout'`, both routes will share the same
 `beforeroute()` and `afterroute()` event handlers.

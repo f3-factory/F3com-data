@@ -17,14 +17,14 @@ Lets have a look at a simple example:
 
 ``` html
 <div>
-    <h1>My favorite books</h1>
-    <ul>
-        {~ foreach (@books as @id=>@book): ~}
-        <li>{~ if (@book.starred): ~}<i class="icon-star"></i>{~ else: ~}<i class="icon-normal">{~ endif ~}
-            <a href="{{ @BASE.@book[slug] }}">{{ @book.title }}</a>
-        </li>
-        {~ endforeach ~}
-    </ul>
+	<h1>My favorite books</h1>
+	<ul>
+		{~ foreach (@books as @id=>@book): ~}
+		<li>{~ if (@book.starred): ~}<i class="icon-star"></i>{~ else: ~}<i class="icon-normal">{~ endif ~}
+			<a href="{{ @BASE.@book[slug] }}">{{ @book.title }}</a>
+		</li>
+		{~ endforeach ~}
+	</ul>
 </div>
 ```
 
@@ -39,7 +39,7 @@ Lets have a look at a simple example:
 string build ( string $node )
 ```
 This method builds the php code out of the given markup, that is used later in the pre-rendered template.
-To know about this method becomes useful when you're creating new template extensions or custom tag handlers. 
+To know about this method becomes useful when you're creating new template extensions or custom tag handlers.
 
 In example it converts this piece of token:
 

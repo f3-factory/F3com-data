@@ -54,7 +54,7 @@ $login_result = $auth->login('admin','secret_pwd'); // returns true on successfu
 bool basic ( [ string $func = NULL ] )
 ```
 
-The `basic()` method provides a way to authenticate a user without using webpage forms. The browser will display a login dialog box, prompting the user to enter their username and password credentials.  
+The `basic()` method provides a way to authenticate a user without using webpage forms. The browser will display a login dialog box, prompting the user to enter their username and password credentials.
 
 `$func` is the name of a callback function that can be used to manipulate the submitted `password` before it is compared against the password kept in the data storage resource, for example if you hash your passwords before storing them in your database. The submitted password is passed to your callback function as an argument.
 

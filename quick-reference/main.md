@@ -53,7 +53,7 @@ Cache backend. F3 can handle Memcache module, APC, WinCache, XCache and a filesy
 For example: if you'd like to use the memcache module, a configuration string is required, e.g. `$f3->set('CACHE','memcache=localhost')` (port 11211 by default) or `$f3->set('CACHE','memcache=192.168.72.72:11212')`.
 
 When set to `TRUE`, or when the connection with the specified memcached server above failed, F3 will auto-detect, in that order, the presence of APC, WinCache, XCache and use the first available of these PHP module.
-If none of these shared memory engine has been detected or is available, a filesystem-based backend is used as a fallback (default directory: `tmp/cache` or you can specify a folder outside the scope of the website, e.g. `$f3->set('CACHE','folder=/var/tmp/f3filescache')`.
+If none of these shared memory engine has been detected or is available, a filesystem-based backend is used as a fallback (default directory: `tmp/cache` or you can specify a folder outside the scope of the website, e.g. `$f3->set('CACHE','folder=/var/tmp/f3filescache/')`.
 
 The framework doesn't use any cache engine when a `FALSE` value is assigned.
 
@@ -149,10 +149,10 @@ If `TRUE`, the framework, after having logged stack trace and errors, stops exec
 HTTP request headers received by the server. e.g. (simplified)
 
 ```
-array ( 
-'Host' => 'fatfreeframework.com'
-'Accept-Encoding' => 'gzip,deflate,sdch',
-'Accept-Language' => 'en-US,en;q=0.8,ja;q=0.6'
+array (
+	'Host' => 'fatfreeframework.com'
+	'Accept-Encoding' => 'gzip,deflate,sdch',
+	'Accept-Language' => 'en-US,en;q=0.8,ja;q=0.6'
 )
 ```
 
@@ -178,7 +178,7 @@ Remote IP address. The framework derives the address from headers if HTTP client
 
 Default cookie parameters. Consists of the following options:
 
-* `expire` Unix timestamp, when the cookie should expire. Default: `0`  
+* `expire` Unix timestamp, when the cookie should expire. Default: `0`
 * `path` The path on the server in which the cookie will be available. Default: `'/'`
 * `domain` The domain that the cookie is available to. Default: `$_SERVER['SERVER_NAME']` if available, else `''`
 * `secure` Set the cookie when a secure HTTPS connection exists. Default: `$_SERVER['HTTPS']=='on'`
@@ -208,7 +208,7 @@ Location of custom logs.
 ### ONERROR
 **Type:** `mixed` &nbsp; &nbsp; **Default:** `NULL`
 
-Callback function to use as custom error handler, or `NULL`. 
+Callback function to use as custom error handler, or `NULL`.
 **Notice**: If no callback function is specified, a default error page is generated (HTML5 for synchronous requests, JSON string for AJAX requests).
 
 ### PACKAGE
@@ -291,7 +291,7 @@ Absolute path to document root folder.
 ### ROUTES
 **Type:** `array` &nbsp; &nbsp; **Default:** `array()`
 
-Contains the defined application routes. 
+Contains the defined application routes.
 
 **Notice**: A route is more than just a URL. It's an HTTP verb (or verbs) _AND_ a URL
 
@@ -387,7 +387,7 @@ A string containing the version of the Framework.
 *   `{~ string expr ~}`
 
     Evaluate expression `expr`, similar to `{{expr}}` but does not echo the result.
-    
+
 *   `{* text-block *}`
 
     Exclude a segment of your template. Alias to `<exclude>`

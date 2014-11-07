@@ -24,7 +24,7 @@ $crypt = \Bcrypt::instance();
 string|FALSE hash ( string $pw [, string $salt = NULL [, int $cost = 10 ]] )
 ```
 
-If provided, the `$salt` parameter must be at least 22 alphanumeric characters.  
+If provided, the `$salt` parameter must be at least 22 alphanumeric characters.
 
 The `$cost` parameter triggers the iteration count for the underlying Blowfish-based hashing algorithmeter and must be in range `04-31`.
 

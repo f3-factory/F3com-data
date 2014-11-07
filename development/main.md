@@ -56,206 +56,192 @@ See what other users have made with F3:
 
 ### Projects Around F3
 
-<table class="table table-striped">
+<div class="row">
+<table class="table col-sm-12">
     <thead>
         <tr>
-            <th class="span2">Plugin Name</th>
-            <th class="span7">Description</th>
-            <th class="span2">Author</th>
-            <th class="span1">Link</th>
+            <th class="col-sm-2">Plugin Name</th>
+            <th class="col-sm-8">Description</th>
+            <th class="col-sm-2">Author</th>
         <tr>
     </thead>
     <tbody>
         <tr>
-            <td>bugtrckr</td>
+            <td><a href="https://github.com/sn0opy/bugtrckr" target="_blank">Bugtrckr</a></td>
             <td>minimal but feature rich bug tracking system</td>
             <td><a href="https://github.com/sn0opy" target="_blank">Sascha Ohms</a></td>
-            <td><a class="btn btn-info" href="https://github.com/sn0opy/bugtrckr" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>F3 Boilerplate</td>
+            <td><a href="https://github.com/vijinho/f3-boilerplate" target="_blank">F3 Boilerplate</a></td>
             <td>A F3 boilerplate MVC website skeleton using [HTML5 Boilerplate](http://html5boilerplate.com/ "HTML5 Boilerplate :: The web's most popular front-end template").<br>It's basically a skeleton web application you can use to learn the Fat-Free Framework and use as a base for your future projects.</td>
             <td><a href="https://github.com/vijinho" target="_blank">Vijay Mahrra</a></td>
-            <td><a class="btn btn-info" href="https://github.com/vijinho/f3-boilerplate" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>fabulog</td>
+            <td><a href="https://github.com/ikkez/fabulog" target="_blank">fabulog</a></td>
             <td>a little example MVC blog with backend</td>
             <td><a href="https://github.com/ikkez" target="_blank">ikkez</a></td>
-            <td><a class="btn btn-info" href="https://github.com/ikkez/fabulog" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>fatfree-blog</td>
+            <td><a href="https://github.com/blo4r/fatfree-blog" target="_blank">fatfree-blog</a></td>
             <td>A simple blog demo, build with fatfree framework version 3+</td>
             <td><a href="https://github.com/blo4r" target="_blank">blo4r</a></td>
-            <td><a class="btn btn-info" href="https://github.com/blo4r/fatfree-blog" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>Phproject</td>
+            <td><a href="http://www.phproject.org/" target="_blank">Phproject</a></td>
             <td>A lightweight project management system</td>
             <td><a href="https://github.com/Alanaktion" target="_blank">Alan Hardman </a></td>
-            <td><a class="btn btn-info" href="http://www.phproject.org/" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>selfoss</td>
+            <td><a href="http://selfoss.aditu.de/" target="_blank" title="selfoss the web based open source rss reader and multi source mashup aggregator">selfoss</a></td>
             <td>selfoss: The new multipurpose rss reader, live stream, mashup, aggregation web application</td>
             <td><a href="https://github.com/SSilence" target="_blank">Tobias Zeising</a></td>
-            <td><a class="btn btn-info" href="http://selfoss.aditu.de/" target="_blank" title="selfoss the web based open source rss reader and multi source mashup aggregator">view</a></td>
         </tr>
         <tr>
-            <td>TaskShare</td>
+            <td><a href="http://taskshare.org/" target="_blank" title="A web-based, responsive todo list tool. No logins required.">TalkShare</a></td>
             <td>TaskShare is a really simple todo/task/list web app</td>
             <td><a href="https://github.com/timbotron" target="_blank">Tim Habersack</a></td>
-            <td><a class="btn btn-info" href="http://taskshare.org/" target="_blank" title="A web-based, responsive todo list tool. No logins required.">view</a></td>
         </tr>
         <tr>
-            <td>ToothPaste-F3</td>
+            <td><a href="https://github.com/sn0opy/ToothPaste-F3" target="_blank" title="ToothPaste is a lightweight open source pastebin. It supports syntax highlighting and file upload.">ToothPaste</a></td>
             <td>Lightweight Pastebin with a nice design</td>
             <td><a href="https://github.com/sn0opy" target="_blank">Sascha Ohms</a></td>
-            <td><a class="btn btn-info" href="https://github.com/sn0opy/ToothPaste-F3" target="_blank" title="ToothPaste is a lightweight open source pastebin. It supports syntax highlighting and file upload.">view</a></td>
         </tr>
     </tbody>
 </table>
+</div>
 
-<button type="button" class="btn btn-small" data-toggle="collapse" data-target="#projects-archive">view projects archive</button>
+<button type="button" class="btn btn-small btn-default" data-toggle="collapse" data-target="#projects-archive"><i class="fa fa-eye"></i> view projects archive</button>
+<div class="row">
 <div id="projects-archive" class="collapse">
-    <table class="table table-striped">
+    <table class="table">
         <thead>
             <tr>
-                <th class="span2">Plugin Name</th>
-                <th class="span7">Description</th>
-                <th class="span2">Author</th>
-                <th class="span1">Link</th>
+                <th class="col-sm-2">Plugin Name</th>
+                <th class="col-sm-8">Description</th>
+                <th class="col-sm-2">Author</th>
             <tr>
         </thead>
         <tbody>
             <tr>
-                <td>Carb</td>
+                <td><a href="https://github.com/wjgilmore/Carb" target="_blank">Carb</a></td>
                 <td>A PHP command line tool for the automated generation of a new F3 project structure.</td>
                 <td><a href="https://github.com/wjgilmore" target="_blank">Jason Gilmore</a></td>
-                <td><a class="btn btn-info" href="https://github.com/wjgilmore/Carb" target="_blank">view</a></td>
             </tr>
             <tr>
-                <td>FatFree Ajax Boilerplate</td>
+                <td><a href="https://github.com/WilliamStam/FatFree-Ajax-Boilerplate" target="_blank">FatFree Ajax Boilerplate</a></td>
                 <td>F3 Ajax application with timers to monitor performance</td>
                 <td><a href="https://github.com/WilliamStam" target="_blank">William Stam</a></td>
-                <td><a class="btn btn-info" href="https://github.com/WilliamStam/FatFree-Ajax-Boilerplate" target="_blank">view</a></td>
             </tr>
             <tr>
-                <td>README</td>
+                <td><a href="https://github.com/codevinsky/README" target="_blank">README</a></td>
                 <td>a blog platform for developers</td>
                 <td><a href="https://github.com/codevinsky" target="_blank">Jeremy Dowell</a></td>
-                <td><a class="btn btn-info" href="https://github.com/codevinsky/README" target="_blank">view</a></td>
             </tr>
         </tbody>
     </table>
+</div>
 </div>
 
 ### User Plugins
 
-<table class="table table-striped">
+<div clasS="row">
+<table class="table">
     <thead>
         <tr>
-            <th class="span2">Plugin Name</th>
-            <th class="span7">Description</th>
-            <th class="span2">Author</th>
-            <th class="span1">Link</th>
+            <th class="col-sm-2">Plugin Name</th>
+            <th class="col-sm-8">Description</th>
+            <th class="col-sm-2">Author</th>
         <tr>
     </thead>
     <tbody>
         <tr>
-            <td>Burgers</td>
+            <td><a href="https://github.com/hanspolo/burgers" target="_blank">Burgers</a></td>
             <td>Burgers make the Fat-Free Framework fat. Includes ORM/Validation, User/Groups/ACL, Forms</td>
             <td><a href="https://github.com/hanspolo" target="_blank">Philipp Hirsch</a></td>
-            <td><a class="btn btn-info" href="https://github.com/hanspolo/burgers" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>Cortex</td>
+            <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Cortex" target="_blank">Cortex</a></td>
             <td>A general purpose ORM with support for relations and more</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
-            <td><a class="btn btn-info" href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Cortex" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>Currency</td>
+            <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Currency" target="_blank">Currency</a></td>
             <td>A currency rates converter, supports +90 currencies and Bitcoin</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
-            <td><a class="btn btn-info" href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Currency" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>FAL</td>
+            <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/FAL" target="_blank">FAL</a></td>
             <td>A File Abstraction Layer across multiple filesystem adapters, with meta data support and F3 Caching features.</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
-            <td><a class="btn btn-info" href="https://github.com/ikkez/F3-Sugar/tree/master-v3/FAL" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>Pagination</td>
+            <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Pagination" target="_blank">Pagination</a></td>
             <td>Create quick and easy Pagination for your F3 application.</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
-            <td><a class="btn btn-info" href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Pagination" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>SQL Schema Builder</td>
+            <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/SchemaBuilder" target="_blank">SQL Schema Builder</a></td>
             <td>An extension for creating and managing SQL database tables.</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
-            <td><a class="btn btn-info" href="https://github.com/ikkez/F3-Sugar/tree/master-v3/SchemaBuilder" target="_blank">view</a></td>
         </tr>
         <tr>
-            <td>System Profile</td>
+            <td><a href="https://github.com/killsaw/F3-Plugins/blob/master/systemprofile.php" target="_blank">System Profile</a></td>
             <td>A plugin for grabbing system information like online users and load levels. Also supports basic interpretation of load levels, which allows for adaptive throttling.</td>
             <td><a href="https://github.com/killsaw" target="_blank">Steven Bredenberg</a></td>
-            <td><a class="btn btn-info" href="https://github.com/killsaw/F3-Plugins/blob/master/systemprofile.php" target="_blank">view</a></td>
         </tr>
     </tbody>
 </table>
+</div>
 
-<button type="button" class="btn btn-small" data-toggle="collapse" data-target="#plugin-archive">view Plugin archive for older F3 versions</button>
+<button type="button" class="btn btn-small btn-default" data-toggle="collapse" data-target="#plugin-archive"><i class="fa fa-eye"></i> view Plugin archive for older F3 versions</button>
 <div id="plugin-archive" class="collapse">
-    <table class="table table-striped">
+<div class="row">
+    <table class="table">
         <thead>
             <tr>
-                <th class="span2">Plugin Name</th>
-                <th class="span7">Description</th>
-                <th class="span2">Author</th>
-                <th class="span1">Link</th>
+                <th class="col-sm-2">Plugin Name</th>
+                <th class="col-sm-8">Description</th>
+                <th class="col-sm-2">Author</th>
             <tr>
         </thead>
         <tbody>
             <tr>
-                <td>AxonREST</td>
+                <td><a href="https://github.com/killsaw/F3-Plugins/blob/master/axonrest.php" target="_blank">AxonREST</a></td>
                 <td>A plugin that handles PUT/POST/GET/DELETE operations against a named Axon model.</td>
                 <td><a href="https://github.com/killsaw" target="_blank">Steven Bredenberg</a></td>
-                <td><a class="btn btn-info" href="https://github.com/killsaw/F3-Plugins/blob/master/axonrest.php" target="_blank">view</a></td>
             </tr>
             <tr>
-                <td>Currency</td>
+                <td><a href="https://github.com/killsaw/F3-Plugins/blob/master/currency.php" target="_blank">Currency</a></td>
                 <td>A simple plugin that converts a money value from one currency to another.</td>
                 <td><a href="https://github.com/killsaw" target="_blank">Steven Bredenberg</a></td>
-                <td><a class="btn btn-info" href="https://github.com/killsaw/F3-Plugins/blob/master/currency.php" target="_blank">view</a></td>
             </tr>
             <tr>
-                <td>TableBuilder</td>
+                <td><a href="https://github.com/killsaw/F3-Plugins/blob/master/tablebuilder.php" target="_blank">TableBuilder</a></td>
                 <td>An HTML table builder with basic support for paging.</td>
                 <td><a href="https://github.com/killsaw" target="_blank">Steven Bredenberg</a></td>
-                <td><a class="btn btn-info" href="https://github.com/killsaw/F3-Plugins/blob/master/tablebuilder.php" target="_blank">view</a></td>
             </tr>
             <tr>
-                <td>URL</td>
+                <td><a href="https://github.com/killsaw/F3-Plugins/blob/master/url.php" target="_blank">URL</a></td>
                 <td>Allows for easy building and manipulation of complicated URLs.</td>
                 <td><a href="https://github.com/killsaw" target="_blank">Steven Bredenberg</a></td>
-                <td><a class="btn btn-info" href="https://github.com/killsaw/F3-Plugins/blob/master/url.php" target="_blank">view</a></td>
             </tr>
         </tbody>
     </table>
 </div>
-
+</div>
 
 ### Some more Goodies
 
-<table class="table table-striped">
+<div class="row">
+<table class="table">
+	<colgroup>
+		<col class="col-sm-10">
+		<col class="col-sm-2">
+	</colgroup>
     <thead>
         <tr>
-            <th class="span10">Name</th>
-            <th class="span2">Link</th>
+            <th>Name</th>
+            <th>Link</th>
         <tr>
     </thead>
     <tbody>
@@ -273,7 +259,7 @@ See what other users have made with F3:
         </tr>
     </tbody>
 </table>
-
+</div>
 
 ## Credits
 
