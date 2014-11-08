@@ -56,7 +56,6 @@ See what other users have made with F3:
 
 ### Projects Around F3
 
-<div class="row">
 <table class="table col-sm-12">
     <thead>
         <tr>
@@ -108,10 +107,8 @@ See what other users have made with F3:
         </tr>
     </tbody>
 </table>
-</div>
 
 <button type="button" class="btn btn-small btn-default" data-toggle="collapse" data-target="#projects-archive"><i class="fa fa-eye"></i> view projects archive</button>
-<div class="row">
 <div id="projects-archive" class="collapse">
     <table class="table">
         <thead>
@@ -140,11 +137,9 @@ See what other users have made with F3:
         </tbody>
     </table>
 </div>
-</div>
 
 ### User Plugins
 
-<div clasS="row">
 <table class="table">
     <thead>
         <tr>
@@ -191,11 +186,9 @@ See what other users have made with F3:
         </tr>
     </tbody>
 </table>
-</div>
 
 <button type="button" class="btn btn-small btn-default" data-toggle="collapse" data-target="#plugin-archive"><i class="fa fa-eye"></i> view Plugin archive for older F3 versions</button>
 <div id="plugin-archive" class="collapse">
-<div class="row">
     <table class="table">
         <thead>
             <tr>
@@ -228,11 +221,9 @@ See what other users have made with F3:
         </tbody>
     </table>
 </div>
-</div>
 
 ### Some more Goodies
 
-<div class="row">
 <table class="table">
 	<colgroup>
 		<col class="col-sm-10">
@@ -259,7 +250,6 @@ See what other users have made with F3:
         </tr>
     </tbody>
 </table>
-</div>
 
 ## Credits
 
