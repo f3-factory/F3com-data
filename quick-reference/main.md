@@ -137,6 +137,12 @@ Comma-separated list of IPv4 addresses to exempt from DNSBL lookups.
 Language (and dictionary) to use if no translation is available.
 
 
+### FRAGMENT
+**Type:** `string` &nbsp; &nbsp; **Default:** `NULL`
+
+Portion of the URI after the optional hash (#) symbol `(http://www.example.org/foo.html#bar)` FRAGMENT = 'bar'.
+
+
 ### HALT
 **Type:** `bool` &nbsp; &nbsp; **Default:** `TRUE`
 
