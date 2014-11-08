@@ -94,10 +94,11 @@ $smtp->clear('In-Reply-To');
 **Add e-mail attachment**
 
 ``` php
-NULL attach ( $filename )
+NULL attach ( $filename, [ $alias ] )
 ```
 
-This function allows you to add an e-mail attachment given by its filename.
+This function allows you to add an e-mail attachment from a file on the webserver. 
+The optional `alias` parameter allows you to use a different label for the filename value as it appears in the email attachment, in case you wish to hide the original filename value to enhance security through obfuscation .
 
 `attach` checks whether the filename is a regular file or not (as per the PHP function [is_file](http://www.php.net/is_file "php.net :: ")), otherwise an `user_error` is raised.
 
