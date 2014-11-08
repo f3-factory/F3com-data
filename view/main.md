@@ -120,6 +120,19 @@ echo $view->render('myview.csv','text/csv',array('urls'=>$urls));
 
 ## Methods
 
+### afterrender
+
+**call a function after view is rendered, before it is written to `/tmp` storage**
+
+``` php
+object afterrender ( func $arg )
+```
+
+Call the function specified in `$arg`. 
+
+When function is called, the rendered view is passed to the function as a string. The called function needs to return the modified rendered view after any modification are done from with the callback function.
+
+
 ### dupe
 
 **Attempt to clone object**
