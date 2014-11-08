@@ -125,12 +125,12 @@ echo $view->render('myview.csv','text/csv',array('urls'=>$urls));
 **call a function after view is rendered, before it is written to `/tmp` storage**
 
 ``` php
-object afterrender ( func $arg )
+string afterrender ( string|callback $func )
 ```
 
-Call the function specified in `$arg`. 
+Call the function specified in `$func`. 
 
-When function is called, the rendered view is passed to the function as a string. The called function needs to return the modified rendered view after any modification are done from with the callback function.
+When function is called, the rendered view is passed to the function as a string. The called function needs to return the modified rendered view after any modification are done from within the callback function. You can call this hook multiple times to assign more than one function if needed. Utilizes [Base->call](Base#call) to trigger the function and therefore accepts a callback string as well.
 
 
 ### dupe
