@@ -183,6 +183,14 @@ DocumentRoot "/var/www/html"
 </Directory>
 ```
 
+In case you just put your fat-free project into a sub-folder of an existing document root, some Apache configurations possibly need a defined `RewriteBase` as well in your `.htaccess` file. If the app is not working, or the default route `/` works, but `/test` maybe fails, try to add the base path:
+
+``` apache
+RewriteEngine On
+RewriteBase /fatfree-project/
+# ...
+```
+
 If you're developing several applications simultaneously, a virtual host configuration is easier
 to manage:
 
