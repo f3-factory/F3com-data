@@ -197,6 +197,19 @@ This will suppress the stack trace output in any system-generated HTML error pag
 
 If your application needs to be user-configurable, F3 provides a handy method for reading configuration files to set up your application. This way, you and your users can tweak the application without altering any PHP code.
 
+There are 3 predefined section names:
+
+* `[globals]` for global variables definitions
+* `[routes]` for routes definitions
+* `[maps]` for route maps definitions
+
+**NB**: `[globals]` is assumed if no section has been provided.
+You can combine all sections in a single configuration file - although having `[routes]` and `[maps]` in a separate file is recommended. This way you can allow end-users to modify some application-specific flags, and at the same time restrict them from meddling with your routing logic.
+
+Here's how to use the different sections:.
+
+### [globals]
+
 Instead of creating a PHP script that contains the following sample code:
 
 ```php
@@ -245,6 +258,8 @@ very long \
 string"
 ```
 
+### [routes]
+
 F3 also gives you the ability to define HTTP routes in configuration files:
 
 ``` ini
@@ -256,6 +271,8 @@ GET /page/@num=Page->controller
 GET /contact=App->contact, 600
 ```
 
+### [maps]
+
 Route maps can be defined in configuration files too:
 
 ``` ini
@@ -264,4 +281,33 @@ Route maps can be defined in configuration files too:
 /blog/@controller=Blog\@controller
 ```
 
-The `[globals]`, `[routes]`, and `[maps]` section headers are required. You can combine both sections in a single configuration file - although having `[routes]` and `[maps]` in a separate file is recommended. This way you can allow end-users to modify some application-specific flags, and at the same time restrict them from meddling with your routing logic.
+### Custom sections
+
+Any other section name than the 3 above is interpreted as a `[globals]` section prefixed by the section name.
+
+So the following:
+
+```ini
+[foo]
+a = 1
+b = 2
+
+[foo.hash]
+x = 1
+y = 2
+z = 3
+```
+
+is equivalent to:
+
+```php
+$f3->set('foo',array(
+  'a' => 1,
+  'b' => 2,
+  'hash' => array(
+    'x' => 1,
+    'y' => 2,
+    'z' => 3
+  )
+));
+```
