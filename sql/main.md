@@ -184,6 +184,11 @@ Here's the equivalent syntax with unnamed placeholders:
 $db->exec('INSERT INTO mytable VALUES(?,?)',array(1=>5,2=>'Jim'))
 ```
 
+<div class="alert alert-info">
+<strong>Notice:</strong><br>
+The SQL class is a simple PDO proxy, hence it requires you to provide the parameters in a 1-based array for unnamed placeholders, otherwise you will get a <code>Invalid parameter number</code> error.
+</div>
+
 and here's the short syntax for a single placeholder:
 
 ```php
