@@ -1129,14 +1129,14 @@ Check out the User Guide about [creating named routes](routing-engine#named-rout
 
 Can be a callable class method like 'Foo->bar' or 'Foo::bar', a function name, or an anonymous function.
 
-F3 automatically passes the framework object to methods of route handler controller classes, i.e.
+F3 automatically passes the framework instance and the route tokens to route handler controller classes. E.g:
 
 ```php
 $f3->set('hello','world');
 $f3->route('GET /foo/@file','Bar->baz');
 
 class Bar {
-    function baz($f3,$args) {
+    function baz($f3,$args) {//<-- $f3 is the framework instance, $args are the route tokens
         echo $f3->get('hello');
         echo $args['file'];
     }

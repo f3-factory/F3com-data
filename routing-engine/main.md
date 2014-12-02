@@ -87,6 +87,10 @@ Another thing: Fat-Free sees `GET /brew` as separate and distinct from the route
 `GET /brew/@count`. Each can have different route handlers.
 
 
+<div class="alert alert-info">
+  <strong>IMPORTANT:</strong> All route handlers are automatically passed the framework instance and the route tokens. <a href="base#route-handler">See here</a>.
+</div>
+
 ### Named Routes
 
 When you define a route, you can assign it a name. Use the route name in your code and templates instead of a typed url. Then if you need to change your urls to please the marketing overlords, you only need to make the change where the route was defined. The route names must follow php variable naming rules (no dots, dashes nor hyphens).
