@@ -283,6 +283,8 @@ Route maps can be defined in configuration files too:
 
 ### Custom sections
 
+**Notice:** This is a new feature, that comes with version 3.3.1.
+
 Any other section name than the 3 above is interpreted as a `[globals]` section prefixed by the section name.
 
 So the following:
