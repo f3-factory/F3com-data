@@ -445,7 +445,7 @@ Examples of multiple languages using the F3 template engine:
 <p>
 {{ @today,time() | format }}.<br />
 {{ @money,365.25 | format }}<br />
-{{ @pi }}
+{{ @pi, 3.1415 | format }}
 </p>
 ```
 
@@ -457,7 +457,7 @@ And the longer version that utilizes PHP as a template engine:
 <p>
     <?php echo $f3->get('today',time()); ?>.<br />
     <?php echo $f3->get('money',365.25); ?>
-    <?php echo $f3->get('pi'); ?>
+    <?php echo $f3->get('pi', 3.1415); ?>
 </p>
 ```
 
