@@ -1376,6 +1376,14 @@ $f3->mutex('test',function() {
 });
 ```
 
+Arguments can be passed to the callback:
+
+```php
+$f3->mutex('my-mutex-id',function($path,$str) {
+	@file_put_contents($path,$str);
+},array('/foo/bar/facts.txt','F3 is cool'));
+```
+
 ### read
 
 **Read file (with option to apply Unix LF as standard line ending)**
