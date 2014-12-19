@@ -467,7 +467,7 @@ If the autoloaded class is `Main\Home`, possible filenames are `Main/Home.php` o
 
 &rArr; `main\Home.php`, `Main\hoME.php` or `MAIN\HOME.php` will not load!
 
-If you need to define a custom case handling, you can set the `AUTOLOAD` variable as an array of a path and a custom function.
+If you need to define a custom case handling, you can set the `AUTOLOAD` variable as an array of a path and a custom function. (new in version 3.3.1)
 
 Let's say that all your filenames are uppercase. Then instead of defining `$f3->set('AUTOLOAD','classes/'`, you should define:
 
