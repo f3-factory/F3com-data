@@ -141,3 +141,10 @@ There are many more Plug-Ins available for F3. Have a look into their API Refere
 * [Google Static Maps API v2](google-static-maps)
 
 Still haven't found what you're looking for? Maybe you'll find it in the [User Contributed Plug-Ins](development#user-plugins) section.
+
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="/databases"><span aria-hidden="true">&larr;</span> 5. Databases</a></li>
+    <li class="next"><a href="/optimization">7. Optimization <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>

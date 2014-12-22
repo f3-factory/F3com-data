@@ -571,3 +571,10 @@ echo $combined->name;
 ```
 
 Tip:Use the tools as they're designed for. Fat-Free already has an easy-to-use SQL helper. Use it if you need a bigger hammer :) Try to seek a balance between convenience and performance. SQL will always be your fallback if you're working on complex and legacy data structures.
+
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="/views-and-templates"><span aria-hidden="true">&larr;</span> 4. Views and Templates</a></li>
+    <li class="next"><a href="/plug-ins">6. Plug-Ins <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
