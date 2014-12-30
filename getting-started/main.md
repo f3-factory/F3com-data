@@ -123,3 +123,9 @@ on your server, you may have to tweak your Web server settings a bit. Take a loo
 [sample Apache configuration](routing-engine#sample-apache-configuration) in the following section (along with the Nginx and Lighttpd equivalents).
 
 **Still having trouble?** Make sure the `$f3 = require('path/to/base.php');` assignment comes before any output in your script. `base.php` modifies the HTTP headers, so any output that has been sent to the browser before this assignment will cause errors.
+
+<nav>
+  <ul class="pager">
+    <li class="next"><a href="/routing-engine">2. Routing Engine <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>

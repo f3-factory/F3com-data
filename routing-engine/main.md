@@ -542,3 +542,10 @@ If no modifiers are defined in a routing pattern, then both AJAX and synchronous
 are routed to the specified handler.
 
 Route pattern modifiers are also recognized by [`$f3->map()`](base#map).
+
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="/getting-started"><span aria-hidden="true">&larr;</span> 1. Getting Started</a></li>
+    <li class="next"><a href="/framework-variables">3. Framework Variables <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>

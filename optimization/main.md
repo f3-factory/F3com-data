@@ -127,3 +127,11 @@ $f3->route('GET /login','\Backoffice\Login->handler', 0, 512); // limit sent dat
 In this example, the framework will serve the GET requests to /login at a maximum rate of ~64 KB/s (512 Kbps).
 
 Bandwidth throttling at the application level can be particularly useful for login pages. Slow responses to dictionary attacks is a good way of mitigating this kind of security risk.
+
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="/plug-ins"><span aria-hidden="true">&larr;</span> 6. Plug-Ins</a></li>
+    <li class="next"><a href="/unit-testing">8. Unit Testing <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
+

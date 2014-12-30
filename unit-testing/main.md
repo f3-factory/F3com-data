@@ -133,3 +133,10 @@ Testing manageable chunks of code leads to more reliable programs that work as y
 The question to ask yourself is: "Have I tested all possible scenarios?" More often than not, those situations that have not been taken into consideration are the likely causes of bugs.
 
 Unit testing helps a lot in minimizing these occurrences. Even a few tests on each fixture can greatly reduce headaches. On the other hand, writing applications without unit testing at all invites trouble.
+
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="/optimization"><span aria-hidden="true">&larr;</span> 7. Optimization</a></li>
+    <li class="next"><a href="/quick-reference">9. Quick Reference <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
