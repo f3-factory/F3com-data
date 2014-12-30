@@ -496,6 +496,8 @@ It means if you have defined differents routes using differents methods of a sam
 e.g. `'GET /login','User->login'` and `'GET /logout','User->logout'`, both routes will share the same
 `beforeroute()` and `afterroute()` event handlers.
 
+Create `beforeRoute()` and `afterRoute()` functions in your base controller class, and have them apply to every request. Of course, you can override them in the child controllers by defining custom `beforeRoute()` and `afterRoute()` handlers in the child classes. One can also create `beforeRoute()` and `afterRoute()`  in a child class, and inherit the front controller handlers by calling `parent::beforeRoute();` or `parent::afterRoute();` in the children.
+
 ## Dynamic Route Handlers
 
 Here's another F3 goodie:
