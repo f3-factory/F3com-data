@@ -96,7 +96,7 @@ See what other users have made with F3:
             <td><a href="https://github.com/SSilence" target="_blank">Tobias Zeising</a></td>
         </tr>
         <tr>
-            <td><a href="http://taskshare.org/" target="_blank" title="A web-based, responsive todo list tool. No logins required.">TalkShare</a></td>
+            <td><a href="http://taskshare.org/" target="_blank" title="A web-based, responsive todo list tool. No logins required.">TaskShare</a></td>
             <td>TaskShare is a really simple todo/task/list web app</td>
             <td><a href="https://github.com/timbotron" target="_blank">Tim Habersack</a></td>
         </tr>
