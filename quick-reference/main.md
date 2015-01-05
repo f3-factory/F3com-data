@@ -130,6 +130,10 @@ Used to enable/disable auto-escaping [@tokens](/quick-reference#token) used in t
 
 Comma-separated list of IPv4 addresses to exempt from DNSBL lookups.
 
+### EXCEPTION
+**Type:** `object` &nbsp; &nbsp; **Default:** `NULL`
+
+Contains the exception object when unhandled exceptions occur.
 
 ### FALLBACK
 **Type:** `string` &nbsp; &nbsp; **Default:** `'en'`
