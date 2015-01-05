@@ -197,7 +197,7 @@ This will suppress the stack trace output in any system-generated HTML error pag
 
 If your application needs to be user-configurable, F3 provides a handy method for reading configuration files to set up your application. This way, you and your users can tweak the application without altering any PHP code.
 
-There are 3 predefined section names:
+There are 4 predefined section names:
 
 * `[globals]` for global variables definitions
 * `[routes]` for routes definitions
@@ -286,8 +286,6 @@ Route maps can be defined in configuration files too:
 
 You can also redirect obsolete routes to new pages in configuration files:
 
-**Notice:** This is a new feature, that comes with version 3.4.
-
 ``` ini
 [redirects]
 GET|HEAD /obsoletepage = /newpage
@@ -296,8 +294,6 @@ GET|HEAD /search = https://www.google.com
 ```
 
 ### Custom sections
-
-**Notice:** This is a new feature, that comes with version 3.3.1.
 
 Any other section name than the 3 above is interpreted as a `[globals]` section prefixed by the section name.
 
