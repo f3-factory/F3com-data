@@ -202,9 +202,10 @@ There are 3 predefined section names:
 * `[globals]` for global variables definitions
 * `[routes]` for routes definitions
 * `[maps]` for route maps definitions
+* `[redirects]` for redirecting routes
 
 **NB**: `[globals]` is assumed if no section has been provided.
-You can combine all sections in a single configuration file - although having `[routes]` and `[maps]` in a separate file is recommended. This way you can allow end-users to modify some application-specific flags, and at the same time restrict them from meddling with your routing logic.
+You can combine all sections in a single configuration file - although having `[routes]`, `[maps]`, and `[redirects]` in a separate file is recommended. This way you can allow end-users to modify some application-specific flags, and at the same time restrict them from meddling with your routing logic.
 
 Here's how to use the different sections:.
 
@@ -279,6 +280,19 @@ Route maps can be defined in configuration files too:
 [maps]
 /blog=Blog\Login
 /blog/@controller=Blog\@controller
+```
+
+### [redirects]
+
+You can also redirect obsolete routes to new pages in configuration files:
+
+**Notice:** This is a new feature, that comes with version 3.4.
+
+``` ini
+[redirects]
+GET|HEAD /obsoletepage = /newpage
+GET|HEAD /dash = @dashboard
+GET|HEAD /search = https://www.google.com
 ```
 
 ### Custom sections
