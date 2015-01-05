@@ -288,7 +288,10 @@ Install the [URL rewrite module](http://www.iis.net/downloads/microsoft/url-rewr
 
 So let's get back to coding. You can declare a page obsolete and redirect your visitors to
 another site:
-
+```php
+$f3->redirect('GET|HEAD /obsoletepage', '/newpage');
+```
+which is the same as
 ```php
 $f3->route('GET|HEAD /obsoletepage',
     function($f3) {
