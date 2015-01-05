@@ -217,6 +217,18 @@ Location of custom logs.
 Callback function to use as custom error handler, or `NULL`.
 **Notice**: If no callback function is specified, a default error page is generated (HTML5 for synchronous requests, JSON string for AJAX requests).
 
+### ONREROUTE
+**Type:** `mixed` &nbsp; &nbsp; **Default:** `NULL`
+
+Callback function that is called before redirect headers are send. It will terminate the redirection if `FALSE` is returned.
+
+```php
+$f3->set('ONREROUTE',function($url,$permanent){
+  // do something
+});
+$f3->reroute('/foo?bar=baz');
+```
+
 ### PACKAGE
 **Type:** `string` &nbsp; &nbsp; **Default:** `'Fat-Free Framework'`
 
