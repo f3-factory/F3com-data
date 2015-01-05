@@ -288,10 +288,13 @@ Install the [URL rewrite module](http://www.iis.net/downloads/microsoft/url-rewr
 
 So let's get back to coding. You can declare a page obsolete and redirect your visitors to
 another site:
+
 ```php
 $f3->redirect('GET|HEAD /obsoletepage', '/newpage');
 ```
+
 which is the same as
+
 ```php
 $f3->route('GET|HEAD /obsoletepage',
     function($f3) {
@@ -470,9 +473,7 @@ If the autoloaded class is `Main\Home`, possible filenames are `Main/Home.php` o
 
 &rArr; `main\Home.php`, `Main\hoME.php` or `MAIN\HOME.php` will not load!
 
-If you need to define a custom case handling, you can set the `AUTOLOAD` variable as an array of a path and a custom function. (new in version 3.3.1)
-
-Let's say that all your filenames are uppercase. Then instead of defining `$f3->set('AUTOLOAD','classes/'`, you should define:
+If you need to define a custom case handling, you can set the `AUTOLOAD` variable as an array of a path and a custom function. Let's say that all your filenames are uppercase. Then instead of defining `$f3->set('AUTOLOAD','classes/'`, you should define:
 
 ```php
 $f3->set('AUTOLOAD',array('classes/',function($class){
