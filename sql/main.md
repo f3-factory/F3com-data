@@ -99,19 +99,22 @@ $db->exec("CREATE TABLE IF NOT EXISTS mytable
 $columns = $db->schema('mytable', 'name;age'); // only interested in these 2 columns
 var_dump($columns);
 // outputs
-array (size=2)
-	'name' =>	array (size=5)
+array (size=2) {
+	'name' => array (size=5) { 
 		'type' => string 'varchar(128)' (length=12)
 		'pdo_type' => int 2  // \PDO::PARAM_STR
 		'default' => string 'anonymous' (length=9)
 		'nullable' => boolean true
+		'pkey' => boolean false 
+	}
+	'age' => array (size=5) {
+		'type' => string 'SMALLINT UNSIGNED' (length=17)
+		'pdo_type' => int 1 // \PDO::PARAM_INT
+		'default' => null
+		'nullable' => boolean false
 		'pkey' => boolean false
-		'age' => array (size=5)
-			'type' => string 'SMALLINT UNSIGNED' (length=17)
-			'pdo_type' => int 1 // \PDO::PARAM_INT
-			'default' => null
-			'nullable' => boolean false
-			'pkey' => boolean false
+	}
+}
 ```
 
 <div class="alert alert-info"><strong>MySQL Hint:</strong><br>You can improve InnoDB performance on MySQL with `SET GLOBAL innodb_stats_on_metadata=0;` <em>! This requires SUPER privilege! </em></div>
