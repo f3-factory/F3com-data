@@ -20,7 +20,9 @@ It is highly recommended that experienced users develop new applications with th
 
 If you feel that this software is one great weapon to have in your programming arsenal, it saves you a lot of time and money, use it for commercial gain or in your business organization, please consider making a donation to the project. A significant amount of time, effort, and money has been spent on this project. Your donations help keep this project alive and the development team motivated. Donors and sponsors get priority support (24-hour response time on business days).
 
-<a class="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MJSQL8N5LPDAY" title="donate with PayPal"></a>
+<a href="https://coinbase.com/checkouts/7986a0da214006256d470f2f8e1a15cf"><img style="max-width:100%;" alt="Bitcoin" src="/bcosca/fatfree/raw/master/ui/images/bitcoin.png"></a>
+
+<!--<a class="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MJSQL8N5LPDAY" title="donate with PayPal"></a>-->
 
 
 
