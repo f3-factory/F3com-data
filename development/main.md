@@ -172,6 +172,11 @@ See what other users have made with F3:
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
         </tr>
         <tr>
+            <td><a href="https://github.com/xfra35/f3-multilang" target="_blank">Multilang</a></td>
+            <td>Create multilingual apps with this localization plugin</td>
+            <td><a href="https://github.com/xfra35" target="_blank">Florent</a></td>
+        </tr>
+        <tr>
             <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Pagination" target="_blank">Pagination</a></td>
             <td>Create quick and easy Pagination for your F3 application.</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
