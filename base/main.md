@@ -979,7 +979,7 @@ A dictionary file can be a php file returning a key-value paired associative arr
 **Replace tokenized URL with current route's token values**
 
 ``` php
-string build ( string $url )
+string build ( string $url [, array $params = array() ] )
 ```
 
 Example:
@@ -990,6 +990,17 @@ Example:
 echo $f3->build('@channel'); // displays 'fatfree'
 echo $f3->build('/get-it/now/@channel'); // displays '/get-it/now/fatfree'
 echo $f3->build('/subscribe/@channel');  // displays '/subscribe/fatfree'
+```
+
+If you'd like to specifically define the tokens in the given `$url`, you can use the `$params` argument for that:
+
+```php
+$f3->build('/resize/@format/*/sep/*',array(
+  'format'=>'200x200',// 1=>'200x200' also works
+  2=>'foo/bar',
+  3=>'baz.gif'
+));
+// returns: /resize/20x20/foo/bar/sep/baz.gif
 ```
 
 ### mock
