@@ -974,6 +974,23 @@ A dictionary file can be a php file returning a key-value paired associative arr
 
 ## Routing
 
+### alias
+
+**Assemble url from alias name**
+
+``` php
+string alias ( string $name [, string $params = null ] )
+```
+
+Example:
+
+```php
+$f3->route('GET @complex:/resize/@format/*/sep/*','App->nowhere');
+$f3->alias('complex','format=20x20,1=foo/bar,2=baz.gif');
+// returns '/resize/20x20/foo/bar/sep/baz.gif'
+```
+
+
 ### build
 
 **Replace tokenized URL with current route's token values**
