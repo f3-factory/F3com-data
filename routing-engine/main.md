@@ -95,7 +95,7 @@ Another thing: Fat-Free sees `GET /brew` as separate and distinct from the route
 
 When you define a route, you can assign it a name. Use the route name in your code and templates instead of a typed url. Then if you need to change your urls to please the marketing overlords, you only need to make the change where the route was defined. The route names must follow php variable naming rules (no dots, dashes nor hyphens).
 
-Let's name a route:-
+Let's name a route:
 
 ```php
 $f3->route('GET @beer_list: /beer', 'Beer->list');
@@ -103,20 +103,14 @@ $f3->route('GET @beer_list: /beer', 'Beer->list');
 
 The name is inserted after the route VERB (`GET` in this example) preceeded by an `@` symbol, and separated from the URL portion by a colon `:` symbol. You can insert a space after the colon if that makes it easier to read your code (as shown here).
 
-To access the named route in a template, get the value of the named route as the key of the `ALIASES` hive array:-
-
-``` html
-<a href="{{@ALIASES.beer_list}}">view beer list</a>
-```
-
-To redirect the visitor to a new URL, call the named route inside the `reroute()` method like:-
+To redirect the visitor to a new URL, call the named route inside the `reroute()` method like:
 
 ```php
 // a named route is a string value
 $f3->reroute('@beer_list'); // note the single quotes
 ```
 
-If you use tokens in your route, F3 will replace those tokens with their current value. If you want to change the token's value before calling reroute, pass it as the 2nd argument.:-
+If you use tokens in your route, F3 will replace those tokens with their current value. If you want to change the token's value before calling reroute, pass it as the 2nd argument:
 
 ```php
 $f3->route('GET @beer_list: /beer/@country', 'Beer->bycountry');
@@ -130,6 +124,27 @@ $f3->reroute('@beer_village_list(@country=Germany,@village=Rhine)');
 ```
 
 Remember to `urlencode()` your arguments if you have characters that do not comply with RFC 1738 guidelines for well-formed URLs.
+
+#### Named routes in templates
+
+To access the named route in a template, you can pass the route name to the alias filter:
+
+``` html
+<a href="{{ 'beer_list' | alias }}">view beer list</a>
+```
+
+If you want to build a link to a named route that contains tokens, you can pass additional parameters to the alias filter:
+
+``` html
+<a href="{{ 'beer_village_list', 'country=Germany,village=Rhine' | alias }}">view beer list from Rhine, Germany</a>
+```
+
+This also works with variables, which looks like `{{ @name, 'a=5,b='.@id | alias }}`. You only need to set or overwrite tokens in named routes that you need to change. All other tokens are resolved automatically, based on the current route. 
+
+If you need to replace wildcard tokens in your route (i.e. `GET @complex:/resize/@format/*/sep/*`), use a numeric index to specify it's new value, for instance: `{{'complex','format=20x20,2=foo/bar,3=baz.gif'|alias}}`.
+
+To generate URLs in your controller code, see the [alias](base#alias) and [build](base#build) methods.  
+
 
 ## Dynamic Web Sites
 
