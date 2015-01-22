@@ -318,3 +318,12 @@ string quotekey ( string $key )
 ```
 
 This function quotes a table or column key name according to the requirements and syntax of the current database engine. E.g will quote `page` to `"page"` for SQLite and Oracle; while it will quote `page` to `&#96;page&#96;` for a MySQL based request.
+
+
+### pdo
+
+**Returns PDO object**
+
+```php
+string pdo ( )
+```
