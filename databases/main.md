@@ -324,7 +324,7 @@ The `load()` method accepts a second argument: an array of options containing ke
 $user->load(
     array('visits>?',3),
     array(
-        'order'=>'userID DESC'
+        'order'=>'userID DESC',
         'offset'=>5,
         'limit'=>3
     )
