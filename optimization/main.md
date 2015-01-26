@@ -91,8 +91,9 @@ Of course we need to set up a route to handle the necessary call to the Fat-Free
 ```php
 $f3->route('GET /minify/@type',
 	function($f3, $args) {
-		$f3->set('UI',$f3->get('UI').$args['type'].'/');
-		echo Web::instance()->minify($_GET['files']);
+		$path = $f3->get('UI').$args['type'].'/';
+		$files = str_replace('../','',$_GET['files']); // close potential hacking attemps  
+		echo Web::instance()->minify($files, null, true, $path);
 	},
 	3600*24
 );
