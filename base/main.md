@@ -953,6 +953,13 @@ which is a comma separated list of 2-letter language codes optionally followed b
 Dictionary files follow the same rule (es-BR.php / es-BR.ini).
 </div>
 
+**NB:** The system locale is loaded automatically by this function. E.g:
+
+```php
+$f3->set('ENCODING','UTF-8');
+$f3->set('LANGUAGE','it-IT');// the locale it_IT.UTF-8 will be automatically loaded using setlocale
+```
+
 ### lexicon
 
 **Transfer lexicon entries to hive**

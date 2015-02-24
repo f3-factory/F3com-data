@@ -201,6 +201,13 @@ You can refer to [session_set_cookie_params() in the PHP Manual](http://www.php.
 
 Current active language(s). Value is used to load the appropriate language(s) translation file(s) in the folder pointed to by `LOCALES`. Default: auto-detected from the HTTP `Accept-Language` request header, e.g. `'en-US,en,es'`.
 
+**NB:** The system locale is loaded accordingly to this variable. E.g:
+
+```php
+$f3->set('ENCODING','UTF-8');
+$f3->set('LANGUAGE','it-IT');// the locale it_IT.UTF-8 will be automatically loaded using setlocale
+```
+
 See the [Localisation section](base#language) in `Base` for more details and an example.
 
 ### LOCALES
