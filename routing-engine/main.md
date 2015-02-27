@@ -570,3 +570,19 @@ Route pattern modifiers are also recognized by [`$f3->map()`](base#map).
     <li class="next"><a href="/framework-variables">3. Framework Variables <span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav>
+
+## Routing in CLI mode
+
+If you want to run a specific route from a command line tool, a shell script, the console or as cron job, you can emulate a HTTP GET request by the following command:
+
+```
+cd /path/to/test/suite
+php index.php /my-awesome-update-route
+```
+
+Alternatively you can also use curl or wget like:
+
+```
+wget -O /dev/null http://my-domain.com/update-route
+```
+
