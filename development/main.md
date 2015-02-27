@@ -22,7 +22,7 @@ If you feel that this software is one great weapon to have in your programming a
 
 <a href="https://coinbase.com/checkouts/7986a0da214006256d470f2f8e1a15cf"><img style="max-width:100%;" alt="Bitcoin" src="http://github.com/bcosca/fatfree/raw/master/ui/images/bitcoin.png"></a>
 
-<!--<a class="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MJSQL8N5LPDAY" title="donate with PayPal"></a>-->
+<a class="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MJSQL8N5LPDAY" title="donate with PayPal"></a>
 
 
 
