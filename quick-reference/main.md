@@ -15,6 +15,11 @@ A string containing the auto-detected HTTP user agent, e.g. `'Mozilla/5.0 (Linux
 `TRUE` if an XML HTTP request is detected, `FALSE` otherwise. Default value: Result of the expression `$headers['X-Requested-With']=='XMLHttpRequest'`
 
 
+### ALIAS
+**Type:** `string`
+
+Contains the alias (name) of the current route. Empty if the current route is not named.
+
 ### ALIASES
 **Type:** `array`
 
