@@ -290,7 +290,7 @@ array skip( [ int $ofs = 1 ] )
 int erase( [ string|array $filter = NULL ] )
 ```
 
-Perform a SQL `DELETE FROM $this->table WHERE $filter` on the table specified when instanciating the mapper.
+This deletes the current mapped record. If a `$filter` is given, it performs a SQL `DELETE FROM $this->table WHERE $filter` on the table specified when instanciating the mapper. Notice that erase event hooks are skipped when `$filter` is present.
 
 ### reset
 **Reset the cursor**
