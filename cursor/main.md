@@ -366,6 +366,12 @@ $mapper->aftererase(function($self,$pkeys){
 });
 ```
 
+<div class="alert alert-info">
+	<strong>Notice:</strong><br>
+	Please notice that the erase hooks can only be executed when using <code>$mapper->erase();</code> on a loaded/hydrated mapper. If you are going to erase a whole set by providing a <code>$filter</code> to the erase method, these event hooks will be skipped.
+</div>
+
+
 ### oninsert, onupdate, onerase
 
 Provided for backwards compatibility, they are aliases to respectively `afterinsert()`, `afterupdate()` and `aftererase()`.
