@@ -236,7 +236,7 @@ Callback function to use as custom error handler, or `NULL`.
 ### ONREROUTE
 **Type:** `mixed` &nbsp; &nbsp; **Default:** `NULL`
 
-Callback function that is called before redirect headers are send. It will terminate the redirection if `FALSE` is returned.
+Callback function that is called before redirect headers are send. The default behavior (301/302 redirection) will be bypassed unless `FALSE` is returned.
 
 ```php
 $f3->set('ONREROUTE',function($url,$permanent){
