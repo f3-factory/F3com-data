@@ -270,6 +270,8 @@ GET /404=App->page404
 GET /page/@num=Page->controller
 ; Cache the route for 10 minutes
 GET /contact=App->contact, 600
+; named route
+GET @about: /about=Page->about
 ```
 
 ### [maps]
