@@ -53,7 +53,7 @@ restore them later and F3 will detect their presence automatically.
 </div>
 
 Make sure you're running the right version of PHP. F3 does not support versions earlier than PHP
-5.3. You'll be getting syntax errors (false positives) all over the place because new language
+5.3.10. You'll be getting syntax errors (false positives) all over the place because new language
 constructs and closures/anonymous functions are not supported by outdated PHP versions. To find
 out, open your console (`bash` shell on Linux, or `cmd.exe` on Windows):-
 
