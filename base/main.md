@@ -1497,51 +1497,6 @@ This function get called while bootstrapping the application and will lookup the
 
 **Return `TRUE` if the IPv4 `$ip` address is present in [DNSBL](quick-reference#dnsbl)**
 
-### config
-
-**Configure framework according to .ini-style file settings**
-
-```php
-null config ( string $file )
-```
-
-This will parse a configuration file, provided by `$file` and setup the framework with variables and routes.
-
-See the user guide section about [configuration files](framework-variables#configuration-files) to get a full description about how to setup your ini file.
-
-
-### dump
-
-**Dump (_echo_) expression with syntax highlighting**
-
-```php
-null dump ( mixed $expr )
-```
-
-<i class="icon-thumbs-up"></i> _NOTICE: The syntax highlighting depends on the [DEBUG level](quick-reference#debug "The DEBUG system variable")_.
-
-### highlight
-
-**Apply syntax highlighting**
-
-```php
-string highlight ( string $text )
-```
-
-Applies syntax highlighting to a given string and returns the highlighted string.
-
-Example:
-
-```php
-$highlighted_code = $f3->highlight( '$fatfree->rocks(\'FAST\' AND $light)' );
-```
-Returns:
-
-```html
-<code><span class="variable">$fatfree</span><span class="object_operator">-&gt;</span><span class="string">rocks</span><span>(</span><span class="constant_encapsed_string">'FAST'</span><span class="whitespace"> </span><span class="logical_and">AND</span><span class="whitespace"> </span><span class="variable">$light</span><span>)</span></code>
-```
-<div class="alert alert-warning">Keep in mind you need the `code.css` stylesheet to correctly see the syntax highlighting in your browser pages. You can include it in your pages with &lt;link href="code.css" rel="stylesheet" /&gt; (code.css is bundled into the framework 'lib/' folder)</div>
-
 ### compile
 
 **Convert JS-style token to PHP expression**
@@ -1557,21 +1512,61 @@ Example:
 $f3->compile('@RAINBOW.cyan'); // returns: $RAINBOW['cyan']
 ```
 
-### status
+### config
 
-**Send HTTP/1.1 status header; Return text equivalent of status code**
-
-```php
-string status ( int $code )
-```
-
-Use this method for sending various [HTTP status messages](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html "w3.org :: Status Code Definitions") to the client, e.g.
+**Configure framework according to .ini-style file settings**
 
 ```php
-$f3->status(404); // Sends a '404 Not Found' client error
-$f3->status(407); // Sends a '407 Proxy Authentication Required' client error
-$f3->status(503); // Sends a '503 Service Unavailable' server error
+null config ( string $file )
 ```
+
+This will parse a configuration file, provided by `$file` and setup the framework with variables and routes.
+
+See the user guide section about [configuration files](framework-variables#configuration-files) to get a full description about how to setup your ini file.
+
+
+### constants
+
+**Convert class constants to array**
+
+```php
+array constants ( object | string $class [, string $prefix = '' ] )
+```
+
+Example, providing we have a `Foo\Bar` class defined as below:
+
+```php
+namespace Foo;
+class Bar {
+  const STATUS_Inactive=0;
+  const STATUS_Active=1;
+  const E_NotFound='Not found';
+}
+```
+
+you can access all the constants prefixed by `STATUS_`:
+
+```php
+$constants=$f3->constants('Foo\Bar','STATUS_');
+var_dump($constants);
+// outputs:
+array(2) {
+  ["Inactive"]=>int(0)
+  ["Active"]=>int(1)
+}
+```
+
+NB: passing an object also works: `$f3->constants($bar,'STATUS_')`.
+
+### dump
+
+**Dump (_echo_) expression with syntax highlighting**
+
+```php
+null dump ( mixed $expr )
+```
+
+<i class="icon-thumbs-up"></i> _NOTICE: The syntax highlighting depends on the [DEBUG level](quick-reference#debug "The DEBUG system variable")_.
 
 ### error
 
@@ -1596,6 +1591,44 @@ There is little need to call this method directly because it is automatically in
 
 ```php
 $f3->expire(0); // sends 'Cache-Control: no-cache, no-store, must-revalidate'
+```
+
+### highlight
+
+**Apply syntax highlighting**
+
+```php
+string highlight ( string $text )
+```
+
+Applies syntax highlighting to a given string and returns the highlighted string.
+
+Example:
+
+```php
+$highlighted_code = $f3->highlight( '$fatfree->rocks(\'FAST\' AND $light)' );
+```
+Returns:
+
+```html
+<code><span class="variable">$fatfree</span><span class="object_operator">-&gt;</span><span class="string">rocks</span><span>(</span><span class="constant_encapsed_string">'FAST'</span><span class="whitespace"> </span><span class="logical_and">AND</span><span class="whitespace"> </span><span class="variable">$light</span><span>)</span></code>
+```
+<div class="alert alert-warning">Keep in mind you need the `code.css` stylesheet to correctly see the syntax highlighting in your browser pages. You can include it in your pages with &lt;link href="code.css" rel="stylesheet" /&gt; (code.css is bundled into the framework 'lib/' folder)</div>
+
+### status
+
+**Send HTTP/1.1 status header; Return text equivalent of status code**
+
+```php
+string status ( int $code )
+```
+
+Use this method for sending various [HTTP status messages](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html "w3.org :: Status Code Definitions") to the client, e.g.
+
+```php
+$f3->status(404); // Sends a '404 Not Found' client error
+$f3->status(407); // Sends a '407 Proxy Authentication Required' client error
+$f3->status(503); // Sends a '503 Service Unavailable' server error
 ```
 
 ### unload
