@@ -1197,7 +1197,7 @@ Set the 4th argument `$kbps` to your desired speed limit, to enable throttling. 
 **Reroute to specified URI**
 
 ```php
-null reroute ( string $uri [, bool $permanent = FALSE] )
+null reroute ( [ string $url = NULL [, bool $permanent = FALSE ]] )
 ```
 
 Examples of usage:
@@ -1217,6 +1217,13 @@ $f3->route('POST /login', function($f3) {
         $f3->reroute('/login', false);
 });
 
+// if no $url parameter is set, it'll reroute to the current route with GET verb
+$f3->route('POST /search', function($f3) {
+    // back to search form, if an empty term was submitted
+    if ($f3->devoid('POST.search_term'))
+        $f3->reroute();
+});
+
 // we can also reroute to external URLs
 $f3->route('GET /partners', function($f3) {
     $f3->reroute('http://externaldomain.com');
@@ -1233,7 +1240,32 @@ $f3->route('GET @beer_producers: /beer/@country/@village', 'Beer->byproducer');
 $f3->route('GET /old-beer-page', function($f3) {
     $f3->reroute('@beer_producers(@country=Germany,@village=Rhine)');
 });
+// but it'll also work with any unnamed tokenized URL
+$f3->reroute('/beer/@country/@village',TRUE)
 ```
+
+### redirect
+
+**Redirect a route to another URL**
+
+```php
+null redirect ( string|array $pattern, string $url [, bool $permanent = TRUE ] )
+```
+
+This is a little shortcut method between *route* and *reroute* methods to defined routes that are just meant to redirect the client. The `$pattern` argument accepts the same values as the [route](base#route) method does. For `$url` you can use anything that would also be accepted in the appropriate [reroute](base#reroute) method argument.
+
+Example of usage:
+
+```php
+// redirect old pages
+$f3->redirect('GET /oldpage', '/newpage');
+// jump to absolut URLs
+$f3->redirect('GET /external-link', 'http://subdomain.domain.com');
+// temporarily redirect to another named route
+$f3->redirect('GET /login', '@memer_area', false);
+```
+
+This can also be configured in [config files](framework-variables#ConfigurationFiles) within a `[redirects]` section.
 
 ### map
 
