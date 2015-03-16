@@ -181,11 +181,13 @@ bool erase( [ array $filter = NULL ] )
 
 
 ### copyfrom
-**Hydrate the mapper object using a hive array variable**
+**Hydrate the mapper object using an array**
 
 ```php
-NULL copyfrom( string $key [, callback $func = NULL ] )
+NULL copyfrom( array | string $var [, callback $func = NULL ] )
 ```
+
+This function allows you to hydrate the mapper using an array (or the name of a hive variable containing an array).
 
 `$func` is the callback function to apply to the hive array variable:
 

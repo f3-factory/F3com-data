@@ -304,15 +304,22 @@ $basket->drop();
 
 ### copyfrom
 
-**Hydrate item using hive array variable**
+**Hydrate item using array**
 
 ```php
-NULL copyfrom ( string $key )
+NULL copyfrom ( array | string $var )
 ```
 
-This function allows you to hydrate the basket using a hive array variable.
+This function allows you to hydrate the basket using an array (or the name of a hive variable containing an array).
 
-Example:
+Example 1:
+
+```php
+$basket->copyfrom(array('name'=>'banana', 'amount'=> 15));
+$basket->get('name'); // banana
+```
+
+Example 2:
 
 ```php
 $f3->set('banana',array('name'=>'banana', 'amount'=> 15));
