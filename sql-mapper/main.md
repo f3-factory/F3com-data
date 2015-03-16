@@ -134,6 +134,14 @@ array(
 bool exists( string $key )
 ```
 
+### changed
+
+**Return TRUE if any/specified field value has changed**
+
+```php
+bool changed ( [ string $key = NULL ] )
+```
+
 ### set
 
 **Assign a given value to a field**
