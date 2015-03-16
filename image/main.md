@@ -9,7 +9,7 @@ File location: `lib/image.php`
 ## Instantiation
 
 ```php
-$img = new Image ( [ string $file = NULL [, bool $flag = FALSE [, string $path = '' ]]] )
+$img = new Image ( [ string $file = NULL [, bool $flag = FALSE [, string $path = NULL ]]] )
 ```
 
 You can create a new Image object from an existing image file like this:
@@ -27,6 +27,7 @@ $img = new Image();
 The constructor also has a 2nd argument, the `$flag` option. Setting it to `TRUE` enables the file [history](image#history), which can save additional states for the current file, allowing for example to [revert](image#restore) to a specified state after having applied a filter.
 
 If your image file is not located within one of the [UI](quick-reference#ui) search paths, you must use the `$path` argument to specify its directory path.
+In particular, set `$path=''` if the provided file path is absolute.
 
 ## Processing
 

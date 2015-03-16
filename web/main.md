@@ -363,7 +363,7 @@ $result = $web->request($url, $options);
 **Minify CSS and Javascript files by stripping whitespaces and comments. Returns a combined output as a string.**
 
 ```php
-string minify ( string|array $files [, string $mime = NULL [, bool $header = TRUE [, string $path = '' ]]] )
+string minify ( string|array $files [, string $mime = NULL [, bool $header = TRUE [, string $path = NULL ]]] )
 ```
 
 Example:
@@ -374,7 +374,8 @@ $minified = Web::instance()->minify('style.css,framework.css,null.css');
 
 This method will also auto-detect the mime-type of the files that are going to be minified and send as header Content-Type to the browser. You can overwrite the used mime-type with the `$mime` parameter, and stop sending the header data entirely by setting the `$header` parameter to `FALSE`.
 
-Notice that the files processed by this function must be located in one of the directories specified in [UI](quick-reference#ui) system var or you specify a new directory with the `$path` parameter.
+If the files are not located within one of the [UI](quick-reference#ui) search paths, you must use the `$path` argument to specify their directory path.
+In particular, set `$path=''` if the provided file paths are absolute.
 
 To get maximum performance, you can [enable the F3 system caching](quick-reference#cache) and F3 will use it to save/retrieve file(s) to minify and to save the combined output as well. You can have a look at the [Cache Engine User Guide](optimization#cache-engine) for more details.
 
