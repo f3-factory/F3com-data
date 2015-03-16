@@ -126,6 +126,14 @@ array(
 
 ## Methods
 
+### table
+
+**Return the name of the mapped table**
+
+```php
+string table()
+```
+
 ### exists
 
 **Return TRUE if a given field is defined**
