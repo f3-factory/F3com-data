@@ -356,6 +356,13 @@ array schema()
 
 See [Retrieve schema of SQL table](sql#schema) for additional information.
 
+### required
+**Return TRUE if field is not nullable**
+
+```php
+bool required( string $field )
+```
+
 ### factory
 **Convert an array to a mapper object**
 
