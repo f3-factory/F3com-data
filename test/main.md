@@ -41,3 +41,10 @@ The returned result array will contain additional assoc array elements of this s
 - **status**: the boolean result of your test condition
 - **text**: your test description
 - **source**: the source of any occured error, if any (file and line)
+
+### passed
+**Return FALSE if at least one test case fails**
+
+```php
+null passed ()
+```
