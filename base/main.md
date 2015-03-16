@@ -589,7 +589,7 @@ $filepath = $f3->fixslashes($filepath); // /www/mysite/myfile.txt
 **Split comma-, semi-colon, or pipe-separated string**
 
 ```php
-array split ( string $str )
+array split ( string $str [, $noempty = TRUE ] )
 ```
 
 Usage:
@@ -607,6 +607,8 @@ Array
 )
 */
 ```
+
+NB: by default, empty values are filtered out. Set `$noempty` to FALSE to prevent this behaviour.
 
 ### stringify
 
