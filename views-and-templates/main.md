@@ -435,7 +435,9 @@ return array(
 
 Dictionaries are nothing more than key-value pairs. F3 automatically instantiates framework variables based on the keys in the language files. As such, it's easy to embed these variables as tokens in your templates.
 
-<div class="alert alert-warning"><strong>Notice:</strong> Dictionary key-value pairs become F3 variables once referenced. Make sure the keys do not conflict with any framework variable instantiated via `$f3->set()`, `$f3->mset()`, or `$f3->config()`.</div>
+<div class="alert alert-warning"><strong>Notice:</strong> Dictionary key-value pairs become F3 variables once referenced. Make sure the keys do not conflict with any framework variable instantiated via `$f3->set()`, `$f3->mset()`, or `$f3->config()`.
+<strong>In Addition, you can also use the <a href="quick-reference#PREFIX">PREFIX</a> var to set a common key that prepends every language key.</strong>  
+</div>
 
 
 Examples of multiple languages using the F3 template engine:
@@ -509,6 +511,8 @@ which is a comma separated list of 2-letter language codes optionally followed b
 <strong>NB:</strong> Even though POSIX locales use an underscore as a separator (es_BR.UTF-8), you should define the LANGUAGE variable with a hyphen (es-BR).
 Dictionary files follow the same rule (es-BR.php / es-BR.ini).
 </div>
+
+For some more technical details, see the [Base->language](base#language) method.
 
 ## Data Sanitation
 

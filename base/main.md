@@ -936,7 +936,7 @@ string language ( string $code )
 
 This function is used while booting the framework to auto-detect the possible user language, by looking at the HTTP request headers, specifically the Accept-Language header sent by the browser.
 
-Use the [LANGUAGE](quick-reference#language "Definition and usage of the LANGUAGE system variable") system variable to get and set languages, since it also handles dependencies like setting the locales using [php setlocale(LC_ALL,...)](http://php.net/manual/en/function.setlocale.php) and changing dictionary files.
+**Use the [LANGUAGE](quick-reference#language "Definition and usage of the LANGUAGE system variable") system variable to get and set languages**, since it also handles dependencies like setting the locales using [php setlocale(LC_ALL,...)](http://php.net/manual/en/function.setlocale.php) and changing dictionary files.
 The  [FALLBACK](quick-reference#fallback "Definition and usage of the FALLBACK system variable") system variable defines a default language, that will be used, if none of the detected languages are available as a dictionary file.
 
 Example:
@@ -955,12 +955,36 @@ which is a comma separated list of 2-letter language codes optionally followed b
 Dictionary files follow the same rule (es-BR.php / es-BR.ini).
 </div>
 
-**NB:** The system locale is loaded automatically by this function. E.g:
+#### System locales
+
+In order to ensure that the [format](base#format) method, and other locale-aware php functions, work like expected, the system locale is loaded automatically by this function. E.g:
 
 ```php
 $f3->set('ENCODING','UTF-8');
 $f3->set('LANGUAGE','it-IT');// the locale it_IT.UTF-8 will be automatically loaded using setlocale
 ```
+
+Some more examples:
+
+    $f3->LANGUAGE='en' => F3 will try to load 2 locales:
+        en.UTF-8
+        en
+    $f3->LANGUAGE='en-US' => F3 will try to load 4 locales:
+        en_US.UTF-8
+        en_US
+        en.UTF-8
+        en
+    $f3->LANGUAGE='en-US,en-GB' => F3 will try to load 6 locales:
+        en_US.UTF-8
+        en_US
+        en_GB.UTF-8
+        en_GB
+        en.UTF-8
+        en
+
+**NB:** The first locale found on the server is loaded. Make sure your server does have all the locales installed, which you want to support in your application. 
+On most linux machines you can check that using `locale -a` and install new locales with `dpkg-reconfigure locales`. Some apache webserver configurations maybe need a restart afterwards to work with the new locales.
+
 
 ### lexicon
 
