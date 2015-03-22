@@ -341,6 +341,30 @@ $mapper->afterupdate(function($self,$pkeys){
 });
 ```
 
+### beforesave, aftersave
+
+**Define hooks to the `beforeinsert`, `beforeupdate`, `afterinsert` and `afterupdate` events**
+
+The `beforesave` hook will be executed just before any INSERT or UPDATE statement.
+
+The `aftersave` hook will be executed right after any issued INSERT or UPDATE statement.
+
+```php
+callable beforesave ( callable $func )
+callable aftersave ( callable $func )
+```
+
+Each hook function takes 2 arguments : the mapper object and the primary key(s) value(s). E.g:
+
+```php
+$mapper->beforesave(function($self,$pkeys){
+  //do something before inserting or updating
+});
+$mapper->aftersave(function($self,$pkeys){
+  //do something after inserting or updating
+});
+```
+
 ### beforeerase, aftererase
 
 **Define hooks to the `beforeerase` and `aftererase` events**
