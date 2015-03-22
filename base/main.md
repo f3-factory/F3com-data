@@ -37,12 +37,19 @@ $f3->set('hash.x',1);
 $f3->set('hash.y',2);
 $f3->set('hash.z',3);
 ```
-*Setting objects properties:*
+*Setting object properties:*
 
 ```php
 $f3->set('a',new \stdClass);
 $f3->set('a->hello','world');
 echo $f3->get('a')->hello; // world
+```
+*shorter ArrayAccess Syntax, since v3.4.0*
+
+```php
+$f3->LANGUAGE = 'en';
+$f3->foo = 1234;
+$f3['bar'] = 'buzzword';
 ```
 
 #### Caching properties
@@ -133,6 +140,9 @@ echo $f3->get('myarray.1'); // value_1
 echo $f3->get('myarray.bar'); // 123
 echo $f3->get('myarray["foo"]'); // we like candy
 echo $f3->get('myarray[baz]'); // 4.56, notice alternate use of single, double and no quotes
+// a new ArrayAccess syntax is also possible since v3.4.0
+echo $f3->myarray['foo']; 
+echo $f3['myarray']['baz']; 
 ```
 
 ### sync
