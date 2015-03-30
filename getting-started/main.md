@@ -83,6 +83,7 @@ If you need a PHP 5.3+ hosting service provider, try one of these services:
 Time to start writing our first application:-
 
 ```php
+<?php
 $f3 = require('path/to/base.php');
 $f3->route('GET /',
     function() {
