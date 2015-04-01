@@ -7,6 +7,8 @@ which syncs the frameworks [SESSION](quick-reference#cookie,-get,-post,-request,
 
 ---
 
+## Engines
+
 ### Cache
 
 Namespace: `\` <br>
@@ -87,3 +89,56 @@ echo $f3->get('SESSION.test');
 ```
 
 The table name can be controlled by the 2nd `$table` parameter of the constructor.
+
+
+## Methods
+
+### agent
+
+**Return HTTP user agent**
+
+```php
+string|FALSE agent( )
+```
+
+This method returns the browser's user-agent that was used by the client when the current session was created.
+
+
+### csrf
+
+**Return anti-CSRF token**
+
+```php
+string|FALSE csrf( )
+```
+
+This method returns a CSRF token which is bound to the current active Session and the current request. Use this token to protect your application from CSRF attacks. The constructor of the Session classes already performs some checks to prevent Session hijacking, but it is recommended that you implement some extra validation to shield your app from URL-Spoofing and [CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks.
+
+```php
+if ($f3->exists('SESSION.csrf',$csrf))
+	echo $csrf; // old token from last request, use this to validate your requests and forms
+$s = new Session();
+$newToken = $s->csrf(); // token for current request
+$f3->set('SESSION.csrf',$newToken); // use this in hidden form fields
+```
+
+
+### ip
+
+**Return IP address**
+
+```php
+string|FALSE ip( )
+```
+
+This method returns the IP address that was used by the client when the current session was created.
+
+### stamp
+
+**Return Unix timestamp**
+
+```php
+string|FALSE stamp( )
+```
+
+This method returns the "last updated at" unix timestamp of the current session.
