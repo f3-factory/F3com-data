@@ -350,7 +350,9 @@ In the above scenario, F3 will retrieve records that match the criteria `'visits
 
 ```
 [subset] array of mapper objects that match the criteria
-[count] number of of subsets available
+[total] sum of all records for all pages
+[limit] same value as the size parameter (here 5)
+[count] number of of subsets/pages available
 [pos] actual subset position
 ```
 
