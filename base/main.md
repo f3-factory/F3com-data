@@ -1132,8 +1132,8 @@ $f3->route('GET /image/@width-@height/@file','ImageCompressor->render'); // /ima
 After processing the incoming request URI (initiated by [run](base#run)), you'll find the value of each of those tokens in the `PARAMS` system variable as named key, like `$f3->get('PARAMS.file')`. // 'mario.jpg'
 
 <div class="alert alert-info">
-    <b>Notice:</b> Routes and their according verbs are grouped by their URL pattern. Static routes _precede_ routes with dynamic tokens or wildcards.
-    This means that having a static route, which overloads a matching dynamic route, requires you to define separately all required VERB patterns to this specific route.
+    <b>Notice:</b> Routes and their according verbs are grouped by their URL pattern. Static routes <strong>precede</strong> routes with dynamic tokens or wildcards.
+    This means that having a static route, which overloads a matching dynamic route, requires you to separately define all required VERB patterns to this specific route <strong>once more</strong>. Otherwise you'll get a 405 error.
 </div>
 
 ##### Wildcards
