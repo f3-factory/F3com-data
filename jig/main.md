@@ -135,3 +135,33 @@ Example:
 ```php
 echo $db->uuid();  // e.g. "0dso6nqcdhr"  (string, length 11)
 ```
+
+## Usage
+
+The Jig DB is not meant to be used directly. Instead have a look at our powerful [Jig Mapper](jig-mapper). To initalize the database, simply add some records with the mapper, i.e.:
+
+```php
+$mapper = new \DB\Jig\Mapper($db, $file);
+$mapper->username = 'userA';
+$mapper->password = '57d82jg05';
+$mapper->save();
+$mapper->reset();
+$mapper->username = 'userB';
+$mapper->password = 'kbjd94973';
+$mapper->save();
+```
+
+In case you used the default JSON style Jig DB, the resulting json db file structure looks like this:
+
+```
+{
+    "548723b9f06c78.10153217": {
+        "username": "userA",
+        "password": "57d82jg05"       
+    },
+    "54f9c763934745.48648465": {
+        "username": "userB",
+        "password": "kbjd94973"       
+    }
+}
+```
