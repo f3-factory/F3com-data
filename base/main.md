@@ -1133,7 +1133,6 @@ After processing the incoming request URI (initiated by [run](base#run)), you'll
 
 <div class="alert alert-info">
     <b>Notice:</b> Routes and their according verbs are grouped by their URL pattern. Static routes <strong>precede</strong> routes with dynamic tokens or wildcards.
-    This means that having a static route, which overloads a matching dynamic route, requires you to separately define all required VERB patterns to this specific route <strong>once more</strong>. Otherwise you'll get a 405 error.
 </div>
 
 ##### Wildcards
