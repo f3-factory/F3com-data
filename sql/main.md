@@ -325,5 +325,5 @@ This function quotes a table or column key name according to the requirements an
 **Returns PDO object**
 
 ```php
-string pdo ( )
+\PDO pdo ( )
 ```
