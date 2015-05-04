@@ -2,6 +2,11 @@
 
 ## System Variables
 
+To use these variables, simply get them from the $f3 object, as in: 
+
+```php
+$current_url = $f3->get('PATH');
+```
 
 ### AGENT
 **Type:** `string`, `Read-only`
@@ -163,7 +168,7 @@ If `TRUE`, the framework, after having logged stack trace and errors, stops exec
 
 HTTP request headers received by the server. e.g. (simplified)
 
-```
+```php
 array (
 	'Host' => 'fatfreeframework.com'
 	'Accept-Encoding' => 'gzip,deflate,sdch',
