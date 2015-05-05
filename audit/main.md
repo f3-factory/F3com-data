@@ -143,42 +143,53 @@ $audit->ispublic('178.7.35.202'); // return TRUE
 
 ### isdesktop
 
-**Return TRUE if user agent is a desktop browser**
+**Return TRUE if the given user agent is a desktop browser**
+
 
 ``` php
-bool isdesktop (  )
+bool isdesktop ( [ string $agent = NULL ] )
 ```
 
 This function allows you to check if a given user agent is a desktop browser.
 
+If no user agent is given, the check is performed against the current user-agent: [AGENT](quick-reference#AGENT).
+
 Example:
 
 ``` php
-$audit->isdesktop(); // returns TRUE or FALSE
+$audit->isdesktop(); // returns TRUE if the current user-agent is a desktop browser
+
+$audit->isdesktop('Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) etc..'); // returns TRUE
 ```
 
 ### ismobile
 
-**Return TRUE if user agent is a mobile device**
+**Return TRUE if the given user agent is a mobile device**
 
 ``` php
-bool ismobile (  )
+bool ismobile ( [ string $agent = NULL ] )
 ```
 
 This function allows you to check if a given user agent is a mobile device.
 
+If no user agent is given, the check is performed against the current user-agent: [AGENT](quick-reference#AGENT).
+
 Example:
 
 ``` php
-$audit->ismobile(); // returns TRUE or FALSE
+$audit->ismobile(); // returns TRUE if the current user-agent is a mobile device 
+
+$audit->ismobile('Mozilla/5.0 (BlackBerry; U; BlackBerry 9900; en) etc..'); // returns TRUE
 ```
 
 ### isbot
 
-**Return TRUE if user agent is a Web bot**
+**Return TRUE if the given user agent is a Web bot**
+
+If no user agent is given, the check is performed against the current user-agent: [AGENT](quick-reference#AGENT).
 
 ``` php
-bool isbot (  )
+bool isbot ( [ string $agent = NULL ] )
 ```
 
 This function allows you to check if a given user agent is a Web bot.
@@ -186,7 +197,9 @@ This function allows you to check if a given user agent is a Web bot.
 Example:
 
 ``` php
-$audit->isbot(); // returns TRUE or FALSE
+$audit->isbot(); // returns TRUE if the current user-agent is a Web bot.
+
+$audit->isbot('Mozilla/5.0 (compatible; Googlebot/2.1 etc..'); // returns TRUE
 ```
 
 ### mod10
