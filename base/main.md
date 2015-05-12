@@ -1060,7 +1060,7 @@ $f3->build('/resize/@format/*/sep/*',array(
   2=>'foo/bar',
   3=>'baz.gif'
 ));
-// returns: /resize/20x20/foo/bar/sep/baz.gif
+// returns: /resize/200x200/foo/bar/sep/baz.gif
 ```
 
 ### mock
