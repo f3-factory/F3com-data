@@ -1192,8 +1192,16 @@ Since `F3 v3.2.0` you may also assign a name to your routes. Therefore follow th
 $f3->route('GET @beer_list: /beer', 'Beer->list');
 ```
 
-Names are inserted after the route VERB and preceded by an @ symbol. All named route can be accessed by the [ALIASES](quick-reference#aliases) for further processing in templates or for rerouting.
+Names are inserted after the route VERB and preceded by an @ symbol. All named routes can be accessed by the [ALIASES](quick-reference#aliases) system variable for further processing in templates or for rerouting.
 Check out the User Guide about [creating named routes](routing-engine#named-routes) for additional information.
+
+Furthermore you can use an existing route name to shorten additional route definitions:
+
+```php
+$f3->route('GET @beer_details: /beer/@id', 'Beer->get');
+$f3->route('POST @beer_details', 'Beer->saveComment');
+$f3->route('PUT @beer_details', 'Beer->savePhoto');
+```
 
 #### Route Handler
 
@@ -1296,6 +1304,8 @@ $f3->redirect('GET /oldpage', '/newpage');
 $f3->redirect('GET /external-link', 'http://subdomain.domain.com');
 // temporarily redirect to another named route
 $f3->redirect('GET /login', '@memer_area', false);
+// redirect one named route to another
+$f3->redirect('GET @member_welcome', '@memer_area');
 ```
 
 This can also be configured in [config files](framework-variables#ConfigurationFiles) within a `[redirects]` section.
