@@ -157,7 +157,7 @@ See what other users have made with F3:
             <td><a href="https://github.com/hanspolo" target="_blank">Philipp Hirsch</a></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Cortex" target="_blank">Cortex</a></td>
+            <td><a href="https://github.com/ikkez/f3-cortex" target="_blank">Cortex</a></td>
             <td>A general purpose ORM with support for relations and more</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
         </tr>
@@ -182,8 +182,8 @@ See what other users have made with F3:
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/SchemaBuilder" target="_blank">SQL Schema Builder</a></td>
-            <td>An extension for creating and managing SQL database tables.</td>
+            <td><a href="https://github.com/ikkez/f3-schema-builder" target="_blank">SQL Schema Builder</a></td>
+            <td>An extension for creating and manipulating SQL database tables.</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
         </tr>
         <tr>
