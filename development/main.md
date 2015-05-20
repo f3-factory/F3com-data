@@ -162,6 +162,11 @@ See what other users have made with F3:
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
         </tr>
         <tr>
+            <td><a href="https://github.com/xfra35/f3-cron" target="_blank">Cron</a></td>
+            <td>Job scheduling for the PHP Fat-Free Framework</td>
+            <td><a href="https://github.com/xfra35" target="_blank">Florent</a></td>
+        </tr>
+        <tr>
             <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Currency" target="_blank">Currency</a></td>
             <td>A currency rates converter, supports +90 currencies and Bitcoin</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
