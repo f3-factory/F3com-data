@@ -1720,3 +1720,14 @@ First, changes PHP's current directory to directory `$cwd`, writes session data 
 Then it shutdowns the application and calls the shutdown handler defined in [UNLOAD](quick-reference#unload).
 
 As a final fallback, an HTTP error `500` is raised if one of the following `E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR` is detected and not handled by the shutdown handler.
+
+### recursive
+
+**Invoke callback recursively for all data types**
+
+```php
+mixed recursive( $arg , $func [, $stack = NULL ] )
+```
+
+<div class="alert alert-info"><strong>Notice:</strong> To invoke the callback `$func` on objects `PHP >= 5.4` is required. Otherwise objects are returned without further processing. Please keep in mind that the returned objects are clones and the callback is only applied to accessible non-static properties.</div>
+
