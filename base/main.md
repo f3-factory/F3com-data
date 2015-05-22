@@ -1068,15 +1068,40 @@ $f3->build('/resize/@format/*/sep/*',array(
 **Mock an HTTP request**
 
 ```php
-NULL mock ( string $pattern [, array $args = NULL [, array $headers = NULL [, string $body = NULL ]]] )
+mixed mock ( string $pattern [, array $args = NULL [, array $headers = NULL [, string $body = NULL ]]] )
 ```
 
-This emulates a HTTP request.
+This emulates a HTTP request based upon the verb and resource defined by `$pattern`.
+
+* `$args` gets exported as the matching verb's global variable (`$_GET`, `$_POST` or `$_REQUEST`)
+* `$headers` gets exported as global HTTP headers (`$_SERVER[HTTP_…]`)
+* The HTTP request body `$body` gets exported as the HIVE's `BODY` variable for verbs not equal to `GET` or `HEAD`. If `$body` is undefined, `$args` gets URL-encoded and exported as `BODY`
+* Appending `[ajax]` to `$pattern` mocks AJAX calls
+* Appending `[sync]` to `$pattern` mocks ordinary (synchronous) calls
+* [Named routes and tokens](routing-engine#NamedRoutes) are valid resources
 
 Basic usage example:
 
 ```php
-$f3->mock('GET /page/view');
+$f3->mock('GET /page/view [ajax]');
+```
+
+Basic usage example with a named route and token:
+
+```php
+$f3->route('GET @grub:/food/@id', /* … */);
+$f3->mock('GET @grub(@id=bread)');
+```
+
+[Unit test](unit-testing) as advanced usage example:
+
+```php
+$f3->route('GET|POST|PUT @grub:/food/@id/@quantity', /* … */);
+$f3->mock('POST /food/sushki/134?a=1',array('b'=>2));
+$test->expect(
+	$_GET==array('a'=>1) && $_POST==array('b'=>2) && $_REQUEST==array('a'=>1,'b'=>2) && $f3->get('BODY')=='b=2',
+	'Request body and superglobals $_GET, $_POST, $_REQUEST correctly set on mocked POST'
+);
 ```
 
 ### parse
