@@ -1441,7 +1441,7 @@ function c($n) {
 array relay ( array|string $funcs [, mixed $args = NULL ] )
 ```
 
-This method invokes callback in succession like [chain](#chain) but applies the result of the first function as argument of the succeeding function, i.e.:
+This method invokes callback in succession like [chain](base#chain) but applies the result of the first function as argument of the succeeding function, i.e.:
 
 ```php
 echo $f3->relay('a; b; c', 0);
