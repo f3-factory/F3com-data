@@ -1581,7 +1581,7 @@ If `$append` is `TRUE` and the `$file` already exits, the `$data` is appended to
 **Return class instance**
 
 ```php
-$f3 = \Base::instance();
+Base $f3 = \Base::instance();
 ```
 
 This is used to grab the framework instance at any point of your code.
@@ -1738,7 +1738,7 @@ $f3->status(503); // Sends a '503 Service Unavailable' server error
 **Execute framework/application shutdown sequence**
 
 ```php
-null unload ( $cwd )
+null unload ( string $cwd )
 ```
 First, changes PHP's current directory to directory `$cwd`, writes session data and ends the session by calling the `session_commit()` <small>PHP function</small>.
 
@@ -1751,7 +1751,7 @@ As a final fallback, an HTTP error `500` is raised if one of the following `E_ER
 **Invoke callback recursively for all data types**
 
 ```php
-mixed recursive( $arg , $func [, $stack = NULL ] )
+mixed recursive( mixed $arg , callable $func [, array $stack = NULL ] )
 ```
 
 <div class="alert alert-info"><strong>Notice:</strong> To invoke the callback `$func` on objects `PHP >= 5.4` is required. Otherwise objects are returned without further processing. Please keep in mind that the returned objects are clones and the callback is only applied to accessible non-static properties.</div>
