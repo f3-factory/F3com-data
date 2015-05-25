@@ -1586,6 +1586,13 @@ Base $f3 = \Base::instance();
 
 This is used to grab the framework instance at any point of your code.
 
+### abort
+
+**Disconnect HTTP client**
+
+```php
+void abort ( )
+```
 
 ### blacklisted
 
@@ -1756,3 +1763,22 @@ mixed recursive( mixed $arg , callable $func [, array $stack = NULL ] )
 
 <div class="alert alert-info"><strong>Notice:</strong> To invoke the callback `$func` on objects `PHP >= 5.4` is required. Otherwise objects are returned without further processing. Please keep in mind that the returned objects are clones and the callback is only applied to accessible non-static properties.</div>
 
+### until
+
+**Loop until callback returns TRUE (for long polling)**
+
+```php
+mixed until ( callable $func [, array $args = null [, int $timeout = 60 ] ] )
+```
+
+The [callback](base#call) `$func` gets called once a second with argument `$args` until one of the following conditions terminates the loop:
+
+* HTTP Client disconnects
+* Time out after `$timeout` seconds
+* Time out one second before reaching PHP's configured `max_execution_time`
+* Session reopening fails
+* Callback `$func` returns a value boolean casted equal to `true`
+
+F3 closes the session after and reopens the session before calling the callback `$func` to prevent session locking, which would otherwise block concurrent requests with the same session.
+
+<div class="alert alert-info"><strong>Notice:</strong> `$timeout` is limited by the PHP configuration `max_execution_time`.</div>
