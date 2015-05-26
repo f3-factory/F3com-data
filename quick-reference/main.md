@@ -80,6 +80,16 @@ Pattern matching of routes against incoming URIs is case-insensitive by default.
 Framework equivalents of PHP globals. For your convenience, F3 automatically synchronizes these variables with the underlying PHP globals.
 These variables may be used throughout an application. However, direct use in templates is not advised due to security risks.
 
+### CORS
+**Type:** `array`
+
+[Cross-Origin Resource Sharing](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) configuration parameters. Consists of the following options:
+
+* `headers`, string or array, default: `''`, allowed headers
+* `origin`, string or false, default: `false`, allowed origin host, i.e `*.mydomain.com` or just `*`
+* `credentials` bool, default: `false`, allow cookies
+* `expose`, string or array, default: `false`, controls which headers are exposed to the client browser
+* `ttl`, int, detault: `0`, caching time of the preflight OPTIONS request
 
 ### DEBUG
 **Type:** `integer` &nbsp; &nbsp; **Default:** `0`
@@ -290,6 +300,13 @@ TCP/IP listening port used by the Web server. Default value: `$_SERVER['SERVER_P
 **Type:** `string` &nbsp; &nbsp; **Default:** `NULL`
 
 Prefix to use with LANGUAGE and LOCALES.
+
+
+### PREMAP
+**Type:** `string` &nbsp; &nbsp; **Default:** `''`, empty string
+
+This variable allows prefixes to route handlers (class functions), named after HTTP verbs. For example, if you set this var to `action_`,
+a route like `$f3->route('POST /submit','Page->submit');` calls `Page->action_submit`.
 
 
 ### QUERY
