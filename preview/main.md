@@ -53,6 +53,30 @@ into:
 <?php echo $this->esc($book['title']); ?>
 ```
 
+### filter
+
+**register token filter**
+
+``` php
+array filter ( [ string $key = NULL [, string $func = NULL ] )
+```
+
+You can use this method to add your own template token filter. For instance:
+
+``` php
+\Preview::instance->filter('wrap','\Helper::instance()->wrap');
+```
+
+``` php
+class Helper extends \Prefab {
+	function wrap($val) {
+		return '<h1>'.ucfirst($val).'</h1>';
+	}
+}
+```
+
+When the function is called without any parameter, it just returns an array of all registered filter names.
+
 ### render
 
 **Render and return a template given by its filename**
