@@ -55,7 +55,7 @@ into:
 
 ### filter
 
-**register token filter**
+**Register token filter**
 
 ``` php
 array filter ( [ string $key = NULL [, string $func = NULL ] )
@@ -126,7 +126,7 @@ echo $tmpl->resolve($content);
 
 
 ### token
-** Convert token to variable **
+**Convert token to variable**
 
 ```php
 string token ( string $str )
