@@ -58,24 +58,29 @@ into:
 **Register token filter**
 
 ``` php
-array filter ( [ string $key = NULL [, string $func = NULL ] )
+mixed filter ( [ string $key = NULL [, string $func = NULL ] )
 ```
 
-You can use this method to add your own template token filter. For instance:
+You can use this method to add your own template token filter like `{{ @content | myfilter }}`. For instance:
 
 ``` php
-\Preview::instance->filter('wrap','\Helper::instance()->wrap');
+\Preview::instance->filter('badwords','\Helper::instance()->badwords');
 ```
 
 ``` php
 class Helper extends \Prefab {
-	function wrap($val) {
-		return '<h1>'.ucfirst($val).'</h1>';
+	function badwords($val) {
+		$bad_words = array("badword","jerk","damn");
+		$replacement_words = array("@#$@#", "j&*%", "da*@"); 
+		return str_ireplace($bad_words, $replacement_words, $val);
 	}
 }
 ```
 
+Now you can use `{{ @user_comment | badwords }}` to filter the `user_comment` var for badwords. It's also possible to combine multiple filter: `{{ @user_comment | badwords, raw }}`.
+
 When the function is called without any parameter, it just returns an array of all registered filter names.
+When the function is called with a `$key` but without a `$func` parameter, it returns the registered function string.
 
 ### render
 
