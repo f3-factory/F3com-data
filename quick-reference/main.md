@@ -85,11 +85,13 @@ These variables may be used throughout an application. However, direct use in te
 
 [Cross-Origin Resource Sharing](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) configuration parameters. Consists of the following options:
 
-* `headers`, string or array, default: `''`, allowed headers
+* `headers`, string or array, default: `''`, allowed headers in the request
 * `origin`, string or false, default: `false`, allowed origin host, i.e `*.mydomain.com`
 * `credentials` bool, default: `false`, allow cookies
-* `expose`, string or array, default: `false`, controls which headers are exposed to the client browser
+* `expose`, string or array, default: `false`, controls which headers from the response are exposed to the client browser
 * `ttl`, int, detault: `0`, caching time of the preflight OPTIONS request
+
+To enable basic CORS support, just set `CORS.origin` to `*`.
 
 ### DEBUG
 **Type:** `integer` &nbsp; &nbsp; **Default:** `0`
