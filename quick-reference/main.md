@@ -103,7 +103,7 @@ Verbosity level of the stack trace. Assign values between 0 to 3 for increasing 
 * 2 : logs classes & functions as well.
 * 3 : logs detailed infos of the objects as well.
 
-<i class="icon-warning-sign"></i> _**NOTICE:** Only the default value of &nbsp;`0` should be used on production servers_.
+<div class="alert alert-info"><strong>Notice:</strong> Only the default value of <code>0</code> should be used on production servers.</div>
 
 
 ### DIACRITICS
@@ -248,7 +248,8 @@ Location of custom logs.
 **Type:** `mixed` &nbsp; &nbsp; **Default:** `NULL`
 
 Callback function to use as custom error handler, or `NULL`.
-**Notice**: If no callback function is specified, a default error page is generated (HTML5 for synchronous requests, JSON string for AJAX requests).
+
+<div class="alert alert-info"><strong>Notice:</strong> If no callback function is specified, a default error page is generated (HTML5 for synchronous requests, JSON string for AJAX requests).</div>
 
 ### ONREROUTE
 **Type:** `mixed` &nbsp; &nbsp; **Default:** `NULL`
@@ -351,7 +352,7 @@ Absolute path to document root folder.
 
 Contains the defined application routes.
 
-**Notice**: A route is more than just a URL. It's an HTTP verb (or verbs) _AND_ a URL
+<div class="alert alert-info"><strong>Notice:</strong> A route is more than just a URL. It's an HTTP verb (or verbs) and an URL.</div>
 
 ### SCHEME
 **Type:** `string`, `Read-Only`
