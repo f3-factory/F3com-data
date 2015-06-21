@@ -869,14 +869,14 @@ Current supported types are:
 
 * date
 * date,long
-* date,custom
+* date,custom,{exp}
 * time
-* time,custom
+* time,custom,{exp}
 * number,integer
 * number,currency
 * number,percent
-* number,decimal
-* plural
+* number,decimal,{int}
+* plural,{exp}
 
 ```php
 echo $f3->format('Current date: {0,date} - Current time: {0,time}',time());
