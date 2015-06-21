@@ -868,9 +868,11 @@ The formatting can get more precise if the expected type is provided within plac
 Current supported types are:
 
 * date
+* date,short
 * date,long
 * date,custom,{exp}
 * time
+* time,short
 * time,custom,{exp}
 * number,integer
 * number,currency
