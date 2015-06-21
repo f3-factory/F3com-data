@@ -1594,6 +1594,8 @@ This is used to grab the framework instance at any point of your code.
 void abort ( )
 ```
 
+This method could be handy to abort the connection to the client and send the current response to it, but actually continue script execution after this point for doing time consuming tasks like sending SMTP mails or generating large PDF files without any lag for the client.
+
 ### blacklisted
 
 **Lookup visitor's IP against common DNS blacklist services**
