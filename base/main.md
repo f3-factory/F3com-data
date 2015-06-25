@@ -742,21 +742,18 @@ echo $f3->base64('<h1>foobar</h1>','text/html');
 string encode ( string $str )
 ```
 
-Encodes symbols like `& " ' < >` and other chars, based on your applications ENCODING setting. (default: UTF-8)
+Encodes symbols like `& < >` and other chars, based on your applications ENCODING setting. (default: UTF-8)
 
 Example:
 
 ```php
 echo $f3->encode("we <b>want</b> 'sugar & candy'");
-// we &amp;lt;b&amp;gt;want&amp;lt;/b&amp;gt; 'sugar &amp;amp; candy'
-
-echo $f3->encode("§9: convert symbols & umlauts like ä ü ö");
-// &amp;sect;9: convert symbols &amp;amp; umlauts like &amp;auml; &amp;uuml; &amp;ouml;
+// we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'
 ```
 
 ### decode
 
-**Convert HTML entities back to characters**
+**Convert special HTML entities back to characters**
 
 ```php
 string decode ( string $str )
@@ -765,11 +762,8 @@ string decode ( string $str )
 Example:
 
 ```php
-echo $f3->decode("we &amp;lt;b&amp;gt;want&amp;lt;/b&amp;gt; 'sugar &amp;amp; candy'");
-// we <b>want</b> 'sugar &amp; candy'
-
-echo $f3->decode("&amp;sect;9: convert symbols &amp;amp; umlauts like &amp;auml; &amp;uuml; &amp;ouml;");
-// §9: convert symbols &amp; umlauts like ä ü ö welcome!
+echo $f3->decode("we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'");
+// we <b>want</b> 'sugar & candy'
 ```
 
 ### clean
