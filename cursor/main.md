@@ -297,7 +297,7 @@ $mapper->onload(function($self){
 
 **Define hooks to the `beforeinsert` and `afterinsert` events**
 
-The `beforeinsert` hook will be executed just before any INSERT statement.
+The `beforeinsert` hook will be executed just before any INSERT statement and is able to abort the event by returning `false`.
 
 The `afterinsert` hook will be executed right after any issued INSERT statement.
 
@@ -321,7 +321,7 @@ $mapper->afterinsert(function($self,$pkeys){
 
 **Define hooks to the `beforeupdate` and `afterupdate` events**
 
-The `beforeupdate` hook will be executed just before any UPDATE statement.
+The `beforeupdate` hook will be executed just before any UPDATE statement and is able to abort the event by returning `false`.
 
 The `afterupdate` hook will be executed right after any issued UPDATE statement.
 
@@ -345,7 +345,7 @@ $mapper->afterupdate(function($self,$pkeys){
 
 **Define hooks to the `beforeinsert`, `beforeupdate`, `afterinsert` and `afterupdate` events**
 
-The `beforesave` hook will be executed just before any INSERT or UPDATE statement.
+The `beforesave` hook will be executed just before any INSERT or UPDATE statement and is able to abort the event by returning `false`.
 
 The `aftersave` hook will be executed right after any issued INSERT or UPDATE statement.
 
@@ -369,7 +369,7 @@ $mapper->aftersave(function($self,$pkeys){
 
 **Define hooks to the `beforeerase` and `aftererase` events**
 
-The `beforerase` hook will be executed just before any DELETE statement.
+The `beforerase` hook will be executed just before any DELETE statement and is able to abort the event by returning `false`.
 
 The `aftererase` hook will be executed right after any issued DELETE statement.
 
