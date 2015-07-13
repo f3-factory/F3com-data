@@ -815,15 +815,7 @@ echo $foo; // 99 bottles of beer on the wall. alert('scripty!')
 string serialize ( mixed $arg )
 ```
 
-Usage:
-
-```php
-// example using json_encode
-$myArray = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
-echo $f3->serialize($myArray);  // outputs {"a":1,"b":2,"c":3,"d":4,"e":5}
-```
-
-Depending on the [SERIALIZER](quick-reference#serializer "Definition and usage of the SERIALIZER system variable") system variable, this method converts anything into a portable string expression. Possible values are **igbinary**, **json** and **php**.
+Depending on the [SERIALIZER](quick-reference#serializer "Definition and usage of the SERIALIZER system variable") system variable, this method converts anything into a portable string expression. Possible values are **igbinary** and **php**.
 F3 checks on startup if igbinary is available and prioritize it, as the igbinary extension works much faster and uses less disc space for serializing. Check [igbinary on github](https://github.com/igbinary/igbinary "Igbinary is a drop in replacement for the standard php serializer").
 
 ### unserialize

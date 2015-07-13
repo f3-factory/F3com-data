@@ -363,7 +363,7 @@ Server protocol. Default: `'http'` or `'https'`
 ### SERIALIZER
 **Type:** `string` &nbsp; &nbsp; **Default:** auto-detected
 
-Define the default serializer used by the [Base->serialize() method](base#serialize "Definition and usage of the Base->serialize method"). Default value: `igbinary` if available, otherwise set to `php`. Default: First match of `'igbinary'` then `'php'`
+The default serializer used by the [Base->serialize()](base#serialize "Definition and usage of the Base->serialize method") method. Default value: `igbinary` if available, otherwise `php`.
 
 
 ### TEMP
