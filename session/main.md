@@ -154,11 +154,11 @@ This method returns the "last updated at" unix timestamp of the current session.
 new \DB\SQL\Session($db,'sessions',TRUE,function($session){
   //suspect session
   $logger = new \Log('logs/session.log');
-  $f3=\Base::instace();
+  $f3=\Base::instance();
   if (($ip=$session->ip())!=$f3->get('IP'))
   	$logger->write('user changed IP:'.$ip);
   else
-  	$logger->write('user changed browser/device:'.$f3->get('HEADERS[User-Agent]'));
+  	$logger->write('user changed browser/device:'.$f3->get('AGENT'));
 });
 ```
 
