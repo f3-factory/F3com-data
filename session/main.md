@@ -142,3 +142,24 @@ string|FALSE stamp( )
 ```
 
 This method returns the "last updated at" unix timestamp of the current session.
+
+
+## Events
+
+### onsuspect
+
+**custom callback for suspect sessions**
+
+```php
+new \DB\SQL\Session($db,'sessions',TRUE,function($session){
+  //suspect session
+  $logger = new \Log('logs/session.log');
+  $f3=\Base::instace();
+  if (($ip=$session->ip())!=$f3->get('IP'))
+  	$logger->write('user changed IP:'.$ip);
+  else
+  	$logger->write('user changed browser/device:'.$f3->get('HEADERS[User-Agent]'));
+});
+```
+
+When a suspect session was found on validation (wrong IP-Address or User-Agent), the default behaviour is to destroy the Session and throw a 403 error. To overwrite that behaviour, you can use the 4th constructor parameter to defines a callback function, which is called instead.
