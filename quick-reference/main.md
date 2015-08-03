@@ -308,9 +308,22 @@ Prefix to use with LANGUAGE and LOCALES.
 ### PREMAP
 **Type:** `string` &nbsp; &nbsp; **Default:** `''`, empty string
 
-This variable allows prefixes to route handlers (class functions), named after HTTP verbs. For example, if you set this var to `action_`,
-a route like `$f3->route('POST /submit','Page->submit');` calls `Page->action_submit`.
+This variable allows [mapped](routing-engine#ReST:RepresentationalStateTransfer) route handlers to be prefixed. For example, defining:
 
+```php
+$f3->PREMAP = 'action_';
+$f3->map('/item','Item');
+```
+
+is the same as defining:
+
+```php
+$f3->route('GET /item','Item->action_get');
+$f3->route('POST /item','Item->action_post');
+$f3->route('PATCH /item','Item->action_patch');
+$f3->route('PUT /item','Item->action_put');
+$f3->route('DELETE /item','Item->action_put');
+```
 
 ### QUERY
 **Type:** `string`, `Read-Only`
