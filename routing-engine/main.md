@@ -384,9 +384,12 @@ HTTP request like `GET /cart/123`, Fat-Free will automatically transfer control 
 or class' `get()` method. Similarly, a `POST /cart/123` request will be routed to the
 `Item` class' `post()` method.
 
+Mapped methods can be prefixed using the [PREMAP](quick-reference#PREMAP) variable.
+
 **Note:** Browsers do not implement the HTTP `PUT` and `DELETE` methods in regular HTML forms.
 These and other ReST methods (`HEAD`, and `CONNECT`) are accessible only via AJAX calls to the
-server.
+server. They can however be tunneled through a `POST` request by setting the `_method` parameter
+to the desired HTTP verb.
 
 If the framework receives an HTTP method that's not implemented by a class,
 it generates an `HTTP 405 Method Not Allowed` error. F3 automatically responds with the
