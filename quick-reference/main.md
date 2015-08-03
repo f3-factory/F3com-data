@@ -322,7 +322,7 @@ $f3->route('GET /item','Item->action_get');
 $f3->route('POST /item','Item->action_post');
 $f3->route('PATCH /item','Item->action_patch');
 $f3->route('PUT /item','Item->action_put');
-$f3->route('DELETE /item','Item->action_put');
+$f3->route('DELETE /item','Item->action_delete');
 ```
 
 ### QUERY
