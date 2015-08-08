@@ -189,9 +189,9 @@ it would be rendered as `<img src="tmp/0fs02ehlcd7.jpg"  class="big" rel="lightb
 
 ### 3. Preview
 
-The Preview class mainly takes care about converting your tempplate and its expressions to PHP code - the so called pre-compiled template. So any tokens that are echo'd `{{ }}` or just executed `{~  ~}` can be used for dynamic templating, not just with HTML markup, but also with non-XML compatible template system like HAML, YAML, markdown or simple text files.
+The Preview class mainly takes care about converting your template and its expressions to PHP code - the so called pre-compiled template. So any tokens that are echo'd `{{ }}` or just executed `{~  ~}` can be used for dynamic templating, not just with HTML markup, but also with non-XML compatible template system like HAML, YAML, markdown or simple text files.
 
-So it takes all those little tokens and renders them into PHP code that is cached in the next step. So if you have a token like `{{@title}}` it'll become `<?php echo $title?>`. Rendering tokens can also be extended with filters (or also called modifiers). Some filters that are already included are [esc](/view#esc), [raw](/view#raw) and [format](/base#format). Filters can be applied to any expression using a pipe char, i.e. `{{ @text | raw }}` .
+It takes all those little tokens and renders them into PHP code that is cached in the next step. So if you have a token like `{{@title}}` it'll become `<?php echo $title?>`. Rendering tokens can also be extended with filters (or also called modifiers). Some filters that are already included are [esc](/view#esc), [raw](/view#raw) and [format](/base#format). Filters can be applied to any expression using a pipe char, i.e. `{{ @text | raw }}` .
 
 This would render the token as the following:
 
