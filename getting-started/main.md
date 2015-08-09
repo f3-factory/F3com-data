@@ -41,11 +41,15 @@ total Web development framework - with a lot of muscle!
 ## Enough Said - See For Yourself
 
 Unzip the contents of the [distribution package](https://github.com/bcosca/fatfree/archive/master.zip) anywhere in your hard drive.
+If you are using composer, you can `require bcosca/fatfree` to get that package as well.
 By default, the framework file and optional plug-ins are located in the
 `lib/` path. Organize your directory structures any way you want.
 You may move the default folders to a path that's not Web-accessible for
 better security. Delete the plug-ins that you don't need. You can always
 restore them later and F3 will detect their presence automatically.
+
+If you are already familiar with composer and fat-free, you probably just want the raw core files instead of the demo package.
+Therefore you can `require bcosca/fatfree-core` or fetch this [fatfree-composer-app](https://github.com/F3Community/fatfree-composer-app) to get started.
 
 <div class="alert alert-warning">
 <strong>Important:</strong> If your application uses APC, Memcached, WinCache, XCache, or a filesystem cache,
