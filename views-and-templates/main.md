@@ -544,7 +544,7 @@ This command will strip all tags (except those specified in the second argument)
 
 ## Extending filters and custom tags
 
-With the F3 template engine you can also setup own expression filters like `{{ @desc,100 | crop }}` and also combine them like `{{ @desc,100 | crop,raw }}`. For this you just need to extend the Template class and add a method of your choice. For own html tag / element handlers that could render anything you want, check out the [template->extend](template#extend) method. For more detailed descriptions about custom filters and how the whole templating system works, see the [extended templating](extended-templating) part of the user guide.
+With the F3 template engine you can also setup own expression filters like `{{ @desc,100 | crop }}` and also combine them like `{{ @desc,100 | crop,raw }}`. Therefore you just need to register a new filter with the [filter](preview#filter) method. For own html tag / element handlers that could render anything you want, check out the [template->extend](template#extend) method. For more detailed descriptions about custom filters and how the whole templating system works, see the [extended templating](extended-templating) part of the user guide.
 
 <nav>
   <ul class="pager">

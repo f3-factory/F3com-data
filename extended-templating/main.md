@@ -191,7 +191,7 @@ it would be rendered as `<img src="tmp/0fs02ehlcd7.jpg"  class="big" rel="lightb
 
 The Preview class mainly takes care about converting your template and its expressions to PHP code - the so called pre-compiled template. So any tokens that are echo'd `{{ }}` or just executed `{~  ~}` can be used for dynamic templating, not just with HTML markup, but also with non-XML compatible template system like HAML, YAML, markdown or simple text files.
 
-It takes all those little tokens and renders them into PHP code that is cached in the next step. So if you have a token like `{{@title}}` it'll become `<?php echo $title?>`. Rendering tokens can also be extended with filters (or also called modifiers). Some filters that are already included are [esc](/view#esc), [raw](/view#raw) and [format](/base#format). Filters can be applied to any expression using a pipe char, i.e. `{{ @text | raw }}` .
+It takes all those little tokens and renders them into PHP code that is cached in the next step. So if you have a token like `{{@title}}` it'll become `<?php echo $title?>`. Rendering tokens can also be extended with filters (or also called modifiers). Some filters that are already included are [esc](view#esc), [raw](view#raw) and [format](base#format). Filters can be applied to any expression using a pipe char, i.e. `{{ @text | raw }}` .
 
 This would render the token as the following:
 
@@ -199,11 +199,10 @@ This would render the token as the following:
 <?php echo $this->raw($text); ?>
 ```
 
-So we are able to send all template variables through some filters before sending them into the output. We can also defined our own filters. For this purpose we need to extend the template class (or just the preview class, if you only use that). Let's try this:
+So we are able to push all template variables through some filters before sending them into the output. We can also defined our own filters. For this purpose we need to register a handler or callback method as our new filter for the template class (or just the preview class, if you only use that). Let's try this:
 
 ```php
-class ExtTemplate extends \Template {
-
+class TemplateFilter extends \Prefab {
 	public function badwords($val) {
 		return str_replace(array(
 			'damn',
@@ -214,9 +213,13 @@ class ExtTemplate extends \Template {
 		),$val);
 	}
 }
+// register a filter for the Preview engine:
+\Preview::instance()->filter('badwords','\TemplateFilter::instance()->badwords');
+// or using the Template engine:
+\Template::instance()->filter('badwords','\TemplateFilter::instance()->badwords');
 ```
 
-If we now use `\ExtTemplate::instance()->render` to render our templates, we can now use the new custom filter.
+If we now use `\Preview::instance()->render` to render our templates, we can now use the new custom filter.
  So if you have a variable like `$f3->set('text','you are a damn asshole!');` and send this to our new filter `{{ @text | badwords}}` you'll get the cleaned result `you are a cute guy!`.
 
 We can also add additional parameters to our filters. Let's see this in a new filter - add this crop-function to the class:
