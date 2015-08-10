@@ -1751,6 +1751,15 @@ As a final fallback, an HTTP error `500` is raised if one of the following `E_ER
 mixed recursive( mixed $arg , callable $func [, array $stack = NULL ] )
 ```
 
+The recursive method takes your mixed `$arg` and applies the `$func` callback to any deep nested array value or object property that can be found and returns a copy of `$arg`. Here a little example:
+
+```php
+// ensure proper UTF-8 sequences before encoding
+echo json_encode($f3->recursive($out,function($val){
+	return mb_convert_encoding($val,'UTF-8','UTF-8');
+}));
+```
+
 <div class="alert alert-info"><strong>Notice:</strong> To invoke the callback `$func` on objects `PHP >= 5.4` is required. Otherwise objects are returned without further processing. Please keep in mind that the returned objects are clones and the callback is only applied to accessible non-static properties.</div>
 
 ### until
