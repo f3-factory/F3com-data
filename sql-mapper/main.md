@@ -355,13 +355,24 @@ That's it! As F3 sanitizes the values, with such an extra filtering, your DB is 
 NULL copyto( string $key )
 ```
 
+### fields 
+**Return field names**
+
+```php
+array fields( bool $adhoc = TRUE )
+```
+
+This method returns all available fields for this mapper. The `$adhoc` argument controls if the adhoc virtual fields are returned as well. This method will respect any limitations on fields that were set during [instantiation](sql-mapper#Instantiation).
+
+
 ### schema
 **Returns the table schema**
 
 ```php
-array schema()
+array schema( array $fields = null )
 ```
 
+When `$fields` argument is provided, it's used to update the underlaying field schema.
 See [Retrieve schema of SQL table](sql#schema) for additional information.
 
 ### required
