@@ -406,7 +406,7 @@ Search path for user interface files used by the `View` and `Template` classes' 
 ### UNLOAD
 **Type:** `callback` &nbsp; &nbsp; **Default:** `NULL`
 
-Defines the shutdown handler the framework will executed on [application shutdown](base#unload).
+Defines the shutdown handler the framework will execute on [application shutdown](base#unload).
 
 
 ### UPLOADS
