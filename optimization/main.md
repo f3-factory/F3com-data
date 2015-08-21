@@ -122,10 +122,10 @@ Want to make your site run even faster? Fat-Free works best with either Alternat
 A fast application that processes all HTTP requests and responds to them at the shortest time possible is not always a good idea - specially if your bandwidth is limited or traffic on your Web site is particularly heavy. Serving pages ASAP also makes your application vulnerable to Denial-of-Service (DOS) attacks. F3 has a bandwidth throttling feature that allows you to control how fast your Web pages are served. You can specify the bandwidth to use when a request is served with route definitions like this:
 
 ```php
-$f3->route('GET /login','\Backoffice\Login->handler', 0, 512); // limit sent data to 512 Kbps
+$f3->route('GET /login','\Backoffice\Login->handler', 0, 64);
 ```
 
-In this example, the framework will serve the GET requests to /login at a maximum rate of ~64 KB/s (512 Kbps).
+In this example, the framework will serve the GET requests to /login at a maximum rate of 64 KiB/s (`64 * 1024` bytes per second).
 
 Bandwidth throttling at the application level can be particularly useful for login pages. Slow responses to dictionary attacks is a good way of mitigating this kind of security risk.
 
