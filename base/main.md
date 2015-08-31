@@ -1616,10 +1616,17 @@ $f3->compile('@RAINBOW.cyan'); // returns: $RAINBOW['cyan']
 **Configure framework according to .ini-style file settings**
 
 ```php
-null config ( string $file )
+null config ( string $file [, bool $allow = FALSE ])
 ```
 
 This will parse a configuration file, provided by `$file` and setup the framework with variables and routes.
+If the 2nd argument `$allow` is provided, template strings are interprete, thus making dynamic configs possible:
+
+```ini
+[globals]
+foo = bar
+baz = {{@foo}}
+```
 
 See the user guide section about [configuration files](framework-variables#configuration-files) to get a full description about how to setup your ini file.
 
