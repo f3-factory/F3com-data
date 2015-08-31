@@ -1620,7 +1620,7 @@ null config ( string $file [, bool $allow = FALSE ])
 ```
 
 This will parse a configuration file, provided by `$file` and setup the framework with variables and routes.
-If the 2nd argument `$allow` is provided, template strings are interprete, thus making dynamic configs possible:
+If the 2nd argument `$allow` is provided, template strings are interpreted, thus making dynamic configs possible:
 
 ```ini
 [globals]
