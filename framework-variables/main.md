@@ -339,14 +339,6 @@ $f3->set('foo',array(
 ));
 ```
 
-<nav>
-  <ul class="pager">
-    <li class="previous"><a href="/routing-engine"><span aria-hidden="true">&larr;</span> 2. Routing Engine</a></li>
-    <li class="next"><a href="/views-and-templates">4. Views and Templates <span aria-hidden="true">&rarr;</span></a></li>
-  </ul>
-</nav>
-
-
 ### Section Hooks
 
 It's also possible to define a custom callback that is applied to every value:
@@ -356,4 +348,13 @@ It's also possible to define a custom callback that is applied to every value:
 x = hello
 y = world
 ```
+
+
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="/routing-engine"><span aria-hidden="true">&larr;</span> 2. Routing Engine</a></li>
+    <li class="next"><a href="/views-and-templates">4. Views and Templates <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
+
 
