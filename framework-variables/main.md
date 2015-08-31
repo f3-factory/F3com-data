@@ -294,6 +294,19 @@ GET|HEAD /obsoletepage = /newpage
 GET|HEAD /dash = @dashboard
 GET|HEAD /search = https://www.google.com
 ```
+	
+### [configs]
+
+You can also include other config files.
+
+``` ini
+[configs]
+app/routes.ini = true
+app/app_ext.ini = false
+```
+
+Don't let the right value confuse you, both files above are included. The `true`/`false` boolean triggers the `$allow` argument on the [config](base#config) method, which enables to resolve dynamic token in your config files.
+
 
 ### Custom sections
 
@@ -332,3 +345,15 @@ $f3->set('foo',array(
     <li class="next"><a href="/views-and-templates">4. Views and Templates <span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav>
+
+
+### Section Hooks
+
+It's also possible to define a custom callback that is applied to every value:
+
+```ini
+[foo.bar:strtoupper]
+x = hello
+y = world
+```
+
