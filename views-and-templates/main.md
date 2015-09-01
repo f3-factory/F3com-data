@@ -346,6 +346,35 @@ Embedding template directives inside your `<script>` or `<style>` tags requires 
 </script>
 ```
 
+## Document Paths
+
+There are some things to consider about public paths used in page links or style/script or image includes. You probably want to use relative paths:
+
+```html
+<link href="ui/css/base.css" type="text/css" rel="stylesheet" />
+<script src="ui/js/base.css"></script>
+<a href="category-abc/article-xyz">read more</a>
+<img src="ui/img/img1.jpg" alt="Image 1" />
+```
+
+These paths could work on your index page `GET /`, but will cause problems when you navigate to `GET /@category/@article`, or run your application from a sub-directory in your webspace public root (i.e. `http://domain.com/my-F3-App/`). To solve this you should either prepend all of your paths with the public base path like this:
+
+```html
+<link href="{{@BASE}}/ui/css/base.css" type="text/css" rel="stylesheet" />
+<script src="{{@BASE}}/ui/js/base.css"></script>
+<a href="{{@BASE}}/category-abc/article-xyz">read more</a>
+<img src="{{@BASE}}/ui/img/img1.jpg" alt="Image 1" />
+```
+
+**Or** use the [HTML <base> Tag](http://www.w3schools.com/tags/tag_base.asp) to specify a document-wide default base path for relative links:
+
+```html
+<base href="{{@SCHEME.'://'.@HOST.@BASE.'/'}}"/>
+```
+
+There are some [side-effects](http://stackoverflow.com/questions/1889076/is-it-recommended-to-use-the-base-html-tag) using a `<base>` tag in your document: Mainly you need to prefix all page anchor links as well (`<a href="{{@PATH}}#top">go to top</a>`).
+
+
 ## Document Encoding
 
 Fat-Free uses the UTF-8 character set by default. You can override this behavior by setting the [`ENCODING`](quick-reference#encoding) system variable like this:
