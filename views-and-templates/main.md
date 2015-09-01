@@ -366,7 +366,7 @@ These paths could work on your index page `GET /`, but will cause problems when 
 <img src="{{@BASE}}/ui/img/img1.jpg" alt="Image 1" />
 ```
 
-**Or** use the [HTML <base> Tag](http://www.w3schools.com/tags/tag_base.asp) to specify a document-wide default base path for relative links:
+**Or** use the [HTML base Tag](http://www.w3schools.com/tags/tag_base.asp) to specify a document-wide default base path for relative links:
 
 ```html
 <base href="{{@SCHEME.'://'.@HOST.@BASE.'/'}}"/>
