@@ -514,9 +514,9 @@ but _before_ executing the `home()` method, the framework looks for a method in 
 handler before transferring control to the method specified in the route, in our example the `home()` method.
 Once the method is terminated, the framework then looks for an `afterRoute()` event handler that is called if present.
 The `beforeroute()` and `afterroute()` event handlers are common to a given class.
-It means if you have defined differents routes using differents methods of a same class,
-e.g. `'GET /login','User->login'` and `'GET /logout','User->logout'`, both routes will share the same
-`beforeroute()` and `afterroute()` event handlers.
+It means if you have defined different routes using different methods of the same class,
+e.g. `'GET /login','User->login'` and `'GET /logout','User->logout'`,
+both routes will share the same `beforeroute()` and `afterroute()` event handlers.
 
 Create `beforeRoute()` and `afterRoute()` functions in your base controller class, and have them apply to every request. Of course, you can override them in the child controllers by defining custom `beforeRoute()` and `afterRoute()` handlers in the child classes. One can also create `beforeRoute()` and `afterRoute()`  in a child class, and inherit the front controller handlers by calling `parent::beforeRoute();` or `parent::afterRoute();` in the children.
 
