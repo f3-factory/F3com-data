@@ -432,6 +432,12 @@ A reference to the current HTTP request method.
 
 A string containing the version of the Framework.
 
+
+### XFRAME
+**Type:** `string` &nbsp; &nbsp; **Default:** e.g. `'SAMEORIGIN'`
+
+Used to set the `X-Frame-Options` header.
+
 ## Template Directives
 
 ### Token
