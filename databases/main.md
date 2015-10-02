@@ -4,11 +4,13 @@
 
 Fat-Free is designed to make the job of interfacing with SQL databases a breeze. If you're not the type to immerse yourself in details about SQL, but lean more towards object-oriented data handling, you can go directly to the next section of this tutorial. However, if you need to do some complex data-handling and database performance optimization tasks, SQL is the way to go.
 
-Establishing communication with a SQL engine like MySQL, SQLite, SQL Server, Sybase, and Oracle is done using the familiar `$f3->set()` command. Connecting to a SQLite database would be:
+Establishing communication with a SQL engine like MySQL, SQLite, PostgreSQL, SQL Server, Sybase, and Oracle is done using the familiar `$f3->set()` command. Connecting to a SQLite database would be:
 
 ```php
-$db=new DB\SQL('sqlite:/absolute/path/to/your/database.sqlite'));
+$f3->set('DB', new DB\SQL('sqlite:/absolute/path/to/your/database.sqlite'));
 ```
+
+You can now work with database object from anywhere in your application with `$f3->get('DB')->exec('...');`.
 
 Another example, this time with MySQL:
 
