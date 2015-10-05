@@ -90,7 +90,7 @@ When the function is called with a `$key` but without a `$func` parameter, it re
 string render ( string $file [, string $mime = 'text/html' [, array $hive = NULL [, int $ttl = 0 ]]] )
 ```
 
-The `$filename` argument expects a file path that is within any defined directories by F3's [UI](quick-reference#ui) system variables. Remember, for your convenience, [UI](quick-reference#ui) can be multiple paths.
+The `$file` argument expects a file path that is within any defined directories by F3's [UI](quick-reference#ui) system variables. Remember, for your convenience, [UI](quick-reference#ui) can be multiple paths.
 
 Actually, the render method first try to load your specified template from the temporary folder [TEMP](quick-reference#temp) acting as a file cache for compiled templates. The specified template file is only load if needed: F3 is smart enough to detect if a newer version of the template file has been saved and then it builds a php based view file and only then renders the php view again.
 
