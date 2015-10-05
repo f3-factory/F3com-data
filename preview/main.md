@@ -87,7 +87,7 @@ When the function is called with a `$key` but without a `$func` parameter, it re
 **Render and return a template given by its filename**
 
 ```php
-string render ( string $file [, string $mime = 'text/html' [, array $hive = NULL [, int $ttl = 0 ]]] )
+string render ( string $filename [, string $mime = 'text/html' [, array $hive = NULL [, int $ttl = 0 ]]] )
 ```
 
 The `$file` argument expects a file path that is within any defined directories by F3's [UI](quick-reference#ui) system variables. Remember, for your convenience, [UI](quick-reference#ui) can be multiple paths.
