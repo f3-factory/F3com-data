@@ -1010,17 +1010,17 @@ A dictionary file can be a php file returning a key-value paired associative arr
 **Assemble url from alias name**
 
 ``` php
-string alias ( string $name [, string $params = null ] )
+string alias ( string $name [, array|string $params = array() ] )
 ```
 
 Example:
 
 ```php
 $f3->route('GET @complex:/resize/@format/*/sep/*','App->nowhere');
-$f3->alias('complex','format=20x20,1=foo/bar,2=baz.gif');
-// returns '/resize/20x20/foo/bar/sep/baz.gif'
+$f3->alias('complex','format=20x20,2=foo/bar,3=baz.gif');
+$f3->alias('complex',array('format'=>'20x20',2=>'foo/bar',3=>'baz.gif'));
+// Both examples return '/resize/20x20/foo/bar/sep/baz.gif'
 ```
-
 
 ### build
 
