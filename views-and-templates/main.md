@@ -53,14 +53,17 @@ $f3=require('lib/base.php');
 $f3->route('GET /',
     function($f3) {
         $f3->set('name','world');
-        $template=new Template;
-        echo $template->render('template.htm');
-        // Above lines can be written as:
-        // echo Template::instance()->render('template.htm');
+        echo \Template::instance()->render('template.htm');
     }
 );
 $f3->run();
 ```
+
+<div class="alert alert-info">
+<strong>Notice:</strong>
+It is recommended to fetch template instance with <code>\Template::instance()</code>, which ensures you always get back the same instance (like a singleton). This could be important for addional plugins to work properly, which might modify the global instance in the registry. Nevertheless you can also create a new instance with <code>new \Template();</code>, but it'll not include any registered filter, tag or event addons.
+</div>
+
 
 Like routing tokens used for catching variables in URLs (still remember the `GET /brew/@count` example in the previous section?), F3 template tokens begin with the `@` symbol followed by a series of letters and digits enclosed in curly braces. The first character must be alpha. Template tokens have a one-to-one correspondence with framework variables. The framework automatically replaces a token with the value stored in a variable of the same name.
 
