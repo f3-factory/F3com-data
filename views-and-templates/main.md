@@ -61,7 +61,7 @@ $f3->run();
 
 <div class="alert alert-info">
 <strong>Notice:</strong>
-It is recommended to fetch template instance with <code>\Template::instance()</code>, which ensures you always get back the same instance (like a singleton). This could be important for addional plugins to work properly, which might modify the global instance in the registry. Nevertheless you can also create a new instance with <code>new \Template();</code>, but it'll not include any registered filter, tag or event addons.
+It is recommended to fetch the template instance with <code>\Template::instance()</code>, which ensures you always get back the same instance (like a singleton). This could be important for additional plugins to work properly, which might modify the global instance in the registry. Nevertheless you can also create a new instance with <code>new \Template();</code>, but it'll not include any registered filter, tag or event addons.
 </div>
 
 
