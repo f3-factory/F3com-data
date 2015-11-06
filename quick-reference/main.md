@@ -473,6 +473,11 @@ Used to set the `X-Frame-Options` header.
 *   `{* text-block *}`
 
     Exclude a segment of your template. Alias to `<exclude>`
+    
+    
+*   `{- {{@BASE}} -}`
+
+    Ignore all tokens within `{- -}` expression and print them as they are.
 
 
 ### Include
