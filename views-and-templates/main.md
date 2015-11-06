@@ -157,6 +157,11 @@ The <include> directive will embed the contents of the header.htm template at th
 
 ``` html
 <include href="{{ @content }}" />
+// OR
+<include href="{{ 'templates/layout/'.@content }}" />
+
+// WRONG
+<include href="templates/layout/{{ @content }}" />
 ```
 
 A practical use for such template directive is when you have several pages with a common HTML layout but with different content. Instructing the framework to insert a sub-template into your main template is as simple as writing the following PHP code:
