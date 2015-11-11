@@ -148,9 +148,10 @@ This method returns the "last updated at" unix timestamp of the current session.
 
 ### onsuspect
 
-**custom callback for suspect sessions**
+**Custom callback for suspect sessions**
 
 ```php
+// Log suspicious sessions and destroy them.
 new \DB\SQL\Session($db,'sessions',TRUE,function($session){
   //suspect session
   $logger = new \Log('logs/session.log');
@@ -159,7 +160,12 @@ new \DB\SQL\Session($db,'sessions',TRUE,function($session){
   	$logger->write('user changed IP:'.$ip);
   else
   	$logger->write('user changed browser/device:'.$f3->get('AGENT'));
+
+  // The default behaviour destroys the supicious session.
+  return false;
 });
 ```
 
-When a suspect session was found on validation (wrong IP-Address or User-Agent), the default behaviour is to destroy the Session and throw a 403 error. To overwrite that behaviour, you can use the 4th constructor parameter to defines a callback function, which is called instead.
+The default behaviour destroys the session and throws a `HTTP 403` error when a suspect session is detected (wrong IP-Address or User-Agent).
+To extend or overwrite that behaviour, you can use the fourth constructor parameter to define a callback function.
+If the callback returns `FALSE` the default behaviour gets also executed.
