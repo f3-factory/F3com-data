@@ -189,7 +189,7 @@ $f3->set('DEBUG',0);
 
 This will suppress the stack trace output in any system-generated HTML error page (because it's not meant to be seen by your site visitors).
 
-`DEBUG` can have values ranging from 0 (stack trace suppressed) to 2 (most verbose with classes & functions calls logs).
+`DEBUG` can have values ranging from `0` (stack trace suppressed) to `3` (most verbose with class and function call logs).
 
 <i class="icon-warning-sign"></i> **Don't forget!** Stack traces may contain paths, file names, database commands, user names and passwords. You might expose your Web site to unnecessary security risks if you fail to set the `DEBUG` global variable to `0` in a production environment.
 
