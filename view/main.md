@@ -35,7 +35,7 @@ echo implode("\r\n",$urls);
 The View class makes it easy to separate the two steps defined above, since it requires rendering a filename and a data hive:
 
 ``` php
-string render ( string $file [, string $mime = 'text/html' [, array $hive = NULL ]] )
+string render ( string $file [, string $mime = 'text/html' [, array $hive = NULL, [ int $ttl = 0 ]]] )
 ```
 
 <div class="alert alert-info">
