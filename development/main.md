@@ -152,6 +152,11 @@ See what other users have made with F3:
     </thead>
     <tbody>
         <tr>
+            <td><a href="https://github.com/xfra35/f3-access" target="_blank">Access</a></td>
+            <td>Route access control for the PHP Fat-Free Framework</td>
+            <td><a href="https://github.com/xfra35" target="_blank">Florent</a></td>
+        </tr>
+        <tr>
             <td><a href="https://github.com/hanspolo/burgers" target="_blank">Burgers</a></td>
             <td>Burgers make the Fat-Free Framework fat. Includes ORM/Validation, User/Groups/ACL, Forms</td>
             <td><a href="https://github.com/hanspolo" target="_blank">Philipp Hirsch</a></td>
