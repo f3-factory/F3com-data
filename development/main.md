@@ -260,6 +260,10 @@ See what other users have made with F3:
             <td>Logos "Powered by F3" for your Website</td>
             <td><a class="btn btn-info" href="https://github.com/bcosca/fatfree/raw/archive/f3-logos.zip" target="_blank">download</a></td>
         </tr>
+        <tr>
+           <td>Fat-Free Framework Template Engine Suppport for Brackets Code Hints</td>
+           <td><a class="btn btn-info" href="https://github.com/Microgamer/Brackets-HTML5CodeHints-F3-Templatetags" target="_blank">view</a></td>
+        </tr>
     </tbody>
 </table>
 
