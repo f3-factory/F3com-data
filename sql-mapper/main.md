@@ -292,6 +292,15 @@ object insert()
 object update()
 ```
 
+### save
+**Update an existing record, or insert a new one**
+
+```php
+object save()
+```
+
+If one or more records have been loaded into the mapper, `save` will use the `update` method. If there are no records currently loaded in the mapper, `save` will use the `insert` method. The `save` method is often used in conjunction with the `copyfrom` method.
+
 ### skip
 **Return the record at the specified offset using the same criteria as previous load() call and make it active**
 
