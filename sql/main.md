@@ -247,6 +247,15 @@ $db->commit();
 // end of transaction: only Clyde has been inserted to database
 ```
 
+### trans
+
+**Returns TRUE if a SQL transaction is currently active**
+
+```php
+if (!$db->trans())
+    $db->begin();
+```
+
 ### count
 
 **Returns the number of rows affected by the last query.**
