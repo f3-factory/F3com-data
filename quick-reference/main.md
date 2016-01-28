@@ -470,7 +470,7 @@ Used to set the `X-Frame-Options` header.
 
     Evaluate expression `expr`, similar to `{{expr}}` but does not echo the result.
 
-*   `{* text-block *}`
+*   `{&#42; text-block &#42;}`
 
     Exclude a segment of your template. Alias to `<exclude>`
     
