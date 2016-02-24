@@ -458,9 +458,10 @@ Used to set the `X-Frame-Options` header.
 
     Render expression `expr` _unescaped_. As F3 auto-escapes string tokens by default, you can use this suffix to by-pass the escaping of a particular token.
 
-*   `{{ string expr, arg1, ..., argN | format }}`
+*   `{{ string expr, arg0, ..., argN | format }}`
 
-    Render the expression `expr` in ICU-format and pass the comma-separated arguments, where `arg1, ..., argn` is one of: `'date'`, `'time'`, `'number, integer'`, `'number, currency'`, `'number, percent'`, or `'number, decimal'`. Have a look at the [format](base#format) method for additional usage examples. <small>More information about [ICU formatting of Numbers, Currencies, Dates and Times](http://userguide.icu-project.org/formatparse/ "International Components for Unicode Formatting and Parsing")</small>.
+    Render the expression `expr` in ICU-format and pass the comma-separated arguments, where `arg0, ..., argN` is used in `expr` as reference, each with an optional formatter that can be one of: `'date'`, `'time'`, `'number'` or `'plural'` (additional formatter options possible). Have a look at the [format](base#format) method for more usage examples. <small>More information about [ICU formatting of Numbers, Currencies, Dates and Times](http://userguide.icu-project.org/formatparse/ "International Components for Unicode Formatting and Parsing")</small>.
+    Sample: `{{'date: {0,date} - time: {0,time} - price: {1,number,currency}',time(),@price | format}}`
 
 *   `{{ string name, args | alias }}`
 
