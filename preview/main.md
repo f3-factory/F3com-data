@@ -64,7 +64,7 @@ mixed filter ( [ string $key = NULL [, string $func = NULL ] )
 You can use this method to add your own template token filter like `{{ @content | myfilter }}`. For instance:
 
 ``` php
-\Preview::instance->filter('badwords','\Helper::instance()->badwords');
+\Preview::instance()->filter('badwords','\Helper::instance()->badwords');
 ```
 
 ``` php
