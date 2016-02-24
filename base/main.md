@@ -862,6 +862,8 @@ Current supported types are:
 * time,custom,{exp}
 * number,integer
 * number,currency
+* number,currency,int
+* number,currency,{char}
 * number,percent
 * number,decimal,{int}
 * plural,{exp}
