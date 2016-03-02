@@ -50,7 +50,7 @@ Here is a list of links to DSN connection details for all currently supported en
 
 ### driver
 
-**Returns the SQL driver name**
+**Return the SQL driver name**
 
 ```php
 echo $db->driver(); // mysql
@@ -58,7 +58,7 @@ echo $db->driver(); // mysql
 
 ### version
 
-**Returns the server version**
+**Return the server version**
 
 ```php
 echo $db->version(); // 5.1.51
@@ -66,7 +66,7 @@ echo $db->version(); // 5.1.51
 
 ### name
 
-**Returns the database name**
+**Return the database name**
 
 ```php
 echo $db->name(); // mysqldb
@@ -249,7 +249,7 @@ $db->commit();
 
 ### trans
 
-**Returns TRUE if a SQL transaction is currently active**
+**Return TRUE if a SQL transaction is currently active**
 
 ```php
 if (!$db->trans())
@@ -258,7 +258,7 @@ if (!$db->trans())
 
 ### count
 
-**Returns the number of rows affected by the last query.**
+**Return the number of rows affected by the last query**
 
 ```php
 $db->exec('INSERT INTO mytable(name) VALUES(?)','Alfred');
@@ -271,7 +271,7 @@ echo $db->count(); // outputs 2
 
 ### log
 
-**Returns the SQL profiler results**
+**Return the SQL profiler results**
 
 ```php
 $db->exec('INSERT INTO mytable(name) VALUES(?)','Clyde');
@@ -288,7 +288,7 @@ Mon, 27 Dec 2013 12:26:05 +0100 (1.3ms) INSERT INTO mytable(name) VALUES('Elliot
 
 ### uuid
 
-**Returns unique connection identifier hash**
+**Return unique connection identifier hash**
 
 ```php
 string uuid ( )
@@ -320,7 +320,7 @@ string quote ( string $val [, int $type = \PDO::PARAM_STR ] )
 
 ### quotekey
 
-**Returns quoted identifier name**
+**Return quoted identifier name**
 
 ```php
 string quotekey ( string $key )
@@ -331,7 +331,7 @@ This function quotes a table or column key name according to the requirements an
 
 ### pdo
 
-**Returns PDO object**
+**Return PDO object**
 
 ```php
 \PDO pdo ( )
