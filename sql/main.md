@@ -19,7 +19,7 @@ For example, to connect to a MySQL database, the syntax looks like:
 $db=new \DB\SQL('mysql:host=localhost;port=3306;dbname=mysqldb','username','password');
 ```
 
-While connecting to a SQLite database it would look like:
+Connecting to a SQLite database would look like:
 
 ```php
 $db=new \DB\SQL('sqlite:/path/to/db.sqlite');
