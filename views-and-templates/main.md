@@ -141,7 +141,7 @@ Two solutions:
 </ul>
 </li>
 </ul>
-Refer to the [FatFree GitHub Issue #201](https://github.com/bcosca/fatfree/issues/201) for more details.
+Refer to the <a href="https://github.com/bcosca/fatfree/issues/201">FatFree GitHub Issue #201</a> for more details.
 </div>
 
 
