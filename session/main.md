@@ -173,6 +173,6 @@ If the callback returns `FALSE` the default behaviour gets also executed.
 <div class="alert alert-warning">
 	<strong>Notice:</strong>
 	The framework doesn't verify the CSRF token.
-	Please have a look at <a href="session/csrf">the <code>csrf()</code> method</a> and
+	Please have a look at <a href="session#csrf">the <code>csrf()</code> method</a> and
 	<a href="https://github.com/bcosca/fatfree-core/pull/94">Pull Request 94</a> for more information.
 </div>
