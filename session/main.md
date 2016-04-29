@@ -153,7 +153,7 @@ This method returns the "last updated at" unix timestamp of the current session.
 ```php
 // Log suspicious sessions and destroy them.
 new \DB\SQL\Session($db,'sessions',TRUE,function($session){
-  //suspect session
+  // Suspect session
   $logger = new \Log('logs/session.log');
   $f3=\Base::instance();
   if (($ip=$session->ip())!=$f3->get('IP'))
@@ -161,7 +161,7 @@ new \DB\SQL\Session($db,'sessions',TRUE,function($session){
   else
   	$logger->write('user changed browser/device:'.$f3->get('AGENT'));
 
-  // The default behaviour destroys the supicious session.
+  // The default behaviour destroys the suspicious session.
   return false;
 });
 ```
@@ -169,3 +169,10 @@ new \DB\SQL\Session($db,'sessions',TRUE,function($session){
 The default behaviour destroys the session and throws a `HTTP 403` error when a suspect session is detected (wrong IP-Address or User-Agent).
 To extend or overwrite that behaviour, you can use the fourth constructor parameter to define a callback function.
 If the callback returns `FALSE` the default behaviour gets also executed.
+
+<div class="alert alert-warning">
+	<strong>Notice:</strong>
+	The framework doesn't verify the CSRF token.
+	Please have a look at <a href="session/csrf">the <code>csrf()</code> method</a> and
+	<a href="https://github.com/bcosca/fatfree-core/pull/94">Pull Request 94</a> for more information.
+</div>
