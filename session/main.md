@@ -114,14 +114,42 @@ string|FALSE csrf( )
 
 This method returns a CSRF token which is bound to the current active Session and the current request. Use this token to protect your application from CSRF attacks. The constructor of the Session classes already performs some checks to prevent Session hijacking, but it is recommended that you implement some extra validation to shield your app from URL-Spoofing and [CSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks.
 
+Here's how to use it:
+
+1) First call the `csrf()` method to get the current session token and store it somewhere:
+
 ```php
-if ($f3->exists('SESSION.csrf',$csrf))
-	echo $csrf; // old token from last request, use this to validate your requests and forms
-$s = new Session();
-$newToken = $s->csrf(); // token for current request
-$f3->set('SESSION.csrf',$newToken); // use this in hidden form fields
+$sess=new DB\SQL\Session($db);
+$f3->CSRF=$sess->csrf();
 ```
 
+NB: as an alternative, you can instantiate the Session class with the 5th parameter set to a hive key name, which will hold the CSRF token. E.g:
+
+```php
+new DB\SQL\Session($db,'sessions',TRUE,NULL,'CSRF');// now $f3->CSRF holds the token
+```
+
+2) Save that token to session:
+
+```php
+$f3->copy('CSRF','SESSION.csrf');// the variable name is up to you
+```
+
+3) Add that token to your form:
+
+```html
+<input type="hidden" name="token" value="{{ @CSRF }}/>
+```
+
+4) On form submission, compare the received token with the value stored in session:
+
+```php
+if ($f3->get('POST.token')!=$f3->get('SESSION.csrf')) {
+  // CSRF attack detected
+}
+```
+
+You can find a working example [here](https://paste.534f.de/OFtewV8J).
 
 ### ip
 
@@ -172,7 +200,5 @@ If the callback returns `FALSE` the default behaviour gets also executed.
 
 <div class="alert alert-warning">
 	<strong>Notice:</strong>
-	The framework doesn't verify the CSRF token.
-	Please have a look at <a href="session#csrf">the <code>csrf()</code> method</a> and
-	<a href="https://github.com/bcosca/fatfree-core/pull/94">Pull Request 94</a> for more information.
+	The framework doesn't verify the CSRF token automatically, you have to do it <a href="session#csrf">manually</a>.
 </div>
