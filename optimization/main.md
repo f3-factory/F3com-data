@@ -92,7 +92,7 @@ Of course we need to set up a route to handle the necessary call to the Fat-Free
 $f3->route('GET /minify/@type',
 	function($f3, $args) {
 		$path = $f3->get('UI').$args['type'].'/';
-		$files = str_replace('../','',$_GET['files']); // close potential hacking attempts  
+		$files = preg_replace('/(\.+\/)/','',$_GET['files'])); // close potential hacking attempts  
 		echo Web::instance()->minify($files, null, true, $path);
 	},
 	3600*24
@@ -102,8 +102,11 @@ $f3->route('GET /minify/@type',
 // make sure you organize your files to be minified into sub-folders, per type, i.e. /ui/css/ /ui/js
 // minify will grab each file specified in the querystring var named 'files' and combine into 1 output
 // Save the minified file in F3 cache for 24 hours. future requests for this route will use cached version
-
 ```
+
+<div class="alert alert-danger">
+<strong>Warning!</strong> You have to make sure that <code>$_GET['files']</code> is sanitized and does not contain <code>../</code> chars, which could potentially open a security issue in your application. This was fixed in v3.5.2, but you need handle this yourself in any previous version.
+</div>
 
 And that's all there is to it! `minify()` reads each file (`typo.css` and `grid.css` in our CSS example, `dialog.js` and `main.js` in our Javascript example), strips off all unnecessary whitespaces and comments, combines all of the related items as a single Web page component, and attaches a future expiry date so the user's Web browser will cache the data and not hit the server for every url request. It's important that the `PARAMS.type` variable base points to the correct path. Otherwise, the URL rewriting mechanism inside the compressor won't find the CSS/Javascript files.
 
