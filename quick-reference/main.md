@@ -304,6 +304,14 @@ TCP/IP listening port used by the Web server. Default value: `$_SERVER['SERVER_P
 
 Prefix to use with LANGUAGE and LOCALES.
 
+For example, if your dictionary file contains `hello = Hello World`, the term will be accessible via:
+
+* `$f3->get('hello')` without prefix
+* `$f3->get('DICT.hello')` if `PREFIX=DICT.`
+
+<div class="alert alert-info">
+<strong>IMPORTANT:</strong> this variable should be set <em>before</em> <code>LANGUAGE</code> and <code>LOCALES</code>.
+</div>
 
 ### PREMAP
 **Type:** `string` &nbsp; &nbsp; **Default:** `''`, empty string
