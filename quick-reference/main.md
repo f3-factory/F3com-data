@@ -43,6 +43,19 @@ you can use a pipe (`|`), comma (`,`), or semi-colon (`;`) as path separator.
 
 [See here](routing-engine#the-f3-autoloader) for more details.
 
+<div class="alert alert-info">
+<strong>BEWARE:</strong> if you define this variable in a config file, remember that commas have a special meaning (array separator).
+<br>
+So the following syntaxes are valid:
+<ul>
+<li><code>AUTOLOAD = foo/;bar/,Customer::casehandler</code></li>
+<li><code>AUTOLOAD = foo/;bar/</code></li>
+<li><code>AUTOLOAD = foo/|bar/</code></li>
+<li><code>AUTOLOAD = "foo/,bar/"</code></li>
+</ul>
+while <code>AUTOLOAD = foo/,bar/</code> is not.
+</div>
+
 ### BASE
 **Type:** `string`, `Read-only` &nbsp; &nbsp; **Default:** auto-detected
 
