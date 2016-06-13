@@ -611,10 +611,6 @@ Equivalent of the PHP switch-case jump table structure.
 ```
 Used to set some variables dynamically within the template.
 
-## API Documentation
-
-The framework API documentation is also contained in `lib/api/index.html` of the distribution package. F3 uses [Doxygen](http://www.stack.nl/~dimitri/doxygen/ "Doxygen is a tool for generating documentation from annotated source code") to generate the documentation in HTML format.
-
 <nav>
   <ul class="pager">
     <li class="previous"><a href="/unit-testing"><span aria-hidden="true">&larr;</span> 8. Unit Testing</a></li>
