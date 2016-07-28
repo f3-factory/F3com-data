@@ -242,16 +242,54 @@ $img->rgb( 0xFF0033 ); // returns array( 255, 0, 51 );
 **Output a raw image stream to the HTTP client**
 
 ```php
-$img->render( [ string $imageformat = 'png' [, int $quality [, int $filters ]]] ); // PNG by default
+$img->render( [ string $imageformat = 'png' ] );
 ```
 
-You can pass multiple variable arguments to this method. The first argument defines the image format. You can use either `png`, `jpeg`, `gif` or `wbmp`. If not specified, the PNG image format will be used. For instance this example will output a PNG image:
+This method sends the image stream to the HTTP client. The image can be rendered in `png`, `jpeg`, `gif` or `wbmp` format.
+If not specified, the PNG image format will be used. For instance this example will output a PNG image:
 
 ```php
 $img->render(); // Send a [Content-Type: image/png] stream to the HTTP client
 ```
 
-You can use `png`, `jpeg`, `gif` or `wbmp` as first argument. All additional arguments are the same as the ones of the relative php render methods:
+Extra arguments are allowed, depending on the requested image format:
+
+#### PNG format (default)
+
+```php
+$img->render( 'png' [, int $quality [, int $filters ]] );
+```
+
+`$quality` indicates the compression level from 0 to 9. The default quality [seems](http://php.net/manual/en/function.imagepng.php#106093) to be 6.
+
+`$filters` allows reducing the PNG file size.
+It is a bitmask field which may be set to any combination of the following constants: `PNG_FILTER_NONE`, `PNG_FILTER_SUB`, `PNG_FILTER_UP`, `PNG_FILTER_AVG`, `PNG_FILTER_PAETH`.
+`PNG_NO_FILTER` or `PNG_ALL_FILTERS` may also be used to respectively disable or activate all filters.
+
+#### JPEG format
+
+```php
+$img->render( 'jpeg' [, int $quality = 75 ] );
+```
+
+`$quality` ranges from 0 (worst quality, smaller file) to 100 (best quality, biggest file).
+
+
+#### GIF format
+
+```php
+$img->render( 'gif' );
+```
+
+#### WBMP format
+
+```php
+$img->render( 'wbmp' [, int $foreground ] );
+```
+
+You can set the foreground color with `$foreground` by setting an identifier obtained from [imagecolorallocate()](http://php.net/manual/en/function.imagecolorallocate.php). The default foreground color is black.
+
+**NB:** internally this method is a wrapper for the following native PHP methods:
 
 *   [imagepng](http://www.php.net/manual/en/function.imagepng.php "Official PHP documentation @ php.net")
 *   [imagejpeg](http://www.php.net/manual/en/function.imagejpeg.php "Official PHP documentation @ php.net")
@@ -266,6 +304,13 @@ $img->dump();
 ```
 
 This method accepts the same arguments as the [`render()`](image#render) method above.
+
+You can write the result of this method to a file:
+
+```php
+$f3->write( '/path/to/file.png', $img->dump('png',9) );
+```
+
 
 ## History
 
