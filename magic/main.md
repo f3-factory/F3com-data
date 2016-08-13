@@ -28,7 +28,7 @@ class User extends Magic {
         $this->data[$key] = $val;
     }
 
-    function get($key) {
+    function &get($key) {
         return $this->data[$key];
     }
 
