@@ -44,7 +44,7 @@ $audit->url('http://fatfreeframework.com'); // returns TRUE
 **Return TRUE if string is a valid e-mail address; Check DNS MX records if specified**
 
 ``` php
-bool email ( string $str [ , boolean $mx = FALSE ] )
+bool email ( string $str [ , boolean $mx = TRUE ] )
 ```
 
 This function allows you to check if a given string is a valid e-mail address.
