@@ -104,7 +104,7 @@ These variables may be used throughout an application. However, direct use in te
 * `expose`, string or array, default: `false`, controls which headers from the response are exposed to the client browser
 * `ttl`, int, detault: `0`, caching time of the preflight OPTIONS request
 
-To enable basic CORS support, just set `CORS.origin` to `*`.
+To enable basic CORS support, just set `CORS.origin` to `*`. For a more defined setup, you can use  `$f3->copy('HEADERS.Origin','CORS.origin');`.
 
 ### DEBUG
 **Type:** `integer` &nbsp; &nbsp; **Default:** `0`
