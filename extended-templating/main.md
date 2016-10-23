@@ -187,6 +187,22 @@ array(
 
 it would be rendered as `<img src="tmp/0fs02ehlcd7.jpg"  class="big" rel="lightbox[]" />` now, where the new image path points to our resized image.
 
+In case you want to create a tag handler that may contain additional content, you need to render this properly by yourself.
+
+In your tag handler function, you'll receive the $node parameter. This includes an "@attrib" key. This key contains all attributes that were defined on your directive. Everything else in $node is the inner content of your directive. To proberly render this content, use the Template->build method like this:
+
+```php
+static public function render($node) {
+    $attr = $node['@attrib'];
+    unset($node['@attrib']);
+    // do things
+    // ...
+    $content = (isset($node[0])) ? \Template::instance()->build($node) : '';
+    return '<div>'.$content.'</div>';
+}
+```
+
+
 ### 3. Preview
 
 The Preview class mainly takes care about converting your template and its expressions to PHP code - the so called pre-compiled template. So any tokens that are echo'd `{{ }}` or just executed `{~  ~}` can be used for dynamic templating, not just with HTML markup, but also with non-XML compatible template system like HAML, YAML, markdown or simple text files.
