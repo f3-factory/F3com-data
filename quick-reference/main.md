@@ -405,6 +405,8 @@ The default serializer used by the [Base->serialize()](base#serialize "Definitio
 
 Temporary folder for cache, filesystem locks, compiled F3 templates, etc. The default value is the `'tmp/'` folder inside the Web root. _Adjust accordingly to conform to your site's security policies_.
 
+When you're using Google App Engine (GAE) to deploy your application, it's recommended to set it to the in-memory file-system with `$f3->set('TEMP', sys_get_temp_dir())`.
+
 
 ### TIME
 **Type:** `float` &nbsp; &nbsp; **Default:** auto-detected
