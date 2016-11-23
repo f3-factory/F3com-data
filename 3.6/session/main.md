@@ -26,6 +26,27 @@ $f3->set('SESSION.test',123);
 echo $f3->get('SESSION.test');
 ```
 
+The constructor accepts a few optional arguments:
+
+```
+new Session( [ callable $onsuspect [, string $key ]] )
+```
+
+The `$onsuspect` argument is there to override the default handling of suspicious sessions:
+when an IP or agent change is detected during the session, the session is destroyed and a 403 error is thrown.
+
+To override this behaviour, you can pass your own suspect session handler to the constructor:
+
+```php
+new Session(function(Session $session,$id){
+  // Session $id is suspect, do something
+  // you can read $session->agent(), $session->ip(), $session->csrf() and $session->stamp()
+  // and/or return FALSE to trigger the default 403 error
+});
+```
+
+The `$key` argument is there to store the [CSRF](session#csrf) token to a hive variable.
+
 ### SQL
 
 This class provides a SQL-based session handler.
