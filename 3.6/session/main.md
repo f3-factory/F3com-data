@@ -29,7 +29,7 @@ echo $f3->get('SESSION.test');
 The constructor accepts a few optional arguments:
 
 ```
-new Session( [ callable $onsuspect [, string $key ]] )
+new Session( [ callable $onsuspect [, string $key [, Cache $cache ]]] )
 ```
 
 The `$onsuspect` argument is there to override the default handling of suspicious sessions:
@@ -45,7 +45,21 @@ new Session(function(Session $session,$id){
 });
 ```
 
-The `$key` argument is there to store the [CSRF](session#csrf) token to a hive variable.
+The `$key` argument is there to store the [CSRF](session#csrf) token into a hive variable:
+
+```php
+new Session(NULL,'CSRF');
+echo $f3->CSRF; // token here
+```
+
+The `$cache` argument makes it possible to store the session data in a dedicated Cache instance,
+rather than the default one:
+
+```php
+$cache=Cache::instance(); // Default cache (the one defined by the CACHE variable)
+$sessionCache=new Cache('folder=var/sessions/'); // Session cache
+new Session(NULL,NULL,$sessionCache);
+```
 
 ### SQL
 
