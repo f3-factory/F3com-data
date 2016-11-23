@@ -277,9 +277,11 @@ $f3->reroute('/foo?bar=baz');
 ```
 
 ### PACKAGE
-**Type:** `string` &nbsp; &nbsp; **Default:** `'Fat-Free Framework'`
+**Type:** `string|null` &nbsp; &nbsp; **Default:** `'Fat-Free Framework'`
 
-A string containing the name of the Framework.
+A string containing the `X-Powered-By` header.
+
+If empty, the header is not sent.
 
 
 ### PARAMS
@@ -457,9 +459,11 @@ A string containing the version of the Framework.
 
 
 ### XFRAME
-**Type:** `string` &nbsp; &nbsp; **Default:** e.g. `'SAMEORIGIN'`
+**Type:** `string|NULL` &nbsp; &nbsp; **Default:** e.g. `'SAMEORIGIN'`
 
-Used to set the `X-Frame-Options` header.
+A string containing the `X-Frame-Options` header.
+
+If empty, the header is not sent.
 
 ## Template Directives
 
