@@ -578,7 +578,7 @@ Tip:Use the tools as they're designed for. Fat-Free already has an easy-to-use S
 
 <nav>
   <ul class="pager">
-    <li class="previous"><a href="/views-and-templates"><span aria-hidden="true">&larr;</span> 4. Views and Templates</a></li>
-    <li class="next"><a href="/plug-ins">6. Plug-Ins <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="previous"><a href="views-and-templates"><span aria-hidden="true">&larr;</span> 4. Views and Templates</a></li>
+    <li class="next"><a href="plug-ins">6. Plug-Ins <span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav>

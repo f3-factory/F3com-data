@@ -615,6 +615,6 @@ Used to set some variables dynamically within the template.
 
 <nav>
   <ul class="pager">
-    <li class="previous"><a href="/unit-testing"><span aria-hidden="true">&larr;</span> 8. Unit Testing</a></li>
+    <li class="previous"><a href="unit-testing"><span aria-hidden="true">&larr;</span> 8. Unit Testing</a></li>
   </ul>
 </nav>

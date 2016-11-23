@@ -131,6 +131,6 @@ on your server, you may have to tweak your Web server settings a bit. Take a loo
 
 <nav>
   <ul class="pager">
-    <li class="next"><a href="/routing-engine">2. Routing Engine <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="next"><a href="routing-engine">2. Routing Engine <span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav>

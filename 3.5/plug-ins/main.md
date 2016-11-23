@@ -144,7 +144,7 @@ Still haven't found what you're looking for? Maybe you'll find it in the [User C
 
 <nav>
   <ul class="pager">
-    <li class="previous"><a href="/databases"><span aria-hidden="true">&larr;</span> 5. Databases</a></li>
-    <li class="next"><a href="/optimization">7. Optimization <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="previous"><a href="databases"><span aria-hidden="true">&larr;</span> 5. Databases</a></li>
+    <li class="next"><a href="optimization">7. Optimization <span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav>

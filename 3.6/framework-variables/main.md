@@ -352,8 +352,8 @@ y = world
 
 <nav>
   <ul class="pager">
-    <li class="previous"><a href="/routing-engine"><span aria-hidden="true">&larr;</span> 2. Routing Engine</a></li>
-    <li class="next"><a href="/views-and-templates">4. Views and Templates <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="previous"><a href="routing-engine"><span aria-hidden="true">&larr;</span> 2. Routing Engine</a></li>
+    <li class="next"><a href="views-and-templates">4. Views and Templates <span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav>
 

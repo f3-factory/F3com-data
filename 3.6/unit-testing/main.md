@@ -136,7 +136,7 @@ Unit testing helps a lot in minimizing these occurrences. Even a few tests on ea
 
 <nav>
   <ul class="pager">
-    <li class="previous"><a href="/optimization"><span aria-hidden="true">&larr;</span> 7. Optimization</a></li>
-    <li class="next"><a href="/quick-reference">9. Quick Reference <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="previous"><a href="optimization"><span aria-hidden="true">&larr;</span> 7. Optimization</a></li>
+    <li class="next"><a href="quick-reference">9. Quick Reference <span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav>

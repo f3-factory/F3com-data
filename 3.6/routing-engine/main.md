@@ -586,8 +586,8 @@ wget -O /dev/null http://my-domain.com/update-route
 
 <nav>
   <ul class="pager">
-    <li class="previous"><a href="/getting-started"><span aria-hidden="true">&larr;</span> 1. Getting Started</a></li>
-    <li class="next"><a href="/framework-variables">3. Framework Variables <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="previous"><a href="getting-started"><span aria-hidden="true">&larr;</span> 1. Getting Started</a></li>
+    <li class="next"><a href="framework-variables">3. Framework Variables <span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav>
 

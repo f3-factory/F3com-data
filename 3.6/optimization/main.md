@@ -134,8 +134,8 @@ Bandwidth throttling at the application level can be particularly useful for log
 
 <nav>
   <ul class="pager">
-    <li class="previous"><a href="/plug-ins"><span aria-hidden="true">&larr;</span> 6. Plug-Ins</a></li>
-    <li class="next"><a href="/unit-testing">8. Unit Testing <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="previous"><a href="plug-ins"><span aria-hidden="true">&larr;</span> 6. Plug-Ins</a></li>
+    <li class="next"><a href="unit-testing">8. Unit Testing <span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav>
 

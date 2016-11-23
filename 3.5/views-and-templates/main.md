@@ -585,7 +585,7 @@ With the F3 template engine you can also setup own expression filters like `{{ @
 
 <nav>
   <ul class="pager">
-    <li class="previous"><a href="/framework-variables"><span aria-hidden="true">&larr;</span> 3. Framework Variables</a></li>
-    <li class="next"><a href="/databases">5. Databases <span aria-hidden="true">&rarr;</span></a></li>
+    <li class="previous"><a href="framework-variables"><span aria-hidden="true">&larr;</span> 3. Framework Variables</a></li>
+    <li class="next"><a href="databases">5. Databases <span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav>
