@@ -157,6 +157,7 @@ F3 maintains a global variable containing the details of the latest error that o
 `ERROR.status` - a brief description of the HTTP status code. e.g. `'Not Found'`
 `ERROR.text` - error context
 `ERROR.trace` - stack trace stored in an `array()`
+`ERROR.level` - error reporting level (`E_WARNING`, `E_STRICT`, etc.)
 ```
 
 If your project uses templates, you may wish to handle potential template errors by clearing any existing output buffer and display a fresh page instead:

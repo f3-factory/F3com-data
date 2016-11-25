@@ -152,6 +152,7 @@ Information about the last HTTP error that occurred:
 * `ERROR.status` is a brief description of the HTTP status code. e.g. `'Temporary Redirect'`
 * `ERROR.text` contains a brief description of the error.
 * `ERROR.trace` is used for HTTP 500 errors, to retrieve the stack trace. `array()`
+* `ERROR.level` - error reporting level (`E_WARNING`, `E_STRICT`, etc.)
 
 
 ### ESCAPE

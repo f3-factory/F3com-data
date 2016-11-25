@@ -1681,7 +1681,7 @@ null dump ( mixed $expr )
 **Execute error handler**
 
 ```php
-null error ( int $code [, string $text = '' [, array $trace = NULL ]] )
+null error ( int $code [, string $text = '' [, array $trace = NULL [, int $level = 0 ]]] )
 ```
 
 Calling this function logs an error and executes the [ONERROR](quick-reference#onerror) handler if defined.
