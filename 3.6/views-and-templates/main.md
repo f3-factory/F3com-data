@@ -91,7 +91,7 @@ And populate the `@buddy` array in your PHP code before serving the template:
 $f3->set('buddy',array('Tom','Dick','Harry'));
 ```
 
-However, if you simply insert `{{ @buddy }}` in your template, PHP 5.3 will replace it with `'Array'` because it converts the token to a string. PHP 5.4, on the other hand, will generate an `Array to string conversion` notice at runtime.
+However, if you simply insert `{{ @buddy }}` in your template, PHP will generate an `Array to string conversion` notice at runtime.
 
 F3 allows you to embed expressions in templates. These expressions may take on various forms, like arithmetic calculations, boolean expressions, PHP constants, etc. Here are a few examples:
 

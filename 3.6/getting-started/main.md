@@ -56,8 +56,8 @@ Therefore you can `require bcosca/fatfree-core` or fetch this [fatfree-composer-
  clear all cache entries first before overwriting an older version of the framework with a new one. This can also be done (except XCache) by calling <code>$f3->clear('CACHE')</code>.
 </div>
 
-Make sure you're running the right version of PHP. F3 does not support versions earlier than PHP
-5.3. You'll be getting syntax errors (false positives) all over the place because new language
+Make sure you're running the right version of PHP. F3 3.6 does not support versions earlier than PHP
+5.4. You'll be getting syntax errors (false positives) all over the place because new language
 constructs and closures/anonymous functions are not supported by outdated PHP versions. To find
 out, open your console (`bash` shell on Linux, or `cmd.exe` on Windows):-
 
@@ -69,13 +69,14 @@ PHP will let you know which particular version you're running and you should get
 looks similar to this:-
 
 ```
-PHP 5.3.15 (cli) (built: Jul 20 2012 00:20:38)
-Copyright (c) 1997-2012 The PHP Group
-Zend Engine v2.3.0, Copyright (c) 1998-2012 Zend Technologies
+PHP 5.6.22-1 (cli)
+Copyright (c) 1997-2016 The PHP Group
+Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
+    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies
 ```
 
-Upgrade if necessary, [check additional system requirements](system-requirements) and come back here if you've made the jump to PHP 5.3 or a later release.
-If you need a PHP 5.3+ hosting service provider, try one of these services:
+Upgrade if necessary, [check additional system requirements](system-requirements) and come back here if you've made the jump to PHP 5.4 or a later release.
+If you need a PHP 5.4+ hosting service provider, try one of these services:
 
 * [A2 Hosting](http://www.a2hosting.com/2461-15-1-72.html)
 * [DreamHost](http://www.dreamhost.com/r.cgi?665472)

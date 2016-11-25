@@ -7,7 +7,7 @@ File location: `lib/bcrypt.php`
 ---
 
 <div class="alert alert-info">
-<b>Notice:</b> This plugin uses BLOWFISH to hash your passwords, which needs at least PHP version 5.3.7. Keep in mind to implement alternative hashing methods, if you aim to support lower versions as well (F3 itself just needs PHP 5.3.3).
+<b>Notice:</b> This plugin uses BLOWFISH to hash your passwords, which needs at least PHP version 5.3.7. Keep in mind to implement alternative hashing methods, if you aim to support lower versions as well (F3 itself requires 5.4 though).
 </div>
 
 

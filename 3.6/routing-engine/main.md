@@ -430,7 +430,7 @@ $f3->set('AUTOLOAD','admin/autoload/; user/autoload/; default/');
 ## Working with Namespaces
 
 `AUTOLOAD` allows class hierarchies to reside in similarly-named subfolders,
-so if you want the framework to autoload a PHP 5.3 namespaced class that's invoked in the
+so if you want the framework to autoload a namespaced class that's invoked in the
 following manner:
 
 ```php
