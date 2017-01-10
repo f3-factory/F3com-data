@@ -269,6 +269,10 @@ See what other users have made with F3:
            <td>Fat-Free Framework Template Engine Support for Brackets Code Hints</td>
            <td><a class="btn btn-info" href="https://github.com/Microgamer/Brackets-HTML5CodeHints-F3-Templatetags" target="_blank">view</a></td>
         </tr>
+	<tr>
+            <td>Tool to create JIG database from CSV data</td>
+            <td><a class="btn btn-info" href="https://cdn.rawgit.com/ethanpil/f3-csv-to-jig/master/csv-to-jig.html" target="_blank">view</a></td>
+        </tr>
     </tbody>
 </table>
 
