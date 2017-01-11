@@ -85,7 +85,7 @@ array (size=12)
 **Return weather data based on specified latitude/longitude**
 
 ```php
-array|FALSE weather ( float $latitude, float $longitude )
+array|FALSE weather ( float $latitude, float $longitude, string $key )
 ```
 
 Example:
@@ -93,7 +93,8 @@ Example:
 ```php
 $geo = \Web\Geo::instance();
 $loc = $geo->location('95.143.172.183'); // locate specific IP
-var_dump($geo->weather($loc['latitude'],$loc['longitude']));
+$key = 'SECRET'; // The API key
+var_dump($geo->weather($loc['latitude'],$loc['longitude'],$key));
 /* returns:
 array (size=17)
   'weatherCondition' => string 'n/a' (length=3)
