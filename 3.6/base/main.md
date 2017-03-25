@@ -637,9 +637,9 @@ Example with a simple 2D array:
 ```php
 $elements = array('water','earth','wind','fire');
 $fireworks = array($elements, shuffle($elements), array_flip($elements));
-echo $f3->csv($fireworks);
+echo $f3->stringify($fireworks);
 // Outputs e.g.:
-'array('water','earth','wind','fire'),true,array('earth'=>0,'fire'=>1,'water'=>2,'wind'=>3)'
+"[['water','earth','wind','fire'],true,['earth'=>0,'water'=>1,'wind'=>2,'fire'=>3]]"
 ```
 
 ```php
@@ -648,7 +648,7 @@ $car->color = 'green';
 $car->location = array('35.360496','138.727798');
 echo $f3->stringify($car);
 // Outputs e.g.:
-'stdClass::__set_state('color'=>'green','location'=>array('35.360496','138.727798'))'
+"stdClass::__set_state(['color'=>'green','location'=>['35.360496','138.727798']])"
 ```
 
 ### csv
