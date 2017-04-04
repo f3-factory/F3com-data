@@ -445,13 +445,24 @@ string slug ( string $text )
 ```
 
 The purpose of this function is to convert foreign characters to their approximate English keyboard character equivalents.
-Therefor it uses ISO-9 transliteration with a lookup table array that can be extended with the [DIACRITICS](quick-reference#diacritics) var.
+Therefor it uses ISO-9 transliteration with a [lookup table array](web#diacritics) that can be extended with the [DIACRITICS](quick-reference#diacritics) var.
 Furthermore, it is designed to remove all non-alphanumeric characters and convert them to dashes.
 
 ```php
 echo Web::instance()->slug('ĤÈĹĹŌ'); // displays 'hello'
 echo Web::instance()->slug('Ein schöner Artikel über Max & John!'); // displays 'ein-schoener-artikel-ueber-max-john'
 ```
+
+### diacritics
+
+**Return the preset diacritics translation table**
+
+```php
+array diacritics ( )
+```
+
+This table is used by the [slug() method](web#slug) in conjunction with the [DIACRITICS](quick-reference#diacritics) variable.
+
 
 ### filler
 

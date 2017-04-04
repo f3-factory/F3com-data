@@ -122,7 +122,7 @@ Verbosity level of the stack trace. Assign values between 0 to 3 for increasing 
 ### DIACRITICS
 **Type:** `array` &nbsp; &nbsp; **Default:** `array()`, empty array
 
-Additional key-value pairs for foreign-to-ASCII character translations.
+Additional key-value pairs for foreign-to-ASCII character translations, as used in [web->slug](web#slug).
 
 
 ### DNSBL
