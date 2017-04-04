@@ -297,7 +297,9 @@ array(4) {
         12 => string 'X-Cache-Status: HIT' (length=19)
         13 => string 'Accept-Ranges: bytes' (length=20)
     'engine' => string 'cURL' (length=4)
-    'cached' => boolean false}
+    'cached' => boolean false
+    'error' => string '' (length=0)
+}
 */
 ```
 
