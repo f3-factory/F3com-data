@@ -137,13 +137,17 @@ $img->crop( int $x1, int $y1, int $x2, int $y2);
 **Resize image (Maintain aspect ratio)**
 
 ```php
-$img->resize( int $width, int $height [, bool $crop = TRUE [, bool $enlarge = TRUE ]] );
+$img->resize( int $width [, int $height = NULL [, bool $crop = TRUE [, bool $enlarge = TRUE ]]] );
 ```
 
 If `$crop` is `TRUE` the image will be resized to fit with its smallest side into the resize box.
 The overflowing margins will be cropped relative to the center, so your resulting image will fully cover your desired width and height values.
+
 If `$crop` is `FALSE` it will be resized to fit with its longest side into the resize box.
+
 If `$enlarge` is `FALSE` the image will not be scaled up to fit in the resize box.
+
+If either `$width` or `$height` is null, the other dimension is guessed in order to preserve the aspect ratio.
 
 ### rotate
 **Rotate image**
