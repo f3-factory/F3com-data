@@ -1068,6 +1068,7 @@ This emulates a HTTP request based upon the verb and resource defined by `$patte
 * The HTTP request body `$body` gets exported as the HIVE's `BODY` variable for verbs not equal to `GET` or `HEAD`. If `$body` is undefined, `$args` gets URL-encoded and exported as `BODY`
 * Appending `[ajax]` to `$pattern` mocks AJAX calls
 * Appending `[sync]` to `$pattern` mocks ordinary (synchronous) calls
+* Appending `[cli]` to `$pattern` mocks command-line (CLI) calls
 * [Named routes and tokens](routing-engine#NamedRoutes) are valid resources
 
 Basic usage example:
