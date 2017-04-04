@@ -75,7 +75,7 @@ $web->acceptable(array('application/xml','application/xhtml+xml')); // returns a
 **Transmits a file to the client and returns the file size on success**
 
 ```php
-int|false send ( string $file [, string $mime = NULL [, int $kbps = 0 [, bool $force = TRUE ]]] )
+int|false send ( string $file [, string $mime = NULL [, int $kbps = 0 [, bool $force = TRUE [, $flush = TRUE ]]]] )
 ```
 
 The `$file` is a filename that must validate against the PHP function `is_file($file)`.
@@ -85,6 +85,8 @@ With the `$mime` argument you can explicitly set a mime type. Leave it to `NULL`
 The 3rd argument `$kbps` specify the throttle speed, measured in Kilobits per second. It allows you to actively limit users' download rates, to avoid overloading your server when you send big multimedia files for example.
 
 Use `$force` to add a `Content-Disposition: attachment;` HTTP header that will force the browser to open a "save file..." download dialog, otherwise it would just display the raw file in some cases, as images, .pdf or .mp3 files can be displayed directly by the browser and will not prompt the browser to display a download dialog.
+
+When `$flush` is set to `TRUE`, the output is flushed every 1 KiB. In most cases, you shouldn't need to disable this. However, it may come in handy when running tests.
 
 Usage example:
 
