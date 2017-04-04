@@ -237,7 +237,17 @@ $img->height();
 **Convert RGB hex triad to array**
 
 ```php
+$img->rgb( int | string $color );
+```
+
+You can pass an integer or a string. Even CSS shorthand notations are supported:
+
+```php
 $img->rgb( 0xFF0033 ); // returns array( 255, 0, 51 );
+$img->rgb( '#FF0033' ); // idem
+$img->rgb( 'ff0033' ); // idem
+$img->rgb( '#F03' ); // idem
+$img->rgb( 'f03' ); // idem
 ```
 
 ## Output
