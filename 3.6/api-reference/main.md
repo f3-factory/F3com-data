@@ -44,6 +44,7 @@ Quick references are available for <a href="quick-reference#SystemVariables">Sys
         <ul class="reference">
             <li><a class="label" href="web" title="The Web class and its descendants Geo and Pingback, contain several helpers to interact with HTTP clients and servers">Web</a></li>
             <li><a class="label" href="geo" title="The Geo plugin gives you a handful of location-based features">Geo</a></li>
+            <li><a class="label" href="oauth2" title="Lightweight OAuth2 client">OAuth2</a></li>
             <li><a class="label" href="openid" title="The OpenID class is a OpenID consumer">OpenID</a></li>
             <li><a class="label" href="pingback" title="Pingback 1.0 protocol (client and server) implementation">PingBack</a></li>
             <li><a class="label" href="smtp" title="The SMTP class is a SMTP plug-in">SMTP</a></li>
