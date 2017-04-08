@@ -1319,9 +1319,9 @@ $f3->redirect('GET /oldpage', '/newpage');
 // jump to absolut URLs
 $f3->redirect('GET /external-link', 'http://subdomain.domain.com');
 // temporarily redirect to another named route
-$f3->redirect('GET /login', '@memer_area', false);
+$f3->redirect('GET /login', '@member_area', false);
 // redirect one named route to another
-$f3->redirect('GET @member_welcome', '@memer_area');
+$f3->redirect('GET @member_welcome', '@member_area');
 ```
 
 This can also be configured in [config files](framework-variables#ConfigurationFiles) within a `[redirects]` section.
