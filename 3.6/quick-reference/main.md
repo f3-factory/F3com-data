@@ -584,7 +584,7 @@ Example:
 <repeat
     group="{{ array @group|expr }}"
     [ key="{{ scalar @key }}" ]
-    value="{{ mixed @value }}
+    value="{{ mixed @value }}"
     [ counter="{{ scalar @key }}" ]>
     text-block
 </repeat>
