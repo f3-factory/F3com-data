@@ -171,7 +171,7 @@ $f3->sync('SESSION'); // ensures PHP global var SESSION is the same as F3 variab
 **Get reference to hive key and its contents**
 
 ```php
-mixed &ref ( string $key [, bool $add = true ] )
+mixed &ref ( string $key [, bool $add = true, mixed $var = null ] )
 ```
 
 Usage:
@@ -207,6 +207,17 @@ echo $my_array['name']; // 'SpongeBob'
 ```
 
 If the 2nd argument `$add` is `false`, it just returns the read-only hive key content. This behaviour is used by get(). If the hive key does not exist, it returns NULL.
+
+Use the 3rd argument when you want to find a reference in your own array/object instead of from the hive.
+
+```php
+$fruitQty = ["Bananas"=>5, "Oranges"=>2, "Apples"=>42, "Mangos"=>1];
+$apples = &$f3->ref("Apples", true, $fruitQty); // References $fruitQty["Apples"]
+$apples = 10;
+
+echo $fruitQty["Apples"]; // 10
+```
+This way you can also use dot notation with your own objects.
 
 ### exists
 
