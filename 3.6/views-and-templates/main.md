@@ -537,6 +537,12 @@ love = I love F3
 today = Today is {0,date}
 pi = {0,number}
 money = Amount remaining: {0,number,currency}
+multiline = It's also possible to have language keys \
+            spread over multiple lines
+
+[module.user.validation]
+name.required = Please enter a your name.
+mail.invalid = This Email address is not valid.
 ```
 
 Save it as `dict/en.ini` so the framework can load it automatically.
