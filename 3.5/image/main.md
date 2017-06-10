@@ -245,7 +245,8 @@ $img->rgb( 0xFF0033 ); // returns array( 255, 0, 51 );
 $img->render( [ string $imageformat = 'png' ] );
 ```
 
-This method sends the image stream to the HTTP client. The image can be rendered in `png`, `jpeg`, `gif` or `wbmp` format.
+This method sends the image stream to the HTTP client. The image can be rendered in `png`, `jpeg`, `gif` or `wbmp` format.  
+Due to a bug in this version, you have to set the second argument to ```NULL```for the `jpeg` and `wbmp` format.
 If not specified, the PNG image format will be used. For instance this example will output a PNG image:
 
 ```php
@@ -269,7 +270,7 @@ It is a bitmask field which may be set to any combination of the following const
 #### JPEG format
 
 ```php
-$img->render( 'jpeg' [, int $quality = 75 ] );
+$img->render( 'jpeg', NULL [, int $quality = 75 ] );
 ```
 
 `$quality` ranges from 0 (worst quality, smaller file) to 100 (best quality, biggest file).
@@ -284,7 +285,7 @@ $img->render( 'gif' );
 #### WBMP format
 
 ```php
-$img->render( 'wbmp' [, int $foreground ] );
+$img->render( 'wbmp', NULL [, int $foreground ] );
 ```
 
 You can set the foreground color with `$foreground` by setting an identifier obtained from [imagecolorallocate()](http://php.net/manual/en/function.imagecolorallocate.php). The default foreground color is black.
@@ -304,7 +305,7 @@ $img->dump();
 ```
 
 This method accepts the same arguments as the [`render()`](image#render) method above.
-
+Due to a bug in this version, you have to set the second argument to ```NULL```for the `jpeg` and `wbmp` format, like above.
 You can write the result of this method to a file:
 
 ```php
