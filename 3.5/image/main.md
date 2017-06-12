@@ -246,19 +246,23 @@ $img->render( [ string $imageformat = 'png' ] );
 ```
 
 This method sends the image stream to the HTTP client. The image can be rendered in `png`, `jpeg`, `gif` or `wbmp` format.
-Due to a bug in this version, you have to set the second argument to `NULL` for the `jpeg` and `wbmp` format.
 If not specified, the PNG image format will be used. For instance this example will output a PNG image:
 
 ```php
 $img->render(); // Send a [Content-Type: image/png] stream to the HTTP client
 ```
 
-Extra arguments are allowed, depending on the requested image format:
+Extra arguments are allowed, depending on the requested image format (cf. below).
+
+<div class="alert alert-danger">
+<strong>NB:</strong> due to a bug, you have to set the second argument to <code>NULL</code> when passing extra arguments.
+This bug has been fixed in 3.6
+</div>
 
 #### PNG format (default)
 
 ```php
-$img->render( 'png' [, int $quality [, int $filters ]] );
+$img->render( 'png', NULL [, int $quality [, int $filters ]] );
 ```
 
 `$quality` indicates the compression level from 0 to 9. The default quality [seems](http://php.net/manual/en/function.imagepng.php#106093) to be 6.
@@ -305,11 +309,16 @@ $img->dump();
 ```
 
 This method accepts the same arguments as the [`render()`](image#render) method above.
-Due to a bug in this version, you have to set the second argument to `NULL` for the `jpeg` and `wbmp` format, like above.
+
+<div class="alert alert-danger">
+<strong>NB:</strong> due to a bug, you have to set the second argument to <code>NULL</code> when passing extra arguments.
+This bug has been fixed in 3.6
+</div>
+
 You can write the result of this method to a file:
 
 ```php
-$f3->write( '/path/to/file.png', $img->dump('png',9) );
+$f3->write( '/path/to/file.png', $img->dump('png',NULL,9) );
 ```
 
 
