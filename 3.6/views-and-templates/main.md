@@ -6,7 +6,7 @@ A user interface like an HTML page should be independent of the underlying PHP c
 
 Mixing programming constructs and user interface components in a single file, like spaghetti coding, makes future application maintenance a nightmare.
 
-## PHP as a Template Engine
+## Views: for using PHP as a Template Engine
 
 F3 supports PHP as a template engine. Take a look at this HTML fragment saved as `template.htm`:.
 
@@ -20,7 +20,7 @@ If short tags are enabled on your server, this should work too:
 <p>Hello, <?= $name ?></p>
 ```
 
-To display this template, you can have PHP code that looks like this (stored in a file separate from the template):
+To display this template, you can use the `View`class, which looks like this (stored in a file separate from the template):
 
 ```php
 $f3=require('lib/base.php');
@@ -38,9 +38,9 @@ $f3->run();
 
 The only issue with using PHP as a template engine, due to the embedded PHP code in these files, is the conscious effort needed to stick to the guidelines on separation of concerns and resist the temptation of mixing business logic with your user interface.
 
-## A Quick Look at the F3 Template Language
+## Templates: for using the F3 Template Language
 
-As an alternative to PHP, you can use F3's own template engine. The above HTML fragment can be rewritten as:
+As an alternative to PHP (and prevent spaghetti coding), you can use F3's own template engine via the `Template`class. The above HTML fragment can be rewritten as:
 
 ``` html
 <p>Hello, {{ @name }}!</p>
