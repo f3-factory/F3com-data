@@ -541,8 +541,8 @@ multiline = It's also possible to have language keys \
             spread over multiple lines
 
 [module.user.validation]
-name.required = Please enter a your name.
-mail.invalid = This Email address is not valid.
+name.required = Please enter your name.
+mail.invalid = This mail address is not valid.
 ```
 
 Save it as `dict/en.ini` so the framework can load it automatically.
