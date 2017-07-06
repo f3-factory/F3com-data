@@ -8,7 +8,7 @@ Mixing programming constructs and user interface components in a single file, li
 
 ## PHP as a Template Engine
 
-F3 supports PHP as a template engine. Take a look at this HTML fragment saved as `template.htm`:.
+F3 supports PHP as a template engine. Take a look at this HTML fragment saved as `template.htm`:
 
 ``` html
 <p>Hello, <?php echo $name; ?>!</p>
@@ -20,7 +20,7 @@ If short tags are enabled on your server, this should work too:
 <p>Hello, <?= $name ?></p>
 ```
 
-To display this template, you can have PHP code that looks like this (stored in a file separate from the template):
+The following PHP code utilizes the `View` class to render the PHP template stored in the `template.htm` file:
 
 ```php
 $f3=require('lib/base.php');
@@ -40,7 +40,7 @@ The only issue with using PHP as a template engine, due to the embedded PHP code
 
 ## A Quick Look at the F3 Template Language
 
-As an alternative to PHP, you can use F3's own template engine. The above HTML fragment can be rewritten as:
+As an alternative to PHP templates, you can use F3's own template engine with the `Template` class. The above HTML fragment can be rewritten as:
 
 ``` html
 <p>Hello, {{ @name }}!</p>
