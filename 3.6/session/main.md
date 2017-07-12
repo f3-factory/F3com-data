@@ -158,10 +158,10 @@ $sess=new DB\SQL\Session($db);
 $f3->CSRF=$sess->csrf();
 ```
 
-NB: as an alternative, you can instantiate the Session class with the 5th parameter set to a hive key name, which will hold the CSRF token. E.g:
+NB: as an alternative, you can instantiate the Session class with the 4th parameter set to a hive key name, which will hold the CSRF token. E.g:
 
 ```php
-new DB\SQL\Session($db,'sessions',TRUE,NULL,'CSRF');// now $f3->CSRF holds the token
+new DB\SQL\Session($db,'sessions',NULL,'CSRF');// now $f3->CSRF holds the token
 ```
 
 2) Save that token to session:
@@ -184,7 +184,35 @@ if ($f3->get('POST.token')!=$f3->get('SESSION.csrf')) {
 }
 ```
 
-You can find a working example [here](https://paste.534f.de/OFtewV8J).
+The complete example looks like this:
+
+```php
+$f3->DB=new DB\SQL('mysql:host=127.0.0.1;port=3306;dbname=test;','user','p4ssw0rd');
+
+$f3->route('GET|POST /test-csrf',function($f3,$params){
+
+    new DB\SQL\Session($f3->DB,'sessions',NULL,'CSRF');
+    // or:
+    // $sess=new DB\SQL\Session($f3->DB);
+    // $f3->CSRF=$sess->csrf();
+
+    if ($f3->VERB=='POST') {
+        if ($f3->get('POST.token')!=$f3->get('SESSION.csrf'))
+            echo 'CSRF attack!';
+        else
+            echo 'Your name is '.$f3->get('POST.name');
+        die();
+    }
+
+    $f3->copy('CSRF','SESSION.csrf');
+
+    echo '<form action="" method="post">'.
+        '<input type="text" name="name" value="" placeholder="Your name"/>'.
+        '<input type="hidden" name="token" value="'.$f3->CSRF.'"/>'.
+        '<button type="submit">Submit</button></form>';
+
+});
+```
 
 ### ip
 
