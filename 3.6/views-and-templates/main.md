@@ -198,6 +198,8 @@ The current data hive is passed to the sub-template. You can however pass new va
 {{@d}} // $d='abc'
 ```
 
+**Notice:** It's currently not possible to use a PHP constant like `TRUE` as a with-variable, since all attributes are parsed as string.
+
 ## Exclusion of Segments
 
 During the course of writing/debugging F3-powered programs and designing templates, there may be instances when disabling the display of a block of HTML may be handy. You can use the `<exclude>` directive for this purpose:
