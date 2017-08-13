@@ -85,7 +85,7 @@ $web->request(
         )
     ),
     array(
-        'headers'=>array(
+        'header'=>array(
             'Accept: text/html,application/xhtml+xml,application/xml',
             'Accept-Language: en-us'
         ),
