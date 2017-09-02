@@ -132,20 +132,6 @@ Call the function specified in `$func`.
 
 When function is called, the rendered view is passed to the function as a string. The called function needs to return the modified rendered view after any modification are done from within the callback function. You can call this hook multiple times to assign more than one function if needed. Utilizes [Base->call](base#call) to trigger the function and therefore accepts a callback string as well.
 
-
-### dupe
-
-**Attempt to clone object**
-
-``` php
-object dupe ( object $arg )
-```
-
-The View is rendered within a sandbox that contains a copy of the whole hive data. Each hive key gets encoded by [esc()](view#esc) to ensure a clean and secure way of rendering your data into the view.
-Therefore the dupe method tries to clone any object in the hive and encode the copy instead. This way the object data retains consistently in the hive for any further processing after rendering a view. Otherwise the original object becomes encodes too, because PHP always passes references of objects.
-This attempt of cloning objects only works for PHP >= 5.4.0.
-
-
 ### esc
 
 **Encode characters to equivalent HTML entities**
