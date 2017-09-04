@@ -243,6 +243,33 @@ might be necessary to effect the changes. You can then point your Web browser to
 `http://site1.com` or `http://site2.com`. Virtual hosts make your applications a lot easier to
 deploy.
 
+### Alternate Apache configuration
+
+If `mod_rewrite` is not available on your server or if you want to improve performance a bit,
+you can take benefit of the [FallbackResource](https://httpd.apache.org/docs/2.4/mod/mod_dir.html#fallbackresource) directive,
+available in Apache 2.4 and higher.
+
+In that case, just add the following line in your `.htaccess` file or in your VirtualHost configuration:
+
+```
+FallbackResource /index.php
+```
+
+In case your web app is running in a subfolder of the server root, don't forget to modify the directive accordingly:
+
+```
+FallbackResource /fatfree-project/index.php
+```
+
+<div class="alert alert-danger">
+	<strong>Notice:</strong>
+	There's currently a <a href="https://bz.apache.org/bugzilla/show_bug.cgi?id=52403">bug</a> that skips the directive when the requested URI ends with <code>.php</code> and is located at the application root:
+	<ul>
+		<li><code>http://localhost/fatfree-project/foo.php</code> =&gt; error 404</li>
+		<li><code>http://localhost/fatfree-project/foo/bar.php</code> =&gt; OK</li>
+	</ul>
+</div>
+
 ### Sample Nginx Configuration
 
 For Nginx servers, here's the recommended configuration (replace ip_address:port with your
