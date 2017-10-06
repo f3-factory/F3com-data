@@ -29,7 +29,7 @@ The SMTP class extends the [Magic](magic) class.
 string set ( string $key, string $val )
 ```
 
-This function allows you to bind a value to an e-mail header.
+This function allows you to bind a value to an e-mail header. For a full list of available fields, see [Internet Message Format, RFC5322](https://tools.ietf.org/html/rfc5322#section-3.6)
 (Returns the `$val` value.)
 
 Example:
@@ -39,6 +39,14 @@ echo $smtp->set('Errors-to', '<bluehole@fatfreeframework.com>');
 echo $smtp->set('To', '"Contact Name" <smtp-plug-in@fatfreeframework.com>');
 echo $smtp->set('Subject', 'Sent with the F3 SMTP plug-in');
 ```
+
+Multiple recipients:
+
+``` php
+echo $smtp->set('To', '"Username1" <user1@fatfreeframework.com>, "Username2" <user2@fatfreeframework.com>');
+```
+
+NB: The e-mail header key names are case-sensitive and should be uppercase-first-char.
 
 ### get
 
