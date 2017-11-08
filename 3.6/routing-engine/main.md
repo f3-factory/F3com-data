@@ -615,21 +615,26 @@ php index.php /my-awesome-route?foo=bar
 ### Shell syntax
 
 Instead of requesting a URI, you can pass shell arguments & options. They will be automatically converted to an emulated
-HTTP GET request, which makes it easy to build a shell tool in the way you would build a web application.
+HTTP GET request, which makes it easy to build a shell tool in the same way you would build a web application.
 
 The following mapping rules apply for conversion:
 
 * space-separated arguments map to path components
 * short-form (aka flags) and long-form options map to query string arguments
 * short-form options can be combined
+* options can be passed in any order (before, between or after arguments)
 
 Here are some examples:
 
 * `php index.php test` maps to `GET /test`
 * `php index.php log show --limit=50 --full` maps to `GET /log/show?limit=50&full=`
 * `php index.php cache clear -f -v -i -n=23` maps to `GET /cache/clear?f=&v=&i=&n=23`
-* `php index.php cache clear -fvi -n=23` is equivalent
-* `php index.php cache clear -fvin=23` is also equivalent
+* the following are all equivalent to the previous request:
+    * `php index.php cache clear -fvi -n=23`
+    * `php index.php cache clear -fvin=23`
+    * `php index.php cache -fvin=23 clear`
+    * `php index.php -fvin=23 cache clear`
+    * `php index.php -fvi cache clear -n=23`
 
 CLI options are accessed via the `$_GET` global variable.
 
