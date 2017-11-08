@@ -86,6 +86,13 @@ The framework doesn't use any cache engine when a `FALSE` value is assigned.
 
 Pattern matching of routes against incoming URIs is case-insensitive by default. Set to `FALSE` to make it case-sensitive.
 
+### CLI
+**Type:** `bool`, `Read-only`
+                
+`TRUE` if the request originates from the command-line interface, `FALSE` if it comes from the web server.
+
+See [CLI mode](routing-engine#RoutinginCLImode) for more details on how to handle CLI requests.
+
 
 ### COOKIE, GET, POST, REQUEST, SESSION, FILES, SERVER, ENV
 **Type:** `array`

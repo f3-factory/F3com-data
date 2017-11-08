@@ -597,19 +597,83 @@ Route pattern modifiers are also recognized by [`$f3->map()`](base#map).
 
 ## Routing in CLI mode
 
+### Web syntax
+
 If you want to run a specific route from a command line tool, a shell script, the console or as cron job, you can emulate a HTTP GET request by the following command:
 
 ```
 cd /path/to/test/suite
-php index.php /my-awesome-update-route
+php index.php /my-awesome-route
 ```
 
-Alternatively you can also use curl or wget like:
+NB: query strings are also supported:
 
 ```
-wget -O /dev/null http://my-domain.com/update-route
+php index.php /my-awesome-route?foo=bar
 ```
 
+### Shell syntax
+
+Instead of requesting a URI, you can pass shell arguments & options. They will be automatically converted to an emulated
+HTTP GET request, which makes it easy to build a shell tool in the way you would build a web application.
+
+The following mapping rules apply for conversion:
+
+* space-separated arguments map to path components
+* short-form (aka flags) and long-form options map to query string arguments
+* short-form options can be combined
+
+Here are some examples:
+
+* `php index.php test` maps to `GET /test`
+* `php index.php log show --limit=50 --full` maps to `GET /log/show?limit=50&full=`
+* `php index.php cache clear -f -v -i -n=23` maps to `GET /cache/clear?f=&v=&i=&n=23`
+* `php index.php cache clear -fvi -n=23` is equivalent
+* `php index.php cache clear -fvin=23` is also equivalent
+
+CLI options are accessed via the `$_GET` global variable.
+
+Here are two slightly different approaches for processing options:
+
+```php
+// syntax #1 (validating data, mixing short and long forms)
+$opts=[
+    'force' => $f3->exists('GET.f'), // -f
+    'limit' => abs((int)$f3->get('GET.limit')) ?: 20, // --limit=N (default: 20)
+    'verbose' => $f3->exists('GET.v') || $f3->exists('GET.verbose'), // -v OR --verbose
+];
+
+// syntax #2 (not validating data, long-form only)
+$opts=$_GET+[
+     'force'=>0, // --force
+     'limit'=>20, // --limit=N (default: 20)
+     'verbose'=>0, // --verbose
+];
+```
+
+### Defining routes
+
+CLI routes are defined in the same way as web routes, the only difference being that they can be restricted
+to CLI mode using the `[cli]` modifier. E.g:
+
+```ini
+[routes]
+GET /log/show       [cli] = CLI\Log->show
+GET /log/clear      [cli] = CLI\Log->clear
+GET /cache/clear    [cli] = CLI\Cache->clear
+GET /help           [cli] = CLI\Help->index
+GET /help/@command  [cli] = CLI\Help->@command
+```
+
+NB: the [CLI](quick-reference#CLI) variable tells if the request comes from the CLI or not.
+
+### Mocking
+
+CLI routes can be mocked just like web routes. Beware that the shell-syntax is not allowed here:
+
+```php
+$f3->mock('GET /log/show?limit=50 [cli]');
+```
 
 <nav>
   <ul class="pager">
