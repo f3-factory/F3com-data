@@ -97,7 +97,15 @@ Set `$lifetime` in seconds to only delete entries that are older than this time.
 
 You can also use `$f3->clear('CACHE')` as a shortcut to this.
 
-<div class="alert alert-warning"><strong>Notice:</strong> when using XCache, all entries are cleared, no matter the value of <code>$suffix</code>.</div>
+<div class="alert alert-warning"><strong>Limitations:</strong>
+    <ul>
+        <li>when using XCache, all entries are cleared, no matter the value of <code>$suffix</code>.</li>
+        <li>when using Memcached via the <a href="https://pecl.php.net/package/memcache">memcache</a> extension,
+            the <em>cachedump</em> stat should be enabled (no <code>-X</code> flag), otherwise the command won't work.
+            The <a href="https://pecl.php.net/package/memcached">memcached</a> extension
+            doesn't have this limitation.</li>
+    </ul>
+</div>
 
 ### load
 
