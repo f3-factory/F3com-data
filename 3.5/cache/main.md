@@ -97,6 +97,8 @@ Set `$lifetime` in seconds to only delete entries that are older than this time.
 
 You can also use `$f3->clear('CACHE')` as a shortcut to this.
 
+<div class="alert alert-warning"><strong>Notice:</strong> when using XCache, all entries are cleared, no matter the value of <code>$suffix</code>.</div>
+
 ### load
 
 **Load/auto-detect cache backend. Return the cache DSN**
