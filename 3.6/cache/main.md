@@ -118,9 +118,11 @@ string load( string|bool $dsn )
 Possible configurations for `$dsn` are:
 
 * `apc`
+* `apcu`
 * `wincache`
 * `xcache`
 * `memcache=localhost:11211`
+* `memcached=localhost:11211`
 * `redis=localhost`
 * `folder=tmp/cache/`
 
