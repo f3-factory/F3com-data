@@ -127,7 +127,9 @@ Possible configurations for `$dsn` are:
 * `folder=tmp/cache/`
 
 You can set `$dsn` to `TRUE` to trigger the auto-detection feature, using the filesystem as a fallback when no shared memory engine has been detected or is available.
+Setting `$dsn` to `FALSE` disables caching.
 
-You can set `$dsn` to `FALSE` to totally disable caching.
+The `memcache` and `memcached` backends support multiple servers.
+The servers have to be separated by `,`, `;` or `|`.
 
 Returns the cache DSN of the cache in use (specified or auto-detected).
