@@ -101,6 +101,19 @@ $f3->run();
 Prepend `base.php` on the first line with the appropriate path. Save the above code fragment as
 `index.php` in your Web root folder. We've written our first Web page.
 
+Using composer? Then just run `composer require bcosca/fatfree` and use the following:
+
+``` php
+require 'vendor/autoload.php';
+$f3 = \Base::instance();
+$f3->route('GET /',
+    function() {
+        echo 'Hello, world!';
+    }
+);
+$f3->run();
+```
+
 The first command tells the PHP interpreter that you want the framework's functions and features
 available to your application. The `$f3->route()` method informs Fat-Free that a Web page is
 available at the relative URL indicated by the slash (`/`). Anyone visiting your site located
