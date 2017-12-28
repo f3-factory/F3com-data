@@ -112,16 +112,18 @@ array(
 	'offset' => integer $offset
 	)
 ```
-
+When using the option clause something must be provided for the whereClause an empty string for nothing.
 i.e:
 
 ```php
+$mapper->load($whereClause,
 array(
 	'order' => 'score DESC, team_name ASC',
 	'group' => 'score, player',
 	'limit' => 20,
 	'offset' => 0
 	)
+     );
 ```
 
 ## Methods
