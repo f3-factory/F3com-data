@@ -6,7 +6,7 @@ There's no better time to start developing Web applications the easy way than ri
 	<i class="fa fa-download"></i> Download <span class="hidden-sm">the latest release</span>
 </a>
 
-You can also grab the [unit test package](https://github.com/bcosca/fatfree/archive/dev.zip "unit test package @ GitHub") or fetch the [nightly build](https://github.com/bcosca/fatfree-core "dev package @ GitHub") if you live in the fast lane. See the version [changelog](https://raw.githubusercontent.com/bcosca/fatfree/master/lib/CHANGELOG) and
+You can also grab the [unit test package](https://github.com/bcosca/fatfree/archive/dev.zip "unit test package @ GitHub") or fetch the [nightly build](https://github.com/bcosca/fatfree-core "dev package @ GitHub") if you live in the fast lane. See the version [changelog](https://github.com/bcosca/fatfree-core/blob/master/CHANGELOG.md) and
 [system requirements](system-requirements) for additional information. There is also [composer](https://packagist.org/packages/bcosca/fatfree) [support](https://packagist.org/packages/bcosca/fatfree-core).
 
 
