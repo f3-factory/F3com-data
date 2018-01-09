@@ -194,6 +194,14 @@ This will suppress the stack trace output in any system-generated HTML error pag
 
 <i class="icon-warning-sign"></i> **Don't forget!** Stack traces may contain paths, file names, database commands, user names and passwords. You might expose your Web site to unnecessary security risks if you fail to set the `DEBUG` global variable to `0` in a production environment.
 
+
+It is possible to customize the error description at the time you trigger the error, by passing the new description as a second argument, like such : 
+
+```php
+$f3->error(401, "The information necessary to grant access is missing from the request.");
+```
+
+
 ## Configuration Files
 
 If your application needs to be user-configurable, F3 provides a handy method for reading configuration files to set up your application. This way, you and your users can tweak the application without altering any PHP code.
