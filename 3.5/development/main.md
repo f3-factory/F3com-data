@@ -187,7 +187,7 @@ See what other users have made with F3:
             <td><a href="https://github.com/xfra35" target="_blank">Florent</a></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Pagination" target="_blank">Pagination</a></td>
+            <td><a href="https://github.com/ikkez/f3-pagination" target="_blank">Pagination</a></td>
             <td>Create quick and easy Pagination for your F3 application.</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
         </tr>
