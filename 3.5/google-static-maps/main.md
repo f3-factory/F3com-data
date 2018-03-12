@@ -214,4 +214,4 @@ or, much probably, as you would do in a template:
 
 <img src="http://s9.postimg.org/igsb67p8v/Pulau_Tomea_Indonesia.jpg" alt="Map of Pulau Tomea in Indonesia" title="Pulau Tomea in Lovely Indonesia" />
 
-You can do more with the Google Static Maps API, especially regarding [Markers](://developers.google.com/maps/documentation/staticmaps#Markers) and [Styled Maps](https://developers.google.com/maps/documentation/staticmaps#StyledMaps). Please refer to the official [Google Static Maps API V2 Developer Guide](https://developers.google.com/maps/documentation/staticmaps/ "Google Static Maps API V2 Developer Guide") for more details about advanced features.
+You can do more with the Google Static Maps API, especially regarding [Markers](https://developers.google.com/maps/documentation/staticmaps#Markers) and [Styled Maps](https://developers.google.com/maps/documentation/staticmaps#StyledMaps). Please refer to the official [Google Static Maps API V2 Developer Guide](https://developers.google.com/maps/documentation/staticmaps/ "Google Static Maps API V2 Developer Guide") for more details about advanced features.

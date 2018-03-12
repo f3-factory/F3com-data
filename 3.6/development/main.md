@@ -83,11 +83,6 @@ See what other users have made with F3:
             <td><a href="https://github.com/ikkez" target="_blank">ikkez</a></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/blo4r/fatfree-blog" target="_blank">fatfree-blog</a></td>
-            <td>A simple blog demo, build with fatfree framework version 3+</td>
-            <td><a href="https://github.com/blo4r" target="_blank">blo4r</a></td>
-        </tr>
-        <tr>
             <td><a href="http://www.phproject.org/" target="_blank">Phproject</a></td>
             <td>A lightweight project management system</td>
             <td><a href="https://github.com/Alanaktion" target="_blank">Alan Hardman </a></td>
@@ -131,11 +126,6 @@ See what other users have made with F3:
                 <td>F3 Ajax application with timers to monitor performance</td>
                 <td><a href="https://github.com/WilliamStam" target="_blank">William Stam</a></td>
             </tr>
-            <tr>
-                <td><a href="https://github.com/codevinsky/README" target="_blank">README</a></td>
-                <td>a blog platform for developers</td>
-                <td><a href="https://github.com/codevinsky" target="_blank">Jeremy Dowell</a></td>
-            </tr>
         </tbody>
     </table>
 </div>
@@ -172,12 +162,7 @@ See what other users have made with F3:
             <td><a href="https://github.com/xfra35" target="_blank">Florent</a></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/Currency" target="_blank">Currency</a></td>
-            <td>A currency rates converter, supports +90 currencies and Bitcoin</td>
-            <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
-        </tr>
-        <tr>
-            <td><a href="https://github.com/ikkez/F3-Sugar/tree/master-v3/FAL" target="_blank">FAL</a></td>
+            <td><a href="https://github.com/ikkez/f3-fal" target="_blank">FAL</a></td>
             <td>A File Abstraction Layer across multiple filesystem adapters, with meta data support and F3 Caching features.</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
         </tr>
