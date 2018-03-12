@@ -6,7 +6,7 @@ The Fat-Free Framework is an open source PHP framework, written by Bong Cosca fr
 The philosophy behind the framework and its approach to software architecture is towards minimalism in structural components, avoiding application complexity and striking a balance between code elegance, application performance and programmer productivity.
 The Fat-Free Framework is engineered specifically with usability and user experience as its primary design goals. Out comes a full-featured toolkit for web artisans, that will make your daily work a lot easier, no matter if you're a beginner or expert.
 
-**Now version 3.6 is here!** &nbsp; &nbsp; &nbsp; [CHANGELOG.txt](https://raw.githubusercontent.com/bcosca/fatfree/master/lib/CHANGELOG)
+**Now version 3.6 is here!** &nbsp; &nbsp; &nbsp; [CHANGELOG.txt](https://raw.githubusercontent.com/bcosca/fatfree/master/lib/CHANGELOG.md)
 
 The latest official release welcomes the summer with a bang and marks the final milestone in this version of the Fat-Free Framework. Packed with exciting new features and outstanding documentation that consumed significant time and effort to develop and refine, version 3.6 is finally [available for download](https://github.com/bcosca/fatfree/archive/master.zip "Download the latest release"). This edition is packed with a bunch of new usability and security features.
 
