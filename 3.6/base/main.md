@@ -1148,12 +1148,13 @@ You can combine multiple verbs, to use the same route handler for all of them. S
 
 ##### Tokens
 
-The request URI may contain one or more **token(s)**, that a meant for defining dynamic routes. Tokens are indicated by a `@` char prior their name. See this example:
+The request URI may contain one or more **token(s)**, that a meant for defining dynamic routes. Tokens are indicated by a `@` char prior their name and can optionally be wrapped by single curly brackets `{ }`. See this examples:
 
 ```php
 $f3->route('GET|HEAD /@page','PageController->display'); // ex: /about
 $f3->route('POST /@category/@thread','ForumThread->saveAnswer'); // /games/battlefield3
 $f3->route('GET /image/@width-@height/@file','ImageCompressor->render'); // /image/300-200/mario.jpg
+$f3->route('GET /image/{@width}x{@height}/@file','ImageCompressor->render'); // /image/300x200/mario.jpg
 ```
 
 After processing the incoming request URI (initiated by [run](base#run)), you'll find the value of each of those tokens in the `PARAMS` system variable as named key, like `$f3->get('PARAMS.file')`. // 'mario.jpg'
