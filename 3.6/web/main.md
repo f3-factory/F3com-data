@@ -270,11 +270,7 @@ NULL subst ( array &$old, string|array $new )
 array|false request ( string $url [, array $options = NULL ] )
 ```
 
-You can use [HTTP context options](http://www.php.net/manual/en/context.http.php) to configure the request for your needs.
-This way you can build request of every type, including the usage of cookies or auth mechanisms, proxy, user-agent, and so on.
-The requested page will be cached as instructed by the remote server.
-
-Returns an array containing the content and the header. For example, let us have a look at a simple GET request to download a remote file:
+Sends a HTTP request to a server and returns an array containing the content and the header. The requested page will be cached as instructed by the remote server. Here's an example of a simple GET request to download a remote file:
 
 ```php
 var_dump( \Web::instance()->request('http://www.golem.de/1303/98339-55766-i_rc.jpg' ));
@@ -305,10 +301,22 @@ array(4) {
 */
 ```
 
-It's easy as that!
+#### $options
 
-Let's move on to some more advanced examples.
+You can use [HTTP context options](http://www.php.net/manual/en/context.http.php) to configure the request for your needs.
+This way you can build request of every type, including the usage of cookies or auth mechanisms, proxy, user-agent, and so on.
+Here as some common samples:
 
+```php
+$options = array(
+	'timeout' => 6, // change request timeout
+	'header' => [
+		'Cookie: User=1;Foo='.rawurlencode('bar'), // add cookie
+		'Authorization: Basic '.base64_encode('user:password'), // auth header
+	],
+	'proxy'=> 'http://186.227.8.21:3128', // use proxy, protocols: http, https, socks4, socks4a, socks5, socks5h
+);
+```
 
 #### GET
 
@@ -348,7 +356,7 @@ $result = \Web::instance()->request($url, $options);
 
 Upload a file via PUT request.
 
-```php
+```php.
 $f3 = \Base::instance();
 $web = \Web::instance();
 
@@ -363,6 +371,7 @@ $options = array(
 
 $result = $web->request($url, $options);
 ```
+
 
 ### minify
 
@@ -384,7 +393,7 @@ If the files are not located within one of the [UI](quick-reference#ui) search p
 In particular, set `$path=''` if the provided file paths are absolute.
 
 To get maximum performance, you can [enable the F3 system caching](quick-reference#cache) and F3 will use it to save/retrieve file(s) to minify and to save the combined output as well. You can have a look at the [Cache Engine User Guide](optimization#cache-engine) for more details.
-
+.
 To see an example of how `minify` can be used in your templates, check the [Keeping Javascript and CSS on a Healthy Diet](optimization#keeping-javascript-and-css-on-a-healthy-diet) section of the User Guide.
 
 
@@ -425,7 +434,7 @@ Domain names in the .com and .net domains can now be registered
 with many different competing registrars. Go to http://www.internic.net
 for detailed information.
 
-   Domain Name: FATFREEFRAMEWORK.COM
+ .  Domain Name: FATFREEFRAMEWORK.COM
    Registrar: INTERNETWORX LTD. & CO. KG
    Whois Server: whois.domrobot.com
    Referral URL: http://www.domrobot.com
