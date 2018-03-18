@@ -305,7 +305,7 @@ array(4) {
 
 You can use [HTTP context options](http://www.php.net/manual/en/context.http.php) to configure the request for your needs.
 This way you can build request of every type, including the usage of cookies or auth mechanisms, proxy, user-agent, and so on.
-Here as some common samples:
+Here are some samples:
 
 ```php
 $options = array(
