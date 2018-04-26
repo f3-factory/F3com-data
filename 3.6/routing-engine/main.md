@@ -175,11 +175,22 @@ If you're using Apache, make sure you activate the URL rewriting module (mod_rew
 apache.conf (or httpd.conf) file. You should also create a .htaccess file containing the following:
 
 ``` apache
+# Enable rewrite engine and route requests to framework
 RewriteEngine On
+
+# Some servers require you to specify the `RewriteBase` directive
+# In such cases, it should be the path (relative to the document root)
+# containing this .htaccess file
+#
+# RewriteBase /
+
+RewriteRule ^(app|dict|ns|tmp)\/|\.ini$ - [R=404]
+
+RewriteCond %{REQUEST_FILENAME} !-l
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule .* index.php [L,QSA]
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
 ```
 
 The script tells Apache that whenever an HTTP request arrives and if no physical file (`!-f`) or
