@@ -1,4 +1,4 @@
-### Write Less code
+### Write Less Code
 
 <div class="teaserIcon fa fa-code"></div>
 
