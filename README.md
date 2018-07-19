@@ -1,5 +1,4 @@
-F3comdata
-=========
+# F3com-data
 
 Content for the F3 CMS on [fatfreeframework.com](http://fatfreeframework.com)
 
