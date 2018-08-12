@@ -93,6 +93,29 @@ Pattern matching of routes against incoming URIs is case-insensitive by default.
 
 See [CLI mode](routing-engine#RoutinginCLImode) for more details on how to handle CLI requests.
 
+### CONTAINER
+
+**Type:** `callable|Prefab|Psr\Container\ContainerInterface`
+
+Defines the optional dependency injection container used by [`Base->call()`](base#call)
+and the routing system.
+`CONTAINER` supports PSR-11 containers,
+[callables](base#call)
+and classes extending `Prefab`.
+`Prefab`-based classes have to implement the `get(string $id)` method.
+Callables receive the requested `$id` (e.g. class name) as first argument.
+
+API-incompatible third party containers can be made compatible with a tiny adapter.
+
+```php
+$dice = … // Configure the API-incompatible Level-2/Dice container.
+
+$f3->set('CONTAINER', function ($class) use ($dice) {
+    return $dice->create($class);
+});
+```
+
+**NB:** `CONTAINER` requires at least Fat-Free Framework `3.6.4`.
 
 ### COOKIE, GET, POST, REQUEST, SESSION, FILES, SERVER, ENV
 **Type:** `array`
