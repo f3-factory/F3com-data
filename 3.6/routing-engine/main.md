@@ -31,7 +31,6 @@ HTTP requests can also be routed to static class methods:
 ```php
 $f3->route('GET /login','Controller\Auth::login');
 ```
-
 <div class="alert alert-info">Stuck with a <strong>404 Not Found</strong> error? Check your <a href="routing-engine#sample-apache-configuration">server configuration</a>.</div>
 
 ## Routes and Tokens
