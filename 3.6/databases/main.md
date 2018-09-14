@@ -482,7 +482,7 @@ There's also a `select()` method that's similar to `find()` but provides more fi
 
 ```php
 select(
-    'foo, bar, MIN(baz) AS lowest',
+    'foo, bar, baz',
     'foo > ?',
     array(
         'group'=>'foo, bar',
