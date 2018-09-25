@@ -566,7 +566,7 @@ Array
 **Merge array with hive array variable**
 
 ```php
-array merge ( string $key, array $src )
+array merge ( string $key, array $src [, bool $keep = FALSE])
 ```
 
 Return the resulting array of the merge. (Does not touch the value of the hive key)
@@ -585,6 +585,56 @@ array (size=4)
   [3] => string 'yellow' (length=6)
 */
 ```
+
+When the parameter `$keep` is *TRUE*, the origin `$key` in the HIVE is also updated.
+
+
+### extend
+
+**Extend hive array variable with default values from $src**
+
+```php
+array extend ( string $key, array $src [, bool $keep = FALSE])
+```
+
+This method provides a simple way to add some default values to an array:
+
+``` php
+$f3->set('settings',[
+	'foo'=> 1,
+	'bar'=> 'baz',
+	'colors'=>[
+		'blue'=>1,
+		'green'=>2
+	]
+]);
+$f3->set('defaults',[
+	'foo'=>0,
+	'zzz'=>2,
+	'colors'=>[
+		'red'=>3,
+		'blue'=>4
+	],
+]);
+$settings = $f3->extend('settings','defaults');
+print_r($settings);
+
+/*
+Array (
+    [foo] => 1
+    [zzz] => 2
+    [colors] => Array (
+            [red] => 3
+            [blue] => 1
+            [green] => 2
+        )
+    [bar] => baz
+)
+*/
+```
+
+When the parameter `$keep` is *TRUE*, the origin `$key` in the HIVE is also updated.
+
 
 ---
 
