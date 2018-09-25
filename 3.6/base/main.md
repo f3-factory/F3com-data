@@ -1266,7 +1266,7 @@ Set the 4th argument `$kbps` to your desired speed limit, to enable throttling. 
 **Reroute to specified URI**
 
 ```php
-null reroute ( [ string $url = NULL [, bool $permanent = FALSE ]] )
+null reroute ( [ string|array $url = NULL [, bool $permanent = FALSE [, bool $die = TRUE ]]] )
 ```
 
 Examples of usage:
@@ -1312,6 +1312,19 @@ $f3->route('GET /old-beer-page', function($f3) {
 // but it'll also work with any unnamed tokenized URL
 $f3->reroute('/beer/@country/@village',TRUE)
 ```
+
+When `$url` is an array, it's uses for alias rerouting. You can specify the alias name in the 1st array element, its parameters in the 2nd and additional query elements as 3rd array element:
+
+```php
+$f3->reroute(['filter','a=foo,b=bar','time=3']);
+// or
+$f3->reroute(['filter',['a'=>'foo','b'=>'bar'],['time'=>3]]);
+
+// equivalent to:
+$f3->reroute('@filter(a=foo,b=bar)?time=3');
+```
+
+The `$die` parameter can be used to disable immediate redirecting, instead the script continues after the appropriate headers were set. This can be useful for unit testing.
 
 ### redirect
 
