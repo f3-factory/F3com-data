@@ -179,7 +179,9 @@ $f3->copy('CSRF','SESSION.csrf');// the variable name is up to you
 4) On form submission, compare the received token with the value stored in session:
 
 ```php
-if ($f3->get('POST.token')!=$f3->get('SESSION.csrf')) {
+$token = $f3->get('POST.token');
+$csrf = $f3->get('SESSION.csrf');
+if (empty($token) || empty($csrf) || $token!==$csrf) {
   // CSRF attack detected
 }
 ```
@@ -197,7 +199,9 @@ $f3->route('GET|POST /test-csrf',function($f3,$params){
     // $f3->CSRF=$sess->csrf();
 
     if ($f3->VERB=='POST') {
-        if ($f3->get('POST.token')!=$f3->get('SESSION.csrf'))
+        $token = $f3->get('POST.token');
+        $csrf = $f3->get('SESSION.csrf');
+        if (empty($token) || empty($csrf) || $token!==$csrf) {
             echo 'CSRF attack!';
         else
             echo 'Your name is '.$f3->get('POST.name');
