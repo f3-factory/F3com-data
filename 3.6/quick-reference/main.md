@@ -427,6 +427,19 @@ Contains the defined application routes.
 Server protocol. Default: `'http'` or `'https'`
 
 
+### SEED
+**Type:** `string`
+
+The SEED string is used as prefix name for cache entries and temp filenames to avoid cache key collisions. In case you use multiple domains with your application, the auto-generated SEED value would be different by default. If you want to share a common cache and temp file storage across both domains, set a custom SEED before initializing the CACHE:
+
+```php
+$f3->set('SEED', $f3->hash('myDomainSEED'));
+$f3->set('CACHE', TRUE);
+```
+
+**NB:** The SEED key is also used for CSRF token generation within the Session handlers.
+
+
 ### SERIALIZER
 **Type:** `string` &nbsp; &nbsp; **Default:** auto-detected
 
