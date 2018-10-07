@@ -207,6 +207,16 @@ Contains the exception object when unhandled exceptions occur.
 Language (and dictionary) to use if no translation is available.
 
 
+### FORMATS
+**Type:** `array` 
+
+Storage for custom format rules to add support for multiple localization formats or other cases. See [code samples](https://github.com/F3Community/snippets/tree/master/formats).
+
+```php
+$f3->set('FORMATS.polish','FormatHelper->polish');
+```
+
+
 ### FRAGMENT
 **Type:** `string` &nbsp; &nbsp; **Default:** `NULL`
 
