@@ -57,8 +57,6 @@ class ImageViewHelper {
 		// retrieve the attributes of the template tag, as found in the template
 		// in our case, we expect 'src', 'width' and 'height', and optionally 'crop'
 		$attr = $args['@attrib']; // provided by the F3 template engine
-		// retrieve the inner html, as found in the template
-		$html = (isset($args[0])) ? $args[0] : '';
 
 		$imagepath = $attr['src'];
 		$imgObj = new \Image($imagepath);
