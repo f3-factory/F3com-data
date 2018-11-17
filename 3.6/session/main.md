@@ -158,10 +158,10 @@ $sess=new DB\SQL\Session($db);
 $f3->CSRF=$sess->csrf();
 ```
 
-NB: as an alternative, you can instantiate the Session class with the 4th parameter set to a hive key name, which will hold the CSRF token. E.g:
+NB: as an alternative, you can instantiate the Session class with the 5th parameter set to a hive key name, which will hold the CSRF token. E.g:
 
 ```php
-new DB\SQL\Session($db,'sessions',NULL,'CSRF');// now $f3->CSRF holds the token
+new DB\SQL\Session($db,'sessions',TRUE,NULL,'CSRF');// now $f3->CSRF holds the token
 ```
 
 2) Save that token to session:
@@ -193,7 +193,7 @@ $f3->DB=new DB\SQL('mysql:host=127.0.0.1;port=3306;dbname=test;','user','p4ssw0r
 
 $f3->route('GET|POST /test-csrf',function($f3,$params){
 
-    new DB\SQL\Session($f3->DB,'sessions',NULL,'CSRF');
+    new DB\SQL\Session($f3->DB,'sessions',TRUE,NULL,'CSRF');
     // or:
     // $sess=new DB\SQL\Session($f3->DB);
     // $f3->CSRF=$sess->csrf();
