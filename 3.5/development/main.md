@@ -30,7 +30,7 @@ If you feel that this software is one great weapon to have in your programming a
 
 Technical support is available at the official discussion forum: [https://groups.google.com/forum/#!forum/f3-framework](https://groups.google.com/forum/#!forum/f3-framework).
 
-If you need live support, you can talk to the development team and other members of the F3 community via IRC. We're on the FreeNode `#fatfree` channel (`chat.freenode.net`). Visit [http://webchat.freenode.net/](http://webchat.freenode.net/?channels=fatfree) to join the conversation. You can also download the [Firefox Chatzilla](https://addons.mozilla.org/en-US/firefox/addon/chatzilla/) add-on or [Pidgin](http://www.pidgin.im/) if you don't have an IRC client so you can participate in the live chat.
+If you need live support, you can talk to the development team and other members of the F3 community via [Slack](https://fatfreeframework-slack.herokuapp.com) and IRC. We're on FreeNode's `#fatfree` channel (`chat.freenode.net`). Visit [http://webchat.freenode.net](http://webchat.freenode.net/?channels=fatfree) to join the conversation.
 
 
 
