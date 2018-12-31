@@ -1073,7 +1073,7 @@ A dictionary file can be a php file returning a key-value paired associative arr
 **Assemble url from alias name**
 
 ``` php
-string alias ( string $name [, array|string $params = array() ] )
+string alias ( string $name [, array|string $params = array() [, array|string $query = array() ]] )
 ```
 
 Example:
