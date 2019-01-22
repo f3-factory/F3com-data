@@ -76,12 +76,6 @@ Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
 ```
 
 Upgrade if necessary, [check additional system requirements](system-requirements) and come back here if you've made the jump to PHP 5.4 or a later release.
-If you need a PHP 5.4+ hosting service provider, try one of these services:
-
-* [A2 Hosting](http://www.a2hosting.com/2461-15-1-72.html)
-* [DreamHost](http://www.dreamhost.com/r.cgi?665472)
-* [Hostek](http://hostek.com/aff.php?aff=364&plat=L)
-* [SiteGround](http://www.siteground.com/index.htm?referrerid=155694)
 
 ## Hello, World: The Less-Than-A-Minute Fat-Free Recipe
 
