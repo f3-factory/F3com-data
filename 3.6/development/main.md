@@ -167,6 +167,11 @@ See what other users have made with F3:
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
         </tr>
         <tr>
+            <td><a href="https://github.com/chez14/f3-ilgar" target="_blank">Ilgar</a></td>
+            <td>A simple migration tool for Fat-Free Framework</td>
+            <td><a href="https://github.com/chez14" target="_blank">Chez14</a></td>
+        </tr>
+        <tr>
             <td><a href="https://github.com/xfra35/f3-multilang" target="_blank">Multilang</a></td>
             <td>Create multilingual apps with this localization plugin</td>
             <td><a href="https://github.com/xfra35" target="_blank">Florent</a></td>
