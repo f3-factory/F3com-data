@@ -37,6 +37,9 @@ mixed|FALSE set( string $key, mixed $val [, int $ttl = 0 ] )
 
 If `$ttl` is 0 then the entry is saved for an infinite time. Otherwise, the specified time, in seconds, is used as TTL.
 
+**NB**: Already cached keys will be updated by reusing the old expiration time!
+See [issue #237](https://github.com/bcosca/fatfree-core/issues/237) for details.
+
 ### exists
 
 **Check if a cache entry exists: Return timestamp and TTL of cache entry or FALSE if not found**
