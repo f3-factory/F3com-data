@@ -13,7 +13,7 @@ F3 needs at least the following server configuration:
 Nginx and Lighttpd configurations are also possible.
 
 
-** PHP Modules**
+**PHP Modules**
 
 If you have a custom server and want to have installed everything you could probably need, here is a debian 1-liner for you (cache module not included):
 
