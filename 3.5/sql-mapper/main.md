@@ -89,7 +89,7 @@ Usually the data type is auto-detected, but to force a bind value to be a specif
 array(
 	'prize > :prize and active = 1',
 	':prize' => array(123, \PDO::PARAM_INT)
-	)
+)
 ```
 
 #### Search
@@ -110,7 +110,7 @@ array(
 	'group' => string $groupClause,
 	'limit' => integer $limit,
 	'offset' => integer $offset
-	)
+)
 ```
 
 i.e:
@@ -121,7 +121,7 @@ array(
 	'group' => 'score, player',
 	'limit' => 20,
 	'offset' => 0
-	)
+)
 ```
 
 ## Methods
