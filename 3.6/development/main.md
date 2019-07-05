@@ -20,8 +20,6 @@ It is highly recommended that experienced users develop new applications with th
 
 If you feel that this software is one great weapon to have in your programming arsenal, it saves you a lot of time and money, use it for commercial gain or in your business organization, please consider making a donation to the project. A significant amount of time, effort, and money has been spent on this project. Your donations help keep this project alive and the development team motivated. Donors and sponsors get priority support (24-hour response time on business days).
 
-<a href="https://coinbase.com/checkouts/7986a0da214006256d470f2f8e1a15cf"><img style="max-width:100%;" alt="Bitcoin" src="http://github.com/bcosca/fatfree/raw/master/ui/images/bitcoin.png"></a>
-
 <a class="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MJSQL8N5LPDAY" title="donate with PayPal"></a>
 
 
@@ -30,7 +28,7 @@ If you feel that this software is one great weapon to have in your programming a
 
 Technical support is available at the official discussion forum: [https://groups.google.com/forum/#!forum/f3-framework](https://groups.google.com/forum/#!forum/f3-framework).
 
-If you need live support, you can talk to the development team and other members of the F3 community via [Slack](https://fatfreeframework-slack.herokuapp.com) and IRC. We're on FreeNode's `#fatfree` channel (`chat.freenode.net`). Visit [http://webchat.freenode.net](http://webchat.freenode.net/?channels=fatfree) to join the conversation.
+If you need live support, you can talk to the development team and other members of the F3 community via [Slack](https://fatfreeframework-slack.herokuapp.com).
 
 
 
