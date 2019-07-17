@@ -14,7 +14,7 @@ F3 supports PHP as a template engine. Take a look at this HTML fragment saved as
 <p>Hello, <?php echo $name; ?>!</p>
 ```
 
-If short tags are enabled on your server, this should work too:
+Regardless, if short tags are enabled on your server or not, this should work too:
 
 ``` html
 <p>Hello, <?= $name ?></p>
