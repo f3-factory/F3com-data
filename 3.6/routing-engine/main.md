@@ -370,7 +370,7 @@ can direct the flow of your application by invoking the function or method that 
 target route. However, this approach will not change the URL on the address bar of the user's
 Web browser. If this is not the behavior you want and you really need to send a user to another
 page, in instances like successful submission of a form or after a user has been authenticated,
-Fat-Free sends an `HTTP 303 See Other` header. For all other attempts to reroute to another
+Fat-Free sends an `HTTP 302 Found` header. For all other attempts to reroute to another
 page or site, the framework sends an `HTTP 301 Moved Permanently` header.
 
 ## Triggering a 404
