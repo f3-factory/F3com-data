@@ -363,7 +363,7 @@ Prefix to use with LANGUAGE and LOCALES.
 For example, if your dictionary file contains `hello = Hello World`, the term will be accessible via:
 
 * `$f3->get('hello')` without prefix
-* `$f3->get('DICT.hello')` if `PREFIX=DICT.`
+* `$f3->get('DICT.hello')` if `PREFIX=DICT.` (Notice the `.`, it's intentional)
 
 <div class="alert alert-info">
 <strong>IMPORTANT:</strong> this variable should be set <em>before</em> <code>LANGUAGE</code> and <code>LOCALES</code>.
