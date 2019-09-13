@@ -100,6 +100,35 @@ When you use a `LIKE` operator in your `where` condition, notice that the `%` wi
 $user->find(array('email LIKE ?','%gmail%')); // returns all users with an email address at GMAIL
 ```
 
+### Full-text search with MATCH
+
+If you'd like to do a full-text search for a keywords against one or multiple fields in MySQL, you can use the `MATCH AGAINST` feature, which looks like this:
+
+```php
+$text = 'some text';
+$mapper->find(["MATCH (name,code) AGAINST (:search IN BOOLEAN MODE)", ':search' => $text ]);
+```
+
+If you also want to sort the results by relevance, you need to add this match expression as adhoc field like this:
+
+```php
+$mapper->relevance = "MATCH (name,code) AGAINST (:search1 IN BOOLEAN MODE)";
+$mapper->find(["MATCH (name,code) AGAINST (:search2 IN BOOLEAN MODE)", ':search1' => $text, ':search2' => $text ], ['order'=>'relevance desc']);
+```
+
+And in case you want to match against multiple keywords at once, you need to wrap and **escape** the keywords
+
+```php
+$mapper->find(["(MATCH(fieldA,fieldB) AGAINST('(".implode('") ("',$keywords).")' IN BOOLEAN MODE )"]);
+```
+
+or insert multiple placeholders:
+
+```php
+$mapper->find(["(MATCH(fieldA,fieldB) AGAINST('(?) (?) (?)' IN BOOLEAN MODE )", $a, $b, $c]);
+```
+
+
 ### $option
 
 The `$option` argument for SQL accepts the following structure:
