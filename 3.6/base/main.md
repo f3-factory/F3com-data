@@ -772,12 +772,12 @@ int sign ( mixed $num )
 string hash ( string $str )
 ```
 
-Generates a 11-characters length hash for a given string
+Generates a hash for a given string (length between 11 and 13)
 
 Example:
 
 ```php
-$f3->hash('foobar'); // returns '0i43fmgps1r' (length=11)
+$f3->hash('foobar'); // returns '3vrllw03cko4s' (length=13)
 ```
 
 ### base64
