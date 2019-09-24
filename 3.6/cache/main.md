@@ -37,8 +37,11 @@ mixed|FALSE set( string $key, mixed $val [, int $ttl = 0 ] )
 
 If `$ttl` is 0 then the entry is saved for an infinite time. Otherwise, the specified time, in seconds, is used as TTL.
 
-**NB**: F3 versions older than 3.6.5 are reusing old expiration times!
+<div class="alert alert-warning"><strong>NB:</strong>
+F3 versions older than 3.6.5 are reusing old expiration times.
+Since 3.6.5 only old TTL values are reused.
 See [issue #237](https://github.com/bcosca/fatfree-core/issues/237) for details.
+</div>
 
 ### exists
 
