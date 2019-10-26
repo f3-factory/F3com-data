@@ -82,6 +82,19 @@ echo $f3->get('SESSION.test');
 It will automatically create the required table, if the `session` table does not exist. The table name can be controlled by the 2nd `$table` parameter of the constructor. A 3rd parameter is used to `$force` the table creation, if it's not existing.
 
 
+The `$onsuspect` argument is there to override the default handling of suspicious sessions:
+when an IP or agent change is detected during the session, the session is destroyed and a 403 error is thrown.
+
+To override this behaviour, you can pass your own suspect session handler to the constructor:
+
+```php
+new \DB\SQL\Session($db,"sessions",TRUE,function(\DB\SQL\Session $session,$id){
+ // Session $id is suspect, do something
+  // you can read $session->agent(), $session->ip(), $session->csrf() and $session->stamp()
+  // and/or return FALSE to trigger the default 403 error
+});
+```
+
 ### Mongo
 
 This class provides a Mongo-based session handler.
