@@ -39,7 +39,7 @@ If we expect the result of this database query to always be `Small`, `Medium`, a
 The SQL data mapper also uses the cache engine to optimize synchronization of table structures with the objects that represent them. The default is `60` seconds. If you make any changes to a table's structure in your database engine, you'll have to wait for the cache timer to expire before seeing the effect in your application. You can change this behavior by specifying a third argument to the data mapper constructor. Set it to a high value if you don't expect to make any further changes to your table structure.
 
 ```php
-$user=new DB\SQL\Mapper($db,'users',86400);
+$user=new DB\SQL\Mapper($db,'users',NULL,86400);
 ```
 
 By default, Fat-Free's cache engine is disabled. You can enable it and allow it to auto-detect APC, WinCache or XCache. If it cannot find an appropriate backend, F3 will use the filesystem, i.e. the `tmp/cache/` folder:
