@@ -94,12 +94,10 @@ bool clear( string $key )
 **Clear contents of the cache backend**
 
 ```php
-bool reset( [ string $suffix = NULL [, int $lifetime = 0 ] )
+bool reset( [ string $suffix = NULL ] )
 ```
 
 You can use `$suffix` to only clear cache entries with a suffix that matches this string.
-
-Set `$lifetime` in seconds to only delete entries that are older than this time.
 
 You can also use `$f3->clear('CACHE')` as a shortcut to this.
 
