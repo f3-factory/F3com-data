@@ -58,7 +58,7 @@ $userList = $user->find(array('email'=> new \MongoRegex('/gmail/')));
 Or just load a single user by its ID:
 
 ```php
-$user->load(array('_id'=> new \MongoId('507c35dd8fada716c89d0013')));
+$user->load(array('_id'=> new \MongoDB\BSON\ObjectID('507c35dd8fada716c89d0013')));
 ```
 
 ### $option
