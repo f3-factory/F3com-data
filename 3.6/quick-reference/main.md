@@ -295,6 +295,12 @@ See the [Localisation section](base#language) in `Base` for more details and an 
 
 Location of the language(s) dictionaries.
 
+To enable caching for dictionaries from a config file, you need to write it this way:
+
+```ini
+LOCALES=/path/to/lexicons | 3600
+```
+
 
 ### LOGS
 **Type:** `string` &nbsp; &nbsp; **Default:** `'./'`
