@@ -93,6 +93,10 @@ Pattern matching of routes against incoming URIs is case-insensitive by default.
 Framework equivalents of PHP globals. For your convenience, F3 automatically synchronizes these variables with the underlying PHP globals.
 These variables may be used throughout an application. However, direct use in templates is not advised due to security risks.
 
+It could be possible that the PHP configuration is not populating all globals.
+If for instance the environment variables are missing,
+then you have to add `E` to the PHP configuration directive [`variables_order`](https://www.php.net/manual/en/ini.core.php#ini.variables-order).
+
 ### CORS
 **Type:** `array`
 
