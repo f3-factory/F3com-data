@@ -157,7 +157,8 @@ This is an example page where you can see how the messages are sent and received
 	</head>
 	<body>
 		<h2>WebSocket Test</h2>
-
+		<input type="text" id="message" placeholder="Type message">
+		<input type="button" id="send">
 		<div id="output"></div>
 		<script language="javascript" type="text/javascript">
 
@@ -217,6 +218,11 @@ This is an example page where you can see how the messages are sent and received
 			}
 
 			window.addEventListener("load", init, false);
+
+			document.getElementById("send").addEventListener("click", function() {
+				doSend(document.getElementById("message"));
+				document.getElementById("message").value = "";
+			});
 
 		</script>
 	</body>
