@@ -49,6 +49,7 @@ Quick references are available for <a href="quick-reference#SystemVariables">Sys
             <li><a class="label" href="pingback" title="Pingback 1.0 protocol (client and server) implementation">PingBack</a></li>
             <li><a class="label" href="smtp" title="The SMTP class is a SMTP plug-in">SMTP</a></li>
             <li><a class="label" href="google-static-maps" title="Google Static Maps API v2 plug-in">Google Static Maps</a></li>
+			<li><a class="label" href="websocket" title="RFC6455 Compatible Websocket Server">Websocket</a></li>
         </ul>
         <h3>Misc</h3>
         <ul class="reference">
