@@ -184,18 +184,25 @@ $db->exec('INSERT INTO mytable VALUES(:id,:name)',array(':id'=>5,':name'=>'Jim')
 Here's the equivalent syntax with unnamed placeholders:
 
 ```php
-$db->exec('INSERT INTO mytable VALUES(?,?)',array(1=>5,2=>'Jim'))
+$db->exec('INSERT INTO mytable VALUES(?,?)',array(5,'Jim'))
 ```
 
-<div class="alert alert-info">
-<strong>Notice:</strong><br>
-The SQL class is a simple PDO proxy, hence it requires you to provide the parameters in a 1-based array for unnamed placeholders, otherwise you will get a <code>Invalid parameter number</code> error.
-</div>
-
-and here's the short syntax for a single placeholder:
+The short syntax for single placeholders looks like the following:
 
 ```php
 $db->exec('INSERT INTO mytable(name) VALUES(?)','Jim');
+```
+
+<div class="alert alert-info">
+    <strong>Notice:</strong><br>
+    Prior to Fat-Free Framework 3.5.1, parameters had to be provided as 1-based arrays for unnamed placeholders.
+    Otherwise, an <code>Invalid parameter number</code> error was returned.
+    See <a href="https://github.com/bcosca/fatfree/issues/853">fatfree#853</a> for more details.
+    The parameters can be provided as 0-based or 1-based arrays.
+</div>
+
+```php
+$db->exec('INSERT INTO mytable VALUES(?,?)',array(1=>5,2=>'Jim'))
 ```
 
 #### Query caching
