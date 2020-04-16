@@ -247,7 +247,7 @@ array (
 ```
 
 ### HIGHLIGHT
-**Type:** `bool` &nbsp; &nbsp; **Default:** `TRUE`
+**Type:** `bool` &nbsp; &nbsp; **Default:** `FALSE`
 
 Enable/disable syntax highlighting of stack traces and [Markdown](markdown) code blocks. When enabled, requires `code.css` stylesheet.
 
