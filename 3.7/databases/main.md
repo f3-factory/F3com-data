@@ -431,7 +431,7 @@ $frequentUsers=$user->find(array('@visits>?',3),array('order'=>'userID'));
 The equivalent code using the MongoDB mapper:
 
 ```php
-$frequentUsers=$user->find(array('visits'=>array('$gt'=>3)),array('userID'=>1));
+$frequentUsers=$user->find(array('visits'=>array('$gt'=>3)), array('order'=>array('userID'=>1)));
 ```
 
 The `find()` method searches the `users` table for records that match the criteria, sorts the result by `userID` and returns the result as an array of mapper objects. `find('visits>3')` is different from `load('visits>3')`. The latter refers to the current `$user` object. `find()` does not have any effect on `skip()`.
