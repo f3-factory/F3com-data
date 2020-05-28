@@ -2,6 +2,11 @@
 
 There's no better time to start developing Web applications the easy way than right now!
 
+##### Composer
+```
+composer require bcosca/fatfree
+```
+##### Direct Download
 <a class="btn btn-success" href="https://github.com/bcosca/fatfree/archive/master.zip">
 	<i class="fa fa-download"></i> Download <span class="hidden-sm">the latest release</span>
 </a>
