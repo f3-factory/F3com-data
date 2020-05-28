@@ -2,6 +2,9 @@
 
 Content for the F3 CMS on [fatfreeframework.com](http://fatfreeframework.com)
 
+## Local Installation
+* To get a local instance up and running that includes this documentation repo, please visit [https://github.com/F3Community/F3com](https://github.com/F3Community/F3com) for instructions. 
+
 ## Participate
 
 * Fork the repository
