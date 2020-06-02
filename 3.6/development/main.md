@@ -59,9 +59,9 @@ See what other users have made with F3:
 <table class="table col-sm-12">
     <thead>
         <tr>
-            <th class="col-sm-2">Plugin Name</th>
-            <th class="col-sm-8">Description</th>
-            <th class="col-sm-2">Author</th>
+            <th width="150">Plugin Name</th>
+            <th>Description</th>
+            <th width="150">Author</th>
         <tr>
     </thead>
     <tbody>
@@ -108,9 +108,9 @@ See what other users have made with F3:
     <table class="table">
         <thead>
             <tr>
-                <th class="col-sm-2">Plugin Name</th>
-                <th class="col-sm-8">Description</th>
-                <th class="col-sm-2">Author</th>
+                <th width="150">Plugin Name</th>
+                <th>Description</th>
+                <th width="150">Author</th>
             <tr>
         </thead>
         <tbody>
@@ -133,9 +133,9 @@ See what other users have made with F3:
 <table class="table">
     <thead>
         <tr>
-            <th class="col-sm-2">Plugin Name</th>
-            <th class="col-sm-8">Description</th>
-            <th class="col-sm-2">Author</th>
+            <th width="150">Plugin Name</th>
+            <th>Description</th>
+            <th width="150">Author</th>
         <tr>
     </thead>
     <tbody>
@@ -197,9 +197,9 @@ See what other users have made with F3:
     <table class="table">
         <thead>
             <tr>
-                <th class="col-sm-2">Plugin Name</th>
-                <th class="col-sm-8">Description</th>
-                <th class="col-sm-2">Author</th>
+                <th width="150">Plugin Name</th>
+                <th>Description</th>
+                <th width="150">Author</th>
             <tr>
         </thead>
         <tbody>
@@ -232,7 +232,7 @@ See what other users have made with F3:
 <table class="table">
 	<colgroup>
 		<col class="col-sm-10">
-		<col class="col-sm-2">
+		<col width="150">
 	</colgroup>
     <thead>
         <tr>
