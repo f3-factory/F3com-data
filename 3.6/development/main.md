@@ -72,7 +72,7 @@ See what other users have made with F3:
         </tr>
         <tr>
             <td><a href="https://github.com/vijinho/f3-boilerplate" target="_blank">F3 Boilerplate</a></td>
-            <td>A F3 boilerplate MVC website skeleton using [HTML5 Boilerplate](http://html5boilerplate.com/ "HTML5 Boilerplate :: The web's most popular front-end template").<br>It's basically a skeleton web application you can use to learn the Fat-Free Framework and use as a base for your future projects.</td>
+            <td>A F3 boilerplate MVC website skeleton using <a href="http://html5boilerplate.com/" title="HTML5 Boilerplate :: The web's most popular front-end template">HTML5 Boilerplate</a>.<br>It's basically a skeleton web application you can use to learn the Fat-Free Framework and use as a base for your future projects.</td>
             <td><a href="https://github.com/vijinho" target="_blank">Vijay Mahrra</a></td>
         </tr>
         <tr>
