@@ -150,6 +150,11 @@ See what other users have made with F3:
             <td><a href="https://github.com/hanspolo" target="_blank">Philipp Hirsch</a></td>
         </tr>
         <tr>
+            <td><a href="https://github.com/myaghobi/f3-captcha" target="_blank">Captcha</a></td>
+            <td>A better captcha for Fat-Free Framework</td>
+            <td><a href="https://github.com/myaghobi" target="_blank">Mohammad Yaghobi</a></td>
+        </tr>
+        <tr>
             <td><a href="https://github.com/ikkez/f3-cortex" target="_blank">Cortex</a></td>
             <td>A general purpose ORM with support for relations and more</td>
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
