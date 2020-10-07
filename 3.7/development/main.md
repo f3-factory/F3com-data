@@ -145,12 +145,17 @@ See what other users have made with F3:
             <td><a href="https://github.com/xfra35" target="_blank">Florent</a></td>
         </tr>
         <tr>
+            <td><a href="https://github.com/myaghobi/F3-Benchmark" target="_blank">Benchmark</a></td>
+            <td>A benchmark helper plugin for Fat-Free framework.</td>
+            <td><a href="https://github.com/myaghobi" target="_blank">Mohammad Yaghobi</a></td>
+        </tr>
+        <tr>
             <td><a href="https://github.com/hanspolo/burgers" target="_blank">Burgers</a></td>
             <td>Burgers make the Fat-Free Framework fat. Includes ORM/Validation, User/Groups/ACL, Forms</td>
             <td><a href="https://github.com/hanspolo" target="_blank">Philipp Hirsch</a></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/myaghobi/f3-captcha" target="_blank">Captcha</a></td>
+            <td><a href="https://github.com/myaghobi/F3-Captcha" target="_blank">Captcha</a></td>
             <td>A better captcha for Fat-Free Framework</td>
             <td><a href="https://github.com/myaghobi" target="_blank">Mohammad Yaghobi</a></td>
         </tr>
