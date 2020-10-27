@@ -1,4 +1,4 @@
-#### Too much at all?
+#### Too much at once?
 Then just have a look at the<br> [**Quick Reference**](quick-reference).
 
 #### New to F3?
