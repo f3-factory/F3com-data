@@ -145,9 +145,19 @@ See what other users have made with F3:
             <td><a href="https://github.com/xfra35" target="_blank">Florent</a></td>
         </tr>
         <tr>
+            <td><a href="https://github.com/myaghobi/F3-Benchmark" target="_blank">Benchmark</a></td>
+            <td>A benchmark helper plugin for Fat-Free framework.</td>
+            <td><a href="https://github.com/myaghobi" target="_blank">Mohammad Yaghobi</a></td>
+        </tr>
+        <tr>
             <td><a href="https://github.com/hanspolo/burgers" target="_blank">Burgers</a></td>
             <td>Burgers make the Fat-Free Framework fat. Includes ORM/Validation, User/Groups/ACL, Forms</td>
             <td><a href="https://github.com/hanspolo" target="_blank">Philipp Hirsch</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://github.com/myaghobi/F3-Captcha" target="_blank">Captcha</a></td>
+            <td>A better captcha for Fat-Free Framework</td>
+            <td><a href="https://github.com/myaghobi" target="_blank">Mohammad Yaghobi</a></td>
         </tr>
         <tr>
             <td><a href="https://github.com/ikkez/f3-cortex" target="_blank">Cortex</a></td>
@@ -168,6 +178,11 @@ See what other users have made with F3:
             <td><a href="https://github.com/chez14/f3-ilgar" target="_blank">Ilgar</a></td>
             <td>A simple migration tool for Fat-Free Framework</td>
             <td><a href="https://github.com/chez14" target="_blank">Chez14</a></td>
+        </tr> 
+        <tr>
+            <td><a href="https://github.com/myaghobi/f3-migrations" target="_blank">Migrations</a></td>
+            <td>Migrations is a database helper plugin for the Fat-Free framework.</td>
+            <td><a href="https://github.com/myaghobi" target="_blank">Mohammad Yaghobi</a></td>
         </tr>
         <tr>
             <td><a href="https://github.com/xfra35/f3-multilang" target="_blank">Multilang</a></td>

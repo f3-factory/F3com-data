@@ -301,6 +301,15 @@ To enable caching for dictionaries from a config file, you need to write it this
 LOCALES=/path/to/lexicons | 3600
 ```
 
+### LOGGABLE
+**Type:** `string|array` &nbsp; &nbsp; **Default:** `'*'`
+
+You can supply this with either an array or a comma/semi-colon separated list of HTTP status codes to allow to be passed into the `error_log()` function when an error occurs. This is particularly useful when you are building a CLI app with FatFree routes and need to intercept a 404 not found error and display a custom message or action.
+
+```ini
+LOGGABLE='403;500;'
+```
+
 
 ### LOGS
 **Type:** `string` &nbsp; &nbsp; **Default:** `'./'`
