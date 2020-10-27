@@ -175,7 +175,7 @@ See what other users have made with F3:
             <td><a href="https://github.com/ikkez" target="_blank">Christian Knuth</a></td>
         </tr>
 		<tr>
-            <td><a href="https://github.com/ikkez/f3-fal" target="_blank">Fat-Free Devtools</a></td>
+            <td><a href="https://github.com/n0nag0n/fatfree-devtools" target="_blank">Fat-Free Devtools</a></td>
             <td>A web-based admin tool set for configuring Fat-Free projects as well as configuring routes and controllers.</td>
             <td><a href="https://github.com/n0nag0n" target="_blank">n0nag0n</a></td>
         </tr>
