@@ -34,6 +34,8 @@ $f3->route('GET /login','Controller\Auth::login');
 
 <div class="alert alert-info">Stuck with a <strong>404 Not Found</strong> error? Check your <a href="routing-engine#sample-apache-configuration">server configuration</a>.</div>
 
+You can also [watch a video](https://youtu.be/XGldwy1pmU0) that goes over many of the points in this routing user guide.
+
 ## Routes and Tokens
 
 As a demonstration of Fat-Free's powerful domain-specific language (DSL),

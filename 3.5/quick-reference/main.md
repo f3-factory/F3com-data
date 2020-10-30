@@ -235,6 +235,8 @@ Default cookie parameters. Consists of the following options:
 
 You can refer to [session_set_cookie_params() in the PHP Manual](http://www.php.net/manual/en/function.session-set-cookie-params.php) for more information.
 
+You can also [watch a video](https://youtu.be/a-zTNeDeqU0) that goes over using cookies in the Fat-Free Framework.
+
 ### LANGUAGE
 **Type:** `string` &nbsp; &nbsp; **Default:** auto-detected
 
