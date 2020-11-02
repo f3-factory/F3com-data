@@ -22,6 +22,8 @@ $db=new DB\SQL(
 );
 ```
 
+You can also [watch a video](https://youtu.be/dZ_FscVVm3I) that goes over using MySQL in the Fat-Free Framework.
+
 ## Querying the Database
 
 OK. That was easy, wasn't it? That's pretty much how you would do the same thing in ordinary PHP. You just need to know the DSN format of the database you're connecting to. See the [PDO section of the PHP manual](http://www.php.net/manual/en/pdo.connections.php "PHP Data Objects :: Connections").
@@ -123,6 +125,8 @@ $db->exec(
     )
 );
 ```
+
+You can also [watch a video](https://youtu.be/55RcfqzEvWM) that goes over SQL Injection and database security.
 
 ## CRUD (But With a Lot of Style)
 

@@ -41,6 +41,8 @@ To find out if a variable has been previously defined:
 $f3->exists('var')
 ```
 
+You can also [watch a video](https://youtu.be/f3kV7oYG89M) that goes over the main points in this variable user guide.
+
 ## Globals
 
 F3 maintains its own symbol table for framework and application variables, which are independent of PHP's. Some variables are mapped to PHP globals. Fat-Free's `SESSION` is equivalent to `$_SESSION`, and `REQUEST` maps to `$_REQUEST`. Use of framework variables is recommended, instead of PHP's, to help you with data transfer across different functions, classes and methods. They also have other advantages:

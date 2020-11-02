@@ -25,3 +25,5 @@ That's not all. F3 is packaged with other optional plug-ins that extend its capa
 Unlike other frameworks, F3 aims to be usable - not usual.
 
 The philosophy behind the framework and its approach to software architecture is towards minimalism in structural components, avoiding application complexity and striking a balance between code elegance, application performance and programmer productivity.
+
+Here is a [short video](https://youtu.be/EBYoyGOAcfo) that will give you a brief introduction to the framework.
