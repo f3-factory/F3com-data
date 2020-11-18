@@ -270,6 +270,8 @@ very long \
 string"
 ```
 
+To see a video regarding configuration files and some basic code organization, you can [check out this video](https://youtu.be/1emj-H4Re-o).
+
 ### [routes]
 
 F3 also gives you the ability to define HTTP routes in configuration files:
