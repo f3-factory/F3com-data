@@ -224,6 +224,8 @@ $user->save();
 
 Calling `save()` a second time without invoking `reset()` will simply update the record currently pointed to by the mapper.
 
+There is also a helpful video available that covers some of the major portions of models/mappers in Fat-Free. [Click here](https://youtu.be/qAo7Hpptn3w) to view the video.
+
 ## Caveat for SQL Tables
 
 Although the issue of having primary keys in all tables in your database is argumentative, F3 does not stop you from creating a data mapper object that communicates with a table containing no primary keys. The only drawback is: you can't delete or update a mapped record because there's absolutely no way for F3 to determine which record you're referring to plus the fact that positional references are not reliable. Row IDs are not portable across different SQL engines and may not be returned by the PHP database driver.
