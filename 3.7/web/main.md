@@ -409,7 +409,7 @@ Example:
 
 ```php
 $count = 20; // Default: 10
-$tags = array('title', 'link', 'pubDate'); // Default: NULL (all tags)
+$tags = 'title,link,pubDate'; // Default: NULL (all tags)
 
 Web::instance()->rss('http://example.org/feed.rss', $count, $tags);
 ```
