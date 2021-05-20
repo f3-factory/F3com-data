@@ -394,6 +394,8 @@ $f3->set('ENCODING','ISO-8859-1');
 ```
 
 Once you inform the framework of the desired character set, F3 will use it for all HTML and XML templates until altered again.
+	
+Please note that Fat-Free uses the `ENCODING` system variable not only for the document encoding but also for the database encoding. If your document encoding (e.g. ISO-8859-1) differs from your database encoding (e.g. latin1), make sure that you supply the divergent database encoding as PDO attribute for the `$options` parameter when establishing the [database connection](sql#constructor).
 
 ## All Kinds of Templates
 
