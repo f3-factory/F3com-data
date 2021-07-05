@@ -365,6 +365,11 @@ $mapper->aftersave(function($self,$pkeys){
 });
 ```
 
+<div class="alert alert-info">
+	<strong>Notice:</strong><br>
+	Either define a hook to the <code>save</code> event or to the underlying <code>insert</code>/<code>update</code> events, but not to both. Behind the scenes, a <code>save</code> hook is translated into both an <code>insert</code> <em>and</em> an <code>update</code> hook and that's why a <code>save</code> hook will overwrite any existing <code>insert</code>/<code>update</code> hooks (and vice versa).
+</div>
+
 ### beforeerase, aftererase
 
 **Define hooks to the `beforeerase` and `aftererase` events**
