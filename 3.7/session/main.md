@@ -173,7 +173,7 @@ $f3->copy('CSRF','SESSION.csrf');// the variable name is up to you
 3) Add that token to your form:
 
 ```html
-<input type="hidden" name="token" value="{{ @CSRF }}/>
+<input type="hidden" name="token" value="{{ @CSRF }}"/>
 ```
 
 4) On form submission, compare the received token with the value stored in session:
