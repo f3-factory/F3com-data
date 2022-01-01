@@ -262,6 +262,10 @@ See what other users have made with F3:
     </thead>
     <tbody>
         <tr>
+            <td>Fat-Free Framework snippets for Sublime Text 4</td>
+            <td><a class="btn btn-info" href="https://github.com/myaghobi/FatFree-SublimeText-Snippets" target="_blank">view</a></td>
+        </tr>
+        <tr>
             <td>Fat-Free Framework snippets for Sublime Text 2 and 3</td>
             <td><a class="btn btn-info" href="https://github.com/uonick/fatfree-snippets" target="_blank">view</a></td>
         </tr>
