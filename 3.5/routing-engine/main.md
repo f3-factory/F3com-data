@@ -199,8 +199,7 @@ DocumentRoot "/var/www/html"
 <Directory "/var/www/html">
     Options -Indexes +FollowSymLinks +Includes
     AllowOverride All
-    Order allow,deny
-    Allow from All
+    Require all granted
 </Directory>
 ```
 
@@ -223,8 +222,7 @@ NameVirtualHost *
     <Directory "/var/www/site1">
         Options -Indexes +FollowSymLinks +Includes
         AllowOverride All
-        Order allow,deny
-        Allow from All
+        Require all granted
     </Directory>
 </VirtualHost>
 <VirtualHost *>
@@ -233,8 +231,7 @@ NameVirtualHost *
     <Directory "/var/www/site2">
         Options -Indexes +FollowSymLinks +Includes
         AllowOverride All
-        Order allow,deny
-        Allow from All
+        Require all granted
     </Directory>
 </VirtualHost>
 ```
