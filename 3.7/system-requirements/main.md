@@ -18,5 +18,5 @@ Nginx and Lighttpd configurations are also possible.
 If you have a custom server and want to have installed everything you could probably need, here is a debian 1-liner for you (cache module not included):
 
 ```
-apt-get install php7.2 php7.2-common php7.2-mysql php7.2-cgi php7.2-cli php7.2-fpm php7.2-mbstring php7.2-curl php7.2-xmlrpc php7.2-gd php7.2-zip php7.2-pdo-sqlite php7.2-xml
+apt-get install php8.1 php8.1-common php8.1-mysql php8.1-cgi php8.1-cli php8.1-fpm php8.1-mbstring php8.1-curl php8.1-xmlrpc php8.1-gd php8.1-zip php8.1-pdo-sqlite php8.1-xml
 ```
