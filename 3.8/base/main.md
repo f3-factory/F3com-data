@@ -1158,19 +1158,31 @@ $test->expect(
 
 ### parse
 
-**Parse a string containing key-value pairs and use them as routing tokens**
+**Parse a string containing key-value pairs and return them as an array**
 
 ``` php
-NULL parse ( string $str )
+array parse ( string $str )
 ```
+
+Basic usage example:
+
+```php
+$array = $f3->parse('framework=f3 , speed=fast , features=full');
+echo $array['framework'];  // 'f3'
+echo $array['speed'];  // 'fast'
+```
+
+**Storing parsed string containing key-value pairs into The Hive as key-value pairs using mset method**
 
 Example:
 
 ```php
-$f3->parse('framework=f3 , speed=fast , features=full');
-echo $f3->get('PARAMS.framework');  // 'f3'
-echo $f3->get('PARAMS.speed');      // 'fast'
+$array = $f3->parse('framework=f3 , speed=fast , features=full');
+$f3->mset($array);
+echo $f3->get('framework');  // 'f3'
+echo $f3->get('speed');      // 'fast'
 ```
+
 
 ### route
 
