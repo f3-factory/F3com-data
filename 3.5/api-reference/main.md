@@ -1,7 +1,7 @@
 # API Reference
 
 Welcome to the API documentation. It's intended as a feature reference to give you more detailed information about working with F3.
-You can also find extensive working examples in the [source code of the framework unit tests](https://github.com/bcosca/fatfree/tree/dev/app).
+You can also find extensive working examples in the [source code of the framework unit tests](https://github.com/f3-factory/fatfree-dev/tree/main/app).
 
 Quick references are available for <a href="quick-reference#SystemVariables">System Variables</a> and <a href="quick-reference#TemplateDirectives">Template Directives</a>.
 
