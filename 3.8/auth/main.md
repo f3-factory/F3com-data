@@ -27,6 +27,19 @@ Currently available authentication storage resources are:
 * LDAP
 * SMTP
 
+
+### SMTP adapter
+
+Instantiation with SMTP as storage adapter has the following syntax:
+
+```php
+$auth = new \Auth('smtp', [
+    'host' => 'smtp.domain.com',
+    'port' => 25,
+    'scheme' => null,
+]);
+```
+
 ## Authenticating
 
 ### Login
