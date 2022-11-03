@@ -27,4 +27,4 @@ Join us on [GitHub](https://github.com/bcosca/fatfree) to make F3 even better.
 
 Do you need some help for getting started? Or just want to share some thoughts? Meet other users
 at the [F3 Google Group](https://groups.google.com/forum/#!forum/f3-framework)
-and [Slack](https://fatfreeframework-slack.herokuapp.com).
+and [Slack](https://fatfreeframework-slack.herokuapp.com) or [Discord](https://discord.gg/ATYXXpZJ6j).
