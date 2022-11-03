@@ -28,7 +28,7 @@ If you feel that this software is one great weapon to have in your programming a
 
 Technical support is available at the official discussion forum: [https://groups.google.com/forum/#!forum/f3-framework](https://groups.google.com/forum/#!forum/f3-framework).
 
-If you need live support, you can talk to the development team and other members of the F3 community via [Slack](https://fatfreeframework-slack.herokuapp.com).
+If you need live support, you can talk to the development team and other members of the F3 community via [Slack](https://fatfreeframework-slack.herokuapp.com) or [Discord](https://discord.gg/ATYXXpZJ6j).
 
 
 
