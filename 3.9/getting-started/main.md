@@ -69,13 +69,13 @@ PHP will let you know which particular version you're running and you should get
 looks similar to this:-
 
 ```
-PHP 5.6.22-1 (cli)
-Copyright (c) 1997-2016 The PHP Group
-Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
-    with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2016, by Zend Technologies
+PHP 8.3.11 (cli) (built: Aug 30 2024 20:21:32) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.3.11, Copyright (c) Zend Technologies
+    with Xdebug v3.3.2, Copyright (c) 2002-2024, by Derick Rethans
 ```
 
-Upgrade if necessary, [check additional system requirements](system-requirements) and come back here if you've made the jump to PHP 5.4 or a later release.
+Upgrade if necessary, [check additional system requirements](system-requirements) and come back here if you've made the jump to PHP 8.0 or a later release.
 
 ## Hello, World: The Less-Than-A-Minute Fat-Free Recipe
 
@@ -95,7 +95,7 @@ $f3->run();
 Prepend `base.php` on the first line with the appropriate path. Save the above code fragment as
 `index.php` in your Web root folder. We've written our first Web page.
 
-Using composer? Then just run `composer require bcosca/fatfree` and use the following:
+Using composer? Then just run `composer require bcosca/fatfree-core` and use the following:
 
 ``` php
 require 'vendor/autoload.php';

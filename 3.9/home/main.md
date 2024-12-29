@@ -26,4 +26,20 @@ Unlike other frameworks, F3 aims to be usable - not usual.
 
 The philosophy behind the framework and its approach to software architecture is towards minimalism in structural components, avoiding application complexity and striking a balance between code elegance, application performance and programmer productivity.
 
-Here is a [short video](https://youtu.be/EBYoyGOAcfo) that will give you a brief introduction to the framework.
+### Contribute
+
+Join us on [GitHub](https://github.com/bcosca/fatfree) to make F3 even better.
+
+
+### Mingle
+
+Do you need some help for getting started? Or just want to share some thoughts? Meet other users
+at the [F3 Google Group](https://groups.google.com/forum/#!forum/f3-framework)
+and [Matrix](https://matrix.to/#/#fat-free-framework:matrix.org).
+
+
+### Intro
+
+Here is a [short video](https://youtu.be/EBYoyGOAcfo) that will give you a brief introduction to the framework:
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/EBYoyGOAcfo?si=R4mdPH13LVLRU0Z1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

@@ -433,6 +433,16 @@ RAW should be TRUE when processing large data coming from `php://input` which wi
 Full canonical URL. Default value: Result of `'http(s)://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']`
 
 
+### REROUTE_TRAILING_SLASH
+**Type:** `bool` &nbsp; &nbsp; **Default:** `TRUE`
+
+When set to `FALSE`, the framework router ($f3->run) will no longer reroute urls with a trailing slash in the URL path.
+
+I.e.: by default this URL `https://myapp.com/foo/` is rerouted to `https://myapp.com/foo`.  
+When `REROUTE_TRAILING_SLASH` option is `FALSE`, this behaviour is disabled. 
+
+**NB**: Search engines like Google might treat pages at `foo/` and `foo` as duplicate content, if the page is accessible on both URIs and no further measures were taken. 
+
 ### RESPONSE
 **Type:** `string`, `Read-Only`
 

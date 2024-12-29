@@ -157,7 +157,7 @@ etc.) that do not use the framework - as long as the paths to these files do not
 any route defined in your application - your Web server software will deliver them to the
 user's browser, provided the server is configured properly.
 
-### PHP 5.4's Built-In Web Server
+### PHP's Built-In Web Server
 
 PHP's latest stable version has its own built-in Web server. Start it up using the following
 configuration:

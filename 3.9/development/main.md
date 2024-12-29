@@ -6,10 +6,6 @@ The Fat-Free Framework is an open source PHP framework, written by Bong Cosca fr
 The philosophy behind the framework and its approach to software architecture is towards minimalism in structural components, avoiding application complexity and striking a balance between code elegance, application performance and programmer productivity.
 The Fat-Free Framework is engineered specifically with usability and user experience as its primary design goals. Out comes a full-featured toolkit for web artisans, that will make your daily work a lot easier, no matter if you're a beginner or expert.
 
-**Version 3.8 is here!** &nbsp; &nbsp; &nbsp; [CHANGELOG](https://github.com/f3-factory/fatfree-core/blob/master/CHANGELOG.md)
-
-The latest official release welcomes the summer with a bang and marks the final milestone in this version of the Fat-Free Framework. Packed with exciting new features and outstanding documentation that consumed significant time and effort to develop and refine, version 3.8 is finally [available for download](https://github.com/bcosca/fatfree/archive/master.zip "Download the latest release"). This edition is packed with a bunch of new usability and security features.
-
 F3 has a stable enterprise-class architecture. Unbeatable performance, user-friendly features and a lightweight footprint. What more can you ask for?
 
 It is highly recommended that experienced users develop new applications with this version to take advantage of the latest features and the numerous significant improvements.
@@ -20,16 +16,14 @@ It is highly recommended that experienced users develop new applications with th
 
 If you feel that this software is one great weapon to have in your programming arsenal, it saves you a lot of time and money, use it for commercial gain or in your business organization, please consider making a donation to the project. A significant amount of time, effort, and money has been spent on this project. Your donations help keep this project alive and the development team motivated. Donors and sponsors get priority support (24-hour response time on business days).
 
-<a class="donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MJSQL8N5LPDAY" title="donate with PayPal"></a>
-
+<a class="btn btn-primary" href="https://github.com/f3-factory/fatfree-core" title="buy me a beer">See sponsoring options at github</a>
 
 
 ## Support
 
 Technical support is available at the official discussion forum: [https://groups.google.com/forum/#!forum/f3-framework](https://groups.google.com/forum/#!forum/f3-framework).
 
-If you need live support, you can talk to the development team and other members of the F3 community via [Slack](https://fatfreeframework-slack.herokuapp.com) or [Matrix](https://matrix.to/#/#fat-free-framework:matrix.org).
-
+If you need live support, you can talk to the development team and other members of the F3 community via [Matrix](https://matrix.to/#/#fat-free-framework:matrix.org).
 
 
 ## Contribute
@@ -42,12 +36,10 @@ You can help out with bug reports, fixes in the code and of course your own plug
 F3 uses Git for version control. To clone the code repository on GitHub:
 
 ``` bash
-git clone git://git@github.com:bcosca/Fat-Free-Framework.git
+git clone https://github.com/f3-factory/fatfree-core.git
 ```
 
-If all you want is a zipball, grab it [**here**](https://github.com/bcosca/fatfree/archive/dev.zip).
-
-To file a bug report, visit [https://github.com/bcosca/fatfree/issues](https://github.com/bcosca/fatfree/issues).
+To file a bug report, visit [https://github.com/f3-factory/fatfree-core/issues](https://github.com/f3-factory/fatfree-core/issues).
 
 
 ## Community
@@ -96,9 +88,9 @@ See what other users have made with F3:
             <td><a href="https://github.com/timbotron" target="_blank">Tim Habersack</a></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/sn0opy/ToothPaste-F3" target="_blank" title="ToothPaste is a lightweight open source pastebin. It supports syntax highlighting and file upload.">ToothPaste</a></td>
-            <td>Lightweight Pastebin with a nice design</td>
-            <td><a href="https://github.com/sn0opy" target="_blank">Sascha Ohms</a></td>
+            <td><a href="http://cryptdown.eu/" target="_blank" title="client-side AES-encrypted Markdown pastebin clone">CryptDown</a></td>
+            <td>Client-side AES-encrypted Markdown pastebin clone</td>
+            <td><a href="https://github.com/ikkez/CryptDown" target="_blank">ikkez</a></td>
         </tr>
     </tbody>
 </table>
@@ -123,6 +115,11 @@ See what other users have made with F3:
                 <td><a href="https://github.com/WilliamStam/FatFree-Ajax-Boilerplate" target="_blank">FatFree Ajax Boilerplate</a></td>
                 <td>F3 Ajax application with timers to monitor performance</td>
                 <td><a href="https://github.com/WilliamStam" target="_blank">William Stam</a></td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/sn0opy/ToothPaste-F3" target="_blank" title="ToothPaste is a lightweight open source pastebin. It supports syntax highlighting and file upload.">ToothPaste</a></td>
+                <td>Lightweight Pastebin with a nice design</td>
+                <td><a href="https://github.com/sn0opy" target="_blank">Sascha Ohms</a></td>
             </tr>
         </tbody>
     </table>

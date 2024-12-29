@@ -10,21 +10,26 @@ composer require bcosca/fatfree-core
 
 ##### Direct Download
 
-<a class="btn btn-success" href="https://github.com/bcosca/fatfree-core/archive/master.zip">
+<a class="btn btn-success" href="https://github.com/f3-factory/fatfree-core/archive/master.zip">
 	<i class="fa fa-download"></i> Download <span class="hidden-sm">the latest release</span>
 </a>
 
-You can also grab the [unit test package](https://github.com/f3-factory/fatfree-dev "unit test package @ GitHub") or fetch the [nightly build](https://github.com/bcosca/fatfree-core "dev package @ GitHub") if you live in the fast lane. See the version [changelog](https://github.com/bcosca/fatfree-core/blob/master/CHANGELOG.md) and
-[system requirements](system-requirements) for additional information. There is also [composer](https://packagist.org/packages/bcosca/fatfree) [support](https://packagist.org/packages/bcosca/fatfree-core).
+You can also grab the development package
 
+<a class="btn btn-default" href="https://github.com/f3-factory/fatfree-dev" title="developer bench package">
+	<i class="fa fa-github"></i> Dev-Bench <span class="hidden-sm"> with unit tests</span>
+</a>
 
-#### Contribute
+Also see:
 
-Join us on [GitHub](https://github.com/bcosca/fatfree) to make F3 even better.
-
-
-#### Mingle
-
-Do you need some help for getting started? Or just want to share some thoughts? Meet other users
-at the [F3 Google Group](https://groups.google.com/forum/#!forum/f3-framework)
-and [Slack](https://fatfreeframework-slack.herokuapp.com) or [Matrix](https://matrix.to/#/#fat-free-framework:matrix.org).
+<a class="btn btn-link" href="system-requirements" title="System requirements">
+	<i class="fa fa-gears"></i> &nbsp; System requirements
+</a>
+<br>
+<a class="btn btn-link" href="https://github.com/f3-factory/fatfree-core/blob/master/CHANGELOG.md" title="Changelogs">
+	<i class="fa fa-book"></i> &nbsp; Changelogs
+</a>
+<br>
+<a class="btn btn-link" href="https://packagist.org/packages/bcosca/fatfree-core" title="Composer package">
+	<i class="fa fa-square-o"></i> &nbsp; Composer package
+</a>
