@@ -366,7 +366,7 @@ $file = '/path/to/myFile.zip';
 $options = array(
     'method'  => 'PUT',
     'content' => $f3->read($file),
-    'header' => array('Content-Type: '.$web->mime($file));
+    'header' => array('Content-Type: '.$web->mime($file))
 );
 
 $result = $web->request($url, $options);
