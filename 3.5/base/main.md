@@ -768,22 +768,24 @@ echo $f3->decode("we &lt;b&gt;want&lt;/b&gt; 'sugar &amp; candy'");
 
 ### clean
 
-**Remove HTML tags (except those enumerated) and non-printable characters to mitigate XSS/code injection attacks**
+**Remove HTML tags (except those enumerated) and non-printable characters and keep the attributes of enumerated tags.**
 
 ```php
 string clean ( mixed $var [, string $tags = NULL ] )
 ```
+
+<div class="alert alert-warning"><strong>Note</strong>: This method doesn't mitigate XSS/code injection attacks.</div>
+
 `$var` can be either a `string` or an `array`. In the latter case, it will be recursively traversed to clean each and every element.
 
 `$tags` defines a list [<small>(as per the split syntax)</small>](base#split) of _allowed_ html tags that will **not** be removed.
 
-<div class="alert alert-success"><strong>Advice</strong>: It is recommended to use this function to sanitize submitted form input.</div>
 
 Examples:
 
 ```php
-$foo = "99 bottles of <b>beer</b> on the wall. <script>alert('scripty!')</script>";
-echo $f3->clean($foo); // "99 bottles of beer on the wall. alert('scripty!')"
+$foo = "99 bottles of <b>beer</b> on the wall.";
+echo $f3->clean($foo); // "99 bottles of beer on the wall."
 ```
 
 ```php
@@ -802,9 +804,9 @@ string scrub ( mixed &$var [, string $tags = NULL ] )
 Example:
 
 ```php
-$foo = "99 bottles of <b>beer</b> on the wall. <script>alert('scripty!')</script>";
+$foo = "99 bottles of <b>beer</b> on the wall.";
 $bar = $f3->scrub($foo);
-echo $foo; // 99 bottles of beer on the wall. alert('scripty!')
+echo $foo; // 99 bottles of beer on the wall.
 ```
 
 ### serialize
