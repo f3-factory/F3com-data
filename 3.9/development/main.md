@@ -142,9 +142,9 @@ See what other users have made with F3:
             <td><a href="https://github.com/xfra35" target="_blank">Florent</a></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/myaghobi/F3-Benchmark" target="_blank">Benchmark</a></td>
+            <td><a href="https://github.com/myaaghubi/F3-Benchmark" target="_blank">Benchmark</a></td>
             <td>A benchmark helper plugin for Fat-Free framework.</td>
-            <td><a href="https://github.com/myaghobi" target="_blank">Mohammad Yaghobi</a></td>
+            <td><a href="https://github.com/myaaghubi" target="_blank">Mohammad Yaaghubi</a></td>
         </tr>
         <tr>
             <td><a href="https://github.com/hanspolo/burgers" target="_blank">Burgers</a></td>
@@ -152,9 +152,9 @@ See what other users have made with F3:
             <td><a href="https://github.com/hanspolo" target="_blank">Philipp Hirsch</a></td>
         </tr>
         <tr>
-            <td><a href="https://github.com/myaghobi/F3-Captcha" target="_blank">Captcha</a></td>
+            <td><a href="https://github.com/myaaghubi/F3-Captcha" target="_blank">Captcha</a></td>
             <td>A better captcha for Fat-Free Framework</td>
-            <td><a href="https://github.com/myaghobi" target="_blank">Mohammad Yaghobi</a></td>
+            <td><a href="https://github.com/myaaghubi" target="_blank">Mohammad Yaaghubi</a></td>
         </tr>
         <tr>
             <td><a href="https://github.com/ikkez/f3-cortex" target="_blank">Cortex</a></td>
@@ -182,9 +182,9 @@ See what other users have made with F3:
             <td><a href="https://github.com/chez14" target="_blank">Chez14</a></td>
         </tr> 
         <tr>
-            <td><a href="https://github.com/myaghobi/f3-migrations" target="_blank">Migrations</a></td>
+            <td><a href="https://github.com/myaaghubi/f3-migrations" target="_blank">Migrations</a></td>
             <td>Migrations is a database helper plugin for the Fat-Free framework.</td>
-            <td><a href="https://github.com/myaghobi" target="_blank">Mohammad Yaghobi</a></td>
+            <td><a href="https://github.com/myaaghubi" target="_blank">Mohammad Yaaghubi</a></td>
         </tr>
         <tr>
             <td><a href="https://github.com/xfra35/f3-multilang" target="_blank">Multilang</a></td>
