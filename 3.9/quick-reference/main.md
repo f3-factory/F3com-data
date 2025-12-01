@@ -188,6 +188,7 @@ Information about the last HTTP error that occurred:
 * `ERROR.trace` is used for HTTP 500 errors, to retrieve the stack trace. `string`
 * `ERROR.level` - error reporting level (`E_WARNING`, `E_STRICT`, etc.)
 
+Register a custom error handler with [`ONERROR`](#ONERROR) to use `ERROR`.
 
 ### ESCAPE
 **Type:** `bool` &nbsp; &nbsp; **Default:** `TRUE`
@@ -323,6 +324,8 @@ Location of custom logs.
 **Type:** `mixed` &nbsp; &nbsp; **Default:** `NULL`
 
 Callback function to use as custom error handler, or `NULL`.
+Use [`ERROR`](#ERROR) for information about available error data.
+More details are given in the [F3 Error Handler section](framework-variables#AbouttheF3ErrorHandler).
 
 <div class="alert alert-info"><strong>Notice:</strong> If no callback function is specified, a default error page is generated (HTML5 for synchronous requests, JSON string for AJAX requests).</div>
 
