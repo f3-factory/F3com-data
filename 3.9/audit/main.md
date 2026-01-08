@@ -202,6 +202,39 @@ $audit->isbot(); // returns TRUE if the current user-agent is a Web bot.
 $audit->isbot('Mozilla/5.0 (compatible; Googlebot/2.1 etc..'); // returns TRUE
 ```
 
+### isai
+
+**Return TRUE if the given user agent is an ai agent**
+
+If no user agent is given, the check is performed against the current user-agent: [AGENT](quick-reference#AGENT).
+
+``` php
+bool isai ( [ string $agent = NULL ] )
+```
+
+This function allows you to check if a given user agent is an ai bot.
+
+Example:
+
+``` php
+$audit->isai(); // returns TRUE if the current user-agent is an ai bot.
+
+$audit->isai('Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.3; +https://openai.com/gptbot'); // returns TRUE
+```
+
+### isbotorai
+
+**Return TRUE if the given user agent is a Web bot or an ai**
+
+If no user agent is given, the check is performed against the current user-agent: [AGENT](quick-reference#AGENT).
+
+``` php
+bool isbotorai ( [ string $agent = NULL ] )
+```
+
+Under the hood, this logic calls both the [isbot](#isbot) and [isai](#isai) methods.
+
+
 ### mod10
 
 **Return TRUE if specified ID has a valid (Luhn) Mod-10 check digit**
