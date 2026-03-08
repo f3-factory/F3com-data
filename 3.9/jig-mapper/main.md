@@ -76,7 +76,7 @@ Info: You can use all common comparison operators in your condition and a single
 The best way to search in Jig is to use some `preg_match` conditions:
 
 ```php
-$userList = $user->find(array('(isset(@email) && preg_match(?,@email))','/gmail/'));
+$userList = $user->find(array('(isset(@email) && preg_match(? ,@email))','/gmail/'));
 // returns all users with an email address that contains GMAIL
 
 // ends with gmail.com => /gmail\.com$/
@@ -86,14 +86,18 @@ $userList = $user->find(array('(isset(@email) && preg_match(?,@email))','/gmail/
 The equivalent of a SQL `IN` operator goes like this:
 
 ```php
-$user->find(array('in_array('_id',array(1,2,3))'));
+$user->find(array('in_array('_id', [?,?,?])', 1,2,3));
 ```
 
 If your document uses an array field, i.e. tags, you can find all posts by tag with just switching the in_array parameters:
 
 ```php
-$post->find(array('isset(@tags) && in_array("fat-free",@tags)'));
+$post->find(array('isset(@tags) && in_array(@tags, :tags)', ':tags' => ['fat-free', 'php']));
 ```
+
+<div class="alert alert-warning">
+<strong>Notice</strong>: Do not put unvalidated user input into the query and always use prepared statements like in the example above. Otherwise this might open a security issue in your application.
+</div>
 
 ### $option
 
