@@ -280,7 +280,7 @@ See what other users have made with F3:
         </tr>
 	<tr>
             <td>Tool to create JIG database from CSV data</td>
-            <td><a class="btn btn-info" href="https://cdn.rawgit.com/ethanpil/f3-csv-to-jig/master/csv-to-jig.html" target="_blank">view</a></td>
+            <td><a class="btn btn-info" href="[https://ethanpil.github.io/f3-csv-to-jig/csv-to-jig.html](https://ethanpil.github.io/f3-csv-to-jig/csv-to-jig.html)" target="_blank">view</a></td>
         </tr>
     </tbody>
 </table>
